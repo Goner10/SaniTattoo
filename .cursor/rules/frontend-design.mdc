@@ -1,0 +1,615 @@
+---
+description: Senior frontend engineer rules for SANITATTOO UI, layout and interaction design
+globs:
+  - "src/components/**/*.jsx"
+  - "src/pages/**/*.jsx"
+  - "src/App.jsx"
+  - "src/index.css"
+alwaysApply: false
+---
+
+# SANITATTOO Frontend Design Rules
+
+You are acting as a senior frontend engineer specialized in React, Vite, Tailwind CSS, responsive UI, interaction design and clean component architecture.
+
+Your main responsibility is to build a premium, clean, bold and usable frontend for SANITATTOO.
+
+The website is a static landing and catalog experience for sanitary tattoo supplies, tattoo studio consumables and merchandising.
+
+## Main frontend responsibility
+
+When working on the frontend, prioritize:
+
+- Clean component architecture
+- Responsive mobile-first layout
+- Strong visual hierarchy
+- Premium brand feeling
+- Fast loading
+- Accessibility
+- Reusable components
+- Clear CTAs
+- Smooth but subtle interactions
+- Consistency with the SANITATTOO brand
+
+Do not focus on product data modeling in this rule. Product data structure belongs to the data-model rule.
+
+## Tech stack
+
+Use:
+
+- React
+- Vite
+- Tailwind CSS
+- React Router DOM
+- Framer Motion
+- Lucide React
+- JavaScript
+
+Do not add new dependencies unless clearly necessary.
+
+## Brand name
+
+The visual brand name is:
+
+SANITATTOO
+
+Use uppercase when referring to the brand in visual headings or brand areas.
+
+## General website structure
+
+The project must include these routes:
+
+- `/`
+- `/catalogo`
+- `/ofertas`
+- `/merchandising`
+- `/contacto`
+
+Use React Router DOM for page routing.
+
+## Homepage structure
+
+The homepage must not display the full catalog.
+
+The homepage should include only these main sections:
+
+1. Header
+2. Hero
+3. Featured products preview
+4. How to order
+5. Merchandising preview
+6. Footer
+
+The complete catalog must live on `/catalogo`.
+
+The complete merchandising list must live on `/merchandising`.
+
+Offers must live on `/ofertas`.
+
+## Header requirements
+
+The header must include:
+
+- SANITATTOO logo
+- Catálogo
+- Ofertas
+- Merchandising
+- Contacto
+- WhatsApp button
+
+Desktop layout:
+
+Logo | Catálogo | Ofertas | Merchandising | Contacto | WhatsApp button
+
+Mobile layout:
+
+- Logo visible
+- Menu button
+- Collapsible mobile navigation
+- WhatsApp CTA visible either inside the menu or as a clear button
+
+Use semantic navigation:
+
+- `<header>`
+- `<nav>`
+- links using React Router `Link` or `NavLink`
+
+Do not use clickable divs for navigation.
+
+## Hero section requirements
+
+The hero should feel premium, bold and related to tattoo culture without becoming visually overloaded.
+
+The hero must include:
+
+- Strong headline
+- Short brand/product description
+- Main CTA linking to `/catalogo`
+- Secondary CTA linking to WhatsApp
+- Visual area for image or video
+
+If real visual assets are not available yet, use placeholders or generic visual blocks.
+
+Do not block frontend development because final images or videos are missing.
+
+Acceptable temporary visual solutions:
+
+- Placeholder image
+- Dark gradient visual block
+- Generic product mockup block
+- Logo-based visual composition
+
+## Featured products preview
+
+The homepage featured section must render only products where:
+
+featured: true
+
+It should show a limited preview, usually 4 to 6 products.
+
+It must include a CTA to `/catalogo`.
+
+Do not render the full catalog on the homepage.
+
+## Catalog page
+
+The `/catalogo` page must include:
+
+- Page title
+- Short intro
+- Search input
+- Category filters
+- Product grid
+- Product cards
+- Product detail modal or expandable detail view
+- WhatsApp CTA per product
+
+The catalog page is the only place where the full active product catalog should be shown.
+
+## Offers page
+
+The `/ofertas` page should show products where:
+
+offer: true
+
+If there are no offers, show a clean empty state with:
+
+- Clear message
+- WhatsApp CTA
+- Link back to catalog
+
+## Merchandising preview
+
+The homepage merchandising preview should show only 2 or 3 products.
+
+These products should come from:
+
+category: "merchandising"
+
+and preferably:
+
+merchandisingFeatured: true
+
+The section must include a CTA to `/merchandising`.
+
+## Merchandising page
+
+The `/merchandising` page should show all active products where:
+
+category: "merchandising"
+
+Use the same product card system where possible.
+
+Do not duplicate card markup.
+
+## Contact page
+
+The `/contacto` page should include:
+
+- WhatsApp
+- Instagram
+- Phone if available
+- Email if available
+- Address if available
+- Simple CTA
+
+Do not add a contact form unless explicitly requested.
+
+## Component architecture
+
+Use small reusable components.
+
+Recommended components:
+
+- Header.jsx
+- Footer.jsx
+- Hero.jsx
+- SectionHeader.jsx
+- ProductCard.jsx
+- ProductGrid.jsx
+- ProductModal.jsx
+- WhatsAppButton.jsx
+- CategoryFilters.jsx
+- SearchInput.jsx
+- HowToOrder.jsx
+- MerchandisingPreview.jsx
+- FeaturedProducts.jsx
+
+Recommended page components:
+
+- Home.jsx
+- Catalog.jsx
+- Offers.jsx
+- Merchandising.jsx
+- Contact.jsx
+
+Keep components focused.
+
+Avoid very large components.
+
+Do not hardcode product data inside components.
+
+Product data must come from `src/data/products.js`.
+
+Category data must come from `src/data/categories.js`.
+
+## Visual style
+
+The visual style should feel:
+
+- Premium
+- Clean
+- Bold
+- Professional
+- Tattoo-related
+- Hygienic and trustworthy
+- Modern
+
+Avoid:
+
+- Overly medical or hospital-like design
+- Overly gothic design
+- Excessive dark clutter
+- Random colors
+- Too many shadows
+- Too many gradients
+- Excessive animation
+- Crowded product cards
+
+The brand has a black and white logo with a strong tattoo-inspired identity. Use that as the visual base.
+
+## Color palette
+
+Use this initial palette:
+
+- Main black: `#050505`
+- White: `#FFFFFF`
+- Soft background: `#F7F7F7`
+- Border gray: `#E5E5E5`
+- Muted text: `#6B6B6B`
+- Accent red: `#C1121F`
+- Accent red hover: `#9B0E18`
+
+Use red as the main accent color.
+
+Do not use green as the accent color.
+
+Avoid pure bright red `#FF0000`.
+
+## Typography
+
+Use the custom font `Acid` for display elements if available.
+
+Use `Acid` only for:
+
+- Hero headline
+- Decorative section titles
+- Brand-style headings
+- Selected visual accents
+
+Do not use `Acid` for:
+
+- Long descriptions
+- Product body text
+- Product descriptions
+- Paragraphs
+- Small UI text
+
+Use a readable sans-serif font for body text, navigation, buttons and catalog content.
+
+Preferred body fallback:
+
+- Manrope
+- Inter
+- system-ui
+
+## Logo usage
+
+Use the SANITATTOO logo in the header.
+
+If the final logo asset is available, place it in:
+
+`public/images/brand/`
+
+Suggested filenames:
+
+- `logo-sanitattoo-black.png`
+- `logo-sanitattoo-white.png`
+
+Use the appropriate version depending on background.
+
+Do not distort the logo.
+
+Do not stretch it.
+
+Keep enough spacing around it.
+
+## Image and placeholder rules
+
+Real product images may not be available during early development.
+
+Do not stop development because images are missing.
+
+Use temporary placeholders where needed.
+
+Acceptable placeholder paths:
+
+`/images/placeholders/product-placeholder.webp`
+
+`/images/placeholders/hero-placeholder.webp`
+
+If placeholder files do not exist yet, use a styled placeholder block with Tailwind instead of broken images.
+
+Example behavior:
+
+- If product image exists, show image.
+- If product image is missing, show neutral placeholder card area.
+
+Always include meaningful `alt` text when rendering real product images.
+
+## Product card requirements
+
+Each product card should display:
+
+- Product image or placeholder
+- Product name
+- Category label
+- Price if available
+- Unit or format
+- Short description
+- Badge if available
+- Button to view details
+- WhatsApp CTA
+
+If `price` is `null`, show a clean text such as:
+
+Consultar precio
+
+Do not display:
+
+€null
+null €
+undefined
+NaN
+
+Do not overload product cards with too much text.
+
+Use short descriptions in the card and longer descriptions in the modal or detail view.
+
+## Product modal requirements
+
+If using a modal for product details, it should include:
+
+- Larger product image or placeholder
+- Product name
+- Category label
+- Price
+- Unit
+- Full description
+- Variants if available
+- Tags if useful
+- WhatsApp CTA
+
+The modal must be keyboard accessible.
+
+It should be possible to close the modal with:
+
+- Close button
+- Escape key if implemented
+- Click outside if implemented safely
+
+Do not trap the user in the modal like a digital basement. Humanity has suffered enough.
+
+## WhatsApp CTA requirements
+
+WhatsApp is the main conversion action.
+
+Use clear CTA text:
+
+- Consultar por WhatsApp
+- Pedir información
+- Preguntar por este producto
+
+For product-specific CTAs, include the product name in the generated WhatsApp message.
+
+Do not duplicate WhatsApp URL logic in multiple components.
+
+Use a utility function from:
+
+`src/utils/whatsapp.js`
+
+## Buttons and links
+
+Buttons should have:
+
+- Clear label
+- Hover state
+- Focus-visible state
+- Consistent padding
+- Rounded shape consistent with the brand
+- Smooth transition
+
+Primary CTA:
+
+- Dark or red background
+- Strong contrast
+- Clear action
+
+Secondary CTA:
+
+- Border style
+- Neutral or transparent background
+- Clear hover state
+
+## Responsive rules
+
+Use mobile-first design.
+
+Minimum supported layouts:
+
+- Mobile
+- Tablet
+- Desktop
+
+Product grids should adapt:
+
+- Mobile: 1 column
+- Tablet: 2 columns
+- Desktop: 3 or 4 columns depending on content
+
+Header must be usable on mobile.
+
+Avoid fixed widths that break small screens.
+
+Use `max-w-*`, `mx-auto`, responsive padding and flexible grids.
+
+## Animation rules
+
+Use Framer Motion for subtle animation only.
+
+Allowed animations:
+
+- Fade in
+- Slight slide up
+- Gentle card scale on hover
+- Modal entrance/exit
+- Small stagger for grids
+
+Avoid:
+
+- Heavy parallax
+- Constant looping animation
+- Excessive movement
+- Animation that hurts mobile performance
+- Effects that distract from product browsing
+
+Animations must feel premium, not like a crypto landing page from 2021.
+
+## Accessibility rules
+
+Use semantic HTML whenever possible.
+
+Required:
+
+- Header uses `<header>`
+- Navigation uses `<nav>`
+- Main content uses `<main>`
+- Footer uses `<footer>`
+- Buttons are real `<button>` elements
+- Links are real links
+- Images have meaningful alt text
+- Interactive elements have focus-visible states
+- Text contrast must be readable
+
+Do not use clickable divs when a button or link is appropriate.
+
+## Tailwind usage
+
+Use Tailwind utility classes.
+
+Avoid inline styles.
+
+Avoid large custom CSS unless necessary.
+
+Use CSS variables/theme values already defined in `src/index.css`.
+
+Keep class names readable.
+
+Avoid extremely long class strings when a small component split would be cleaner.
+
+## Page spacing
+
+Use consistent section spacing.
+
+Recommended spacing:
+
+- Mobile sections: `py-16`
+- Desktop sections: `py-24`
+- Page horizontal padding: `px-4`, `sm:px-6`, `lg:px-8`
+- Content max width: `max-w-7xl mx-auto`
+
+Do not cram sections together.
+
+The design should breathe.
+
+## Empty states
+
+Empty states should be clean and useful.
+
+Examples:
+
+- No offers available
+- No products found by search
+- No merchandising products yet
+
+Each empty state should include:
+
+- Short explanation
+- Useful CTA
+- Link to catalog or WhatsApp
+
+## Restrictions
+
+Do not implement:
+
+- Cart
+- Checkout
+- Login
+- User accounts
+- Payment gateway
+- Backend
+- Database
+- Admin panel
+- Stock management system
+
+This project is currently a static landing/catalog website.
+
+## Code quality
+
+Use clear names.
+
+Prefer readable components over clever code.
+
+Avoid unnecessary abstractions.
+
+Avoid duplicated JSX.
+
+Avoid mixing data transformation, UI state and layout in a single component.
+
+Keep imports organized.
+
+Remove unused imports.
+
+Do not leave console logs unless explicitly used for debugging.
+
+## Final goal
+
+The frontend should make SANITATTOO look like a serious, modern and trustworthy tattoo supply brand.
+
+The website should help users:
+
+1. Understand what SANITATTOO offers.
+2. Explore selected products from the homepage.
+3. Visit the complete catalog when needed.
+4. Discover offers and merchandising.
+5. Contact quickly through WhatsApp.

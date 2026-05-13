@@ -1,0 +1,384 @@
+---
+description: Senior backend/data engineer rules for SANITATTOO catalog data modeling
+globs:
+  - "src/data/**/*.js"
+  - "src/utils/**/*.js"
+alwaysApply: false
+---
+
+# SANITATTOO Data Model Rules
+
+You are acting as a senior backend/data engineer.
+
+Your main responsibility is to keep the product catalog data clean, consistent, scalable and ready for a future migration to WooCommerce or Shopify.
+
+The current project is a static React catalog, but the data must be modeled as if it could later be exported to CSV or imported into an ecommerce platform.
+
+## Main responsibility
+
+When working with catalog data, prioritize:
+
+- Data consistency
+- Future ecommerce compatibility
+- Easy CSV export
+- Clear product categorization
+- Unique identifiers
+- Clean slugs
+- Numeric prices
+- Reusable utility functions
+- Avoiding duplicated logic
+
+Do not focus on visual design in this rule. Visual design belongs to the frontend/design rule.
+
+## Product source of truth
+
+All product data must live in:
+
+`src/data/products.js`
+
+All category data must live in:
+
+`src/data/categories.js`
+
+Do not duplicate product data inside React components.
+
+Do not hardcode product cards manually.
+
+## Required product fields
+
+Every product must include:
+
+- `id`
+- `sku`
+- `name`
+- `slug`
+- `category`
+- `categoryLabel`
+- `price`
+- `currency`
+- `unit`
+- `image`
+- `alt`
+- `shortDescription`
+- `description`
+- `tags`
+- `featured`
+- `offer`
+- `active`
+
+Recommended base shape:
+
+```js
+{
+  id: "",
+  sku: "",
+  name: "",
+  slug: "",
+  category: "",
+  categoryLabel: "",
+  price: null,
+  currency: "EUR",
+  unit: "",
+  image: "",
+  alt: "",
+  shortDescription: "",
+  description: "",
+  tags: [],
+  featured: false,
+  offer: false,
+  active: true
+}
+```
+
+## Optional product fields
+
+Products may include:
+
+- `variants`
+- `merchandisingFeatured`
+- `badge`
+- `stockStatus`
+- `format`
+- `size`
+- `color`
+- `material`
+- `notes`
+
+Use optional fields only when they add real value.
+
+Do not add random fields without a clear reason.
+
+## Price rules
+
+Prices must always be numbers.
+
+Correct:
+
+```js
+price: 9
+```
+
+Incorrect:
+
+```js
+price: "9€"
+```
+
+If the product does not have a defined price yet, use:
+
+```js
+price: null
+```
+
+The currency must be stored separately:
+
+```js
+currency: "EUR"
+```
+
+Never include the euro symbol inside the price value.
+
+## SKU rules
+
+Every SKU must be unique.
+
+Use the prefix:
+
+`SAN-`
+
+Examples:
+
+- `SAN-FILM-NEGRO-50X120`
+- `SAN-GUANTES-NITRILO-NEGRO-M`
+- `SAN-MERCH-CAMISETA-NEGRA`
+
+Do not generate duplicate SKUs.
+
+Do not use spaces, accents or special symbols in SKUs.
+
+## Slug rules
+
+Slugs must be:
+
+- lowercase
+- URL-safe
+- without accents
+- without spaces
+- separated by hyphens
+
+Correct:
+
+`guantes-nitrilo-negro`
+
+Incorrect:
+
+- `Guantes Nitrilo Negro`
+- `guantes_nitrilo_negro`
+- `guantes-nitrílo-negro`
+
+## Category rules
+
+Allowed category keys:
+
+- `proteccion-higiene`
+- `desinfeccion-limpieza`
+- `consumibles`
+- `mobiliario-camilla`
+- `stencil-preparacion`
+- `aftercare`
+- `merchandising`
+
+Do not create new categories unless explicitly requested.
+
+Each category must have:
+
+```js
+{
+  id: "",
+  name: "",
+  description: ""
+}
+```
+
+Category IDs must match the product `category` field.
+
+## Variant rules
+
+If a product has multiple sizes, colors, formats or units, prefer using a `variants` array.
+
+Example:
+
+```js
+variants: [
+  {
+    label: "30x300",
+    price: 8,
+    sku: "SAN-FILM-TRANSPARENTE-30X300"
+  },
+  {
+    label: "45x300",
+    price: 12,
+    sku: "SAN-FILM-TRANSPARENTE-45X300"
+  }
+]
+```
+
+Use separate products only when the item is clearly independent.
+
+Do not create unnecessary duplicate products for small variations.
+
+## Featured and merchandising logic
+
+Use:
+
+```js
+featured: true
+```
+
+for products that should appear in the homepage featured products preview.
+
+Use:
+
+```js
+category: "merchandising"
+```
+
+for merchandising products.
+
+Use:
+
+```js
+merchandisingFeatured: true
+```
+
+for merchandising products that should appear in the homepage merchandising preview.
+
+The homepage must not render the full catalog.
+
+## Offers logic
+
+Use:
+
+```js
+offer: true
+```
+
+for products that should appear on the `/ofertas` page.
+
+If a product is not on offer, use:
+
+```js
+offer: false
+```
+
+## Active products
+
+Use:
+
+```js
+active: true
+```
+
+for products visible on the website.
+
+Use:
+
+```js
+active: false
+```
+
+for products that should remain in the data file but not appear in public listings.
+
+Do not delete inactive products unless explicitly requested.
+
+## Image rules
+
+Product images should use this path pattern when real product images exist:
+
+`/images/productos/product-name.webp`
+
+If real product images are not available yet, use placeholder paths or generic placeholders.
+
+Example:
+
+```js
+image: "/images/placeholders/product-placeholder.webp"
+```
+
+Every product must include meaningful alt text.
+
+Example:
+
+```js
+alt: "Film negro para protección en estudio de tatuaje"
+```
+
+Do not leave alt text empty.
+
+## Placeholder image behavior
+
+Until real images are added to the project, use placeholder or generic image references.
+
+Do not block development because final images are missing.
+
+Do not invent exact product photography filenames unless the product image exists.
+
+Prefer this temporary fallback:
+
+```js
+image: "/images/placeholders/product-placeholder.webp"
+```
+
+## Utility rules
+
+Reusable logic must go inside:
+
+`src/utils/`
+
+Useful utilities may include:
+
+- `formatPrice.js`
+- `whatsapp.js`
+- `filterProducts.js`
+- `slugify.js`
+
+Do not duplicate WhatsApp URL generation across components.
+
+Do not duplicate price formatting across components.
+
+## CSV/export compatibility
+
+When editing product data, keep future WooCommerce or Shopify export in mind.
+
+Avoid deeply nested structures unless necessary.
+
+Avoid mixing display text and raw data.
+
+Prefer clean fields that can map to CSV columns:
+
+- `name`
+- `sku`
+- `slug`
+- `category`
+- `price`
+- `currency`
+- `description`
+- `shortDescription`
+- `image`
+- `tags`
+- `active`
+
+## Do not implement
+
+Do not implement:
+
+- backend
+- database
+- authentication
+- cart
+- checkout
+- payment gateway
+- admin panel
+- stock management system
+
+This project is currently a static catalog and lead generation website.

@@ -1,0 +1,50 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap");
+
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Acid";
+  src: url("/fonts/acid.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-display: "Acid", system-ui, sans-serif;
+  --font-sans: "Manrope", system-ui, sans-serif;
+
+  --color-brand-black: #050505;
+  --color-brand-white: #ffffff;
+  --color-brand-bg: #f7f7f7;
+  --color-brand-border: #e5e5e5;
+  --color-brand-muted: #6b6b6b;
+  --color-brand-red: #c1121f;
+  --color-brand-red-dark: #9b0e18;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--color-brand-bg);
+  color: var(--color-brand-black);
+}
+
+img,
+video {
+  max-width: 100%;
+  display: block;
+}
+
+button,
+a {
+  font: inherit;
+}
