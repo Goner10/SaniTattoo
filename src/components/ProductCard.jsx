@@ -3,18 +3,30 @@ import WhatsAppButton from "./WhatsAppButton.jsx";
 import { formatPrice, getDisplayPrice } from "../utils/formatPrice.js";
 import { productWhatsAppUrl } from "../utils/whatsapp.js";
 
-export default function ProductCard({ product, onOpenDetail }) {
+/**
+ * @param {{
+ *   product: import("../data/products.js").products[number]
+ *   onOpenDetail?: (p: import("../data/products.js").products[number]) => void
+ *   cardMotion?: "default" | "carousel"
+ * }} props
+ */
+export default function ProductCard({ product, onOpenDetail, cardMotion = "default" }) {
   const displayPrice = getDisplayPrice(product);
   const hasVariants = Boolean(product.variants?.length);
+  const isCarousel = cardMotion === "carousel";
 
   const body = (
     <>
-      <div className="aspect-square w-full bg-brand-bg">
+      <div
+        className={`aspect-square w-full bg-brand-bg ${isCarousel ? "select-none" : ""}`}
+      >
         <img
           src={product.image}
           alt={product.alt}
           loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-200 group-hover:scale-[1.02]"
+          draggable={isCarousel ? false : undefined}
+          onDragStart={isCarousel ? (e) => e.preventDefault() : undefined}
+          className="h-full w-full object-cover"
         />
       </div>
       <div className="flex flex-1 flex-col gap-2 p-4">
@@ -35,13 +47,24 @@ export default function ProductCard({ product, onOpenDetail }) {
     </>
   );
 
+  const motionArticleProps = isCarousel
+    ? {
+        initial: { opacity: 1, y: 0 },
+        whileHover: { scale: 1.02 },
+        transition: { type: "spring", stiffness: 400, damping: 28 },
+      }
+    : {
+        layout: true,
+        initial: { opacity: 0, y: 10 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, margin: "-40px" },
+        whileHover: { scale: 1.015 },
+        transition: { duration: 0.28 },
+      };
+
   return (
     <motion.article
-      layout
-      initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.25 }}
+      {...motionArticleProps}
       className="flex h-full flex-col overflow-hidden rounded-lg border border-brand-border bg-brand-white shadow-sm"
     >
       {onOpenDetail ? (

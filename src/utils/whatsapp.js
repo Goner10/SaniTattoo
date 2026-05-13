@@ -1,5 +1,5 @@
-/** Número en formato internacional sin símbolo + (sustituir por el real). */
-export const WHATSAPP_PHONE = "34600000000";
+/** Número en formato internacional sin símbolo + */
+export const WHATSAPP_PHONE = "34686332011";
 
 /**
  * @param {string} [message]

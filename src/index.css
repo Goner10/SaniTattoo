@@ -48,3 +48,19 @@ button,
 a {
   font: inherit;
 }
+
+/* Carrusel destacados: ocultar barra y contener scroll horizontal */
+.featured-scroller {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overscroll-behavior-x: contain;
+}
+
+.featured-scroller::-webkit-scrollbar {
+  display: none;
+}
+
+.featured-scroller img {
+  -webkit-user-drag: none;
+  user-select: none;
+}

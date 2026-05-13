@@ -2,7 +2,6 @@ import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import WhatsAppButton from "./WhatsAppButton.jsx";
-import { generalWhatsAppUrl } from "../utils/whatsapp.js";
 
 const navLinkClass = ({ isActive }) =>
   [
@@ -48,13 +47,21 @@ export default function Header() {
           <NavLink to="/contacto" className={navLinkClass}>
             Contacto
           </NavLink>
-          <WhatsAppButton href={generalWhatsAppUrl()} className="ml-2">
+          <WhatsAppButton
+            href="https://wa.me/34686332011"
+            variant="whatsapp"
+            className="ml-2"
+          >
             WhatsApp
           </WhatsAppButton>
         </nav>
 
         <div className="flex items-center gap-2 md:hidden">
-          <WhatsAppButton href={generalWhatsAppUrl()} className="!px-3">
+          <WhatsAppButton
+            href="https://wa.me/34686332011"
+            variant="whatsapp"
+            className="!px-3"
+          >
             WhatsApp
           </WhatsAppButton>
           <button
