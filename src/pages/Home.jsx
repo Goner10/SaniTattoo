@@ -1,6 +1,7 @@
 import { BadgeCheck, MessageCircle, Search } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import BrandStrip from "../components/BrandStrip.jsx";
 import FeaturedCarousel from "../components/FeaturedCarousel.jsx";
 import ProductGrid from "../components/ProductGrid.jsx";
 import ProductModal from "../components/ProductModal.jsx";
@@ -107,6 +108,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <BrandStrip />
 
       <section
         className="relative overflow-x-hidden border-y border-brand-red-dark/30 bg-gradient-to-br from-brand-red via-brand-red to-brand-red-dark text-white"

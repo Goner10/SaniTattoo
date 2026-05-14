@@ -1,7 +1,9 @@
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import WhatsAppButton from "./WhatsAppButton.jsx";
+
+const SCROLL_TOP_THRESHOLD_PX = 10;
 
 const navLinkClass = ({ isActive }) =>
   [
@@ -13,9 +15,32 @@ const navLinkClass = ({ isActive }) =>
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [showPromoBar, setShowPromoBar] = useState(true);
+
+  useEffect(() => {
+    const update = () => {
+      setShowPromoBar(window.scrollY <= SCROLL_TOP_THRESHOLD_PX);
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
+  }, []);
 
   return (
     <header className="sticky top-0 z-40 border-b border-brand-border bg-brand-white/95 backdrop-blur">
+      <div
+        className={[
+          "overflow-hidden bg-[#C1121F] transition-[max-height,opacity] duration-300 ease-in-out motion-reduce:transition-none",
+          showPromoBar
+            ? "max-h-[2.125rem] border-b border-white/10 opacity-100 sm:max-h-9"
+            : "pointer-events-none max-h-0 border-b border-transparent opacity-0",
+        ].join(" ")}
+        aria-hidden={!showPromoBar}
+      >
+        <p className="mx-auto max-w-full px-3 py-1 text-center font-sans text-[clamp(0.625rem,2.6vw,0.8125rem)] font-semibold leading-snug tracking-[0.04em] text-white sm:py-1.5 sm:text-xs sm:tracking-[0.06em]">
+          Envío gratis en pedidos superiores a 60€
+        </p>
+      </div>
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3.5 sm:gap-4 sm:px-6 sm:py-4">
         <NavLink
           to="/"

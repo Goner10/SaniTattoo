@@ -583,7 +583,7 @@ export const products = [
     price: 10,
     currency: "EUR",
     unit: "150ml",
-    image: "/images/placeholders/product-placeholder.png",
+    image: "/images/productos/wound-care-hydrogel.png",
     alt: "Frasco de desinfectante de piel tipo hydrogel 150 ml",
     shortDescription:
       "Desinfectante de piel en gel acuoso (hydrogel), 150 ml, cómodo de extender.",
