@@ -51,11 +51,12 @@ a {
   font: inherit;
 }
 
-/* Carrusel destacados: ocultar barra y contener scroll horizontal */
+/* Carrusel destacados: ocultar barra, contener scroll horizontal y permitir scroll vertical de página en táctil */
 .featured-scroller {
   scrollbar-width: none;
   -ms-overflow-style: none;
   overscroll-behavior-x: contain;
+  touch-action: pan-x pan-y;
 }
 
 .featured-scroller::-webkit-scrollbar {

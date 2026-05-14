@@ -1,32 +1,45 @@
 import { useReducedMotion } from "framer-motion";
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+} from "react";
 import ProductCard from "./ProductCard.jsx";
 
-const MAX_SEGMENTS = 30;
+/**
+ * Número fijo de repeticiones del listado solo en DOM (sin tocar products.js).
+ * Garantiza overflow horizontal en pantallas grandes con pocos featured.
+ */
+const VISUAL_LOOP_COPIES = 8;
 
 /**
- * Carrusel horizontal con bucle visual (copias solo en el componente).
- * Autoplay vía scrollLeft + arrastre (pointer) y swipe (overflow-x).
- * @param {{ products: import("../data/products.js").products }} props
+ * Carrusel horizontal con bucle infinito (copias duplicadas solo en UI).
+ * Autoplay, arrastre con puntero y scroll nativo horizontal; sin dependencias extra.
+ * @param {{
+ *   products: import("../data/products.js").products
+ *   onOpenDetail?: (p: import("../data/products.js").products[number]) => void
+ * }} props
  */
-export default function FeaturedCarousel({ products }) {
+export default function FeaturedCarousel({ products, onOpenDetail }) {
   const reduceMotion = useReducedMotion();
   const scrollerRef = useRef(null);
   const innerRef = useRef(null);
-  const setWidthRef = useRef(0);
+  const segmentWRef = useRef(0);
   const pauseRef = useRef(false);
   const dragRef = useRef(null);
   const resumeTimerRef = useRef(null);
-  const [segmentCount, setSegmentCount] = useState(2);
+  const nudgeLockRef = useRef(false);
 
   const productIdsKey = useMemo(
     () => products.map((p) => p.id).join("|"),
     [products],
   );
 
-  const loop = useMemo(
-    () => Array.from({ length: segmentCount }, () => products).flat(),
-    [products, segmentCount],
+  const loopProducts = useMemo(
+    () => Array.from({ length: VISUAL_LOOP_COPIES }, () => products).flat(),
+    [products],
   );
 
   const clearResumeTimer = useCallback(() => {
@@ -49,60 +62,72 @@ export default function FeaturedCarousel({ products }) {
     pauseRef.current = true;
   }, [clearResumeTimer]);
 
-  const measure = useCallback(() => {
+  const measureSegment = useCallback(() => {
     const inner = innerRef.current;
-    if (!inner || segmentCount < 1) return;
-    const w = inner.scrollWidth / segmentCount;
-    setWidthRef.current = w > 0 ? w : 0;
-  }, [segmentCount]);
-
-  const tryGrowTrack = useCallback(() => {
-    if (reduceMotion) return;
-    const scroller = scrollerRef.current;
-    const inner = innerRef.current;
-    if (!scroller || !inner || products.length === 0) return;
-    const innerW = inner.scrollWidth;
-    const viewW = scroller.clientWidth;
-    if (innerW <= 0 || viewW <= 0) return;
-
-    if (innerW <= viewW + 48) {
-      setSegmentCount((n) => {
-        const segW = innerW / Math.max(1, n);
-        const target = Math.ceil((viewW + 120) / Math.max(1, segW)) + 1;
-        return Math.min(MAX_SEGMENTS, Math.max(n + 1, target));
-      });
+    if (!inner) {
+      segmentWRef.current = 0;
+      return 0;
     }
-  }, [products.length, reduceMotion]);
+    const w = inner.scrollWidth / VISUAL_LOOP_COPIES;
+    segmentWRef.current = w > 0 ? w : 0;
+    return segmentWRef.current;
+  }, []);
 
-  useLayoutEffect(() => {
-    measure();
-  }, [measure, loop.length]);
+  const centerScroll = useCallback(() => {
+    const el = scrollerRef.current;
+    const seg = segmentWRef.current;
+    if (!el || seg <= 0) return;
+    const maxL = Math.max(0, el.scrollWidth - el.clientWidth);
+    const mid = Math.floor(VISUAL_LOOP_COPIES / 2);
+    el.scrollLeft = Math.min(mid * seg, maxL);
+  }, []);
+
+  const normalizeScroll = useCallback(() => {
+    const el = scrollerRef.current;
+    const seg = segmentWRef.current;
+    if (!el || seg <= 0 || nudgeLockRef.current) return;
+    const maxL = el.scrollWidth - el.clientWidth;
+    if (maxL <= 0) return;
+    const buf = Math.min(72, Math.max(12, maxL * 0.1), seg * 0.12);
+
+    if (el.scrollLeft <= buf) {
+      nudgeLockRef.current = true;
+      el.scrollLeft = Math.min(maxL, el.scrollLeft + seg);
+      nudgeLockRef.current = false;
+      return;
+    }
+    if (el.scrollLeft >= maxL - buf) {
+      nudgeLockRef.current = true;
+      el.scrollLeft = Math.max(0, el.scrollLeft - seg);
+      nudgeLockRef.current = false;
+    }
+  }, []);
 
   useLayoutEffect(() => {
     if (reduceMotion) return;
-    const scroller = scrollerRef.current;
+    measureSegment();
+    centerScroll();
+    requestAnimationFrame(() => {
+      measureSegment();
+      centerScroll();
+      normalizeScroll();
+    });
+  }, [measureSegment, centerScroll, normalizeScroll, productIdsKey, loopProducts.length, reduceMotion]);
+
+  useLayoutEffect(() => {
+    if (reduceMotion) return;
     const inner = innerRef.current;
-    if (!scroller || !inner || typeof ResizeObserver === "undefined") return;
+    const scroller = scrollerRef.current;
+    if (!inner || !scroller || typeof ResizeObserver === "undefined") return;
 
     const ro = new ResizeObserver(() => {
-      measure();
-      tryGrowTrack();
+      measureSegment();
+      normalizeScroll();
     });
     ro.observe(inner);
     ro.observe(scroller);
     return () => ro.disconnect();
-  }, [measure, tryGrowTrack, reduceMotion, segmentCount, productIdsKey]);
-
-  const normalizeScroll = useCallback(() => {
-    const el = scrollerRef.current;
-    const w = setWidthRef.current;
-    if (!el || w <= 0) return;
-    let guard = 0;
-    while (el.scrollLeft >= w - 0.5 && guard < 12) {
-      el.scrollLeft -= w;
-      guard += 1;
-    }
-  }, []);
+  }, [measureSegment, normalizeScroll, reduceMotion, productIdsKey]);
 
   useEffect(() => {
     if (reduceMotion) return;
@@ -111,28 +136,28 @@ export default function FeaturedCarousel({ products }) {
     const tick = () => {
       if (cancelled) return;
       const el = scrollerRef.current;
-      const w = setWidthRef.current;
-      if (el && w > 0 && !pauseRef.current) {
+      if (el && !pauseRef.current) {
         el.scrollLeft += 0.45;
-        if (el.scrollLeft >= w - 0.5) {
-          el.scrollLeft -= w;
-        }
+        normalizeScroll();
       }
-      if (!cancelled) {
-        raf = requestAnimationFrame(tick);
-      }
+      raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
     return () => {
       cancelled = true;
       cancelAnimationFrame(raf);
     };
-  }, [reduceMotion, productIdsKey, segmentCount]);
+  }, [reduceMotion, productIdsKey, normalizeScroll]);
 
   useEffect(() => () => clearResumeTimer(), [clearResumeTimer]);
 
   const onPointerDown = (e) => {
     if (e.pointerType === "mouse" && e.button !== 0) return;
+    /** Táctil: scroll horizontal nativo + onScroll; evitar captura que compite con scroll vertical. */
+    if (e.pointerType === "touch") {
+      pause();
+      return;
+    }
     const target = e.target;
     if (target instanceof Element && target.closest("a, button")) return;
 
@@ -173,6 +198,10 @@ export default function FeaturedCarousel({ products }) {
     scheduleResume();
   };
 
+  const onScroll = () => {
+    normalizeScroll();
+  };
+
   const onTouchStart = () => {
     pause();
   };
@@ -210,7 +239,13 @@ export default function FeaturedCarousel({ products }) {
             key={product.id}
             className="w-[min(88vw,20rem)] shrink-0 snap-center sm:w-[17.5rem]"
           >
-            <ProductCard product={product} cardMotion="carousel" />
+            <ProductCard
+              product={product}
+              cardMotion="carousel"
+              onOpenDetail={onOpenDetail}
+              openOnCardClick={false}
+              showWhatsAppButton={false}
+            />
           </div>
         ))}
       </div>
@@ -240,22 +275,28 @@ export default function FeaturedCarousel({ products }) {
       <div
         ref={scrollerRef}
         className="featured-scroller cursor-grab select-none overflow-x-auto overscroll-x-contain px-4 active:cursor-grabbing sm:px-6"
-        style={{ touchAction: "pan-x" }}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={endPointerDrag}
         onPointerCancel={endPointerDrag}
+        onScroll={onScroll}
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
         onWheel={onWheel}
       >
         <div ref={innerRef} className="flex w-max gap-4 md:gap-6">
-          {loop.map((product, index) => (
+          {loopProducts.map((product, index) => (
             <div
-              key={`${product.id}-${index}`}
+              key={`${product.id}-loop-${index}`}
               className="w-[min(88vw,20rem)] shrink-0 sm:w-[17.5rem] lg:w-[18.5rem]"
             >
-              <ProductCard product={product} cardMotion="carousel" />
+              <ProductCard
+                product={product}
+                cardMotion="carousel"
+                onOpenDetail={onOpenDetail}
+                openOnCardClick={false}
+                showWhatsAppButton={false}
+              />
             </div>
           ))}
         </div>

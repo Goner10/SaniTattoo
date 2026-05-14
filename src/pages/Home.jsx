@@ -1,22 +1,14 @@
-import { motion } from "framer-motion";
 import { BadgeCheck, MessageCircle, Search } from "lucide-react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import FeaturedCarousel from "../components/FeaturedCarousel.jsx";
 import ProductGrid from "../components/ProductGrid.jsx";
+import ProductModal from "../components/ProductModal.jsx";
 import SectionHeader from "../components/SectionHeader.jsx";
 import WhatsAppButton from "../components/WhatsAppButton.jsx";
 import { getActiveProducts } from "../data/products.js";
 import { generalWhatsAppUrl } from "../utils/whatsapp.js";
 import { catalogCtaPrimary } from "../utils/catalogCta.js";
-
-const easeOut = [0.22, 1, 0.36, 1];
-
-const sectionReveal = {
-  initial: { opacity: 0, y: 20 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-72px", amount: 0.2 },
-  transition: { duration: 0.5, ease: easeOut },
-};
 
 const orderSteps = [
   {
@@ -40,6 +32,7 @@ const orderSteps = [
 ];
 
 export default function Home() {
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const active = getActiveProducts();
   const featured = active.filter((p) => p.featured);
   const merchandisingPreview = active
@@ -49,13 +42,25 @@ export default function Home() {
 
   return (
     <>
-      <section className="overflow-x-hidden border-b border-brand-border bg-brand-bg">
-        <div className="mx-auto grid max-w-6xl min-w-0 gap-8 px-4 py-12 sm:grid-cols-2 sm:items-center sm:gap-10 sm:px-6 sm:py-16 lg:gap-14 lg:py-20">
-          <motion.div
-            className="min-w-0"
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, ease: easeOut }}
+      <section className="relative isolate min-h-[400px] w-full overflow-x-hidden border-b border-brand-border sm:min-h-[460px] lg:min-h-[500px] xl:min-h-[540px] lg:max-h-[min(620px,calc(100vh-96px))] xl:max-h-[min(620px,calc(100vh-96px))] 2xl:max-h-none 2xl:min-h-[700px]">
+        <div className="pointer-events-none absolute inset-0 z-0">
+          <img
+            src="/images/placeholders/hero-sanitattoo-desktop.png"
+            alt="Cabecera Sanitattoo: higiene y consumibles para estudio de tatuaje"
+            className="h-full min-h-[400px] w-full object-cover object-right sm:min-h-[460px] lg:min-h-[500px] xl:min-h-[540px] lg:max-h-[min(620px,calc(100vh-96px))] xl:max-h-[min(620px,calc(100vh-96px))] 2xl:max-h-none 2xl:min-h-[700px] xl:object-[right_45%] 2xl:object-[right_42%]"
+            width={1920}
+            height={1080}
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+        <div
+          className="pointer-events-none absolute inset-0 z-1 bg-gradient-to-r from-brand-white/95 from-0% via-brand-white/72 via-42% to-white/10 to-88% max-md:via-brand-white/78 lg:from-brand-white/55 lg:via-brand-white/28 lg:to-transparent"
+          aria-hidden
+        />
+        <div className="relative z-10 mx-auto flex min-h-[400px] max-w-6xl min-w-0 items-center px-4 py-12 sm:min-h-[460px] sm:px-6 sm:py-14 lg:min-h-[500px] xl:min-h-[540px] lg:max-h-[min(620px,calc(100vh-96px))] xl:max-h-[min(620px,calc(100vh-96px))] 2xl:max-h-none 2xl:min-h-[700px] lg:py-10 xl:py-10 2xl:py-16">
+          <div
+            className="max-w-xl rounded-2xl border border-brand-border/60 bg-white/80 p-5 shadow-sm backdrop-blur-[6px] sm:max-w-lg sm:border-transparent sm:bg-transparent sm:p-0 sm:shadow-none sm:backdrop-blur-none md:max-w-xl"
           >
             <span className="font-heading inline-flex items-center gap-2 rounded-full border border-brand-red/30 bg-brand-white px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-red shadow-sm sm:text-xs sm:tracking-[0.18em]">
               Sanitattoo
@@ -71,41 +76,17 @@ export default function Home() {
               Catálogo curado de material sanitario, aftercare y merchandising.
               Diseñado para flujo de trabajo real en tatuaje.
             </p>
-            <div className="mt-8 flex min-w-0 flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+            <div className="mt-8 sm:mt-10">
               <Link to="/catalogo" className={catalogCtaPrimary}>
                 Ver catálogo
               </Link>
-              <WhatsAppButton href={generalWhatsAppUrl()} variant="solid">
-                WhatsApp
-              </WhatsAppButton>
             </div>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.08, ease: easeOut }}
-            className="relative min-w-0"
-          >
-            <div className="rounded-2xl border border-brand-border/90 bg-gradient-to-br from-brand-white via-brand-bg to-brand-white p-3 shadow-[0_20px_50px_rgba(5,5,5,0.08)] ring-1 ring-black/[0.04] sm:p-4">
-              <div className="relative overflow-hidden rounded-xl bg-brand-bg">
-                <div
-                  className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-brand-black/[0.06] via-transparent to-brand-red/[0.06]"
-                  aria-hidden
-                />
-                <img
-                  src="/images/placeholders/hero.jpg"
-                  alt="Producto destacado Green Soap Cleansing Foam"
-                  className="aspect-[4/3] w-full object-cover sm:aspect-[5/4]"
-                />
-              </div>
-            </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      <motion.section
+      <section
         className="overflow-x-hidden border-b border-brand-border bg-brand-white"
-        {...sectionReveal}
       >
         <div className="mx-auto max-w-6xl min-w-0 px-4 py-12 sm:px-6 sm:py-16">
           <SectionHeader
@@ -121,15 +102,14 @@ export default function Home() {
             <FeaturedCarousel
               key={featured.map((p) => p.id).join("|")}
               products={featured}
+              onOpenDetail={setSelectedProduct}
             />
           </div>
         </div>
-      </motion.section>
+      </section>
 
-      <motion.section
+      <section
         className="relative overflow-x-hidden border-y border-brand-red-dark/30 bg-gradient-to-br from-brand-red via-brand-red to-brand-red-dark text-white"
-        {...sectionReveal}
-        transition={{ ...sectionReveal.transition, delay: 0.05 }}
       >
         <div
           className="pointer-events-none absolute -left-24 top-0 h-72 w-72 rounded-full bg-white/10 blur-3xl"
@@ -163,12 +143,8 @@ export default function Home() {
             {orderSteps.map((item) => {
               const Icon = item.Icon;
               return (
-                <motion.li
+                <li
                   key={item.step}
-                  initial={{ opacity: 0, y: 14 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.4, ease: easeOut }}
                   className="group relative overflow-hidden rounded-2xl border border-white/20 bg-white/[0.08] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.22)] backdrop-blur-md transition-[transform,box-shadow,border-color,background-color] duration-300 ease-out will-change-transform hover:-translate-y-1 hover:border-white/35 hover:bg-white/[0.14] hover:shadow-[0_22px_56px_rgba(0,0,0,0.28)] sm:p-7"
                 >
                   <div
@@ -195,7 +171,7 @@ export default function Home() {
                     className="pointer-events-none absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-100"
                     aria-hidden
                   />
-                </motion.li>
+                </li>
               );
             })}
           </ol>
@@ -208,14 +184,15 @@ export default function Home() {
               href={generalWhatsAppUrl()}
               variant="outline"
               className="border-white/70 bg-transparent text-white hover:border-white hover:bg-white/10 hover:text-white"
-            />
+            >
+              WhatsApp
+            </WhatsAppButton>
           </div>
         </div>
-      </motion.section>
+      </section>
 
-      <motion.section
+      <section
         className="overflow-x-hidden border-t border-brand-border bg-gradient-to-b from-brand-bg via-brand-bg to-brand-white"
-        {...sectionReveal}
       >
         <div className="mx-auto max-w-6xl min-w-0 px-4 py-12 sm:px-6 sm:py-16">
           <div className="relative rounded-2xl border border-brand-border bg-brand-white/90 p-5 shadow-sm ring-1 ring-brand-red/10 sm:p-7 lg:p-8">
@@ -230,19 +207,19 @@ export default function Home() {
               ctaTone="accent"
             />
             <div className="mt-2">
-              <ProductGrid products={merchandisingPreview} />
-            </div>
-            <div className="mt-8 flex justify-center border-t border-brand-border/70 pt-8 sm:justify-end">
-              <Link
-                to="/merchandising"
-                className={`${catalogCtaPrimary} w-full justify-center sm:w-auto`}
-              >
-                Ver merchandising completo
-              </Link>
+              <ProductGrid
+                products={merchandisingPreview}
+                onOpenDetail={setSelectedProduct}
+              />
             </div>
           </div>
         </div>
-      </motion.section>
+      </section>
+
+      <ProductModal
+        product={selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+      />
     </>
   );
 }

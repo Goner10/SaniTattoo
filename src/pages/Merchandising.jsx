@@ -8,19 +8,28 @@ export default function Merchandising() {
   const items = getActiveProducts().filter((p) => p.category === "merchandising");
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12">
-      <header className="max-w-2xl">
-        <h1 className="font-display text-3xl tracking-tight text-brand-black sm:text-4xl">
-          Merchandising
-        </h1>
-        <p className="mt-3 text-sm leading-relaxed text-brand-muted sm:text-base">
-          Textil y productos de marca SANITATTOO. Disponibilidad y tallas las
-          confirmamos por mensaje.
-        </p>
-      </header>
+    <div className="min-h-screen bg-gradient-to-b from-brand-bg via-brand-bg to-brand-white">
+      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-14">
+        <header className="max-w-3xl">
+          <p className="font-heading text-xs font-semibold uppercase tracking-[0.22em] text-brand-red">
+            Marca & textil
+          </p>
+          <h1 className="font-heading mt-3 text-3xl font-semibold tracking-tight text-brand-black sm:text-4xl lg:text-[2.5rem] lg:leading-tight">
+            Merchandising
+          </h1>
+          <span
+            className="mt-4 block h-1 w-14 rounded-full bg-brand-red"
+            aria-hidden
+          />
+          <p className="mt-4 text-sm leading-relaxed text-brand-muted sm:text-base">
+            Textil y productos de marca SANITATTOO. Disponibilidad y tallas las
+            confirmamos por mensaje.
+          </p>
+        </header>
 
-      <div className="mt-10">
-        <ProductGrid products={items} onOpenDetail={setSelected} />
+        <div className="mt-12">
+          <ProductGrid products={items} onOpenDetail={setSelected} />
+        </div>
       </div>
 
       <ProductModal product={selected} onClose={() => setSelected(null)} />
