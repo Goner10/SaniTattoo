@@ -1,8 +1,13 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ProductGrid from "../components/ProductGrid.jsx";
 import ProductModal from "../components/ProductModal.jsx";
 import { categories } from "../data/categories.js";
 import { getActiveProducts } from "../data/products.js";
+
+const PAGE_SIZE = 12;
+
+const loadMoreButtonClass =
+  "rounded-lg border-2 border-[#C1121F] bg-[#C1121F] px-8 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-white hover:text-[#C1121F] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C1121F]";
 
 const chipBase =
   "inline-flex items-center justify-center rounded-full px-3.5 py-2 text-xs font-semibold transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red sm:text-sm";
@@ -17,6 +22,11 @@ export default function Catalog() {
   const [query, setQuery] = useState("");
   const [categoryId, setCategoryId] = useState("all");
   const [selected, setSelected] = useState(null);
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+
+  useEffect(() => {
+    setVisibleCount(PAGE_SIZE);
+  }, [query, categoryId]);
 
   const filtered = useMemo(() => {
     const list = getActiveProducts();
@@ -38,8 +48,15 @@ export default function Catalog() {
 
   const hasFilters = categoryId !== "all" || query.trim() !== "";
   const count = filtered.length;
-  const countLabel =
-    count === 1 ? "1 producto encontrado" : `${count} productos encontrados`;
+  const shown = Math.min(visibleCount, count);
+  const rangeLabel =
+    count === 0
+      ? "No hay productos que coincidan"
+      : count === 1
+        ? "Mostrando 1 de 1 producto"
+        : `Mostrando ${shown} de ${count} productos`;
+  const visibleProducts = filtered.slice(0, visibleCount);
+  const showLoadMore = count >= PAGE_SIZE && visibleCount < count;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-brand-bg via-brand-bg to-brand-white">
@@ -81,7 +98,7 @@ export default function Catalog() {
                 role="status"
                 aria-live="polite"
               >
-                {countLabel}
+                {rangeLabel}
               </p>
               {hasFilters ? (
                 <button
@@ -129,7 +146,18 @@ export default function Catalog() {
         </div>
 
         <div className="mt-12">
-          <ProductGrid products={filtered} onOpenDetail={setSelected} />
+          <ProductGrid products={visibleProducts} onOpenDetail={setSelected} />
+          {showLoadMore ? (
+            <div className="mt-10 flex justify-center">
+              <button
+                type="button"
+                className={loadMoreButtonClass}
+                onClick={() => setVisibleCount((n) => n + PAGE_SIZE)}
+              >
+                Ver más productos
+              </button>
+            </div>
+          ) : null}
         </div>
       </div>
 
