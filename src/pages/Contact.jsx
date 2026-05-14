@@ -2,10 +2,10 @@ import { AtSign, Mail, MapPin, Phone } from "lucide-react";
 import WhatsAppButton from "../components/WhatsAppButton.jsx";
 import { buildWhatsAppUrl, WHATSAPP_PHONE } from "../utils/whatsapp.js";
 
-const INSTAGRAM_URL = "https://instagram.com/sanitattoo";
-const PHONE_DISPLAY = "+34 600 000 000";
+const INSTAGRAM_URL = "https://www.instagram.com/sanitattoosupply/";
+const PHONE_DISPLAY = "+34 686 332 011";
 const EMAIL = "hola@sanitattoo.com";
-const ADDRESS = "España (dirección comercial pendiente de publicar)";
+const ADDRESS = "Calle Islas Canarias 1, Paterna, Valencia 46988";
 
 export default function Contact() {
   return (
@@ -26,11 +26,7 @@ export default function Contact() {
             WhatsApp
           </h2>
           <p className="mt-2 text-sm text-brand-black">
-            Número (sustituye por el definitivo en{" "}
-            <code className="rounded bg-brand-bg px-1 py-0.5 text-xs">
-              src/utils/whatsapp.js
-            </code>
-            ): {WHATSAPP_PHONE}
+             {WHATSAPP_PHONE}
           </p>
           <div className="mt-6">
             <WhatsAppButton href={buildWhatsAppUrl()}>
@@ -53,7 +49,7 @@ export default function Contact() {
                 rel="noopener noreferrer"
                 className="mt-1 inline-block text-sm text-brand-red underline-offset-2 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red rounded-sm"
               >
-                @sanitattoo
+                @sanitattoosupply
               </a>
             </div>
           </li>
@@ -62,7 +58,7 @@ export default function Contact() {
             <div>
               <p className="text-sm font-semibold text-brand-black">Teléfono</p>
               <a
-                href="tel:+34600000000"
+                href="tel:+34686332011"
                 className="mt-1 inline-block text-sm text-brand-black hover:text-brand-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red rounded-sm"
               >
                 {PHONE_DISPLAY}

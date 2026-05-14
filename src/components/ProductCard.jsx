@@ -18,16 +18,18 @@ export default function ProductCard({ product, onOpenDetail, cardMotion = "defau
   const body = (
     <>
       <div
-        className={`aspect-square w-full bg-brand-bg ${isCarousel ? "select-none" : ""}`}
+        className={`aspect-square w-full shrink-0 overflow-hidden rounded-t-lg bg-[#f1f1f1] ring-1 ring-inset ring-black/[0.04] ${isCarousel ? "select-none" : ""}`}
       >
-        <img
-          src={product.image}
-          alt={product.alt}
-          loading="lazy"
-          draggable={isCarousel ? false : undefined}
-          onDragStart={isCarousel ? (e) => e.preventDefault() : undefined}
-          className="h-full w-full object-cover"
-        />
+        <div className="flex h-full min-h-0 w-full items-center justify-center p-3 sm:p-4 md:p-5">
+          <img
+            src={product.image}
+            alt={product.alt}
+            loading="lazy"
+            draggable={isCarousel ? false : undefined}
+            onDragStart={isCarousel ? (e) => e.preventDefault() : undefined}
+            className="max-h-full w-full max-w-full object-contain"
+          />
+        </div>
       </div>
       <div className="flex flex-1 flex-col gap-2 p-4">
         <p className="text-xs font-medium uppercase tracking-wide text-brand-muted">

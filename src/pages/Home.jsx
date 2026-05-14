@@ -7,6 +7,7 @@ import SectionHeader from "../components/SectionHeader.jsx";
 import WhatsAppButton from "../components/WhatsAppButton.jsx";
 import { getActiveProducts } from "../data/products.js";
 import { generalWhatsAppUrl } from "../utils/whatsapp.js";
+import { catalogCtaPrimary } from "../utils/catalogCta.js";
 
 const easeOut = [0.22, 1, 0.36, 1];
 
@@ -48,38 +49,33 @@ export default function Home() {
 
   return (
     <>
-      <section className="border-b border-brand-border bg-brand-bg">
-        <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:grid-cols-2 sm:items-center sm:gap-12 sm:px-6 sm:py-16 lg:py-20">
+      <section className="overflow-x-hidden border-b border-brand-border bg-brand-bg">
+        <div className="mx-auto grid max-w-6xl min-w-0 gap-8 px-4 py-12 sm:grid-cols-2 sm:items-center sm:gap-10 sm:px-6 sm:py-16 lg:gap-14 lg:py-20">
           <motion.div
+            className="min-w-0"
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, ease: easeOut }}
           >
-            <span className="inline-flex items-center gap-2 rounded-full border border-brand-red/25 bg-brand-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-brand-red shadow-sm">
+            <span className="font-heading inline-flex items-center gap-2 rounded-full border border-brand-red/30 bg-brand-white px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-red shadow-sm sm:text-xs sm:tracking-[0.18em]">
               Sanitattoo
             </span>
-            <h1 className="mt-4 font-display text-4xl leading-[1.05] tracking-tight text-brand-black sm:text-5xl lg:text-6xl">
+            <h1 className="font-heading mt-4 text-3xl font-semibold leading-[1.08] tracking-tight text-brand-black sm:mt-5 sm:text-4xl lg:text-[2.75rem] lg:leading-[1.06]">
               Higiene y consumibles para tu estudio
             </h1>
             <span
-              className="mt-4 block h-1 w-14 rounded-full bg-brand-red"
+              className="mt-4 block h-1 w-14 rounded-full bg-brand-red sm:mt-5"
               aria-hidden
             />
-            <p className="mt-5 max-w-md text-sm leading-relaxed text-brand-muted sm:text-base">
+            <p className="mt-4 max-w-md text-sm leading-relaxed text-brand-muted sm:mt-5 sm:text-base">
               Catálogo curado de material sanitario, aftercare y merchandising.
               Diseñado para flujo de trabajo real en tatuaje.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <Link
-                to="/catalogo"
-                className="inline-flex items-center justify-center rounded-md border-2 border-brand-red bg-brand-black px-5 py-3 text-sm font-medium text-brand-white transition-colors hover:bg-brand-red hover:text-brand-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
-              >
+            <div className="mt-8 flex min-w-0 flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+              <Link to="/catalogo" className={catalogCtaPrimary}>
                 Ver catálogo
               </Link>
-              <WhatsAppButton
-                href={generalWhatsAppUrl()}
-                className="shadow-sm ring-1 ring-[#25D366]/30 ring-offset-2 ring-offset-brand-bg"
-              >
+              <WhatsAppButton href={generalWhatsAppUrl()} variant="solid">
                 WhatsApp
               </WhatsAppButton>
             </div>
@@ -88,17 +84,21 @@ export default function Home() {
             initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.08, ease: easeOut }}
-            className="relative overflow-hidden rounded-xl border border-brand-border bg-brand-white shadow-[0_20px_50px_rgba(5,5,5,0.08)]"
+            className="relative min-w-0"
           >
-            <div
-              className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-tr from-brand-red/10 via-transparent to-transparent"
-              aria-hidden
-            />
-            <img
-              src="/images/productos/green-soap-cleansing-foam.png"
-              alt="Producto destacado Green Soap Cleansing Foam"
-              className="aspect-square w-full object-cover sm:aspect-[5/4]"
-            />
+            <div className="rounded-2xl border border-brand-border/90 bg-gradient-to-br from-brand-white via-brand-bg to-brand-white p-3 shadow-[0_20px_50px_rgba(5,5,5,0.08)] ring-1 ring-black/[0.04] sm:p-4">
+              <div className="relative overflow-hidden rounded-xl bg-brand-bg">
+                <div
+                  className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-brand-black/[0.06] via-transparent to-brand-red/[0.06]"
+                  aria-hidden
+                />
+                <img
+                  src="/images/placeholders/hero.jpg"
+                  alt="Producto destacado Green Soap Cleansing Foam"
+                  className="aspect-[4/3] w-full object-cover sm:aspect-[5/4]"
+                />
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -107,7 +107,7 @@ export default function Home() {
         className="overflow-x-hidden border-b border-brand-border bg-brand-white"
         {...sectionReveal}
       >
-        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
+        <div className="mx-auto max-w-6xl min-w-0 px-4 py-12 sm:px-6 sm:py-16">
           <SectionHeader
             eyebrow="Selección estudio"
             accent
@@ -117,15 +117,17 @@ export default function Home() {
             ctaTo="/catalogo"
             ctaTone="accent"
           />
-          <FeaturedCarousel
-            key={featured.map((p) => p.id).join("|")}
-            products={featured}
-          />
+          <div className="rounded-2xl border border-brand-border/80 bg-gradient-to-b from-brand-bg/60 to-brand-white p-2 shadow-[0_10px_40px_rgba(5,5,5,0.05)] sm:p-3">
+            <FeaturedCarousel
+              key={featured.map((p) => p.id).join("|")}
+              products={featured}
+            />
+          </div>
         </div>
       </motion.section>
 
       <motion.section
-        className="relative overflow-hidden border-y border-brand-red-dark/30 bg-gradient-to-br from-brand-red via-brand-red to-brand-red-dark text-white"
+        className="relative overflow-x-hidden border-y border-brand-red-dark/30 bg-gradient-to-br from-brand-red via-brand-red to-brand-red-dark text-white"
         {...sectionReveal}
         transition={{ ...sectionReveal.transition, delay: 0.05 }}
       >
@@ -139,12 +141,12 @@ export default function Home() {
         />
         <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
 
-        <div className="relative mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
-          <div className="mb-10 max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-white/80">
+        <div className="relative mx-auto max-w-6xl min-w-0 px-4 py-12 sm:px-6 sm:py-16">
+          <div className="mb-8 max-w-2xl sm:mb-10">
+            <p className="font-heading text-xs font-semibold uppercase tracking-[0.28em] text-white/80">
               Proceso
             </p>
-            <h2 className="mt-3 font-display text-3xl tracking-tight text-white sm:text-4xl">
+            <h2 className="font-heading mt-3 text-2xl font-semibold tracking-tight text-white sm:text-3xl md:text-4xl">
               Cómo hacer un pedido
             </h2>
             <span
@@ -157,7 +159,7 @@ export default function Home() {
             </p>
           </div>
 
-          <ol className="grid gap-5 sm:grid-cols-3 sm:gap-6">
+          <ol className="grid gap-4 sm:grid-cols-3 sm:gap-5 lg:gap-6">
             {orderSteps.map((item) => {
               const Icon = item.Icon;
               return (
@@ -167,21 +169,21 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-40px" }}
                   transition={{ duration: 0.4, ease: easeOut }}
-                  className="relative overflow-hidden rounded-2xl border border-white/20 bg-white/[0.08] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.22)] backdrop-blur-md sm:p-7"
+                  className="group relative overflow-hidden rounded-2xl border border-white/20 bg-white/[0.08] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.22)] backdrop-blur-md transition-[transform,box-shadow,border-color,background-color] duration-300 ease-out will-change-transform hover:-translate-y-1 hover:border-white/35 hover:bg-white/[0.14] hover:shadow-[0_22px_56px_rgba(0,0,0,0.28)] sm:p-7"
                 >
                   <div
-                    className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-white/10"
+                    className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-white/10 transition-opacity duration-300 group-hover:opacity-80"
                     aria-hidden
                   />
                   <div className="relative flex items-start gap-4">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-white/35 bg-white/10 text-white shadow-inner">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-white/35 bg-white/10 text-white shadow-inner transition-colors duration-300 group-hover:border-white/50 group-hover:bg-white/15">
                       <Icon className="size-5" aria-hidden />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <span className="font-display text-4xl leading-none text-white/25 sm:text-5xl">
+                      <span className="font-display text-4xl leading-none text-white/25 transition-colors duration-300 group-hover:text-white/35 sm:text-5xl">
                         {item.step}
                       </span>
-                      <h3 className="mt-2 text-lg font-semibold tracking-tight text-white">
+                      <h3 className="font-heading mt-2 text-base font-semibold tracking-tight text-white sm:text-lg">
                         {item.title}
                       </h3>
                       <p className="mt-2 text-sm leading-relaxed text-white/80">
@@ -190,7 +192,7 @@ export default function Home() {
                     </div>
                   </div>
                   <div
-                    className="pointer-events-none absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-white/50 to-transparent"
+                    className="pointer-events-none absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-100"
                     aria-hidden
                   />
                 </motion.li>
@@ -198,11 +200,8 @@ export default function Home() {
             })}
           </ol>
 
-          <div className="mt-10 flex flex-wrap items-center gap-3">
-            <Link
-              to="/catalogo"
-              className="inline-flex items-center justify-center rounded-md border-2 border-white bg-white px-5 py-2.5 text-sm font-semibold text-brand-red transition-colors hover:bg-transparent hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-            >
+          <div className="mt-8 flex flex-wrap items-center gap-3 sm:mt-10">
+            <Link to="/catalogo" className={catalogCtaPrimary}>
               Ir al catálogo
             </Link>
             <WhatsAppButton
@@ -214,17 +213,35 @@ export default function Home() {
         </div>
       </motion.section>
 
-      <motion.section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16" {...sectionReveal}>
-        <SectionHeader
-          eyebrow="Marca"
-          accent
-          title="Merchandising"
-          subtitle="Textil y piezas de marca. Vista previa; el listado completo está en su sección."
-          ctaLabel="Ir a merchandising"
-          ctaTo="/merchandising"
-          ctaTone="accent"
-        />
-        <ProductGrid products={merchandisingPreview} />
+      <motion.section
+        className="overflow-x-hidden border-t border-brand-border bg-gradient-to-b from-brand-bg via-brand-bg to-brand-white"
+        {...sectionReveal}
+      >
+        <div className="mx-auto max-w-6xl min-w-0 px-4 py-12 sm:px-6 sm:py-16">
+          <div className="relative rounded-2xl border border-brand-border bg-brand-white/90 p-5 shadow-sm ring-1 ring-brand-red/10 sm:p-7 lg:p-8">
+            <div className="absolute left-5 top-0 h-1 w-16 -translate-y-px rounded-b-full bg-brand-red sm:left-7 lg:left-8" />
+            <SectionHeader
+              eyebrow="Marca"
+              accent
+              title="Merchandising"
+              subtitle="Textil y piezas de marca. Vista previa de hasta 3 referencias; el catálogo completo está en su sección."
+              ctaLabel="Ir a merchandising"
+              ctaTo="/merchandising"
+              ctaTone="accent"
+            />
+            <div className="mt-2">
+              <ProductGrid products={merchandisingPreview} />
+            </div>
+            <div className="mt-8 flex justify-center border-t border-brand-border/70 pt-8 sm:justify-end">
+              <Link
+                to="/merchandising"
+                className={`${catalogCtaPrimary} w-full justify-center sm:w-auto`}
+              >
+                Ver merchandising completo
+              </Link>
+            </div>
+          </div>
+        </div>
       </motion.section>
     </>
   );

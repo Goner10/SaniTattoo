@@ -1,5 +1,5 @@
 /** Número en formato internacional sin símbolo + */
-export const WHATSAPP_PHONE = "34686332011";
+export const WHATSAPP_PHONE = "+34 686 332 011";
 
 /**
  * @param {string} [message]

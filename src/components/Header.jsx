@@ -16,18 +16,18 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-brand-border bg-brand-white/95 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3.5 sm:gap-4 sm:px-6 sm:py-4">
         <NavLink
           to="/"
-          className="flex items-center gap-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
+          className="flex min-w-0 shrink items-center gap-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
           onClick={() => setOpen(false)}
         >
           <img
-            src="/images/logos/LOGO_NEGRO.png"
+            src="/images/logos/logo.png"
             alt="SANITATTOO"
-            className="h-9 w-auto sm:h-10"
-            width={160}
-            height={40}
+            className="h-10 w-auto max-h-12 object-contain sm:h-12 md:h-14"
+            width={200}
+            height={56}
           />
         </NavLink>
 

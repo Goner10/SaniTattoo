@@ -21,6 +21,7 @@
  *   active: boolean
  *   variants?: ProductVariant[]
  *   merchandisingFeatured?: boolean
+ *   gallery?: string[]
  * }} Product
  */
 
@@ -50,19 +51,19 @@ export const products = [
   {
     id: "green-soap-cleansing-foam",
     sku: "SAN-GREEN-SOAP-FOAM-220",
-    name: "Green Soap Cleaning Foam",
+    name: "Servilletas Ghost Tattoo",
     slug: "green-soap-cleaning-foam",
     category: "aftercare",
     categoryLabel: "Aftercare",
-    price: 8,
+    price: 7.5,
     currency: "EUR",
-    unit: "220ml",
-    image: "/images/productos/green-soap-cleansing-foam.png",
+    unit: "125 unidades",
+    image: "/images/productos/ghost.png",
     alt: "Bote de espuma limpiadora Green Soap Cleansing Foam",
     shortDescription:
-      "Espuma limpiadora suave para la piel durante y después del tatuaje.",
+      "Servilletas super absorbentes con sistema de envasado y corte.",
     description:
-      "Espuma limpiadora formulada para uso profesional en estudio. Ayuda a retirar residuos de tinta y mantiene la zona cómoda durante el proceso y el aftercare.",
+      "Súper absorbente",
     tags: ["aftercare", "green soap", "limpieza", "espuma"],
     featured: true,
     offer: false,
@@ -121,14 +122,14 @@ export const products = [
   {
     id: "camiseta-sanitattoo",
     sku: "SAN-MERCH-CAMISETA",
-    name: "Camiseta SANITATTOO",
+    name: "Camiseta blanca SANITATTOO",
     slug: "camiseta-sanitattoo",
     category: "merchandising",
     categoryLabel: "Merchandising",
     price: null,
     currency: "EUR",
     unit: "1 unidad",
-    image: "/images/placeholders/product-placeholder.png",
+    image: "/images/merchandising/camiseta-blanca-trasera.jpg",
     alt: "Camiseta de merchandising SANITATTOO",
     shortDescription: "Camiseta oficial de marca. Consulta tallas y stock por WhatsApp.",
     description:
@@ -138,6 +139,35 @@ export const products = [
     offer: false,
     active: true,
     merchandisingFeatured: true,
+    gallery: [
+      "/images/merchandising/camiseta-blanca-trasera.jpg",
+      "/images/merchandising/pack-merchandising.jpg",
+    ],
+  },
+  {
+    id: "camiseta-sanitattoo",
+    sku: "SAN-MERCH-CAMISETA",
+    name: "Camiseta negra SANITATTOO",
+    slug: "camiseta-sanitattoo",
+    category: "merchandising",
+    categoryLabel: "Merchandising",
+    price: null,
+    currency: "EUR",
+    unit: "1 unidad",
+    image: "/images/merchandising/camiseta-negra-frontal.jpg",
+    alt: "Camiseta negra de merchandising SANITATTOO",
+    shortDescription: "Camiseta oficial de marca. Consulta tallas y stock por WhatsApp.",
+    description:
+      "Textil de merchandising SANITATTOO. Disponibilidad y tallas sujetas a stock; te informamos al momento por WhatsApp.",
+    tags: ["merchandising", "camiseta", "textil"],
+    featured: false,
+    offer: false,
+    active: true,
+    merchandisingFeatured: true,
+    gallery: [
+      "/images/merchandising/camiseta-negra-frontal.jpg",
+      "/images/merchandising/pack-merchandising.jpg",
+    ],
   },
 ];
 
