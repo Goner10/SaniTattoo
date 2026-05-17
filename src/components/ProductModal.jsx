@@ -77,7 +77,7 @@ export default function ProductModal({ product, onClose }) {
                 </p>
                 <h2
                   id="product-modal-title"
-                  className="mt-1 font-display text-xl text-brand-black sm:text-2xl"
+                  className="mt-1 font-heading text-xl text-brand-black sm:text-2xl"
                 >
                   {product.name}
                 </h2>

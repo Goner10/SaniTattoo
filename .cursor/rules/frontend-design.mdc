@@ -298,30 +298,26 @@ Avoid pure bright red `#FF0000`.
 
 ## Typography
 
-Use the custom font `Acid` for display elements if available.
+Use **Poppins** as the main brand font (loaded via Google Fonts in `src/index.css`).
 
-Use `Acid` only for:
+Use `font-heading` or `font-display` (both map to Poppins) for:
 
 - Hero headline
 - Decorative section titles
 - Brand-style headings
 - Selected visual accents
 
-Do not use `Acid` for:
+Use `font-sans` (Poppins) for:
 
 - Long descriptions
 - Product body text
 - Product descriptions
 - Paragraphs
+- Navigation
+- Buttons
 - Small UI text
 
-Use a readable sans-serif font for body text, navigation, buttons and catalog content.
-
-Preferred body fallback:
-
-- Manrope
-- Inter
-- system-ui
+Fallback: `system-ui`, sans-serif.
 
 ## Logo usage
 

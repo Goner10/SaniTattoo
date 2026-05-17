@@ -43,12 +43,12 @@ export default function Home() {
 
   return (
     <>
-      <section className="relative isolate min-h-[400px] w-full overflow-x-hidden border-b border-brand-border sm:min-h-[460px] lg:min-h-[500px] xl:min-h-[540px] lg:max-h-[min(620px,calc(100vh-96px))] xl:max-h-[min(620px,calc(100vh-96px))] 2xl:max-h-none 2xl:min-h-[700px]">
+      <section className="relative isolate min-h-[400px] w-full overflow-x-hidden border-b border-brand-border sm:min-h-[460px] lg:min-h-[420px] lg:max-h-[min(560px,calc(100vh-120px))] xl:min-h-[440px] xl:max-h-[min(580px,calc(100vh-112px))] 2xl:max-h-none 2xl:min-h-[700px]">
         <div className="pointer-events-none absolute inset-0 z-0">
           <img
             src="/images/placeholders/hero-sanitattoo-desktop.png"
             alt="Cabecera Sanitattoo: higiene y consumibles para estudio de tatuaje"
-            className="h-full min-h-[400px] w-full object-cover object-right sm:min-h-[460px] lg:min-h-[500px] xl:min-h-[540px] lg:max-h-[min(620px,calc(100vh-96px))] xl:max-h-[min(620px,calc(100vh-96px))] 2xl:max-h-none 2xl:min-h-[700px] xl:object-[right_45%] 2xl:object-[right_42%]"
+            className="h-full min-h-[400px] w-full object-cover object-right sm:min-h-[460px] lg:min-h-[420px] lg:max-h-[min(560px,calc(100vh-120px))] xl:min-h-[440px] xl:max-h-[min(580px,calc(100vh-112px))] 2xl:max-h-none 2xl:min-h-[700px] xl:object-[right_45%] 2xl:object-[right_42%]"
             width={1920}
             height={1080}
             loading="eager"
@@ -59,7 +59,7 @@ export default function Home() {
           className="pointer-events-none absolute inset-0 z-1 bg-gradient-to-r from-brand-white/95 from-0% via-brand-white/72 via-42% to-white/10 to-88% max-md:via-brand-white/78 lg:from-brand-white/55 lg:via-brand-white/28 lg:to-transparent"
           aria-hidden
         />
-        <div className="relative z-10 mx-auto flex min-h-[400px] max-w-6xl min-w-0 items-center px-4 py-12 sm:min-h-[460px] sm:px-6 sm:py-14 lg:min-h-[500px] xl:min-h-[540px] lg:max-h-[min(620px,calc(100vh-96px))] xl:max-h-[min(620px,calc(100vh-96px))] 2xl:max-h-none 2xl:min-h-[700px] lg:py-10 xl:py-10 2xl:py-16">
+        <div className="relative z-10 mx-auto flex min-h-[400px] max-w-6xl min-w-0 items-center px-4 py-12 sm:min-h-[460px] sm:px-6 sm:py-14 lg:min-h-[420px] lg:max-h-[min(560px,calc(100vh-120px))] lg:py-8 xl:min-h-[440px] xl:max-h-[min(580px,calc(100vh-112px))] xl:py-8 2xl:max-h-none 2xl:min-h-[700px] 2xl:py-16">
           <div
             className="max-w-xl rounded-2xl border border-brand-border/60 bg-white/80 p-5 shadow-sm backdrop-blur-[6px] sm:max-w-lg sm:border-transparent sm:bg-transparent sm:p-0 sm:shadow-none sm:backdrop-blur-none md:max-w-xl"
           >
@@ -67,15 +67,14 @@ export default function Home() {
               Sanitattoo
             </span>
             <h1 className="font-heading mt-4 text-3xl font-semibold leading-[1.08] tracking-tight text-brand-black sm:mt-5 sm:text-4xl lg:text-[2.75rem] lg:leading-[1.06]">
-              Higiene y consumibles para tu estudio
+            Material profesional para estudios de tatuaje
             </h1>
             <span
               className="mt-4 block h-1 w-14 rounded-full bg-brand-red sm:mt-5"
               aria-hidden
             />
             <p className="mt-4 max-w-md text-sm leading-relaxed text-brand-muted sm:mt-5 sm:text-base">
-              Catálogo curado de material sanitario, aftercare y merchandising.
-              Diseñado para flujo de trabajo real en tatuaje.
+            Material sanitario, consumibles y aftercare seleccionados para mantener tu flujo de trabajo limpio, cómodo y preparado para cada sesión.
             </p>
             <div className="mt-8 sm:mt-10">
               <Link to="/catalogo" className={catalogCtaPrimary}>
@@ -91,10 +90,10 @@ export default function Home() {
       >
         <div className="mx-auto max-w-6xl min-w-0 px-4 py-12 sm:px-6 sm:py-16">
           <SectionHeader
-            eyebrow="Selección estudio"
+            eyebrow="Más buscados"
             accent
             title="Productos destacados"
-            subtitle="Selección de referencias que recomendamos para el día a día del estudio."
+            subtitle="Referencias habituales en estudios de tatuaje por su utilidad, rendimiento y presencia en el día a día de cada sesión."
             ctaLabel="Ver catálogo completo"
             ctaTo="/catalogo"
             ctaTone="accent"
@@ -159,7 +158,7 @@ export default function Home() {
                       <Icon className="size-5" aria-hidden />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <span className="font-display text-4xl leading-none text-white/25 transition-colors duration-300 group-hover:text-white/35 sm:text-5xl">
+                      <span className="font-heading text-4xl leading-none text-white/25 transition-colors duration-300 group-hover:text-white/35 sm:text-5xl">
                         {item.step}
                       </span>
                       <h3 className="font-heading mt-2 text-base font-semibold tracking-tight text-white sm:text-lg">
@@ -198,22 +197,41 @@ export default function Home() {
         className="overflow-x-hidden border-t border-brand-border bg-gradient-to-b from-brand-bg via-brand-bg to-brand-white"
       >
         <div className="mx-auto max-w-6xl min-w-0 px-4 py-12 sm:px-6 sm:py-16">
-          <div className="relative rounded-2xl border border-brand-border bg-brand-white/90 p-5 shadow-sm ring-1 ring-brand-red/10 sm:p-7 lg:p-8">
+          <div className="relative overflow-hidden rounded-2xl border border-brand-border bg-brand-white/90 p-5 pb-8 shadow-sm ring-1 ring-brand-red/10 sm:p-7 sm:pb-10 lg:p-8 lg:pb-20">
             <div className="absolute left-5 top-0 h-1 w-16 -translate-y-px rounded-b-full bg-brand-red sm:left-7 lg:left-8" />
+            <div
+              className="pointer-events-none absolute right-4 top-5 z-0 hidden lg:block xl:right-6 xl:top-6 2xl:right-8"
+              aria-hidden
+            >
+              <img
+                src="/images/logos/logo_nuevo.png"
+                alt=""
+                aria-hidden
+                width={210}
+                height={210}
+                className="w-[150px] -rotate-3 opacity-[0.85] xl:w-[180px] xl:opacity-[0.85] 2xl:w-[210px] 2xl:opacity-[0.85]"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div className="relative z-10 lg:max-w-[calc(100%-10rem)] xl:max-w-[calc(100%-12rem)] 2xl:max-w-[calc(100%-14rem)]">
             <SectionHeader
               eyebrow="Marca"
               accent
               title="Merchandising"
-              subtitle="Textil y piezas de marca. Vista previa de hasta 3 referencias; el catálogo completo está en su sección."
-              ctaLabel="Ir a merchandising"
-              ctaTo="/merchandising"
-              ctaTone="accent"
+              subtitle="Viste la marca dentro y fuera del estudio sin perder identidad.."
             />
-            <div className="mt-2">
+            </div>
+            <div className="relative z-10 mt-2 lg:max-w-[calc(100%-12rem)] xl:max-w-[calc(100%-14rem)]">
               <ProductGrid
                 products={merchandisingPreview}
                 onOpenDetail={setSelectedProduct}
               />
+            </div>
+            <div className="relative z-10 mt-8 flex justify-center sm:mt-10 lg:absolute lg:bottom-6 lg:right-6 lg:mt-0 lg:justify-end xl:bottom-8 xl:right-8">
+              <Link to="/merchandising" className={catalogCtaPrimary}>
+                Ir a merchandising
+              </Link>
             </div>
           </div>
         </div>

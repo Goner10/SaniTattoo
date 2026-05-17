@@ -344,17 +344,15 @@ Accent red hover: #9B0E18
 
 ## Typography
 
-Use the custom font `Acid` for display elements if available.
+Use **Poppins** as the main brand font.
 
-Use `Acid` for:
+Use `font-heading` or `font-display` (both map to Poppins) for:
 
 - Main hero headline
 - Decorative headings
 - Brand-style section titles
 
-Do not use `Acid` for long descriptions or catalog body text.
-
-Use a readable sans-serif font for:
+Use `font-sans` (Poppins) for:
 
 - Product descriptions
 - Buttons

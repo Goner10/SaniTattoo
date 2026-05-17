@@ -7,7 +7,7 @@ const SCROLL_TOP_THRESHOLD_PX = 10;
 
 const navLinkClass = ({ isActive }) =>
   [
-    "rounded-md px-3 py-2 text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red",
+    "rounded-md px-3 py-2 font-sans text-sm font-bold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red",
     isActive
       ? "bg-brand-black text-brand-white"
       : "text-brand-black hover:bg-brand-bg",
@@ -15,11 +15,13 @@ const navLinkClass = ({ isActive }) =>
 
 export default function Header() {
   const [open, setOpen] = useState(false);
-  const [showPromoBar, setShowPromoBar] = useState(true);
+  const [isAtTop, setIsAtTop] = useState(true);
+
+  const showPromoBar = isAtTop;
 
   useEffect(() => {
     const update = () => {
-      setShowPromoBar(window.scrollY <= SCROLL_TOP_THRESHOLD_PX);
+      setIsAtTop(window.scrollY <= SCROLL_TOP_THRESHOLD_PX);
     };
     update();
     window.addEventListener("scroll", update, { passive: true });
@@ -38,19 +40,29 @@ export default function Header() {
         aria-hidden={!showPromoBar}
       >
         <p className="mx-auto max-w-full px-3 py-1 text-center font-sans text-[clamp(0.625rem,2.6vw,0.8125rem)] font-semibold leading-snug tracking-[0.04em] text-white sm:py-1.5 sm:text-xs sm:tracking-[0.06em]">
-          Envío gratis en pedidos superiores a 60€
+          Envío gratis en pedidos superiores a 100€
         </p>
       </div>
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3.5 sm:gap-4 sm:px-6 sm:py-4">
+      <div
+        className={[
+          "mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 transition-[padding] duration-300 ease-in-out sm:gap-4 sm:px-6",
+          isAtTop ? "py-4 sm:py-5" : "py-3.5 sm:py-4",
+        ].join(" ")}
+      >
         <NavLink
           to="/"
           className="flex min-w-0 shrink items-center gap-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
           onClick={() => setOpen(false)}
         >
           <img
-            src="/images/logos/logo.png"
+            src="/images/logos/logo_nuevo.png"
             alt="SANITATTOO"
-            className="h-10 w-auto max-h-12 object-contain sm:h-12 md:h-14"
+            className={[
+              "w-auto object-contain transition-[height,max-height] duration-300 ease-in-out",
+              isAtTop
+                ? "h-12 max-h-14 sm:h-14 sm:max-h-16 md:h-16 md:max-h-[4.5rem]"
+                : "h-10 max-h-12 sm:h-12 md:h-14",
+            ].join(" ")}
             width={200}
             height={56}
           />

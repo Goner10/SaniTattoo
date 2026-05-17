@@ -11,18 +11,18 @@ export default function BrandStrip() {
     },
     {
       name: "Ghost Tattoo",
-      logo: null,
+      logo: "/images/brands/ghost-logo.png",
       alt: "Logo Ghost Tattoo",
     },
     {
-      name: "Shapu",
-      logo: null,
-      alt: "Logo Shapu",
+      name: "Effigerm",
+      logo: "/images/brands/Effigerm.webp",
+      alt: "Logo Effigerm",
     },
     {
-      name: "Sanitattoo",
-      logo: null,
-      alt: "Logo Sanitattoo",
+      name: "BioTaTum",
+      logo: "images/brands/bioTatum.png",
+      alt: "Logo BioTaTum",
     },
     {
       name: "Tattoo Supplies",

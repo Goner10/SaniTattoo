@@ -1,18 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
 @import "tailwindcss";
 
-@font-face {
-  font-family: "Poppins";
-  src: url("/fonts/acid.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 @theme {
-  --font-display: "Acid", system-ui, sans-serif;
+  --font-display: "Poppins", system-ui, sans-serif;
   --font-heading: "Poppins", system-ui, sans-serif;
   --font-sans: "Poppins", system-ui, sans-serif;
 
