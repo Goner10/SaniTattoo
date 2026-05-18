@@ -7,11 +7,13 @@ import { productWhatsAppUrl } from "../utils/whatsapp.js";
 
 export default function ProductModal({ product, onClose }) {
   const [selectedImage, setSelectedImage] = useState("");
+  const [lightboxOpen, setLightboxOpen] = useState(false);
 
   useEffect(() => {
     if (!product) return;
     const urls = product.gallery;
     queueMicrotask(() => {
+      setLightboxOpen(false);
       if (Array.isArray(urls) && urls.length > 1) {
         setSelectedImage(urls[0]);
       } else {
@@ -32,11 +34,16 @@ export default function ProductModal({ product, onClose }) {
   useEffect(() => {
     if (!product) return;
     const onKey = (e) => {
-      if (e.key === "Escape") onClose();
+      if (e.key !== "Escape") return;
+      if (lightboxOpen) {
+        setLightboxOpen(false);
+      } else {
+        onClose();
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [product, onClose]);
+  }, [product, onClose, lightboxOpen]);
 
   const useGallery =
     product &&
@@ -44,6 +51,10 @@ export default function ProductModal({ product, onClose }) {
     product.gallery.length > 1;
 
   const mainSrc = useGallery ? selectedImage || product.image : product?.image;
+
+  const mainImageAlt = useGallery
+    ? `${product?.alt} — vista seleccionada`
+    : product?.alt;
 
   return (
     <AnimatePresence>
@@ -94,17 +105,25 @@ export default function ProductModal({ product, onClose }) {
             <div className="min-h-0 flex-1 overflow-y-auto">
               <div className="w-full shrink-0 overflow-hidden bg-[#f1f1f1] ring-1 ring-inset ring-black/[0.04]">
                 <div className="aspect-[4/3] w-full">
-                  <div className="flex h-full min-h-0 w-full items-center justify-center p-4 sm:p-6 md:p-8">
+                  <button
+                    type="button"
+                    onClick={() => setLightboxOpen(true)}
+                    className="group relative flex h-full min-h-0 w-full cursor-zoom-in items-center justify-center p-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red sm:p-6 md:p-8"
+                    aria-label="Ampliar imagen del producto"
+                  >
                     <img
                       src={mainSrc}
-                      alt={
-                        useGallery
-                          ? `${product.alt} — vista seleccionada`
-                          : product.alt
-                      }
+                      alt={mainImageAlt}
                       className="max-h-full w-full max-w-full object-contain"
+                      draggable={false}
                     />
-                  </div>
+                    <span
+                      className="pointer-events-none absolute inset-x-0 bottom-3 mx-auto w-fit rounded-md bg-brand-black/70 px-3 py-1.5 text-xs font-medium text-brand-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100 sm:bottom-4"
+                      aria-hidden
+                    >
+                      Ampliar imagen
+                    </span>
+                  </button>
                 </div>
                 {useGallery ? (
                   <div
@@ -195,6 +214,55 @@ export default function ProductModal({ product, onClose }) {
               </WhatsAppButton>
             </div>
           </motion.div>
+          <AnimatePresence>
+            {lightboxOpen ? (
+              <motion.div
+                role="dialog"
+                aria-modal="true"
+                aria-label="Vista ampliada de la imagen"
+                className="fixed inset-0 z-[60] flex items-center justify-center p-3 sm:p-6"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.15 }}
+              >
+                <button
+                  type="button"
+                  className="absolute inset-0 bg-black/75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-white"
+                  aria-label="Cerrar vista ampliada"
+                  onClick={() => setLightboxOpen(false)}
+                />
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  transition={{ duration: 0.15 }}
+                  className="relative z-10 flex max-h-[90vh] max-w-[90vw] flex-col overflow-hidden rounded-xl bg-[#f3f3f3] shadow-2xl ring-1 ring-black/5"
+                >
+                  <button
+                    type="button"
+                    onClick={() => setLightboxOpen(false)}
+                    className="absolute right-2 top-2 z-10 rounded-md border border-brand-border bg-brand-white p-3 text-brand-black shadow-sm transition-colors hover:bg-brand-bg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red sm:right-3 sm:top-3"
+                    aria-label="Cerrar vista ampliada"
+                  >
+                    <X className="size-5" aria-hidden />
+                  </button>
+                  <div className="flex min-h-0 items-center justify-center p-4 pt-14 sm:p-6 sm:pt-16 md:p-8 md:pt-[4.5rem]">
+                    <img
+                      src={mainSrc}
+                      alt={
+                        useGallery
+                          ? `${product.alt} — vista ampliada`
+                          : product.alt
+                      }
+                      className="max-h-[70vh] max-w-full cursor-zoom-out object-contain sm:max-h-[75vh] md:max-h-[85vh]"
+                      draggable={false}
+                    />
+                  </div>
+                </motion.div>
+              </motion.div>
+            ) : null}
+          </AnimatePresence>
         </motion.div>
       ) : null}
     </AnimatePresence>
