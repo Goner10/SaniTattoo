@@ -99,7 +99,7 @@ function HeroSlidePanel({ slide, eagerImage }) {
         <div className={slideContentCardClass(slide.variant)}>
           <span
             className={[
-              "font-heading inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] shadow-sm sm:text-xs sm:tracking-[0.18em]",
+              "font-heading inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] shadow-sm sm:text-xs sm:tracking-[0.18em]",
               isBrand
                 ? "border-white/25 bg-white/10 text-brand-white"
                 : "border-brand-red/30 bg-brand-white text-brand-red",
@@ -109,7 +109,7 @@ function HeroSlidePanel({ slide, eagerImage }) {
           </span>
           <h2
             className={[
-              "font-heading mt-4 text-3xl font-semibold leading-[1.08] tracking-tight sm:mt-5 sm:text-4xl lg:text-[2.75rem] lg:leading-[1.06]",
+              "font-heading mt-4 text-3xl font-extrabold leading-[1.08] tracking-tight sm:mt-5 sm:text-4xl lg:text-[2.75rem] lg:leading-[1.06]",
               isBrand ? "text-brand-white" : "text-brand-black",
             ].join(" ")}
           >
@@ -124,7 +124,7 @@ function HeroSlidePanel({ slide, eagerImage }) {
           />
           <p
             className={[
-              "mt-4 max-w-md text-sm leading-relaxed sm:mt-5 sm:text-base",
+              "mt-4 max-w-md text-sm font-normal leading-relaxed sm:mt-5 sm:text-base",
               isBrand ? "text-white/90" : "text-brand-muted",
             ].join(" ")}
           >

@@ -87,10 +87,10 @@ export default function Home() {
 
         <div className="relative mx-auto max-w-6xl min-w-0 px-4 py-12 sm:px-6 sm:py-16">
           <div className="mb-8 max-w-2xl sm:mb-10">
-            <p className="font-heading text-xs font-semibold uppercase tracking-[0.28em] text-white/80">
+            <p className="font-heading text-xs font-bold uppercase tracking-[0.28em] text-white/80">
               Proceso
             </p>
-            <h2 className="font-heading mt-3 text-2xl font-semibold tracking-tight text-white sm:text-3xl md:text-4xl">
+            <h2 className="font-heading mt-3 text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl">
               Cómo hacer un pedido
             </h2>
             <span

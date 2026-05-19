@@ -45,7 +45,9 @@ export default function ProductCard({
           {product.categoryLabel}
         </p>
         <h3 className="text-base font-semibold text-brand-black">{product.name}</h3>
-        <p className="line-clamp-2 text-sm text-brand-muted">{product.shortDescription}</p>
+        <p className="line-clamp-2 text-sm font-normal text-brand-muted">
+          {product.shortDescription}
+        </p>
         <p className="mt-auto text-sm font-medium text-brand-black">
           {hasVariants && displayPrice !== null ? (
             <>Desde {formatPrice(displayPrice, product.currency)}</>

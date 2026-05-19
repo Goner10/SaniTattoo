@@ -15,17 +15,17 @@ export default function Contact() {
     <div className="min-h-screen bg-gradient-to-b from-brand-bg via-brand-bg to-brand-white">
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-14">
         <header className="max-w-3xl">
-          <p className="font-heading text-xs font-semibold uppercase tracking-[0.22em] text-brand-red">
+          <p className="font-heading text-xs font-bold uppercase tracking-[0.22em] text-brand-red">
             Estudio
           </p>
-          <h1 className="font-heading mt-3 text-3xl font-semibold tracking-tight text-brand-black sm:text-4xl lg:text-[2.5rem] lg:leading-tight">
+          <h1 className="font-heading mt-3 text-3xl font-bold tracking-tight text-brand-black sm:text-4xl lg:text-[2.5rem] lg:leading-tight">
             Contacto
           </h1>
           <span
             className="mt-4 block h-1 w-14 rounded-full bg-brand-red"
             aria-hidden
           />
-          <p className="mt-4 text-sm leading-relaxed text-brand-muted sm:text-base">
+          <p className="mt-4 text-sm font-normal leading-relaxed text-brand-muted sm:text-base">
             Canal preferido: WhatsApp para pedidos y consultas rápidas. También
             puedes usar Instagram, teléfono o correo.
           </p>
@@ -33,10 +33,10 @@ export default function Contact() {
 
         <div className="mt-12 grid gap-6 lg:grid-cols-2 lg:gap-8">
           <div className={cardClass}>
-            <p className="font-heading text-xs font-semibold uppercase tracking-[0.18em] text-brand-red">
+            <p className="font-heading text-xs font-bold uppercase tracking-[0.18em] text-brand-red">
               WhatsApp
             </p>
-            <p className="mt-3 font-heading text-lg font-semibold text-brand-black">
+            <p className="mt-3 font-heading text-lg font-bold text-brand-black">
               {WHATSAPP_PHONE}
             </p>
             <div className="mt-8">

@@ -11,13 +11,13 @@ const headerContainerClass =
 
 const navLinkClass = ({ isActive }) =>
   [
-    "font-header rounded-md px-3 py-2 text-sm font-bold tracking-[0.04em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red",
+    "font-header rounded-md px-3 py-2 text-sm font-black tracking-[0.04em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red",
     isActive
       ? "bg-brand-black text-brand-white"
       : "text-brand-black hover:bg-brand-bg",
   ].join(" ");
 
-const headerWhatsAppClass = "font-header font-bold tracking-[0.04em]";
+const headerWhatsAppClass = "font-header font-bold tracking-[0.03em]";
 
 export default function Header() {
   const [open, setOpen] = useState(false);

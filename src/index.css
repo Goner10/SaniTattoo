@@ -1,13 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&display=swap");
 
 @import "tailwindcss";
 
 @theme {
-  --font-display: "Poppins", system-ui, sans-serif;
-  --font-heading: "Poppins", system-ui, sans-serif;
-  --font-sans: "Poppins", system-ui, sans-serif;
-  --font-header: "Cinzel", serif;
+  --font-display: "Cinzel", ui-serif, Georgia, serif;
+  --font-heading: "Cinzel", ui-serif, Georgia, serif;
+  --font-sans: "Cinzel", ui-serif, Georgia, serif;
+  --font-header: "Cinzel", ui-serif, Georgia, serif;
 
   --color-brand-black: #050505;
   --color-brand-white: #ffffff;
@@ -29,6 +28,7 @@ html {
 body {
   margin: 0;
   font-family: var(--font-sans);
+  font-weight: 400;
   background: var(--color-brand-bg);
   color: var(--color-brand-black);
 }

@@ -11,7 +11,7 @@ export default function BrandStrip() {
     },
     {
       name: "Ghost Tattoo",
-      logo: "/images/brands/ghost-logo.png",
+      logo: "/images/brands/ghost.jpg",
       alt: "Logo Ghost Tattoo",
     },
     {
@@ -21,7 +21,7 @@ export default function BrandStrip() {
     },
     {
       name: "BioTaTum",
-      logo: "images/brands/bioTatum.png",
+      logo: "images/brands/biotatum-banner.png",
       alt: "Logo BioTaTum",
     },
   ];
@@ -33,12 +33,12 @@ export default function BrandStrip() {
     >
       <div className="mx-auto max-w-6xl min-w-0 px-4 py-12 sm:px-6 sm:py-16">
         <div className="max-w-2xl">
-          <p className="font-heading text-xs font-semibold uppercase tracking-[0.22em] text-brand-red">
+          <p className="font-heading text-xs font-bold uppercase tracking-[0.22em] text-brand-red">
             Marcas
           </p>
           <h2
             id="brands-heading"
-            className="font-heading mt-3 text-2xl font-semibold tracking-tight text-brand-black sm:text-3xl"
+            className="font-heading mt-3 text-2xl font-bold tracking-tight text-brand-black sm:text-3xl"
           >
             Marcas y proveedores para estudios que no improvisan
           </h2>

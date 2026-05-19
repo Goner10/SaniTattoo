@@ -41,7 +41,7 @@ function CatalogBrandBanner({ brandId }) {
             aria-hidden
           />
           <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-brand-black/90 via-brand-black/50 to-transparent p-5 pb-6 sm:p-6 lg:bg-none lg:from-transparent lg:via-transparent lg:to-transparent">
-            <p className="font-heading text-lg font-semibold text-brand-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.85)] sm:text-xl lg:drop-shadow-none">
+            <p className="font-heading text-lg font-bold text-brand-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.85)] sm:text-xl lg:drop-shadow-none">
               {brand.name}
             </p>
             <p className="mt-1 max-w-2xl text-sm leading-relaxed text-white/95 drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] lg:text-white/90 lg:drop-shadow-none">
@@ -68,7 +68,7 @@ function CatalogBrandBanner({ brandId }) {
           </div>
         ) : null}
         <div className="min-w-0">
-          <p className="font-heading text-lg font-semibold text-brand-black sm:text-xl">
+          <p className="font-heading text-lg font-bold text-brand-black sm:text-xl">
             {brand.name}
           </p>
           <p className="mt-1 text-sm leading-relaxed text-brand-muted">
@@ -168,7 +168,7 @@ export default function Catalog() {
   const sidebarFilters = (
     <aside className="min-w-0 space-y-6">
       <label className="block w-full min-w-0">
-        <span className="mb-2 block text-xs font-semibold uppercase tracking-wide text-brand-muted">
+        <span className="mb-2 block text-xs font-bold uppercase tracking-wide text-brand-muted">
           Buscar
         </span>
         <input
@@ -181,7 +181,7 @@ export default function Catalog() {
       </label>
 
       <div>
-        <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-brand-muted">
+        <p className="mb-2 text-xs font-bold uppercase tracking-wide text-brand-muted">
           Categoría
         </p>
         <div className="space-y-1.5" role="group" aria-label="Filtrar por categoría">
@@ -212,7 +212,7 @@ export default function Catalog() {
       </div>
 
       <div>
-        <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-brand-muted">
+        <p className="mb-2 text-xs font-bold uppercase tracking-wide text-brand-muted">
           Marca
         </p>
         <div className="space-y-1.5" role="group" aria-label="Filtrar por marca">
@@ -258,17 +258,17 @@ export default function Catalog() {
     <div className="min-h-screen overflow-x-hidden bg-gradient-to-b from-brand-bg via-brand-bg to-brand-white">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-14 2xl:max-w-[1500px]">
         <header className="max-w-3xl">
-          <p className="font-heading text-xs font-semibold uppercase tracking-[0.22em] text-brand-red">
+          <p className="font-heading text-xs font-bold uppercase tracking-[0.22em] text-brand-red">
             Catálogo
           </p>
-          <h1 className="font-heading mt-3 text-3xl font-semibold tracking-tight text-brand-black sm:text-4xl lg:text-[2.5rem] lg:leading-tight">
+          <h1 className="font-heading mt-3 text-3xl font-bold tracking-tight text-brand-black sm:text-4xl lg:text-[2.5rem] lg:leading-tight">
             Catálogo
           </h1>
           <span
             className="mt-4 block h-1 w-14 rounded-full bg-brand-red"
             aria-hidden
           />
-          <p className="mt-4 text-sm leading-relaxed text-brand-muted sm:text-base">
+          <p className="mt-4 text-sm font-normal leading-relaxed text-brand-muted sm:text-base">
             Busca, filtra por categoría o marca y abre la ficha para ver
             detalle. Cada producto incluye acceso directo a WhatsApp.
           </p>

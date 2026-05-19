@@ -88,7 +88,7 @@ export default function ProductModal({ product, onClose }) {
                 </p>
                 <h2
                   id="product-modal-title"
-                  className="mt-1 font-heading text-xl text-brand-black sm:text-2xl"
+                  className="mt-1 font-heading text-xl font-bold text-brand-black sm:text-2xl"
                 >
                   {product.name}
                 </h2>
@@ -161,12 +161,12 @@ export default function ProductModal({ product, onClose }) {
                 ) : null}
               </div>
               <div className="space-y-4 p-4 sm:p-6">
-                <p className="text-sm leading-relaxed text-brand-black">
+                <p className="text-sm font-normal leading-relaxed text-brand-black">
                   {product.description}
                 </p>
                 {product.variants?.length ? (
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-wide text-brand-muted">
+                    <p className="text-xs font-bold uppercase tracking-wide text-brand-muted">
                       Formatos
                     </p>
                     <ul className="mt-2 space-y-2">
