@@ -15,9 +15,9 @@ export default function Footer() {
               className="inline-block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red rounded-sm"
             >
               <img
-                src="/images/logos/Logo_Nuevo.PNG"
+                src="/images/logos/logo-nuevo-negro.PNG"
                 alt="SANITATTOO"
-                className="h-11 w-auto brightness-0 invert opacity-95 sm:h-12"
+                className="h-11 w-auto opacity-95 sm:h-32"
                 width={180}
                 height={48}
               />

@@ -6,13 +6,18 @@ import WhatsAppButton from "./WhatsAppButton.jsx";
 
 const SCROLL_TOP_THRESHOLD_PX = 10;
 
+const headerContainerClass =
+  "mx-auto w-full max-w-6xl px-4 sm:px-6 2xl:max-w-[1500px] 2xl:px-8";
+
 const navLinkClass = ({ isActive }) =>
   [
-    "rounded-md px-3 py-2 font-sans text-sm font-bold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red",
+    "font-header rounded-md px-3 py-2 text-sm font-bold tracking-[0.04em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red",
     isActive
       ? "bg-brand-black text-brand-white"
       : "text-brand-black hover:bg-brand-bg",
   ].join(" ");
+
+const headerWhatsAppClass = "font-header font-bold tracking-[0.04em]";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -45,13 +50,19 @@ export default function Header() {
         ].join(" ")}
         aria-hidden={!showPromoBar}
       >
-        <p className="mx-auto max-w-full px-3 py-1 text-center font-sans text-[clamp(0.625rem,2.6vw,0.8125rem)] font-semibold leading-snug tracking-[0.04em] text-white sm:py-1.5 sm:text-xs sm:tracking-[0.06em]">
+        <p
+          className={[
+            headerContainerClass,
+            "py-1 text-center font-header text-[clamp(0.625rem,2.6vw,0.8125rem)] font-bold leading-snug tracking-[0.06em] text-white sm:py-1.5 sm:text-xs",
+          ].join(" ")}
+        >
           Envío gratis en pedidos superiores a 100€
         </p>
       </div>
       <div
         className={[
-          "mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 transition-[padding] duration-300 ease-in-out sm:gap-4 sm:px-6",
+          headerContainerClass,
+          "flex items-center justify-between gap-3 transition-[padding] duration-300 ease-in-out sm:gap-4",
           isAtTop ? "py-4 sm:py-5" : "py-3.5 sm:py-4",
         ].join(" ")}
       >
@@ -78,6 +89,9 @@ export default function Header() {
           className="hidden items-center gap-1 md:flex"
           aria-label="Principal"
         >
+          <NavLink to="/" end className={navLinkClass} onClick={scrollToTop}>
+            Inicio
+          </NavLink>
           <NavLink to="/catalogo" className={navLinkClass} onClick={scrollToTop}>
             Catálogo
           </NavLink>
@@ -97,7 +111,7 @@ export default function Header() {
           <WhatsAppButton
             href="https://wa.me/34686332011"
             variant="whatsapp"
-            className="ml-2"
+            className={`ml-2 ${headerWhatsAppClass}`}
           >
             WhatsApp
           </WhatsAppButton>
@@ -107,7 +121,7 @@ export default function Header() {
           <WhatsAppButton
             href="https://wa.me/34686332011"
             variant="whatsapp"
-            className="!px-3"
+            className={`!px-3 ${headerWhatsAppClass}`}
           >
             WhatsApp
           </WhatsAppButton>
@@ -131,9 +145,20 @@ export default function Header() {
       {open ? (
         <div
           id="mobile-menu"
-          className="border-t border-brand-border bg-brand-white px-4 py-3 md:hidden"
+          className={[
+            "border-t border-brand-border bg-brand-white py-3 md:hidden",
+            headerContainerClass,
+          ].join(" ")}
         >
           <div className="flex flex-col gap-1">
+            <NavLink
+              to="/"
+              end
+              className={navLinkClass}
+              onClick={handleNavClick}
+            >
+              Inicio
+            </NavLink>
             <NavLink
               to="/catalogo"
               className={navLinkClass}
@@ -153,7 +178,7 @@ export default function Header() {
               className={navLinkClass}
               onClick={handleNavClick}
             >
-              Merchandising
+              Camisetas
             </NavLink>
             <NavLink
               to="/contacto"

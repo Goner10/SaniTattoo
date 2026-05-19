@@ -2,6 +2,7 @@ import { BadgeCheck, MessageCircle, Search } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import BrandStrip from "../components/BrandStrip.jsx";
+import HeroCarousel from "../components/HeroCarousel.jsx";
 import FeaturedCarousel from "../components/FeaturedCarousel.jsx";
 import ProductGrid from "../components/ProductGrid.jsx";
 import ProductModal from "../components/ProductModal.jsx";
@@ -43,47 +44,8 @@ export default function Home() {
 
   return (
     <>
-      <section className="relative isolate min-h-[400px] w-full overflow-x-hidden border-b border-brand-border sm:min-h-[460px] lg:min-h-[420px] lg:max-h-[min(560px,calc(100vh-120px))] xl:min-h-[440px] xl:max-h-[min(580px,calc(100vh-112px))] 2xl:max-h-none 2xl:min-h-[700px]">
-        <div className="pointer-events-none absolute inset-0 z-0">
-          <img
-            src="/images/placeholders/hero-sanitattoo-desktop.png"
-            alt="Cabecera Sanitattoo: higiene y consumibles para estudio de tatuaje"
-            className="h-full min-h-[400px] w-full object-cover object-right sm:min-h-[460px] lg:min-h-[420px] lg:max-h-[min(560px,calc(100vh-120px))] xl:min-h-[440px] xl:max-h-[min(580px,calc(100vh-112px))] 2xl:max-h-none 2xl:min-h-[700px] xl:object-[right_45%] 2xl:object-[right_42%]"
-            width={1920}
-            height={1080}
-            loading="eager"
-            decoding="async"
-          />
-        </div>
-        <div
-          className="pointer-events-none absolute inset-0 z-1 bg-gradient-to-r from-brand-white/95 from-0% via-brand-white/72 via-42% to-white/10 to-88% max-md:via-brand-white/78 lg:from-brand-white/55 lg:via-brand-white/28 lg:to-transparent"
-          aria-hidden
-        />
-        <div className="relative z-10 mx-auto flex min-h-[400px] max-w-6xl min-w-0 items-center px-4 py-12 sm:min-h-[460px] sm:px-6 sm:py-14 lg:min-h-[420px] lg:max-h-[min(560px,calc(100vh-120px))] lg:py-8 xl:min-h-[440px] xl:max-h-[min(580px,calc(100vh-112px))] xl:py-8 2xl:max-h-none 2xl:min-h-[700px] 2xl:py-16">
-          <div
-            className="max-w-xl rounded-2xl border border-brand-border/60 bg-white/80 p-5 shadow-sm backdrop-blur-[6px] sm:max-w-lg sm:border-transparent sm:bg-transparent sm:p-0 sm:shadow-none sm:backdrop-blur-none md:max-w-xl"
-          >
-            <span className="font-heading inline-flex items-center gap-2 rounded-full border border-brand-red/30 bg-brand-white px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-red shadow-sm sm:text-xs sm:tracking-[0.18em]">
-              Sanitattoo
-            </span>
-            <h1 className="font-heading mt-4 text-3xl font-semibold leading-[1.08] tracking-tight text-brand-black sm:mt-5 sm:text-4xl lg:text-[2.75rem] lg:leading-[1.06]">
-            Material profesional para estudios de tatuaje
-            </h1>
-            <span
-              className="mt-4 block h-1 w-14 rounded-full bg-brand-red sm:mt-5"
-              aria-hidden
-            />
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-brand-muted sm:mt-5 sm:text-base">
-            Material sanitario, consumibles y aftercare seleccionados para mantener tu flujo de trabajo limpio, cómodo y preparado para cada sesión.
-            </p>
-            <div className="mt-8 sm:mt-10">
-              <Link to="/catalogo" className={catalogCtaPrimary}>
-                Ver catálogo
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroCarousel />
+
 
       <section
         className="overflow-x-hidden border-b border-brand-border bg-brand-white"
@@ -204,12 +166,12 @@ export default function Home() {
               aria-hidden
             >
               <img
-                src="/images/logos/logo_nuevo.png"
+                src="/images/logos/logo-blanco.png"
                 alt=""
                 aria-hidden
                 width={210}
                 height={210}
-                className="w-[150px] -rotate-3 opacity-[0.85] xl:w-[180px] xl:opacity-[0.85] 2xl:w-[210px] 2xl:opacity-[0.85]"
+                className="w-[150px] opacity-[0.85] xl:w-[180px] xl:opacity-[0.85] 2xl:w-[210px] 2xl:opacity-[0.85]"
                 loading="lazy"
                 decoding="async"
               />

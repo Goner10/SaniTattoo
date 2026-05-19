@@ -1,5 +1,6 @@
 import { ChevronDown, SlidersHorizontal } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import ProductGrid from "../components/ProductGrid.jsx";
 import ProductModal from "../components/ProductModal.jsx";
 import { brands, getBrandById } from "../data/brands.js";
@@ -79,7 +80,15 @@ function CatalogBrandBanner({ brandId }) {
   );
 }
 
+const CATALOG_BRAND_QUERY_IDS = new Set([
+  "aloetattoo",
+  "biotatum",
+  "ghost-tattoo",
+  "generico",
+]);
+
 export default function Catalog() {
+  const [searchParams] = useSearchParams();
   const [query, setQuery] = useState("");
   const [categoryId, setCategoryId] = useState("all");
   const [brandId, setBrandId] = useState("all");
@@ -97,6 +106,13 @@ export default function Catalog() {
         (idsWithProducts.has(b.id) || Boolean(b.banner)),
     );
   }, [catalogProducts]);
+
+  useEffect(() => {
+    const brandParam = searchParams.get("brand");
+    if (brandParam && CATALOG_BRAND_QUERY_IDS.has(brandParam)) {
+      setBrandId(brandParam);
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     setVisibleCount(PAGE_SIZE);

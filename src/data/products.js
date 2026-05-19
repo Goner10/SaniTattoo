@@ -45,7 +45,7 @@ export const products = [
       "Espuma limpiadora suave para la piel durante y después del tatuaje.",
     description:
       "Espuma limpiadora formulada para uso profesional en estudio. Ayuda a retirar residuos de tinta y mantiene la zona cómoda durante el proceso y el aftercare.",
-    tags: ["aftercare", "green soap", "limpieza", "espuma"],
+    tags: ["aftercare", "green soap", "limpieza", "AloeTattoo"],
     featured: true,
     offer: false,
     active: true,
