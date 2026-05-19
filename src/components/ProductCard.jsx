@@ -3,6 +3,7 @@ import WhatsAppButton from "./WhatsAppButton.jsx";
 import { formatPrice, getDisplayPrice } from "../utils/formatPrice.js";
 import { productWhatsAppUrl } from "../utils/whatsapp.js";
 import { catalogCtaPrimary } from "../utils/catalogCta.js";
+import { publicAssetUrl } from "../utils/publicAsset.js";
 
 /**
  * @param {{
@@ -31,7 +32,7 @@ export default function ProductCard({
       >
         <div className="flex h-full min-h-0 w-full items-center justify-center p-3 sm:p-4 md:p-5">
           <img
-            src={product.image}
+            src={publicAssetUrl(product.image)}
             alt={product.alt}
             loading="lazy"
             draggable={isCarousel ? false : undefined}

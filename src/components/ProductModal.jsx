@@ -3,6 +3,7 @@ import { X } from "lucide-react";
 import { useEffect, useState } from "react";
 import WhatsAppButton from "./WhatsAppButton.jsx";
 import { formatPrice } from "../utils/formatPrice.js";
+import { publicAssetUrl } from "../utils/publicAsset.js";
 import { productWhatsAppUrl } from "../utils/whatsapp.js";
 
 export default function ProductModal({ product, onClose }) {
@@ -112,7 +113,7 @@ export default function ProductModal({ product, onClose }) {
                     aria-label="Ampliar imagen del producto"
                   >
                     <img
-                      src={mainSrc}
+                      src={publicAssetUrl(mainSrc)}
                       alt={mainImageAlt}
                       className="max-h-full w-full max-w-full object-contain"
                       draggable={false}
@@ -148,7 +149,7 @@ export default function ProductModal({ product, onClose }) {
                       >
                         <span className="block h-14 w-14 sm:h-16 sm:w-16">
                           <img
-                            src={src}
+                            src={publicAssetUrl(src)}
                             alt=""
                             className="h-full w-full object-contain"
                             loading="lazy"
@@ -249,7 +250,7 @@ export default function ProductModal({ product, onClose }) {
                   </button>
                   <div className="flex min-h-0 items-center justify-center p-4 pt-14 sm:p-6 sm:pt-16 md:p-8 md:pt-[4.5rem]">
                     <img
-                      src={mainSrc}
+                      src={publicAssetUrl(mainSrc)}
                       alt={
                         useGallery
                           ? `${product.alt} — vista ampliada`

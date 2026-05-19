@@ -11,6 +11,7 @@ import WhatsAppButton from "../components/WhatsAppButton.jsx";
 import { getActiveProducts } from "../data/products.js";
 import { generalWhatsAppUrl } from "../utils/whatsapp.js";
 import { catalogCtaPrimary } from "../utils/catalogCta.js";
+import { publicAssetUrl } from "../utils/publicAsset.js";
 
 const orderSteps = [
   {
@@ -166,7 +167,7 @@ export default function Home() {
               aria-hidden
             >
               <img
-                src="/images/logos/logo-blanco.png"
+                src={publicAssetUrl("images/logos/logo-blanco.png")}
                 alt=""
                 aria-hidden
                 width={210}

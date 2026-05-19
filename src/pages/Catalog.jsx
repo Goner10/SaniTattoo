@@ -6,6 +6,7 @@ import ProductModal from "../components/ProductModal.jsx";
 import { brands, getBrandById } from "../data/brands.js";
 import { categories } from "../data/categories.js";
 import { getCatalogProducts } from "../data/products.js";
+import { publicAssetUrl } from "../utils/publicAsset.js";
 
 const PAGE_SIZE = 12;
 
@@ -30,7 +31,7 @@ function CatalogBrandBanner({ brandId }) {
       <div className="mb-8 overflow-hidden rounded-2xl border border-brand-border bg-brand-white shadow-[0_6px_28px_rgba(5,5,5,0.06)]">
         <div className="relative aspect-[21/7] min-h-[140px] w-full sm:aspect-[21/6] sm:min-h-[160px] 2xl:aspect-auto 2xl:h-[300px] 2xl:max-h-[300px]">
           <img
-            src={brand.banner}
+            src={publicAssetUrl(brand.banner)}
             alt=""
             className="h-full w-full object-cover object-center 2xl:object-[center_35%]"
             loading="lazy"
@@ -59,7 +60,7 @@ function CatalogBrandBanner({ brandId }) {
         {brand.logo ? (
           <div className="flex h-16 w-32 shrink-0 items-center justify-center rounded-xl border border-brand-border bg-[#f3f3f3] p-3 sm:h-20 sm:w-36">
             <img
-              src={brand.logo}
+              src={publicAssetUrl(brand.logo)}
               alt=""
               className="max-h-full max-w-full object-contain"
               loading="lazy"

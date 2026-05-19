@@ -1,3 +1,5 @@
+import { publicAssetUrl } from "../utils/publicAsset.js";
+
 /**
  * Marcas / proveedores mostrados en la home.
  * Sustituir `logo: null` por rutas reales cuando existan los assets.
@@ -6,17 +8,17 @@ export default function BrandStrip() {
   const brands = [
     {
       name: "Aloe Tattoo",
-      logo: "/images/brands/aloe-tattoo.jfif",
+      logo: "images/brands/aloe-tattoo.jfif",
       alt: "Logo Aloe Tattoo",
     },
     {
       name: "Ghost Tattoo",
-      logo: "/images/brands/ghost.jpg",
+      logo: "images/brands/ghost.jpg",
       alt: "Logo Ghost Tattoo",
     },
     {
       name: "Effigerm",
-      logo: "/images/brands/Effigerm.webp",
+      logo: "images/brands/Effigerm.webp",
       alt: "Logo Effigerm",
     },
     {
@@ -61,7 +63,7 @@ export default function BrandStrip() {
               >
                 {brand.logo ? (
                   <img
-                    src={brand.logo}
+                    src={publicAssetUrl(brand.logo)}
                     alt={brand.alt}
                     className="max-h-10 w-auto object-contain opacity-80 transition-opacity duration-200 group-hover:opacity-100 sm:max-h-11"
                     loading="lazy"

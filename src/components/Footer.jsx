@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import WhatsAppButton from "./WhatsAppButton.jsx";
+import { publicAssetUrl } from "../utils/publicAsset.js";
 import { generalWhatsAppUrl } from "../utils/whatsapp.js";
 
 const PORTFOLIO_URL = "https://goner10.github.io/Portfolio-personal/";
@@ -15,7 +16,7 @@ export default function Footer() {
               className="inline-block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red rounded-sm"
             >
               <img
-                src="/images/logos/logo-nuevo-negro.PNG"
+                src={publicAssetUrl("images/logos/logo-nuevo-negro.PNG")}
                 alt="SANITATTOO"
                 className="h-11 w-auto opacity-95 sm:h-32"
                 width={180}

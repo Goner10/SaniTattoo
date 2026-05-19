@@ -39,7 +39,7 @@ export const products = [
     price: 8,
     currency: "EUR",
     unit: "220ml",
-    image: "/images/productos/green-soap-cleansing-foam.png",
+    image: "images/productos/green-soap-cleansing-foam.png",
     alt: "Bote de espuma limpiadora Green Soap Cleansing Foam",
     shortDescription:
       "Espuma limpiadora suave para la piel durante y después del tatuaje.",
@@ -61,7 +61,7 @@ export const products = [
     price: 7.5,
     currency: "EUR",
     unit: "125 unidades",
-    image: "/images/productos/ghost.png",
+    image: "images/productos/ghost.png",
     alt: "Paquete de servilletas absorbentes Ghost Tattoo para estudio",
     shortDescription:
       "Servilletas super absorbentes con sistema de envasado y corte.",
@@ -83,7 +83,7 @@ export const products = [
     price: 12,
     currency: "EUR",
     unit: "100ml",
-    image: "/images/productos/gel-stencil-premium.png",
+    image: "images/productos/gel-stencil-premium.png",
     alt: "Gel para stencil premium en formato bote",
     shortDescription:
       "Gel de transferencia para stencil con acabado nítido y fijación fiable.",
@@ -109,7 +109,7 @@ export const products = [
     price: 12,
     currency: "EUR",
     unit: "220ml",
-    image: "/images/productos/red_out.png",
+    image: "images/productos/red_out.png",
     alt: "Bote de espuma calmante bioactiva Red Out para la piel en estudio",
     shortDescription:
       "Espuma bioactiva calmante para la piel durante y después del tatuaje.",
@@ -131,7 +131,7 @@ export const products = [
     price: 5.90,
     currency: "EUR",
     unit: "250ml",
-    image: "/images/productos/biotatum1.png",
+    image: "images/productos/biotatum1.png",
     alt: "Bote de espuma calmante bioactiva Red Out para la piel en estudio",
     shortDescription:
       "Jabón profesional a base de aceite de oliva y aloe vera",
@@ -153,7 +153,7 @@ export const products = [
     price: 11.90,
     currency: "EUR",
     unit: "500ml",
-    image: "/images/productos/royal-jelly-vaseline.png",
+    image: "images/productos/royal-jelly-vaseline.png",
     alt: "Vaselina profesional para tatuadores con aloe vera",
     shortDescription:
       "Vaselina profesional especialmente formulada para su uso durante el proceso del tatuaje.",
@@ -175,7 +175,7 @@ export const products = [
     price: 9.5,
     currency: "EUR",
     unit: "150ml",
-    image: "/images/productos/special-shading.png",
+    image: "images/productos/special-shading.png",
     alt: "Frasco de Special Shading Solution para trabajo de sombreado",
     shortDescription:
       "Solución para sombreado en formato 150 ml, uso profesional en estudio.",
@@ -197,7 +197,7 @@ export const products = [
     price: 3.5,
     currency: "EUR",
     unit: "100 unidades",
-    image: "/images/productos/guantes-nitrilo.png",
+    image: "images/productos/guantes-nitrilo.png",
     alt: "Caja de guantes de nitrilo desechables para estudio de tatuaje",
     shortDescription:
       "Guantes desechables de nitrilo en caja de 100 unidades. Disponibles en varios colores.",
@@ -224,7 +224,7 @@ export const products = [
     price: 4.8,
     currency: "EUR",
     unit: "100 unidades",
-    image: "/images/productos/guantes-latex.png",
+    image: "images/productos/guantes-latex.png",
     alt: "Caja de guantes de látex sin polvo para uso profesional",
     shortDescription:
       "Guantes de látex sin polvo en caja de 100 unidades para protección en estudio.",
@@ -251,7 +251,7 @@ export const products = [
     price: 11,
     currency: "EUR",
     unit: "100 unidades",
-    image: "/images/productos/rasuradoras.png",
+    image: "images/productos/rasuradoras.png",
     alt: "Paquete de rasuradoras de doble hoja desechables para estudio",
     shortDescription:
       "Rasuradoras de doble hoja en formato práctico para preparación de piel.",
@@ -273,7 +273,7 @@ export const products = [
     price: 1,
     currency: "EUR",
     unit: "100 unidades",
-    image: "/images/productos/depresores-madera.png",
+    image: "images/productos/depresores-madera.png",
     alt: "Depresores de lengua de madera embolsados para estudio",
     shortDescription:
       "Depresores de madera en bolsa de 100 unidades para aplicación y mezcla.",
@@ -295,7 +295,7 @@ export const products = [
     price: 6.15,
     currency: "EUR",
     unit: "100 unidades",
-    image: "/images/productos/servilletas-absorbentes.png",
+    image: "images/productos/servilletas-absorbentes.png",
     alt: "Servilletas absorbentes 30 por 30 centímetros en paquete",
     shortDescription:
       "Servilletas absorbentes 30x30 cm, paquete de 100 unidades.",
@@ -317,7 +317,7 @@ export const products = [
     price: 8,
     currency: "EUR",
     unit: "1 unidad",
-    image: "/images/productos/papel-camilla-polipropileno.png",
+    image: "images/productos/papel-camilla-polipropileno.png",
     alt: "Rollo de papel camilla de polipropileno con precorte para camilla",
     shortDescription:
       "Papel camilla de polipropileno con precorte. Disponible en negro y rosa.",
@@ -343,7 +343,7 @@ export const products = [
     price: 8.5,
     currency: "EUR",
     unit: "1 unidad",
-    image: "/images/productos/papel-camilla-resistente.png",
+    image: "images/productos/papel-camilla-resistente.png",
     alt: "Rollo de papel camilla resistente sin precorte",
     shortDescription:
       "Papel camilla resistente sin precorte, formato de 1 unidad (rollo).",
@@ -365,7 +365,7 @@ export const products = [
     price: 7.5,
     currency: "EUR",
     unit: "1 unidad",
-    image: "/images/productos/papel-camilla-bicapa.png",
+    image: "images/productos/papel-camilla-bicapa.png",
     alt: "Rollo de papel camilla bicapa con precorte",
     shortDescription:
       "Papel camilla bicapa con precorte para protección cómoda de la camilla.",
@@ -387,7 +387,7 @@ export const products = [
     price: 8,
     currency: "EUR",
     unit: "1 unidad",
-    image: "/images/productos/film-rosa.png",
+    image: "images/productos/film-rosa.png",
     alt: "Rollo de film transparente para cubrir y proteger la piel o material",
     shortDescription:
       "Film transparente en rollo. Elige medida entre 30x300 y 45x300.",
@@ -413,7 +413,7 @@ export const products = [
     price: 9,
     currency: "EUR",
     unit: "50x120",
-    image: "/images/productos/film-negro.png",
+    image: "images/productos/film-negro.png",
     alt: "Film negro para protección en estudio de tatuaje, formato 50x120",
     shortDescription:
       "Film negro en formato 50x120 para cubrir zona de trabajo o piel según uso.",
@@ -435,7 +435,7 @@ export const products = [
     price: 12,
     currency: "EUR",
     unit: "12 unidades",
-    image: "/images/productos/vendas.png",
+    image: "images/productos/vendas.png",
     alt: "Paquete de vendas grip para estudio de tatuaje",
     shortDescription:
       "Vendas grip en paquete de 12 unidades. Disponibles en negro y azul.",
@@ -450,8 +450,8 @@ export const products = [
       { label: "Azul", price: 12, sku: "SAN-VENDAS-GRIP-AZUL-12U" },
     ],
     gallery: [
-      "/images/productos/vendas.png",
-      "/images/productos/venda-negra.png",
+      "images/productos/vendas.png",
+      "images/productos/venda-negra.png",
     ],
   },
   {
@@ -465,7 +465,7 @@ export const products = [
     price: 5,
     currency: "EUR",
     unit: "12 unidades",
-    image: "/images/productos/esparadrapo.png",
+    image: "images/productos/esparadrapo.png",
     alt: "Esparadrapo de tela en rollo o caja para fijación en estudio",
     shortDescription:
       "Esparadrapo de tela, paquete de 12 unidades para uso profesional.",
@@ -487,7 +487,7 @@ export const products = [
     price: 3.23,
     currency: "EUR",
     unit: "50 unidades",
-    image: "/images/productos/servilletas-bicapa.png",
+    image: "images/productos/servilletas-bicapa.png",
     alt: "Servilletas bicapa en paquete de 50 unidades para estudio",
     shortDescription:
       "Servilletas bicapa, paquete de 50 unidades. Disponibles en negro y rosa.",
@@ -513,7 +513,7 @@ export const products = [
     price: 35,
     currency: "EUR",
     unit: "1 unidad",
-    image: "/images/productos/esterilizador.png",
+    image: "images/productos/esterilizador.png",
     alt: "Esterilizador ultravioleta modelo 1 Pro para material de estudio",
     shortDescription:
       "Esterilizador UV 1 Pro para ciclo de desinfección de instrumental y accesorios compatibles.",
@@ -535,7 +535,7 @@ export const products = [
     price: 28,
     currency: "EUR",
     unit: "6 unidades · 140m",
-    image: "/images/productos/papel-secamanos.png",
+    image: "images/productos/papel-secamanos.png",
     alt: "Pack de papel secamanos para baño o aseo del estudio",
     shortDescription:
       "Papel secamanos en pack de 6 unidades, 140 metros por unidad.",
@@ -557,7 +557,7 @@ export const products = [
     price: 4.25,
     currency: "EUR",
     unit: "5 unidades",
-    image: "/images/productos/sabana-ajustable.png",
+    image: "images/productos/sabana-ajustable.png",
     alt: "Sábanas ajustables desechables para camilla de tatuaje",
     shortDescription:
       "Sábanas ajustables en bolsa de 5 unidades. Disponibles en blanco y negro.",
@@ -583,7 +583,7 @@ export const products = [
     price: 18,
     currency: "EUR",
     unit: "200 unidades",
-    image: "/images/productos/bolsas-esterilizadoras.png",
+    image: "images/productos/bolsas-esterilizadoras.png",
     alt: "Bolsas para esterilización en autoclave, caja de 200 unidades",
     shortDescription:
       "Bolsas esterilizadoras en caja de 200 unidades. Varios tamaños según medida.",
@@ -610,7 +610,7 @@ export const products = [
     price: 9.5,
     currency: "EUR",
     unit: "150ml",
-    image: "/images/productos/desinfectante.png",
+    image: "images/productos/desinfectante.png",
     alt: "Frasco de desinfectante de piel en formato líquido 150 ml",
     shortDescription:
       "Desinfectante de piel en formato líquido, 150 ml, para preparación en estudio.",
@@ -621,8 +621,8 @@ export const products = [
     offer: false,
     active: true,
     gallery: [
-      "/images/productos/desinfectante.png",
-      "/images/productos/desinfectante2.png",
+      "images/productos/desinfectante.png",
+      "images/productos/desinfectante2.png",
     ],
   },
   {
@@ -636,7 +636,7 @@ export const products = [
     price: 10,
     currency: "EUR",
     unit: "150ml",
-    image: "/images/productos/wound-care-hydrogel.png",
+    image: "images/productos/wound-care-hydrogel.png",
     alt: "Frasco de desinfectante de piel tipo hydrogel 150 ml",
     shortDescription:
       "Desinfectante de piel en gel acuoso (hydrogel), 150 ml, cómodo de extender.",
@@ -658,7 +658,7 @@ export const products = [
     price: 3.5,
     currency: "EUR",
     unit: "100 unidades",
-    image: "/images/productos/capsulas-1.png",
+    image: "images/productos/capsulas-1.png",
     alt: "Cápsulas con base para pigmentos en formato bolsa de 100 unidades",
     shortDescription:
       "Cápsulas con base en bolsa de 100 unidades. Varios diámetros según medida.",
@@ -685,7 +685,7 @@ export const products = [
     price: 4,
     currency: "EUR",
     unit: "2L",
-    image: "/images/productos/cubo.png",
+    image: "images/productos/cubo.png",
     alt: "Contenedor rígido para residuos punzantes de 2 litros",
     shortDescription:
       "Contenedor para agujas y material punzante, capacidad 2 litros.",
@@ -707,7 +707,7 @@ export const products = [
     price: 3.5,
     currency: "EUR",
     unit: "500ml",
-    image: "/images/productos/botella.png",
+    image: "images/productos/botella.png",
     alt: "Botella tipo bóxer de 500 ml para pulverizar o aplicar líquido en sesión",
     shortDescription:
       "Botella bóxer de 500 ml, formato habitual para líquidos de trabajo en estudio.",
@@ -718,8 +718,8 @@ export const products = [
     offer: false,
     active: true,
     gallery: [
-      "/images/productos/botella.png",
-      "/images/productos/botella2.webp",
+      "images/productos/botella.png",
+      "images/productos/botella2.webp",
     ],
   },
   {
@@ -733,7 +733,7 @@ export const products = [
     price: 7.03,
     currency: "EUR",
     unit: "100 unidades",
-    image: "/images/productos/mangas1.png",
+    image: "images/productos/mangas1.png",
     alt: "Mangas desechables para brazos en caja de 100 unidades",
     shortDescription:
       "Mangas desechables para brazos, bolsa de 100 unidades.",
@@ -744,9 +744,9 @@ export const products = [
     offer: false,
     active: true,
     gallery: [
-      "/images/productos/mangas1.png",
-      "/images/productos/mangas2.png",
-      "/images/productos/mangas.jpg",
+      "images/productos/mangas1.png",
+      "images/productos/mangas2.png",
+      "images/productos/mangas.jpg",
     ],
   },
   {
@@ -760,7 +760,7 @@ export const products = [
     price: 3,
     currency: "EUR",
     unit: "500ml",
-    image: "/images/productos/alcohol-96.png",
+    image: "images/productos/alcohol-96.png",
     alt: "Envase de alcohol etílico al 96% en presentación 500 ml",
     shortDescription:
       "Alcohol etílico al 96 %, frasco de 500 ml para limpieza y desinfección en estudio.",
@@ -782,7 +782,7 @@ export const products = [
     price: 2.44,
     currency: "EUR",
     unit: "50 unidades",
-    image: "/images/productos/vasos-plastico.png",
+    image: "images/productos/vasos-plastico.png",
     alt: "Vasos de plástico negros desechables en paquete de 50 unidades",
     shortDescription:
       "Vasos de plástico negro, paquete de 50 unidades para mezcla o pigmento.",
@@ -804,7 +804,7 @@ export const products = [
     price: 18,
     currency: "EUR",
     unit: "150ml",
-    image: "/images/productos/lofty1.png",
+    image: "images/productos/lofty1.png",
     alt: "Bálsamo tipo butter Lofty Bloom Butter Balm para cuidado de la piel",
     shortDescription:
       "Bálsamo butter para hidratar y cuidar la piel en fase de aftercare.",
@@ -815,8 +815,8 @@ export const products = [
     offer: false,
     active: true,
     gallery: [
-      "/images/productos/lofty1.png",
-      "/images/productos/lofty2.png",
+      "images/productos/lofty1.png",
+      "images/productos/lofty2.png",
     ],
   },
   {
@@ -830,7 +830,7 @@ export const products = [
     price: 8,
     currency: "EUR",
     unit: "1 unidad",
-    image: "/images/productos/stencil-eraser.png",
+    image: "images/productos/stencil-eraser.png",
     alt: "Spray borrador de stencil en envase para estudio",
     shortDescription:
       "Spray para corregir o retirar stencil. Elige formato 100 ml o 250 ml.",
@@ -853,10 +853,10 @@ export const products = [
     category: "cuidados-tatuaje",
     categoryLabel: "Cuidados tatuaje",
     brand: "sanitattoo",
-    price: 15,
+    price: 20,
     currency: "EUR",
     unit: "1 unidad",
-    image: "/images/merchandising/cami-blanca.png",
+    image: "images/merchandising/cami-blanca.png",
     alt: "Camiseta de merchandising SANITATTOO",
     shortDescription: "Camiseta oficial de marca. Consulta tallas y stock por WhatsApp.",
     description:
@@ -867,8 +867,8 @@ export const products = [
     active: true,
     merchandisingFeatured: true,
     gallery: [
-      "/images/merchandising/cami-blanca.png",
-      "/images/merchandising/cami-blanca-atras.png",
+      "images/merchandising/cami-blanca.png",
+      "images/merchandising/cami-blanca-atras.png",
     ],
     variants: [
       { label: "M", price: 15, sku: "SAN-MERCH-CAMISETA-BLANCA-M" },
@@ -884,10 +884,10 @@ export const products = [
     category: "cuidados-tatuaje",
     categoryLabel: "Cuidados tatuaje",
     brand: "sanitattoo",
-    price: null,
+    price: 20,
     currency: "EUR",
     unit: "1 unidad",
-    image: "/images/merchandising/cami-negra-.png",
+    image: "images/merchandising/cami-negra-.png",
     alt: "Camiseta negra de merchandising SANITATTOO",
     shortDescription: "Camiseta oficial de marca. Consulta tallas y stock por WhatsApp.",
     description:
@@ -898,8 +898,8 @@ export const products = [
     active: true,
     merchandisingFeatured: true,
     gallery: [
-      "/images/merchandising/cami-negra-.png",
-      "/images/merchandising/cami-negra-atras.png",
+      "images/merchandising/cami-negra-.png",
+      "images/merchandising/cami-negra-atras.png",
     ],
     variants: [
       { label: "M", price: 15, sku: "SAN-MERCH-CAMISETA-NEGRA-M" },
@@ -915,10 +915,10 @@ export const products = [
     category: "cuidados-tatuaje",
     categoryLabel: "Cuidados tatuaje",
     brand: "sanitattoo",
-    price: null,
+    price: 20,
     currency: "EUR",
     unit: "1 unidad",
-    image: "/images/merchandising/cami-nueva.png",
+    image: "images/merchandising/cami-nueva.png",
     alt: "Camiseta negra de merchandising SANITATTOO",
     shortDescription: "Camiseta oficial de marca. Consulta tallas y stock por WhatsApp.",
     description:
@@ -929,8 +929,8 @@ export const products = [
     active: true,
     merchandisingFeatured: true,
     gallery: [
-      "/images/merchandising/cami-nueva.png",
-      "/images/merchandising/cami-nueva-atras.png",
+      "images/merchandising/cami-nueva.png",
+      "images/merchandising/cami-nueva-atras.png",
     ],
   },
 ];

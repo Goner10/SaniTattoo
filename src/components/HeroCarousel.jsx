@@ -3,13 +3,14 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { catalogCtaPrimary } from "../utils/catalogCta.js";
+import { publicAssetUrl } from "../utils/publicAsset.js";
 
 const AUTOPLAY_MS = 5500;
 
 const SLIDES = [
   {
     id: "sanitattoo",
-    image: "/images/placeholders/hero-sanitattoo-desktop.png",
+    image: "images/placeholders/hero-sanitattoo-desktop.png",
     imageAlt:
       "Cabecera Sanitattoo: higiene y consumibles para estudio de tatuaje",
     imageClass:
@@ -25,7 +26,7 @@ const SLIDES = [
   },
   {
     id: "aloetattoo",
-    image: "/images/brands/aloe_tattoo.JPG",
+    image: "images/brands/aloe_tattoo.JPG",
     imageAlt: "Banner Aloe Tattoo: aftercare y preparación profesional",
     imageClass: "object-cover object-center",
     variant: "brand",
@@ -39,7 +40,7 @@ const SLIDES = [
   },
   {
     id: "biotatum",
-    image: "/images/brands/biotatum-banner.png",
+    image: "images/brands/biotatum-banner.png",
     imageAlt: "Banner BioTaTum Professional: cuidado para piel tatuada",
     imageClass: "object-cover object-center 2xl:object-[center_35%]",
     variant: "brand",
@@ -85,7 +86,7 @@ function HeroSlidePanel({ slide, eagerImage }) {
   return (
     <div className={slidePanelHeightClass}>
       <img
-        src={slide.image}
+        src={publicAssetUrl(slide.image)}
         alt={slide.imageAlt}
         className={[imageFillClass, slide.imageClass].join(" ")}
         width={1920}

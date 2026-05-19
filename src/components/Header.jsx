@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { scrollToTop } from "./ScrollToTop.jsx";
 import WhatsAppButton from "./WhatsAppButton.jsx";
+import { publicAssetUrl } from "../utils/publicAsset.js";
 
 const SCROLL_TOP_THRESHOLD_PX = 10;
 
@@ -72,7 +73,7 @@ export default function Header() {
           onClick={handleNavClick}
         >
           <img
-            src="/images/logos/logo-blanco.png"
+            src={publicAssetUrl("images/logos/logo-blanco.png")}
             alt="SANITATTOO"
             className={[
               "w-auto object-contain transition-[height,max-height] duration-300 ease-in-out",
