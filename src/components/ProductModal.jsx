@@ -104,11 +104,11 @@ export default function ProductModal({ product, onClose }) {
             </div>
             <div className="min-h-0 flex-1 overflow-y-auto">
               <div className="w-full shrink-0 overflow-hidden bg-[#f1f1f1] ring-1 ring-inset ring-black/[0.04]">
-                <div className="aspect-[4/3] w-full">
+                <div className="aspect-[4/3] w-full lg:aspect-auto lg:h-[320px] lg:max-h-[320px] xl:h-[340px] xl:max-h-[340px] 2xl:h-[420px] 2xl:max-h-[420px]">
                   <button
                     type="button"
                     onClick={() => setLightboxOpen(true)}
-                    className="group relative flex h-full min-h-0 w-full cursor-zoom-in items-center justify-center p-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red sm:p-6 md:p-8"
+                    className="group relative flex h-full min-h-0 w-full cursor-zoom-in items-center justify-center p-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red sm:p-6 lg:p-5 xl:p-6 2xl:p-8"
                     aria-label="Ampliar imagen del producto"
                   >
                     <img
@@ -118,7 +118,7 @@ export default function ProductModal({ product, onClose }) {
                       draggable={false}
                     />
                     <span
-                      className="pointer-events-none absolute inset-x-0 bottom-3 mx-auto w-fit rounded-md bg-brand-black/70 px-3 py-1.5 text-xs font-medium text-brand-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100 sm:bottom-4"
+                      className="pointer-events-none absolute inset-x-0 bottom-3 mx-auto w-fit rounded-md bg-brand-black/70 px-3 py-1.5 text-xs font-medium text-brand-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100 sm:bottom-4 lg:bottom-5"
                       aria-hidden
                     >
                       Ampliar imagen

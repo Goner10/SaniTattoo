@@ -1,6 +1,7 @@
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer.jsx";
 import Header from "./components/Header.jsx";
+import ScrollToTop from "./components/ScrollToTop.jsx";
 import Catalog from "./pages/Catalog.jsx";
 import Contact from "./pages/Contact.jsx";
 import Home from "./pages/Home.jsx";
@@ -22,6 +23,7 @@ function Layout() {
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<Home />} />

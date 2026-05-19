@@ -1,6 +1,7 @@
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { scrollToTop } from "./ScrollToTop.jsx";
 import WhatsAppButton from "./WhatsAppButton.jsx";
 
 const SCROLL_TOP_THRESHOLD_PX = 10;
@@ -28,6 +29,11 @@ export default function Header() {
     return () => window.removeEventListener("scroll", update);
   }, []);
 
+  const handleNavClick = () => {
+    setOpen(false);
+    scrollToTop();
+  };
+
   return (
     <header className="sticky top-0 z-40 border-b border-brand-border bg-brand-white/95 backdrop-blur">
       <div
@@ -52,10 +58,10 @@ export default function Header() {
         <NavLink
           to="/"
           className="flex min-w-0 shrink items-center gap-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
-          onClick={() => setOpen(false)}
+          onClick={handleNavClick}
         >
           <img
-            src="/images/logos/logo_nuevo.png"
+            src="/images/logos/logo-blanco.png"
             alt="SANITATTOO"
             className={[
               "w-auto object-contain transition-[height,max-height] duration-300 ease-in-out",
@@ -72,16 +78,20 @@ export default function Header() {
           className="hidden items-center gap-1 md:flex"
           aria-label="Principal"
         >
-          <NavLink to="/catalogo" className={navLinkClass}>
+          <NavLink to="/catalogo" className={navLinkClass} onClick={scrollToTop}>
             Catálogo
           </NavLink>
-          <NavLink to="/ofertas" className={navLinkClass}>
+          <NavLink to="/ofertas" className={navLinkClass} onClick={scrollToTop}>
             Ofertas
           </NavLink>
-          <NavLink to="/merchandising" className={navLinkClass}>
-            Merchandising
+          <NavLink
+            to="/merchandising"
+            className={navLinkClass}
+            onClick={scrollToTop}
+          >
+            Camisetas
           </NavLink>
-          <NavLink to="/contacto" className={navLinkClass}>
+          <NavLink to="/contacto" className={navLinkClass} onClick={scrollToTop}>
             Contacto
           </NavLink>
           <WhatsAppButton
@@ -127,28 +137,28 @@ export default function Header() {
             <NavLink
               to="/catalogo"
               className={navLinkClass}
-              onClick={() => setOpen(false)}
+              onClick={handleNavClick}
             >
               Catálogo
             </NavLink>
             <NavLink
               to="/ofertas"
               className={navLinkClass}
-              onClick={() => setOpen(false)}
+              onClick={handleNavClick}
             >
               Ofertas
             </NavLink>
             <NavLink
               to="/merchandising"
               className={navLinkClass}
-              onClick={() => setOpen(false)}
+              onClick={handleNavClick}
             >
               Merchandising
             </NavLink>
             <NavLink
               to="/contacto"
               className={navLinkClass}
-              onClick={() => setOpen(false)}
+              onClick={handleNavClick}
             >
               Contacto
             </NavLink>

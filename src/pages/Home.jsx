@@ -37,7 +37,7 @@ export default function Home() {
   const active = getActiveProducts();
   const featured = active.filter((p) => p.featured);
   const merchandisingPreview = active
-    .filter((p) => p.category === "merchandising")
+    .filter((p) => p.brand === "sanitattoo")
     .sort((a, b) => Number(b.merchandisingFeatured) - Number(a.merchandisingFeatured))
     .slice(0, 3);
 

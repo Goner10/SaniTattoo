@@ -24,11 +24,6 @@ export default function BrandStrip() {
       logo: "images/brands/bioTatum.png",
       alt: "Logo BioTaTum",
     },
-    {
-      name: "Tattoo Supplies",
-      logo: null,
-      alt: "Logo Tattoo Supplies",
-    },
   ];
 
   return (

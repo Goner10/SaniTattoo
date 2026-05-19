@@ -1,11 +1,11 @@
 import { useState } from "react";
 import ProductGrid from "../components/ProductGrid.jsx";
 import ProductModal from "../components/ProductModal.jsx";
-import { getActiveProducts } from "../data/products.js";
+import { getMerchandisingProducts } from "../data/products.js";
 
 export default function Merchandising() {
   const [selected, setSelected] = useState(null);
-  const items = getActiveProducts().filter((p) => p.category === "merchandising");
+  const items = getMerchandisingProducts();
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-brand-bg via-brand-bg to-brand-white">

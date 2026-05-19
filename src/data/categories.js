@@ -3,39 +3,21 @@
 /** @type {Category[]} */
 export const categories = [
   {
-    id: "proteccion-higiene",
-    name: "Protección e higiene",
-    description: "Barreras, fundas y protección de zona de trabajo.",
+    id: "material-sanitario",
+    name: "Material sanitario",
+    description: "Consumibles y material diario para el trabajo en estudio.",
   },
   {
-    id: "desinfeccion-limpieza",
-    name: "Desinfección y limpieza",
-    description: "Productos para limpieza y desinfección del estudio.",
+    id: "esterilizacion",
+    name: "Esterilización",
+    description:
+      "Productos para limpieza, desinfección y gestión segura del material.",
   },
   {
-    id: "consumibles",
-    name: "Consumibles",
-    description: "Material de uso frecuente en sesión.",
-  },
-  {
-    id: "mobiliario-camilla",
-    name: "Mobiliario y camilla",
-    description: "Mobiliario profesional para tatuadores.",
-  },
-  {
-    id: "stencil-preparacion",
-    name: "Stencil y preparación",
-    description: "Stencil, transfer y preparación de piel.",
-  },
-  {
-    id: "aftercare",
-    name: "Aftercare",
-    description: "Cuidados posteriores para una buena cicatrización.",
-  },
-  {
-    id: "merchandising",
-    name: "Merchandising",
-    description: "Textil y productos de marca SANITATTOO.",
+    id: "cuidados-tatuaje",
+    name: "Cuidados tatuaje",
+    description:
+      "Aftercare, preparación y productos especializados para la piel tatuada.",
   },
 ];
 

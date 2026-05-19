@@ -15,7 +15,7 @@ export default function Footer() {
               className="inline-block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red rounded-sm"
             >
               <img
-                src="/images/logos/logo.png"
+                src="/images/logos/Logo_Nuevo.PNG"
                 alt="SANITATTOO"
                 className="h-11 w-auto brightness-0 invert opacity-95 sm:h-12"
                 width={180}
@@ -23,7 +23,7 @@ export default function Footer() {
               />
             </Link>
             <p className="font-heading mt-5 max-w-sm text-sm leading-relaxed text-white/75 sm:text-[0.9375rem]">
-              Material sanitario, consumibles y merchandising para estudios de
+              Material sanitario y consumibles para estudios de
               tatuaje. Calidad profesional y pedidos ágiles.
             </p>
           </div>
@@ -52,7 +52,7 @@ export default function Footer() {
                 to="/merchandising"
                 className="text-white/85 transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red rounded-sm"
               >
-                Merchandising
+                Camisetas
               </Link>
               <Link
                 to="/contacto"
