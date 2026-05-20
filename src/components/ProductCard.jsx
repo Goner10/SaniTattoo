@@ -28,8 +28,13 @@ export default function ProductCard({
   const body = (
     <>
       <div
-        className={`aspect-square w-full shrink-0 overflow-hidden rounded-t-lg bg-[#f1f1f1] ring-1 ring-inset ring-black/[0.04] ${isCarousel ? "select-none" : ""}`}
+        className={`relative aspect-square w-full shrink-0 overflow-hidden rounded-t-lg bg-[#f1f1f1] ring-1 ring-inset ring-black/[0.04] ${isCarousel ? "select-none" : ""}`}
       >
+        {product.badge ? (
+          <span className="absolute left-2.5 top-2.5 z-10 rounded-full bg-brand-red px-2.5 py-1 font-sans text-[0.625rem] font-bold uppercase tracking-[0.06em] text-brand-white shadow-[0_2px_8px_rgba(5,5,5,0.18)] sm:left-3 sm:top-3 sm:px-3 sm:py-1 sm:text-xs">
+            {product.badge}
+          </span>
+        ) : null}
         <div className="flex h-full min-h-0 w-full items-center justify-center p-3 sm:p-4 md:p-5">
           <img
             src={publicAssetUrl(product.image)}

@@ -22,6 +22,7 @@
  *   active: boolean
  *   variants?: ProductVariant[]
  *   merchandisingFeatured?: boolean
+ *   badge?: string
  *   gallery?: string[]
  * }} Product
  */
@@ -70,6 +71,12 @@ export const products = [
         "Las servilletas GHOST vienen en un envase protector especialmente desarrollado para evitar la contaminación cruzada, garantizando un entorno de trabajo más seguro tanto para el artista como para el cliente.",
         "El dispensador incorpora un cortador metálico de alta precisión, que permite extraer cada unidad de forma rápida, cómoda y sin tirones, optimizando el flujo de trabajo en el estudio.",
       ],
+      gallery: [
+        "images/productos/ghost.png",
+        "images/productos/ghost-tattoo-wipes3.png",
+        "images/productos/ghost-tattoo-wipes2.png",
+
+      ],
     tags: ["material sanitario", "servilletas", "ghost tattoo", "estudio"],
     featured: true,
     offer: false,
@@ -86,7 +93,7 @@ export const products = [
     price: 12,
     currency: "EUR",
     unit: "100ml",
-    image: "images/productos/gel-stencil-premium.png",
+    image: "images/productos/stencil-premium-aloe-tattoo.png",
     alt: "Gel para stencil premium en formato bote",
     shortDescription:
       "Gel de transferencia para stencil con acabado nítido y fijación fiable.",
@@ -370,15 +377,16 @@ export const products = [
     shortDescription:
       "Guantes desechables de nitrilo en caja de 100 unidades. Disponibles en varios colores.",
     description:
-      "Guantes de nitrilo sin polvo pensados para protección e higiene en sesión. Buen ajuste y tacto para trabajo preciso. Tallas S, M, L. Caja de 100 unidades.",
+      "Guantes de nitrilo sin polvo pensados para protección e higiene en sesión. Buen ajuste y tacto para trabajo preciso. En colores negro y violeta. Caja de 100 unidades.",
     tags: ["material sanitario", "protección", "higiene", "guantes", "nitrilo", "desechables"],
     featured: false,
     offer: false,
     active: true,
     variants: [
-      { label: "Negro", price: 3.5, sku: "SAN-GUANTES-NITRILO-NEGRO-100" },
-      { label: "Azul", price: 3.5, sku: "SAN-GUANTES-NITRILO-AZUL-100" },
-      { label: "Violeta", price: 3.5, sku: "SAN-GUANTES-NITRILO-VIOLETA-100" },
+      { label: "Talla S", price: 3.5, sku: "SAN-GUANTES-NITRILO-NEGRO-100" },
+      { label: "Talla M", price: 3.5, sku: "SAN-GUANTES-NITRILO-AZUL-100" },
+      { label: "Talla L", price: 3.5, sku: "SAN-GUANTES-NITRILO-VIOLETA-100" },
+      { label: "Talla XL", price: 3.5, sku: "SAN-GUANTES-NITRILO-XL-100" },
     ],
   },
   {
@@ -586,7 +594,7 @@ export const products = [
     shortDescription:
       "Film negro en formato 50x120 para cubrir zona de trabajo o piel según uso.",
     description:
-      "Film negro de uso profesional en estudio. Formato indicado 50x120; consulta detalles de presentación al pedir.",
+      "Film negro de uso profesional en estudio. Formato indicado 50x120 consulta detalles de presentación al pedir.",
     tags: ["consumibles", "film", "negro", "barrera"],
     featured: false,
     offer: false,
@@ -625,7 +633,7 @@ export const products = [
   {
     id: "esparadrapo-tela-12u",
     sku: "SAN-ESPARADRAPO-TELA-12U",
-    name: "Esparadrapo de tela",
+    name: "Esparadrapo",
     slug: "esparadrapo-tela-12u",
     category: "material-sanitario",
     categoryLabel: "Material sanitario",
@@ -633,10 +641,10 @@ export const products = [
     price: 5,
     currency: "EUR",
     unit: "12 unidades",
-    image: "images/productos/esparadrapo.png",
-    alt: "Esparadrapo de tela en rollo o caja para fijación en estudio",
+    image: "images/productos/esparadrapo1.png",
+    alt: "Esparadrapo en rollo o caja para fijación en estudio",
     shortDescription:
-      "Esparadrapo de tela, paquete de 12 unidades para uso profesional.",
+      "Esparadrapo textil, paquete de 12 unidades para uso profesional.",
     description:
       "Esparadrapo textil para fijar apósitos o material con buena adherencia y retirada controlada. Formato de 12 unidades.",
     tags: ["consumibles", "esparadrapo", "tela", "fijación"],
@@ -655,7 +663,7 @@ export const products = [
     price: 3.23,
     currency: "EUR",
     unit: "50 unidades",
-    image: "images/productos/servilletas-bicapa.png",
+    image: "images/productos/esparadrapo.png",
     alt: "Servilletas bicapa en paquete de 50 unidades para estudio",
     shortDescription:
       "Servilletas bicapa, paquete de 50 unidades. Disponibles en negro y rosa.",
@@ -668,6 +676,10 @@ export const products = [
     variants: [
       { label: "Negro", price: 3.23, sku: "SAN-SERVILLETAS-BICAPA-NEGRO-50" },
       { label: "Rosa", price: 3.23, sku: "SAN-SERVILLETAS-BICAPA-ROSA-50" },
+    ],
+    gallery: [
+      "images/productos/esparadrapo.png",
+      "images/productos/servilletas-bicapa.png",
     ],
   },
   {
@@ -784,7 +796,7 @@ export const products = [
     price: 9.5,
     currency: "EUR",
     unit: "150ml",
-    image: "images/productos/desinfectante.png",
+    image: "images/productos/effigerm-prot.png",
     alt: "Frasco de desinfectante de piel en formato líquido 150 ml",
     shortDescription:
       "Desinfectante de piel en formato líquido, 150 ml, para preparación en estudio.",
@@ -812,7 +824,7 @@ export const products = [
     price: 10,
     currency: "EUR",
     unit: "150ml",
-    image: "images/productos/wound-care-hydrogel.png",
+    image: "images/productos/effigerm-hydrogel.png",
     alt: "Frasco de desinfectante de piel tipo hydrogel 150 ml",
     shortDescription:
       "Desinfectante de piel en gel acuoso (hydrogel), 150 ml, cómodo de extender.",
@@ -897,7 +909,6 @@ export const products = [
     active: true,
     variants: [
       { label: "250ml", price: 3.5, sku: "SAN-BOTELLA-BOXER-250ML" },
-      { label: "500ml", price: 5, sku: "SAN-BOTELLA-BOXER-500ML" },
     ],
     gallery: [
       "images/productos/botella.png",
@@ -930,7 +941,6 @@ export const products = [
     gallery: [
       "images/productos/mangas1.png",
       "images/productos/mangas2.png",
-      "images/productos/mangas.jpg",
     ],
   },
   {
@@ -1040,12 +1050,12 @@ export const products = [
     ],
   },
   {
-    id: "camiseta-sanitattoo-roja",
-    sku: "SAN-MERCH-CAMISETA-ROJA",
+    id: "camiseta-sanitattoo-nueva-blanca",
+    sku: "SAN-MERCH-CAMISETA-NUEVA-BLANCA",
     name: "Camiseta logo nuevo SANITATTOO",
-    slug: "camiseta-sanitattoo-roja",
-    category: "cuidados-tatuaje",
-    categoryLabel: "Cuidados tatuaje",
+    slug: "camiseta-sanitattoo-nueva-blanca",
+    category: "merchandising",
+    categoryLabel: "merchandising",
     brand: "sanitattoo",
     price: 20,
     currency: "EUR",
@@ -1059,10 +1069,38 @@ export const products = [
     featured: false,
     offer: false,
     active: true,
-    merchandisingFeatured: true,
+    merchandisingFeatured: false,
+    badge: "Próximamente",
     gallery: [
       "images/merchandising/cami-nueva.png",
       "images/merchandising/cami-nueva-atras.png",
+    ],
+  },
+  {
+    id: "camiseta-sanitattoo-nueva-negra",
+    sku: "SAN-MERCH-CAMISETA-NUEVA-NEGRA",
+    name: "Camiseta logo nuevo SANITATTOO",
+    slug: "camiseta-sanitattoo-nueva-negra",
+    category: "merchandising",
+    categoryLabel: "merchandising",
+    brand: "sanitattoo",
+    price: 20,
+    currency: "EUR",
+    unit: "1 unidad",
+    image: "images/merchandising/cami-nueva-negra.png",
+    alt: "Camiseta negra de merchandising SANITATTOO",
+    shortDescription: "Camiseta oficial de marca. Consulta tallas y stock por WhatsApp.",
+    description:
+      "Textil de merchandising SANITATTOO. Disponibilidad y tallas sujetas a stock; te informamos al momento por WhatsApp.",
+    tags: ["merchandising", "camiseta", "textil"],
+    featured: false,
+    offer: false,
+    active: true,
+    merchandisingFeatured: true,
+    badge: "Próximamente",
+    gallery: [
+      "images/merchandising/cami-nueva-negra.png",
+      "images/merchandising/cami-nueva-negra-atras.png",
     ],
   },
 ];

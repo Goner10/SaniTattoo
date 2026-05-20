@@ -6,7 +6,7 @@
   --font-display: "Cinzel", ui-serif, Georgia, serif;
   --font-heading: "Cinzel", ui-serif, Georgia, serif;
   --font-header: "Cinzel", ui-serif, Georgia, serif;
-  --font-sans: "Cinzel", system-ui, sans-serif;
+  --font-sans: "Poppins", system-ui, sans-serif;
 
   --color-brand-black: #050505;
   --color-brand-white: #ffffff;
@@ -48,6 +48,13 @@ a {
   font-family: "Cinzel", ui-serif, Georgia, serif;
   font-weight: 600;
   letter-spacing: 0.015em;
+  text-transform: uppercase;
+  text-shadow: 0 0 0.25px currentColor;
+}
+h3{
+  font-family: "Cinzel", ui-serif, Georgia, serif;
+  font-weight: 700;
+  
   text-transform: uppercase;
   text-shadow: 0 0 0.25px currentColor;
 }

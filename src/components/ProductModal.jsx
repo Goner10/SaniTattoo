@@ -83,16 +83,23 @@ export default function ProductModal({ product, onClose }) {
             className="relative z-10 flex max-h-[90vh] w-full max-w-lg flex-col overflow-hidden rounded-t-xl border border-brand-border bg-brand-white shadow-lg sm:rounded-xl"
           >
             <div className="flex items-start justify-between gap-3 border-b border-brand-border p-4">
-              <div>
+              <div className="min-w-0">
                 <p className="text-xs font-medium uppercase tracking-wide text-brand-muted">
                   {product.categoryLabel}
                 </p>
-                <h2
-                  id="product-modal-title"
-                  className="mt-1 font-heading text-xl font-bold text-brand-black sm:text-2xl"
-                >
-                  {product.name}
-                </h2>
+                <div className="mt-1 flex flex-wrap items-center gap-2 gap-y-1.5">
+                  <h2
+                    id="product-modal-title"
+                    className="font-heading text-xl font-bold text-brand-black sm:text-2xl"
+                  >
+                    {product.name}
+                  </h2>
+                  {product.badge ? (
+                    <span className="shrink-0 rounded-full bg-brand-red px-2.5 py-1 font-sans text-[0.625rem] font-bold uppercase tracking-[0.06em] text-brand-white shadow-[0_2px_8px_rgba(5,5,5,0.12)] sm:px-3 sm:py-1 sm:text-xs">
+                      {product.badge}
+                    </span>
+                  ) : null}
+                </div>
               </div>
               <button
                 type="button"
@@ -104,7 +111,7 @@ export default function ProductModal({ product, onClose }) {
               </button>
             </div>
             <div className="min-h-0 flex-1 overflow-y-auto">
-              <div className="w-full shrink-0 overflow-hidden bg-[#f1f1f1] ring-1 ring-inset ring-black/[0.04]">
+              <div className="relative w-full shrink-0 overflow-hidden bg-[#f1f1f1] ring-1 ring-inset ring-black/[0.04]">
                 <div className="aspect-[4/3] w-full lg:aspect-auto lg:h-[320px] lg:max-h-[320px] xl:h-[340px] xl:max-h-[340px] 2xl:h-[420px] 2xl:max-h-[420px]">
                   <button
                     type="button"
@@ -112,6 +119,11 @@ export default function ProductModal({ product, onClose }) {
                     className="group relative flex h-full min-h-0 w-full cursor-zoom-in items-center justify-center p-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red sm:p-6 lg:p-5 xl:p-6 2xl:p-8"
                     aria-label="Ampliar imagen del producto"
                   >
+                    {product.badge ? (
+                      <span className="pointer-events-none absolute left-3 top-3 z-10 rounded-full bg-brand-red px-2.5 py-1 font-sans text-[0.625rem] font-bold uppercase tracking-[0.06em] text-brand-white shadow-[0_2px_8px_rgba(5,5,5,0.18)] sm:px-3 sm:py-1 sm:text-xs">
+                        {product.badge}
+                      </span>
+                    ) : null}
                     <img
                       src={publicAssetUrl(mainSrc)}
                       alt={mainImageAlt}

@@ -43,10 +43,10 @@ function CatalogBrandBanner({ brandId }) {
           />
           <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-brand-black/90 via-brand-black/50 to-transparent p-5 pb-6 sm:p-6 lg:bg-none lg:from-transparent lg:via-transparent lg:to-transparent">
             <p className="font-heading text-lg font-bold text-brand-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.85)] sm:text-xl lg:drop-shadow-none">
-              {brand.name}
+              
             </p>
             <p className="mt-1 max-w-2xl text-sm leading-relaxed text-white/95 drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] lg:text-white/90 lg:drop-shadow-none">
-              {brand.description}
+              
             </p>
           </div>
         </div>

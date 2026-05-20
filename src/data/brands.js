@@ -8,7 +8,7 @@ export const brands = [
     logo: "images/brands/aloe-tattoo.jfif",
     banner: "images/brands/aloe_tattoo.JPG",
     description:
-      "Productos especializados para preparación, limpieza y cuidado del tatuaje.",
+      "",
   },
   {
     id: "biotatum",
@@ -19,8 +19,8 @@ export const brands = [
   },
   {
     id: "ghost-tattoo",
-    name: "Ghost Tattoo",
-    logo: "images/brands/ghost-logo.png",
+    name: "Ghost Wipes",
+    logo: "images/brands/ghost-wipes.jpeg",
     banner: "images/brands/ghost.jpg",
     description: "Consumibles profesionales para estudios de tatuaje.",
   },
