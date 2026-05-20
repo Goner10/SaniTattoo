@@ -9,11 +9,12 @@ import {
 } from "react";
 import ProductCard from "./ProductCard.jsx";
 
-/** Repeticiones mínimas del listado solo en DOM (sin tocar products.js). */
 const MIN_LOOP_COPIES = 8;
-const MAX_LOOP_COPIES = 16;
-/** Recorrido mínimo (px) para activar autoplay y bucle. */
-const MIN_SCROLL_FOR_MOTION = 40;
+const MAX_LOOP_COPIES = 24;
+/** px por frame (~60fps); un poco más rápido que 0.45, sin exceso. */
+const AUTOPLAY_DELTA = 0.58;
+const GAP_PX = 16;
+const FALLBACK_CARD_W = 296;
 
 const CARD_SLOT_CLASS =
   "shrink-0 w-[min(88vw,20rem)] sm:w-[17.5rem] lg:w-[18.5rem]";
@@ -32,6 +33,8 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
   const innerRef = useRef(null);
   const segmentWRef = useRef(0);
   const loopCopiesRef = useRef(MIN_LOOP_COPIES);
+  const virtualXRef = useRef(0);
+  const useTransformRef = useRef(false);
   const pauseRef = useRef(false);
   const dragRef = useRef(null);
   const resumeTimerRef = useRef(null);
@@ -39,6 +42,8 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
 
   const [loopCopies, setLoopCopies] = useState(MIN_LOOP_COPIES);
   const [cardWidthPx, setCardWidthPx] = useState(null);
+
+  const productCount = products.length;
 
   const productIdsKey = useMemo(
     () => products.map((p) => p.id).join("|"),
@@ -50,12 +55,23 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
     [products, loopCopies],
   );
 
+  const estimatedSlotW = cardWidthPx ?? FALLBACK_CARD_W;
+
+  const estimatedSegmentW = useMemo(() => {
+    if (productCount === 0) return 0;
+    return productCount * estimatedSlotW + (productCount - 1) * GAP_PX;
+  }, [productCount, estimatedSlotW]);
+
+  const innerMinWidthPx = estimatedSegmentW * loopCopies;
+
   useEffect(() => {
     loopCopiesRef.current = loopCopies;
   }, [loopCopies]);
 
   useEffect(() => {
     loopCopiesRef.current = MIN_LOOP_COPIES;
+    virtualXRef.current = 0;
+    useTransformRef.current = false;
     setLoopCopies(MIN_LOOP_COPIES);
   }, [productIdsKey]);
 
@@ -84,33 +100,79 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
     return Math.max(0, el.scrollWidth - el.clientWidth);
   }, []);
 
+  const clearTransform = useCallback(() => {
+    const inner = innerRef.current;
+    if (!inner) return;
+    inner.style.transform = "";
+    useTransformRef.current = false;
+  }, []);
+
   const measureSegment = useCallback(() => {
     const inner = innerRef.current;
-    const copies = loopCopiesRef.current;
-    if (!inner || copies <= 0) {
+    const n = productCount;
+    if (!inner || n <= 0) {
       segmentWRef.current = 0;
       return 0;
     }
-    const w = inner.scrollWidth / copies;
-    segmentWRef.current = w > 0 ? w : 0;
+
+    const first = inner.children[0];
+    const last = inner.children[n - 1];
+    if (first instanceof HTMLElement && last instanceof HTMLElement) {
+      const seg =
+        last.offsetLeft + last.offsetWidth - first.offsetLeft + GAP_PX;
+      if (seg > 0) {
+        segmentWRef.current = seg;
+        return seg;
+      }
+    }
+
+    const copies = loopCopiesRef.current;
+    const w = copies > 0 ? inner.scrollWidth / copies : 0;
+    segmentWRef.current = w > 0 ? w : estimatedSegmentW;
     return segmentWRef.current;
-  }, []);
+  }, [productCount, estimatedSegmentW]);
+
+  const getRequiredCopies = useCallback(
+    (clientWidth, segmentW) => {
+      if (!clientWidth || !segmentW || productCount === 0) return MIN_LOOP_COPIES;
+      const targetScroll = clientWidth * 2.5;
+      const needed = Math.ceil(targetScroll / segmentW);
+      return Math.min(
+        MAX_LOOP_COPIES,
+        Math.max(MIN_LOOP_COPIES, needed),
+      );
+    },
+    [productCount],
+  );
 
   const centerScroll = useCallback(() => {
     const el = scrollerRef.current;
     const seg = segmentWRef.current;
     if (!el || seg <= 0) return;
+    clearTransform();
     const maxL = getMaxScroll(el);
     if (maxL <= 0) return;
     const copies = loopCopiesRef.current;
     const mid = Math.floor(copies / 2);
     el.scrollLeft = Math.min(mid * seg, maxL);
-  }, [getMaxScroll]);
+    virtualXRef.current = 0;
+  }, [getMaxScroll, clearTransform]);
 
   const normalizeScroll = useCallback(() => {
     const el = scrollerRef.current;
     const seg = segmentWRef.current;
     if (!el || seg <= 0 || nudgeLockRef.current) return;
+
+    if (useTransformRef.current) {
+      if (virtualXRef.current >= seg) virtualXRef.current -= seg;
+      if (virtualXRef.current < 0) virtualXRef.current += seg;
+      const inner = innerRef.current;
+      if (inner) {
+        inner.style.transform = `translate3d(-${virtualXRef.current}px,0,0)`;
+      }
+      return;
+    }
+
     const maxL = getMaxScroll(el);
     if (maxL <= 0) return;
     const buf = Math.min(72, Math.max(12, maxL * 0.1), seg * 0.12);
@@ -133,8 +195,7 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
     if (!scroller) return;
     const cw = scroller.clientWidth;
     if (cw >= 1280) {
-      const gap = 16;
-      const raw = (cw - 3 * gap) / 4;
+      const raw = (cw - 3 * GAP_PX) / 4;
       setCardWidthPx(Math.min(272, Math.max(208, Math.floor(raw))));
     } else {
       setCardWidthPx(null);
@@ -143,37 +204,139 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
 
   const ensureOverflow = useCallback(() => {
     const el = scrollerRef.current;
-    if (!el || products.length === 0) return;
+    if (!el || productCount === 0) return false;
+
+    const seg = measureSegment() || estimatedSegmentW;
+    if (seg <= 0) return false;
+
     const maxL = getMaxScroll(el);
-    if (maxL >= MIN_SCROLL_FOR_MOTION) return;
-    if (loopCopiesRef.current >= MAX_LOOP_COPIES) return;
-    const next = Math.min(MAX_LOOP_COPIES, loopCopiesRef.current + 2);
-    loopCopiesRef.current = next;
-    setLoopCopies(next);
-  }, [getMaxScroll, products.length]);
+    const required = getRequiredCopies(el.clientWidth, seg);
+
+    if (maxL < 8 && loopCopiesRef.current < required) {
+      loopCopiesRef.current = required;
+      setLoopCopies(required);
+      return true;
+    }
+
+    if (maxL < 8 && loopCopiesRef.current < MAX_LOOP_COPIES) {
+      const next = Math.min(MAX_LOOP_COPIES, loopCopiesRef.current + 4);
+      loopCopiesRef.current = next;
+      setLoopCopies(next);
+      return true;
+    }
+
+    return maxL >= 8;
+  }, [
+    productCount,
+    measureSegment,
+    estimatedSegmentW,
+    getMaxScroll,
+    getRequiredCopies,
+  ]);
+
+  const enableTransformAutoplay = useCallback(() => {
+    const inner = innerRef.current;
+    const seg = segmentWRef.current || estimatedSegmentW;
+    if (!inner || seg <= 0) return;
+    useTransformRef.current = true;
+    const el = scrollerRef.current;
+    if (el) el.scrollLeft = 0;
+    virtualXRef.current = seg * Math.floor(loopCopiesRef.current / 2);
+    inner.style.transform = `translate3d(-${virtualXRef.current}px,0,0)`;
+  }, [estimatedSegmentW]);
+
+  const advanceAutoplay = useCallback(() => {
+    const el = scrollerRef.current;
+    if (!el) return;
+
+    const maxL = getMaxScroll(el);
+
+    if (maxL >= 1 && !useTransformRef.current) {
+      el.scrollLeft += AUTOPLAY_DELTA;
+      normalizeScroll();
+      return;
+    }
+
+    if (maxL >= 1 && useTransformRef.current) {
+      clearTransform();
+      centerScroll();
+      el.scrollLeft += AUTOPLAY_DELTA;
+      normalizeScroll();
+      return;
+    }
+
+    const seg = segmentWRef.current || estimatedSegmentW;
+    if (seg <= 0) return;
+
+    if (!useTransformRef.current) {
+      enableTransformAutoplay();
+    }
+    virtualXRef.current += AUTOPLAY_DELTA;
+    normalizeScroll();
+  }, [
+    getMaxScroll,
+    normalizeScroll,
+    clearTransform,
+    centerScroll,
+    enableTransformAutoplay,
+    estimatedSegmentW,
+  ]);
 
   const syncLayout = useCallback(() => {
     updateCardWidth();
-    measureSegment();
-    ensureOverflow();
-    centerScroll();
-    normalizeScroll();
+    const grew = ensureOverflow();
+    if (!grew) {
+      measureSegment();
+      const el = scrollerRef.current;
+      const maxL = el ? getMaxScroll(el) : 0;
+      if (maxL >= 8) {
+        clearTransform();
+        centerScroll();
+        normalizeScroll();
+      } else if (loopCopiesRef.current >= MAX_LOOP_COPIES) {
+        measureSegment();
+        enableTransformAutoplay();
+      }
+    }
   }, [
     updateCardWidth,
-    measureSegment,
     ensureOverflow,
+    measureSegment,
+    getMaxScroll,
+    clearTransform,
     centerScroll,
     normalizeScroll,
+    enableTransformAutoplay,
   ]);
 
   useLayoutEffect(() => {
     if (reduceMotion) return;
     syncLayout();
     requestAnimationFrame(() => {
-      syncLayout();
+      measureSegment();
+      ensureOverflow();
+      requestAnimationFrame(() => {
+        measureSegment();
+        const el = scrollerRef.current;
+        if (el && getMaxScroll(el) >= 8) {
+          clearTransform();
+          centerScroll();
+        } else if (loopCopiesRef.current >= MAX_LOOP_COPIES) {
+          measureSegment();
+          enableTransformAutoplay();
+        }
+        normalizeScroll();
+      });
     });
   }, [
     syncLayout,
+    measureSegment,
+    ensureOverflow,
+    centerScroll,
+    normalizeScroll,
+    clearTransform,
+    enableTransformAutoplay,
+    getMaxScroll,
     productIdsKey,
     loopProducts.length,
     cardWidthPx,
@@ -192,8 +355,11 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
       ensureOverflow();
       requestAnimationFrame(() => {
         measureSegment();
-        centerScroll();
-        normalizeScroll();
+        const maxL = getMaxScroll(scroller);
+        if (maxL >= 8) {
+          clearTransform();
+          normalizeScroll();
+        }
       });
     });
     ro.observe(inner);
@@ -203,8 +369,9 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
     updateCardWidth,
     measureSegment,
     ensureOverflow,
-    centerScroll,
     normalizeScroll,
+    clearTransform,
+    getMaxScroll,
     reduceMotion,
     productIdsKey,
     loopCopies,
@@ -214,17 +381,14 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
     if (reduceMotion) return;
     let raf = 0;
     let cancelled = false;
+    let frame = 0;
+
     const tick = () => {
       if (cancelled) return;
-      const el = scrollerRef.current;
-      if (el && !pauseRef.current) {
-        const maxL = getMaxScroll(el);
-        if (maxL >= MIN_SCROLL_FOR_MOTION) {
-          el.scrollLeft += 0.45;
-          normalizeScroll();
-        } else {
-          ensureOverflow();
-        }
+      if (!pauseRef.current) {
+        advanceAutoplay();
+        frame += 1;
+        if (frame % 90 === 0) ensureOverflow();
       }
       raf = requestAnimationFrame(tick);
     };
@@ -236,8 +400,7 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
   }, [
     reduceMotion,
     productIdsKey,
-    normalizeScroll,
-    getMaxScroll,
+    advanceAutoplay,
     ensureOverflow,
     loopCopies,
   ]);
@@ -248,7 +411,6 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
 
   const onPointerDown = (e) => {
     if (e.pointerType === "mouse" && e.button !== 0) return;
-    /** Táctil: scroll horizontal nativo + onScroll; evitar captura que compite con scroll vertical. */
     if (e.pointerType === "touch") {
       pause();
       return;
@@ -260,6 +422,11 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
     if (!el) return;
 
     pause();
+    if (useTransformRef.current) {
+      clearTransform();
+      el.scrollLeft = virtualXRef.current;
+      virtualXRef.current = 0;
+    }
     el.setPointerCapture(e.pointerId);
     dragRef.current = {
       active: true,
@@ -294,7 +461,7 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
   };
 
   const onScroll = () => {
-    normalizeScroll();
+    if (!useTransformRef.current) normalizeScroll();
   };
 
   const onTouchStart = () => {
@@ -330,10 +497,7 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
         tabIndex={0}
       >
         {products.map((product) => (
-          <div
-            key={product.id}
-            className={CARD_SLOT_CLASS}
-          >
+          <div key={product.id} className={CARD_SLOT_CLASS}>
             <ProductCard
               product={product}
               cardMotion="carousel"
@@ -353,10 +517,6 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
       role="region"
       aria-roledescription="carrusel"
       aria-label="Productos destacados. Puedes arrastrar o deslizar. El movimiento se pausa al interactuar o al pasar el cursor."
-      onMouseEnter={pause}
-      onMouseLeave={() => {
-        if (!dragRef.current?.active) scheduleResume();
-      }}
     >
       <div
         className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-brand-bg to-transparent sm:w-14"
@@ -378,14 +538,21 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
         onWheel={onWheel}
+        onMouseEnter={pause}
+        onMouseLeave={() => {
+          if (!dragRef.current?.active) scheduleResume();
+        }}
       >
         <div
           ref={innerRef}
-          className="flex w-max gap-4 md:gap-5 xl:gap-4"
+          className="flex w-max min-w-max gap-4 md:gap-5 xl:gap-4"
+          style={
+            innerMinWidthPx > 0 ? { minWidth: innerMinWidthPx } : undefined
+          }
         >
           {loopProducts.map((product, index) => (
             <div
-              key={`${product.id}-loop-${index}`}
+              key={`${product.id}-${index}`}
               className={CARD_SLOT_CLASS}
               style={cardSlotStyle}
             >
