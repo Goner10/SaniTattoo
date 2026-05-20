@@ -55,15 +55,15 @@ const SLIDES = [
 ];
 
 const sectionHeightClass =
-  "relative isolate min-h-[400px] w-full overflow-hidden border-b border-brand-border bg-brand-white sm:min-h-[460px] lg:min-h-[420px] lg:max-h-[min(560px,calc(100vh-120px))] xl:min-h-[440px] xl:max-h-[min(580px,calc(100vh-112px))] 2xl:max-h-none 2xl:min-h-[700px]";
+  "relative isolate min-h-[500px] w-full overflow-hidden border-b border-brand-border bg-brand-white sm:min-h-[460px] lg:min-h-[420px] lg:max-h-[min(560px,calc(100vh-120px))] xl:min-h-[440px] xl:max-h-[min(580px,calc(100vh-112px))] 2xl:max-h-none 2xl:min-h-[700px]";
 
 const slidePanelHeightClass =
-  "relative h-full min-h-[400px] w-full shrink-0 basis-full sm:min-h-[460px] lg:min-h-[420px] lg:max-h-[min(560px,calc(100vh-120px))] xl:min-h-[440px] xl:max-h-[min(580px,calc(100vh-112px))] 2xl:max-h-none 2xl:min-h-[700px]";
+  "relative h-full min-h-[500px] w-full shrink-0 basis-full sm:min-h-[460px] lg:min-h-[420px] lg:max-h-[min(560px,calc(100vh-120px))] xl:min-h-[440px] xl:max-h-[min(580px,calc(100vh-112px))] 2xl:max-h-none 2xl:min-h-[700px]";
 
 const imageFillClass = "absolute inset-0 h-full w-full";
 
 const contentShellClass =
-  "relative z-10 mx-auto flex h-full min-h-[inherit] max-w-6xl min-w-0 items-center px-4 py-12 sm:px-6 sm:py-14 lg:py-8 xl:py-8 2xl:py-16";
+  "relative z-10 mx-auto flex h-full min-h-[inherit] max-w-6xl min-w-0 items-center px-4 py-14 pb-28 sm:px-6 sm:py-14 sm:pb-14 lg:py-8 lg:pb-8 xl:py-8 xl:pb-8 2xl:py-16 2xl:pb-16";
 
 function slideOverlayClass(variant) {
   return variant === "brand"
@@ -131,7 +131,7 @@ function HeroSlidePanel({ slide, eagerImage }) {
           >
             {slide.description}
           </p>
-          <div className="mt-8 sm:mt-10">
+          <div className="mt-8 max-sm:mb-1 sm:mt-10">
             <Link to={slide.ctaTo} className={catalogCtaPrimary}>
               {slide.ctaLabel}
             </Link>
@@ -219,7 +219,7 @@ export default function HeroCarousel() {
           </button>
 
           <div
-            className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 gap-2 sm:bottom-6"
+            className="absolute bottom-4 left-1/2 z-20 flex -translate-x-1/2 gap-2 sm:bottom-6"
             role="tablist"
             aria-label="Slides del hero"
           >

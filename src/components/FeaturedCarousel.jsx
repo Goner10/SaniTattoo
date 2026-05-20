@@ -5,14 +5,18 @@ import {
   useLayoutEffect,
   useMemo,
   useRef,
+  useState,
 } from "react";
 import ProductCard from "./ProductCard.jsx";
 
-/**
- * Número fijo de repeticiones del listado solo en DOM (sin tocar products.js).
- * Garantiza overflow horizontal en pantallas grandes con pocos featured.
- */
-const VISUAL_LOOP_COPIES = 8;
+/** Repeticiones mínimas del listado solo en DOM (sin tocar products.js). */
+const MIN_LOOP_COPIES = 8;
+const MAX_LOOP_COPIES = 16;
+/** Recorrido mínimo (px) para activar autoplay y bucle. */
+const MIN_SCROLL_FOR_MOTION = 40;
+
+const CARD_SLOT_CLASS =
+  "shrink-0 w-[min(88vw,20rem)] sm:w-[17.5rem] lg:w-[18.5rem]";
 
 /**
  * Carrusel horizontal con bucle infinito (copias duplicadas solo en UI).
@@ -27,10 +31,14 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
   const scrollerRef = useRef(null);
   const innerRef = useRef(null);
   const segmentWRef = useRef(0);
+  const loopCopiesRef = useRef(MIN_LOOP_COPIES);
   const pauseRef = useRef(false);
   const dragRef = useRef(null);
   const resumeTimerRef = useRef(null);
   const nudgeLockRef = useRef(false);
+
+  const [loopCopies, setLoopCopies] = useState(MIN_LOOP_COPIES);
+  const [cardWidthPx, setCardWidthPx] = useState(null);
 
   const productIdsKey = useMemo(
     () => products.map((p) => p.id).join("|"),
@@ -38,9 +46,18 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
   );
 
   const loopProducts = useMemo(
-    () => Array.from({ length: VISUAL_LOOP_COPIES }, () => products).flat(),
-    [products],
+    () => Array.from({ length: loopCopies }, () => products).flat(),
+    [products, loopCopies],
   );
+
+  useEffect(() => {
+    loopCopiesRef.current = loopCopies;
+  }, [loopCopies]);
+
+  useEffect(() => {
+    loopCopiesRef.current = MIN_LOOP_COPIES;
+    setLoopCopies(MIN_LOOP_COPIES);
+  }, [productIdsKey]);
 
   const clearResumeTimer = useCallback(() => {
     if (resumeTimerRef.current) {
@@ -62,13 +79,19 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
     pauseRef.current = true;
   }, [clearResumeTimer]);
 
+  const getMaxScroll = useCallback((el) => {
+    if (!el) return 0;
+    return Math.max(0, el.scrollWidth - el.clientWidth);
+  }, []);
+
   const measureSegment = useCallback(() => {
     const inner = innerRef.current;
-    if (!inner) {
+    const copies = loopCopiesRef.current;
+    if (!inner || copies <= 0) {
       segmentWRef.current = 0;
       return 0;
     }
-    const w = inner.scrollWidth / VISUAL_LOOP_COPIES;
+    const w = inner.scrollWidth / copies;
     segmentWRef.current = w > 0 ? w : 0;
     return segmentWRef.current;
   }, []);
@@ -77,16 +100,18 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
     const el = scrollerRef.current;
     const seg = segmentWRef.current;
     if (!el || seg <= 0) return;
-    const maxL = Math.max(0, el.scrollWidth - el.clientWidth);
-    const mid = Math.floor(VISUAL_LOOP_COPIES / 2);
+    const maxL = getMaxScroll(el);
+    if (maxL <= 0) return;
+    const copies = loopCopiesRef.current;
+    const mid = Math.floor(copies / 2);
     el.scrollLeft = Math.min(mid * seg, maxL);
-  }, []);
+  }, [getMaxScroll]);
 
   const normalizeScroll = useCallback(() => {
     const el = scrollerRef.current;
     const seg = segmentWRef.current;
     if (!el || seg <= 0 || nudgeLockRef.current) return;
-    const maxL = el.scrollWidth - el.clientWidth;
+    const maxL = getMaxScroll(el);
     if (maxL <= 0) return;
     const buf = Math.min(72, Math.max(12, maxL * 0.1), seg * 0.12);
 
@@ -101,18 +126,59 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
       el.scrollLeft = Math.max(0, el.scrollLeft - seg);
       nudgeLockRef.current = false;
     }
+  }, [getMaxScroll]);
+
+  const updateCardWidth = useCallback(() => {
+    const scroller = scrollerRef.current;
+    if (!scroller) return;
+    const cw = scroller.clientWidth;
+    if (cw >= 1280) {
+      const gap = 16;
+      const raw = (cw - 3 * gap) / 4;
+      setCardWidthPx(Math.min(272, Math.max(208, Math.floor(raw))));
+    } else {
+      setCardWidthPx(null);
+    }
   }, []);
+
+  const ensureOverflow = useCallback(() => {
+    const el = scrollerRef.current;
+    if (!el || products.length === 0) return;
+    const maxL = getMaxScroll(el);
+    if (maxL >= MIN_SCROLL_FOR_MOTION) return;
+    if (loopCopiesRef.current >= MAX_LOOP_COPIES) return;
+    const next = Math.min(MAX_LOOP_COPIES, loopCopiesRef.current + 2);
+    loopCopiesRef.current = next;
+    setLoopCopies(next);
+  }, [getMaxScroll, products.length]);
+
+  const syncLayout = useCallback(() => {
+    updateCardWidth();
+    measureSegment();
+    ensureOverflow();
+    centerScroll();
+    normalizeScroll();
+  }, [
+    updateCardWidth,
+    measureSegment,
+    ensureOverflow,
+    centerScroll,
+    normalizeScroll,
+  ]);
 
   useLayoutEffect(() => {
     if (reduceMotion) return;
-    measureSegment();
-    centerScroll();
+    syncLayout();
     requestAnimationFrame(() => {
-      measureSegment();
-      centerScroll();
-      normalizeScroll();
+      syncLayout();
     });
-  }, [measureSegment, centerScroll, normalizeScroll, productIdsKey, loopProducts.length, reduceMotion]);
+  }, [
+    syncLayout,
+    productIdsKey,
+    loopProducts.length,
+    cardWidthPx,
+    reduceMotion,
+  ]);
 
   useLayoutEffect(() => {
     if (reduceMotion) return;
@@ -121,13 +187,28 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
     if (!inner || !scroller || typeof ResizeObserver === "undefined") return;
 
     const ro = new ResizeObserver(() => {
+      updateCardWidth();
       measureSegment();
-      normalizeScroll();
+      ensureOverflow();
+      requestAnimationFrame(() => {
+        measureSegment();
+        centerScroll();
+        normalizeScroll();
+      });
     });
     ro.observe(inner);
     ro.observe(scroller);
     return () => ro.disconnect();
-  }, [measureSegment, normalizeScroll, reduceMotion, productIdsKey]);
+  }, [
+    updateCardWidth,
+    measureSegment,
+    ensureOverflow,
+    centerScroll,
+    normalizeScroll,
+    reduceMotion,
+    productIdsKey,
+    loopCopies,
+  ]);
 
   useEffect(() => {
     if (reduceMotion) return;
@@ -137,8 +218,13 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
       if (cancelled) return;
       const el = scrollerRef.current;
       if (el && !pauseRef.current) {
-        el.scrollLeft += 0.45;
-        normalizeScroll();
+        const maxL = getMaxScroll(el);
+        if (maxL >= MIN_SCROLL_FOR_MOTION) {
+          el.scrollLeft += 0.45;
+          normalizeScroll();
+        } else {
+          ensureOverflow();
+        }
       }
       raf = requestAnimationFrame(tick);
     };
@@ -147,9 +233,18 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
       cancelled = true;
       cancelAnimationFrame(raf);
     };
-  }, [reduceMotion, productIdsKey, normalizeScroll]);
+  }, [
+    reduceMotion,
+    productIdsKey,
+    normalizeScroll,
+    getMaxScroll,
+    ensureOverflow,
+    loopCopies,
+  ]);
 
   useEffect(() => () => clearResumeTimer(), [clearResumeTimer]);
+
+  const cardSlotStyle = cardWidthPx ? { width: cardWidthPx } : undefined;
 
   const onPointerDown = (e) => {
     if (e.pointerType === "mouse" && e.button !== 0) return;
@@ -237,7 +332,7 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
         {products.map((product) => (
           <div
             key={product.id}
-            className="w-[min(88vw,20rem)] shrink-0 snap-center sm:w-[17.5rem]"
+            className={CARD_SLOT_CLASS}
           >
             <ProductCard
               product={product}
@@ -284,11 +379,15 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
         onTouchEnd={onTouchEnd}
         onWheel={onWheel}
       >
-        <div ref={innerRef} className="flex w-max gap-4 md:gap-6">
+        <div
+          ref={innerRef}
+          className="flex w-max gap-4 md:gap-5 xl:gap-4"
+        >
           {loopProducts.map((product, index) => (
             <div
               key={`${product.id}-loop-${index}`}
-              className="w-[min(88vw,20rem)] shrink-0 sm:w-[17.5rem] lg:w-[18.5rem]"
+              className={CARD_SLOT_CLASS}
+              style={cardSlotStyle}
             >
               <ProductCard
                 product={product}
