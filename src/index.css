@@ -1,12 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap");
 
 @import "tailwindcss";
 
 @theme {
   --font-display: "Cinzel", ui-serif, Georgia, serif;
   --font-heading: "Cinzel", ui-serif, Georgia, serif;
-  --font-sans: "Cinzel", ui-serif, Georgia, serif;
   --font-header: "Cinzel", ui-serif, Georgia, serif;
+  --font-sans: "Cinzel", system-ui, sans-serif;
 
   --color-brand-black: #050505;
   --color-brand-white: #ffffff;
@@ -42,6 +42,14 @@ video {
 button,
 a {
   font: inherit;
+}
+
+.header-font {
+  font-family: "Cinzel", ui-serif, Georgia, serif;
+  font-weight: 600;
+  letter-spacing: 0.015em;
+  text-transform: uppercase;
+  text-shadow: 0 0 0.25px currentColor;
 }
 
 /* Carrusel destacados: ocultar barra, contener scroll horizontal y permitir scroll vertical de página en táctil */

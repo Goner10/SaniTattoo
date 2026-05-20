@@ -15,7 +15,7 @@
  *   image: string
  *   alt: string
  *   shortDescription: string
- *   description: string
+ *   description: string | string[]
  *   tags: string[]
  *   featured: boolean
  *   offer: boolean
@@ -53,7 +53,7 @@ export const products = [
   {
     id: "servilletas-ghost-tattoo",
     sku: "SAN-SERVILLETAS-GHOST-TATTOO-125",
-    name: "Servilletas Ghost Tattoo",
+    name: "Ghost Tattoo Wipes",
     slug: "servilletas-ghost-tattoo",
     category: "material-sanitario",
     categoryLabel: "Material sanitario",
@@ -65,9 +65,12 @@ export const products = [
     alt: "Paquete de servilletas absorbentes Ghost Tattoo para estudio",
     shortDescription:
       "Servilletas super absorbentes con sistema de envasado y corte.",
-    description:
-      "Súper absorbente",
-    tags: ["consumibles", "servilletas", "ghost tattoo", "estudio"],
+      description: [
+        "Nuevas servilletas para tatuajes GHOST, diseñadas para ofrecer la máxima higiene y comodidad durante el proceso de tatuaje.",
+        "Las servilletas GHOST vienen en un envase protector especialmente desarrollado para evitar la contaminación cruzada, garantizando un entorno de trabajo más seguro tanto para el artista como para el cliente.",
+        "El dispensador incorpora un cortador metálico de alta precisión, que permite extraer cada unidad de forma rápida, cómoda y sin tirones, optimizando el flujo de trabajo en el estudio.",
+      ],
+    tags: ["material sanitario", "servilletas", "ghost tattoo", "estudio"],
     featured: true,
     offer: false,
     active: true,
@@ -165,6 +168,119 @@ export const products = [
     active: true,
   },
   {
+    id: "royal-jelly-vaseline-cannabis",
+    sku: "SAN-ROYAL-JELLY-VASELINE-CANNABIS-200",
+    name: "Royal Jelly Vaseline Cannabis BioTaTum",
+    slug: "royal-jelly-vaseline-cannabis",
+    category: "cuidados-tatuaje",
+    categoryLabel: "Cuidados tatuaje",
+    brand: "biotatum",
+    price: 21.90,
+    currency: "EUR",
+    unit: "1000ml",
+    image: "images/productos/biotatum-royal-jelly-cannabis.png",
+    alt: "Vaselina profesional para tatuadores con cannabis",
+    shortDescription:
+      "Vaselina profesional especialmente formulada para su uso durante el proceso del tatuaje.",
+    description:[
+      "Vaselina profesional formulada especialmente para su uso durante el proceso del tatuaje. Enriquecida con manteca de karité (Butyrospermum Parkii Butter), aceite de semilla de cáñamo (Cannabis Sativa Seed Oil) y pantenol, que nutren, calman y protegen la piel contra la sequedad.",
+      "No elimina el diseño transferido ni irrita la piel. Su aroma neutro y fresco ofrece mayor comodidad durante el trabajo."
+    ],
+    gallery: [
+      "images/productos/biotatum-royal-jelly-cannabis.png",
+      "images/productos/biotatum-vaselina-royal-jelly-con-cbd-1000ml.jpg",
+    ],
+    tags: ["aftercare", "BioTaTum", "vaselina", "piel"],
+    featured: true,
+    offer: false,
+    active: true,
+  },
+  {
+    id:"copy-cream-transfer",
+    sku: "SAN-COPY-CREAM-TRANSFER-200",
+    name: "Copy Cream Transfer BioTaTum",
+    slug: "copy-cream-transfer",
+    category: "cuidados-tatuaje",
+    categoryLabel: "Cuidados tatuaje",
+    brand: "biotatum",
+    price: 14.90,
+    currency: "EUR",
+    unit: "250ml",
+    image: "images/productos/transfer.png",
+    alt: "Frasco de Copy Cream Transfer para trabajo de transferencia",
+    shortDescription:
+      "Solución para transferencia de plantillas.",
+    description:[
+      "Garantiza una transferencia precisa, limpia y duradera de los diseños de tatuajes desde la plantilla a la piel: las líneas se mantienen nítidas y fáciles de seguir durante toda la sesión.",
+      "Su fórmula es resistente a las manchas y a la decoloración, manteniendo la nitidez incluso durante largas sesiones de tatuaje.",
+      "Apto para todo tipo de piel: suave y no irritante, ideal para pieles sensibles."
+    ],
+    gallery: [
+      "images/productos/transfer.png",
+      "images/productos/Transfer-Copy.webp",
+    ],
+    tags: ["aftercare", "BioTaTum", "crema", "transferencia", "tatuaje"],
+    featured: false,
+    offer: false,
+    active: true,
+  },
+  {
+    id:"mixing-solution-biotatum",
+    sku: "SAN-MIXING-SOLUTION-BIOTATUM-250",
+    name: "Mixing Solution BioTaTum",
+    slug: "mixing-solution-biotatum",
+    category: "cuidados-tatuaje",
+    categoryLabel: "Cuidados tatuaje",
+    brand: "biotatum",
+    price: 9.90,
+    currency: "EUR",
+    unit: "150ml",
+    image: "images/productos/mixing-solution.png",
+    alt: "Frasco de Mixing Solution para trabajo de mezcla",
+    shortDescription:
+      "Solución para diluir tinta de tatuaje.",
+    description:[
+      "Solución profesional para diluir y humedecer pigmentos de tatuaje.",
+      "Gracias al pantenol, ayuda a obtener la consistencia perfecta sin alterar la intensidad del color y mejora la comodidad durante el proceso de tatuado.",
+      "No contiene alcohol ni ingredientes irritantes, por lo que es segura para la piel y compatible con todos los tipos de pigmentos."
+    ],
+    tags: ["aftercare", "BioTaTum", "mezcla", "pigmentos", "tatuaje"],
+    featured: false,
+    offer: false,
+    active: true,
+    gallery: [
+      "images/productos/mixing-solution.png",
+    ],
+  },
+  {
+    id:"rapid-repair-cream-biotatum",
+    sku: "SAN-RAPID-REPAIR-CREAM-BIOTATUM-250",
+    name: "Rapid Repair Cream BioTaTum",
+    slug: "rapid-repair-cream-biotatum",
+    category: "cuidados-tatuaje",
+    categoryLabel: "Cuidados tatuaje",
+    brand: "biotatum",
+    price: 6,
+    currency: "EUR",
+    unit: "20ml",
+    image: "images/productos/rapid-repair.png",
+    alt: "Frasco de Rapid Repair Cream para trabajo de reparación",
+    shortDescription:
+      "Cuidado intensivo y protección del tatuaje",
+    description:[
+        "BioTaTum Professional Rapid Repair Cream es una crema especializada para el cuidado diario de la piel tatuada. Su textura ligera y no grasa hidrata, protege y mantiene el confort de la piel, ayudando a conservar su equilibrio natural.",
+        "Gracias al pantenol y la vitamina E, calma e hidrata la piel, reforzando su barrera natural y manteniendo la intensidad de los colores del tatuaje. Forma una capa protectora transpirable que evita la pérdida de humedad. Libre de colorantes y fragancias, es apta para pieles sensibles.",
+      ],
+    tags: ["aftercare", "BioTaTum", "crema", "reparación", "tatuaje"],
+    featured: false,
+    offer: false,
+    active: true,
+    gallery: [
+      "images/productos/rapid-repair.png",
+      "images/productos/crema-accion-rapida-biotatum.jpg",
+    ],
+  },
+  {
     id: "special-shading-solution-150ml",
     sku: "SAN-SPECIAL-SHADING-SOLUTION-150",
     name: "Special Shading Solution",
@@ -187,6 +303,58 @@ export const products = [
     active: true,
   },
   {
+    id: "lofty-bloom-butter-balm-150ml",
+    sku: "SAN-LOFTY-BLOOM-BUTTER-BALM-150",
+    name: "Lofty Bloom Butter Balm",
+    slug: "lofty-bloom-butter-balm-150ml",
+    category: "cuidados-tatuaje",
+    categoryLabel: "Cuidados tatuaje",
+    brand: "aloetattoo",
+    price: 18,
+    currency: "EUR",
+    unit: "150ml",
+    image: "images/productos/lofty1.png",
+    alt: "Bálsamo tipo butter Lofty Bloom Butter Balm para cuidado de la piel",
+    shortDescription:
+      "Bálsamo butter para hidratar y cuidar la piel en fase de aftercare.",
+    description:
+      "Fórmula tipo bálsamo pensada para aportar confort e hidratación a la piel tatuada durante la recuperación. Uso según indicaciones del fabricante y recomendación profesional.",
+    tags: ["aftercare", "bálsamo", "butter", "hidratar", "piel"],
+    featured: true,
+    offer: false,
+    active: true,
+    gallery: [
+      "images/productos/lofty1.png",
+      "images/productos/lofty2.png",
+    ],
+  },
+  {
+    id: "stencil-eraser-spray",
+    sku: "SAN-STENCIL-ERASER-SPRAY-100",
+    name: "Stencil Eraser Spray",
+    slug: "stencil-eraser-spray",
+    category: "cuidados-tatuaje",
+    categoryLabel: "Cuidados tatuaje",
+    brand: "aloetattoo",
+    price: 8,
+    currency: "EUR",
+    unit: "1 unidad",
+    image: "images/productos/stencil-eraser.png",
+    alt: "Spray borrador de stencil en envase para estudio",
+    shortDescription:
+      "Spray para corregir o retirar stencil. Elige formato 100 ml o 250 ml.",
+    description:
+      "Spray de preparación para ajustar o eliminar transferencias de stencil cuando el trazo necesita corrección. Selecciona capacidad al pedir por WhatsApp.",
+    tags: ["stencil", "spray", "corrección", "preparación", "transfer"],
+    featured: false,
+    offer: false,
+    active: true,
+    variants: [
+      { label: "100ml", price: 8, sku: "SAN-STENCIL-ERASER-SPRAY-100" },
+      { label: "250ml", price: 14, sku: "SAN-STENCIL-ERASER-SPRAY-250" },
+    ],
+  },
+  {
     id: "guantes-nitrilo-100",
     sku: "SAN-GUANTES-NITRILO-NEGRO-100",
     name: "Guantes de nitrilo",
@@ -202,8 +370,8 @@ export const products = [
     shortDescription:
       "Guantes desechables de nitrilo en caja de 100 unidades. Disponibles en varios colores.",
     description:
-      "Guantes de nitrilo pensados para protección e higiene en sesión. Buen ajuste y tacto para trabajo preciso. Indica color al pedir por WhatsApp. Caja de 100 unidades.",
-    tags: ["protección", "higiene", "guantes", "nitrilo", "desechables"],
+      "Guantes de nitrilo sin polvo pensados para protección e higiene en sesión. Buen ajuste y tacto para trabajo preciso. Tallas S, M, L. Caja de 100 unidades.",
+    tags: ["material sanitario", "protección", "higiene", "guantes", "nitrilo", "desechables"],
     featured: false,
     offer: false,
     active: true,
@@ -235,9 +403,9 @@ export const products = [
     offer: false,
     active: true,
     variants: [
-      { label: "Talla S", price: 3.5, sku: "SAN-GUANTES-NITRILO-S-100" },
-      { label: "Talla M", price: 3.5, sku: "SAN-GUANTES-NITRILO-M-100" },
-      { label: "Talla L", price: 3.5, sku: "SAN-GUANTES-NITRILO-L-100" },
+      { label: "Talla S", price: 4.8, sku: "SAN-GUANTES-NITRILO-S-100" },
+      { label: "Talla M", price: 4.8, sku: "SAN-GUANTES-NITRILO-M-100" },
+      { label: "Talla L", price: 4.8, sku: "SAN-GUANTES-NITRILO-L-100" },
     ],
   },
   {
@@ -256,8 +424,8 @@ export const products = [
     shortDescription:
       "Rasuradoras de doble hoja en formato práctico para preparación de piel.",
     description:
-      "Consumible de uso frecuente para preparar la zona antes del tatuaje. Presentación de 100 unidades.",
-    tags: ["consumibles", "rasuradora", "preparación", "piel"],
+      "Rasuradoras de doble hoja con peine de color verde. Presentación en caja de 100 unidades.",
+    tags: ["material sanitario", "rasuradora", "preparación", "piel"],
     featured: false,
     offer: false,
     active: true,
@@ -278,8 +446,8 @@ export const products = [
     shortDescription:
       "Depresores de madera en bolsa de 100 unidades para aplicación y mezcla.",
     description:
-      "Depresores de madera desechables, útiles para extender productos, mezclar o trabajar la zona con control. Formato de 100 unidades.",
-    tags: ["consumibles", "depresores", "madera", "estudio"],
+      "Depresores de madera desechables, útiles para extender productos, mezclar o trabajar la zona con control. Formato caja de 100 unidades.",
+    tags: ["material sanitario", "depresores", "madera", "estudio"],
     featured: false,
     offer: false,
     active: true,
@@ -322,8 +490,8 @@ export const products = [
     shortDescription:
       "Papel camilla de polipropileno con precorte. Disponible en negro y rosa.",
     description:
-      "Rollo de papel camilla de polipropileno con precorte para proteger la camilla y facilitar el cambio entre clientes. Elige color al pedir.",
-    tags: ["mobiliario", "camilla", "papel camilla", "polipropileno", "precorte"],
+      "Rollo de papel camilla de polipropileno con precorte  cada 40cm para proteger la camilla y facilitar el cambio entre clientes. Muy agradable al tacto. Elige color al pedir.",
+    tags: ["material sanitario", "papel camilla", "polipropileno", "precorte"],
     featured: false,
     offer: false,
     active: true,
@@ -348,8 +516,8 @@ export const products = [
     shortDescription:
       "Papel camilla resistente sin precorte, formato de 1 unidad (rollo).",
     description:
-      "Papel camilla de mayor resistencia sin precorte, pensado para sesiones largas y cambios puntuales. Formato de 1 unidad.",
-    tags: ["mobiliario", "camilla", "papel camilla", "resistente"],
+      "Papel camilla de mayor resistencia sin precorte, pensado para sesiones largas y cambios puntuales.",
+    tags: ["material sanitario", "camilla", "papel camilla", "resistente"],
     featured: false,
     offer: false,
     active: true,
@@ -370,8 +538,8 @@ export const products = [
     shortDescription:
       "Papel camilla bicapa con precorte para protección cómoda de la camilla.",
     description:
-      "Combinación bicapa con precorte para facilitar el desglose y mantener la camilla protegida de forma higiénica. Formato de 1 unidad.",
-    tags: ["mobiliario", "camilla", "papel camilla", "bicapa", "precorte"],
+      "Rollo de papel camilla celulosa con precorte cada 50cm para una mayor comodidad.",
+    tags: ["material sanitario", "camilla", "papel camilla", "bicapa", "precorte"],
     featured: false,
     offer: false,
     active: true,
@@ -440,8 +608,8 @@ export const products = [
     shortDescription:
       "Vendas grip en paquete de 12 unidades. Disponibles en negro y azul.",
     description:
-      "Vendas de agarre para fijación y comodidad en sesión. Presentación de 12 unidades; indica color al pedir por WhatsApp.",
-    tags: ["consumibles", "vendas", "grip", "fijación"],
+      "Vendas de agarre para fijación muy resistentes. Presentación en caja de 12 unidades; indica color al pedir por WhatsApp.",
+    tags: ["material sanitario", "vendas", "grip", "fijación"],
     featured: false,
     offer: false,
     active: true,
@@ -538,10 +706,10 @@ export const products = [
     image: "images/productos/papel-secamanos.png",
     alt: "Pack de papel secamanos para baño o aseo del estudio",
     shortDescription:
-      "Papel secamanos en pack de 6 unidades, 140 metros por unidad.",
+      "Bobina de papel secamanos, pack de 6 unidades.",
     description:
-      "Consumible de aseo para estudio o zona de lavado. Pack de 6 rollos con 140 metros lineales por unidad; ideal para alto tránsito.",
-    tags: ["consumibles", "papel", "secamanos", "higiene"],
+      "Bobina de papel secamanos, pack de 6 unidades, 140 metros por unidad. Ideal para alto tránsito.",
+    tags: ["material sanitario", "papel", "secamanos", "higiene"],
     featured: false,
     offer: false,
     active: true,
@@ -561,12 +729,18 @@ export const products = [
     alt: "Sábanas ajustables desechables para camilla de tatuaje",
     shortDescription:
       "Sábanas ajustables en bolsa de 5 unidades. Disponibles en blanco y negro.",
-    description:
-      "Sábanas con ajuste para camilla, facilitan el cambio higiénico entre clientes. Elige color al pedir; precios según variante.",
-    tags: ["mobiliario", "camilla", "sábanas", "desechables"],
+    description:[
+      "Sábanas con ajuste para camilla en formato bolsa de 5 unidades.",
+      "Extremos con plástico ajustable, ideales para evitar manchas de tinta en la camilla. Elige color al pedir.",
+    ],
+    tags: ["material sanitario", "camilla", "sábanas", "desechables"],
     featured: false,
     offer: false,
     active: true,
+    gallery: [
+      "images/productos/sabana-ajustable.png",
+      "images/productos/camilla.png",
+    ],
     variants: [
       { label: "Blanco", price: 4.25, sku: "SAN-SABANAS-AJUSTABLES-BLANCO-5U" },
       { label: "Negro", price: 5.06, sku: "SAN-SABANAS-AJUSTABLES-NEGRO-5U" },
@@ -588,8 +762,8 @@ export const products = [
     shortDescription:
       "Bolsas esterilizadoras en caja de 200 unidades. Varios tamaños según medida.",
     description:
-      "Bolsas sellables para ciclos de esterilización. Disponibles en distintas medidas; selecciona formato al consultar stock y precio por WhatsApp.",
-    tags: ["desinfección", "esterilización", "bolsas", "autoclave"],
+      "Bolsas autoadhesivas para la esterilización, resistentes y de alta calidad. Caja de 200 unidades. Disponible en diferentes medidas. Consultar stock y precio por WhatsApp.",
+    tags: ["esterilizacion", "bolsas", "autoclave"],
     featured: false,
     offer: false,
     active: true,
@@ -602,7 +776,7 @@ export const products = [
   {
     id: "desinfectante-piel-liquido-150ml",
     sku: "SAN-DESINFECTANTE-PIEL-LIQUIDO-150ML",
-    name: "Desinfectante de piel líquido",
+    name: "Desinfectante de piel líquido EFFIGERM",
     slug: "desinfectante-piel-liquido-150ml",
     category: "esterilizacion",
     categoryLabel: "Esterilización",
@@ -614,9 +788,11 @@ export const products = [
     alt: "Frasco de desinfectante de piel en formato líquido 150 ml",
     shortDescription:
       "Desinfectante de piel en formato líquido, 150 ml, para preparación en estudio.",
-    description:
-      "Solución para desinfección de piel antes del tatuaje. Uso profesional; sigue las indicaciones del fabricante y la normativa aplicable.",
-    tags: ["desinfección", "piel", "líquido", "preparación"],
+    description:[
+      "Effigerm Wound Care es una solución con ácido hipocloroso al 0,016% (160 ppm), el desinfectante más potente y natural que existe.",
+      "Limpia, hidrata y acelera la cicatrización sin dolor ni escozor. Previene infecciones, elimina malos olores y protege frente a biofilms.",
+    ],
+    tags: ["esterilizacion", "piel", "líquido", "preparación"],
     featured: false,
     offer: false,
     active: true,
@@ -640,8 +816,10 @@ export const products = [
     alt: "Frasco de desinfectante de piel tipo hydrogel 150 ml",
     shortDescription:
       "Desinfectante de piel en gel acuoso (hydrogel), 150 ml, cómodo de extender.",
-    description:
-      "Formato hydrogel para aplicación uniforme sobre la piel en fase de preparación. Producto para uso profesional en estudio.",
+    description:[
+      "Effigerm Wound Care es una solución con ácido hipocloroso al 0,016% (160 ppm), el desinfectante más potente y natural que existe. Formato hydrogel para aplicación uniforme sobre la piel en fase de preparación.",
+      "Limpia, hidrata y acelera la cicatrización sin dolor ni escozor. Previene infecciones, elimina malos olores y protege frente a biofilms. ",
+    ],
     tags: ["desinfección", "piel", "hydrogel", "gel", "preparación"],
     featured: false,
     offer: false,
@@ -690,8 +868,8 @@ export const products = [
     shortDescription:
       "Contenedor para agujas y material punzante, capacidad 2 litros.",
     description:
-      "Recipiente de seguridad para el depósito de agujas y residuos cortopunzantes según protocolo del estudio. Capacidad 2 L.",
-    tags: ["desinfección", "contenedor", "agujas", "residuos", "biosanitario"],
+      "Recipiente de seguridad para el depósito de agujas y residuos cortopunzantes según protocolo del estudio.",
+    tags: ["esterilizacion", "contenedor", "residuos", "desinfección"],
     featured: false,
     offer: false,
     active: true,
@@ -713,10 +891,14 @@ export const products = [
       "Botella bóxer de 500 ml, formato habitual para líquidos de trabajo en estudio.",
     description:
       "Botella con rosca y boquilla tipo bóxer para dispensar líquidos de forma controlada. Uso profesional en tatuaje; consulta compatibilidad de contenido.",
-    tags: ["consumibles", "botella", "bóxer", "pulverizar", "estudio"],
+    tags: ["material sanitario", "botella", "bóxer", "pulverizar", "estudio"],
     featured: false,
     offer: false,
     active: true,
+    variants: [
+      { label: "250ml", price: 3.5, sku: "SAN-BOTELLA-BOXER-250ML" },
+      { label: "500ml", price: 5, sku: "SAN-BOTELLA-BOXER-500ML" },
+    ],
     gallery: [
       "images/productos/botella.png",
       "images/productos/botella2.webp",
@@ -737,9 +919,11 @@ export const products = [
     alt: "Mangas desechables para brazos en caja de 100 unidades",
     shortDescription:
       "Mangas desechables para brazos, bolsa de 100 unidades.",
-    description:
+    description:[
       "Protección desechable para antebrazo durante la sesión. Material ligero y práctico para mantener la higiene de la zona de trabajo.",
-    tags: ["protección", "higiene", "mangas", "desechables", "brazo"],
+      "Presentación en caja de 100 unidades.",
+    ],
+    tags: ["material sanitario", "higiene", "mangas", "desechables", "brazo"],
     featured: false,
     offer: false,
     active: true,
@@ -752,7 +936,7 @@ export const products = [
   {
     id: "alcohol-96-500ml",
     sku: "SAN-ALCOHOL-96-500ML",
-    name: "Alcohol 96%",
+    name: "Alcohol VAZA 96%",
     slug: "alcohol-96-500ml",
     category: "esterilizacion",
     categoryLabel: "Esterilización",
@@ -765,8 +949,8 @@ export const products = [
     shortDescription:
       "Alcohol etílico al 96 %, frasco de 500 ml para limpieza y desinfección en estudio.",
     description:
-      "Solución de alcohol de uso habitual en protocolos de limpieza de superficies y material no sensible al disolvente. Manipular con precaución y ventilación.",
-    tags: ["desinfección", "alcohol", "limpieza", "estudio"],
+      "Antiséptico y bactericida para piel sana, destinado al uso sanitario, clínico y hospitalario, con actividad desinfectante, prepara la piel para trabajar en ella. Solo uso externo.",
+    tags: ["esterilizacion", "alcohol", "limpieza", "estudio"],
     featured: false,
     offer: false,
     active: true,
@@ -782,68 +966,16 @@ export const products = [
     price: 2.44,
     currency: "EUR",
     unit: "50 unidades",
-    image: "images/productos/vasos-plastico.png",
+    image: "images/productos/vasos-plastico (2).png",
     alt: "Vasos de plástico negros desechables en paquete de 50 unidades",
     shortDescription:
       "Vasos de plástico negro, paquete de 50 unidades para mezcla o pigmento.",
     description:
-      "Vasos desechables de color negro, útiles para diluir tinta o organizar pigmentos en sesión. Presentación de 50 unidades.",
+      "Vasos desechables de color negro, útiles para diluir tinta o organizar pigmentos en sesión. Presentación en caja de 50 unidades.",
     tags: ["consumibles", "vasos", "plástico", "negro", "pigmento"],
     featured: false,
     offer: false,
     active: true,
-  },
-  {
-    id: "lofty-bloom-butter-balm-150ml",
-    sku: "SAN-LOFTY-BLOOM-BUTTER-BALM-150",
-    name: "Lofty Bloom Butter Balm",
-    slug: "lofty-bloom-butter-balm-150ml",
-    category: "cuidados-tatuaje",
-    categoryLabel: "Cuidados tatuaje",
-    brand: "aloetattoo",
-    price: 18,
-    currency: "EUR",
-    unit: "150ml",
-    image: "images/productos/lofty1.png",
-    alt: "Bálsamo tipo butter Lofty Bloom Butter Balm para cuidado de la piel",
-    shortDescription:
-      "Bálsamo butter para hidratar y cuidar la piel en fase de aftercare.",
-    description:
-      "Fórmula tipo bálsamo pensada para aportar confort e hidratación a la piel tatuada durante la recuperación. Uso según indicaciones del fabricante y recomendación profesional.",
-    tags: ["aftercare", "bálsamo", "butter", "hidratar", "piel"],
-    featured: true,
-    offer: false,
-    active: true,
-    gallery: [
-      "images/productos/lofty1.png",
-      "images/productos/lofty2.png",
-    ],
-  },
-  {
-    id: "stencil-eraser-spray",
-    sku: "SAN-STENCIL-ERASER-SPRAY-100",
-    name: "Stencil Eraser Spray",
-    slug: "stencil-eraser-spray",
-    category: "cuidados-tatuaje",
-    categoryLabel: "Cuidados tatuaje",
-    brand: "aloetattoo",
-    price: 8,
-    currency: "EUR",
-    unit: "1 unidad",
-    image: "images/productos/stencil-eraser.png",
-    alt: "Spray borrador de stencil en envase para estudio",
-    shortDescription:
-      "Spray para corregir o retirar stencil. Elige formato 100 ml o 250 ml.",
-    description:
-      "Spray de preparación para ajustar o eliminar transferencias de stencil cuando el trazo necesita corrección. Selecciona capacidad al pedir por WhatsApp.",
-    tags: ["stencil", "spray", "corrección", "preparación", "transfer"],
-    featured: false,
-    offer: false,
-    active: true,
-    variants: [
-      { label: "100ml", price: 8, sku: "SAN-STENCIL-ERASER-SPRAY-100" },
-      { label: "250ml", price: 14, sku: "SAN-STENCIL-ERASER-SPRAY-250" },
-    ],
   },
   {
     id: "camiseta-sanitattoo-blanca",
@@ -910,7 +1042,7 @@ export const products = [
   {
     id: "camiseta-sanitattoo-roja",
     sku: "SAN-MERCH-CAMISETA-ROJA",
-    name: "Camiseta roja SANITATTOO",
+    name: "Camiseta logo nuevo SANITATTOO",
     slug: "camiseta-sanitattoo-roja",
     category: "cuidados-tatuaje",
     categoryLabel: "Cuidados tatuaje",

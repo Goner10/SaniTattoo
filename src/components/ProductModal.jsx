@@ -162,9 +162,17 @@ export default function ProductModal({ product, onClose }) {
                 ) : null}
               </div>
               <div className="space-y-4 p-4 sm:p-6">
-                <p className="text-sm font-normal leading-relaxed text-brand-black">
-                  {product.description}
-                </p>
+               {Array.isArray(product.description) ? (
+                <div className="space-y-3 text-sm font-normal leading-relaxed text-brand-black">
+                 {product.description.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+               </div>
+            ) : (
+               <p className="whitespace-pre-line text-sm font-normal leading-relaxed text-brand-black">
+                 {product.description}
+              </p>
+              )}
                 {product.variants?.length ? (
                   <div>
                     <p className="text-xs font-bold uppercase tracking-wide text-brand-muted">
