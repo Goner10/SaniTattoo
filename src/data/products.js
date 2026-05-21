@@ -592,7 +592,7 @@ export const products = [
     shortDescription:
       "Film transparente en rollo. Elige medida entre 30x300 y 45x300.",
     description:
-      "Film transparente para uso en estudio. Disponible en distintas medidas de rollo; selecciona la opción al consultar por WhatsApp.",
+      "Film transparente para uso en estudio. Disponible en distintas medidas de rollo, selecciona la opción al consultar por WhatsApp.",
     tags: ["consumibles", "film", "transparente", "barrera"],
     featured: false,
     offer: false,
@@ -640,7 +640,7 @@ export const products = [
     shortDescription:
       "Vendas grip en paquete de 12 unidades. Disponibles en negro y azul.",
     description:
-      "Vendas de agarre para fijación muy resistentes. Presentación en caja de 12 unidades; indica color al pedir por WhatsApp.",
+      "Vendas de agarre para fijación muy resistentes. Presentación en caja de 12 unidades. Indica color al pedir por WhatsApp.",
     tags: ["material sanitario", "vendas", "grip", "fijación"],
     featured: false,
     offer: false,
@@ -692,7 +692,7 @@ export const products = [
     shortDescription:
       "Servilletas bicapa, paquete de 50 unidades. Disponibles en negro y rosa.",
     description:
-      "Servilletas de estructura bicapa para absorción y manejo en sesión. Presentación de 50 unidades; indica color al pedir por WhatsApp.",
+      "Servilletas de estructura bicapa para absorción y manejo en sesión. Presentación de 50 unidades. Indica color al pedir por WhatsApp.",
     tags: ["consumibles", "servilletas", "bicapa", "negro", "rosa"],
     featured: false,
     offer: false,
@@ -1037,9 +1037,10 @@ export const products = [
       "images/merchandising/cami-blanca-atras.png",
     ],
     variants: [
-      { label: "M", price: 15, sku: "SAN-MERCH-CAMISETA-BLANCA-M" },
-      { label: "L", price: 15, sku: "SAN-MERCH-CAMISETA-BLANCA-L" },
-      { label: "XL", price: 15, sku: "SAN-MERCH-CAMISETA-BLANCA-XL" },
+      { label: "S", price: 20, sku: "SAN-MERCH-CAMISETA-BLANCA-S" },
+      { label: "M", price: 20, sku: "SAN-MERCH-CAMISETA-BLANCA-M" },
+      { label: "L", price: 20, sku: "SAN-MERCH-CAMISETA-BLANCA-L" },
+      { label: "XL", price: 20, sku: "SAN-MERCH-CAMISETA-BLANCA-XL" },
     ],
   },
   {
@@ -1068,9 +1069,10 @@ export const products = [
       "images/merchandising/cami-negra-atras.png",
     ],
     variants: [
-      { label: "M", price: 15, sku: "SAN-MERCH-CAMISETA-NEGRA-M" },
-      { label: "L", price: 15, sku: "SAN-MERCH-CAMISETA-NEGRA-L" },
-      { label: "XL", price: 15, sku: "SAN-MERCH-CAMISETA-NEGRA-XL" },
+      { label: "S", price: 20, sku: "SAN-MERCH-CAMISETA-BLANCA-S" },
+      { label: "M", price: 20, sku: "SAN-MERCH-CAMISETA-BLANCA-M" },
+      { label: "L", price: 20, sku: "SAN-MERCH-CAMISETA-BLANCA-L" },
+      { label: "XL", price: 20, sku: "SAN-MERCH-CAMISETA-BLANCA-XL" },
     ],
   },
   {
@@ -1099,6 +1101,12 @@ export const products = [
       "images/merchandising/cami-nueva.png",
       "images/merchandising/cami-nueva-atras.png",
     ],
+    variants: [
+      { label: "S", price: 20, sku: "SAN-MERCH-CAMISETA-BLANCA-S" },
+      { label: "M", price: 20, sku: "SAN-MERCH-CAMISETA-BLANCA-M" },
+      { label: "L", price: 20, sku: "SAN-MERCH-CAMISETA-BLANCA-L" },
+      { label: "XL", price: 20, sku: "SAN-MERCH-CAMISETA-BLANCA-XL" },
+    ],
   },
   {
     id: "camiseta-sanitattoo-nueva-negra",
@@ -1125,6 +1133,12 @@ export const products = [
     gallery: [
       "images/merchandising/cami-nueva-negra.png",
       "images/merchandising/cami-nueva-negra-atras.png",
+    ],
+    variants: [
+      { label: "S", price: 20, sku: "SAN-MERCH-CAMISETA-BLANCA-S" },
+      { label: "M", price: 20, sku: "SAN-MERCH-CAMISETA-BLANCA-M" },
+      { label: "L", price: 20, sku: "SAN-MERCH-CAMISETA-BLANCA-L" },
+      { label: "XL", price: 20, sku: "SAN-MERCH-CAMISETA-BLANCA-XL" },
     ],
   },
 ];
