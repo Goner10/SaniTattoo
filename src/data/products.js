@@ -32,7 +32,7 @@ export const products = [
   {
     id: "green-soap-cleansing-foam",
     sku: "SAN-GREEN-SOAP-FOAM-220",
-    name: "Green Soap Cleaning Foam",
+    name: "Green Soap Cleaning Foam Aloe Tattoo",
     slug: "green-soap-cleansing-foam",
     category: "cuidados-tatuaje",
     categoryLabel: "Cuidados tatuaje",
@@ -43,9 +43,12 @@ export const products = [
     image: "images/productos/green-soap-cleansing-foam.png",
     alt: "Bote de espuma limpiadora Green Soap Cleansing Foam",
     shortDescription:
-      "Espuma limpiadora suave para la piel durante y después del tatuaje.",
-    description:
-      "Espuma limpiadora formulada para uso profesional en estudio. Ayuda a retirar residuos de tinta y mantiene la zona cómoda durante el proceso y el aftercare.",
+      "Solución jabonosa de alta calidad de aloetattoo.",
+    description:[
+      "Green Soap de Aloe Tattoo es una solución jabonosa de alta calidad sin sulfatos ni PEG. Muy suave para con la piel y con gran poder de limpieza de las tintas, para utilizar directamente, sin diluir, durante el proceso del tatuaje.",
+      "Su contenido en alantoína y jugo puro de aloe vera (procedente de cultivo ecológico), le confieren un alto efecto calmante y astringente (reduce el sangrado durante el tatuaje).",
+      "Presentación en bote de 220ml."
+    ],
     tags: ["aftercare", "green soap", "limpieza", "AloeTattoo"],
     featured: true,
     offer: false,
@@ -85,7 +88,7 @@ export const products = [
   {
     id: "gel-stencil-premium",
     sku: "SAN-GEL-STENCIL-100",
-    name: "Gel Stencil Premium",
+    name: "Gel Stencil Premium Aloe Tattoo",
     slug: "gel-stencil-premium",
     category: "cuidados-tatuaje",
     categoryLabel: "Cuidados tatuaje",
@@ -97,8 +100,10 @@ export const products = [
     alt: "Gel para stencil premium en formato bote",
     shortDescription:
       "Gel de transferencia para stencil con acabado nítido y fijación fiable.",
-    description:
-      "Gel premium para preparación de stencil. Pensado para uso en estudio con textura de trabajo cómoda y transferencias consistentes.",
+    description:[
+      "Es un producto de alta calidad, muy fácil de extender y agradable en la piel. No necesita agitarse ni volcar el bote. Con sistema de extracción por bomba (más cómodo e higiénico). Fabricado con jugo puro de aloe vera Barbadensis Miller cultivo ecológico.",
+      "MODO DE USO: El gel Stencil Premium de Aloe Tattoo es un producto de alta calidad que no precisa agitarse antes de su uso, por lo que una sola gota sirve para fijar una plantilla de dibujo semejante a un cuadrado de 15cmx15cm de lado. Extienda el gel en el área a tatuar hasta que la piel presente un aspecto casi seco. Aplique la plantilla del dibujo y espere de 3 a 5 segundos antes de retirarla. Deje pasar de 8 a 10 minutos antes de comenzar a tatuar. Trabaje de abajo a arriba, ocasionalmente limpiando el exceso de tinta. Ideal para realismos."
+    ],
     tags: ["stencil", "gel", "transfer", "preparación"],
     featured: true,
     offer: false,
@@ -111,7 +116,7 @@ export const products = [
   {
     id: "red-out-bioactive-calming-foam",
     sku: "SAN-RED-OUT-BIOACTIVE-FOAM-220",
-    name: "Red Out bioactive calming foam",
+    name: "Red Out bioactive calming foam Aloe Tattoo",
     slug: "red-out-bioactive-calming-foam",
     category: "cuidados-tatuaje",
     categoryLabel: "Cuidados tatuaje",
@@ -122,9 +127,12 @@ export const products = [
     image: "images/productos/red_out.png",
     alt: "Bote de espuma calmante bioactiva Red Out para la piel en estudio",
     shortDescription:
-      "Espuma bioactiva calmante para la piel durante y después del tatuaje.",
-    description:
-      "Espuma calmante formulada para uso profesional en estudio. Ayuda a aportar sensación de confort a la piel durante el trabajo y en fases de aftercare.",
+      "Solucón jabonosa librre de sulfatos de Aloe Tattoo.",
+    description:[
+      "Solución jabonosa - libre de PEG, sulfatos y conservantes - compuesta de agentes tenso-activos de origen natural y de agentes bio-activos procedentes de la flor de la Camomila (cultivo ecológico), que le confieren a la espuma un notable efecto calmante e higienizante sobre pieles irritadas durante y al finalizar el proceso del tatuaje.",
+      "Instrucciones de uso: aplicar la espuma generada por 1-2 pulsaciones sobre la piel previamente humedecida, durante las 'paradas' en el tatuaje y al finalizar el mismo. Masajear suavemente con las yemas de los dedos. Dejar actuar al producto al menos 2 minutos. Aclarar con agua y secar con toallitas de papel tissue sin frotar la piel.",
+      "Presentación en bote de 220ml con dosificador de espuma."
+    ],
     tags: ["aftercare", "red out", "espuma", "calmante", "piel"],
     featured: true,
     offer: false,
@@ -147,7 +155,11 @@ export const products = [
       "Jabón profesional a base de aceite de oliva y aloe vera",
     description:
       "Green Soap + Aloe es un concentrado de jabón verde natural diseñado para artistas del tatuaje. Garantiza una limpieza higiénica de la piel antes, durante y después de la sesión. Su fórmula con aceite de oliva y zumo de aloe vera elimina suavemente la tinta, la sangre y la vaselina sin irritar la piel. Los ingredientes naturales aseguran una limpieza eficaz y segura.",
-    tags: ["aftercare", "BioTaTum", "jabon", "calmante", "piel"],
+    gallery: [
+      "images/productos/biotatum1.png",
+      "images/productos/biotatum-green-soap.jpg",
+    ],
+      tags: ["aftercare", "BioTaTum", "jabon", "calmante", "piel"],
     featured: true,
     offer: false,
     active: true,
@@ -169,6 +181,11 @@ export const products = [
       "Vaselina profesional especialmente formulada para su uso durante el proceso del tatuaje.",
     description:
       "Enriquecida con manteca de karité (Butyrospermum Parkii Butter), zumo de hojas de aloe vera (Aloe Barbadensis Leaf Juice) y vitaminas E y A, hidrata, calma y protege la piel frente a la sequedad. No elimina el diseño transferido y ofrece una aplicación suave y cómoda. Su aroma neutro hace que el trabajo sea más agradable tanto para el artista como para el cliente.",
+    gallery: [
+      "images/productos/royal-jelly-vaseline.png",
+      "images/productos/biotatum-royal-jelly-aloe-vaseline-.jpg",
+      "images/productos/biotatum-royal-jelly-aloe-vaseline- (1).jpg",
+    ],
     tags: ["aftercare", "BioTaTum", "vaselina", "piel"],
     featured: false,
     offer: false,
@@ -290,7 +307,7 @@ export const products = [
   {
     id: "special-shading-solution-150ml",
     sku: "SAN-SPECIAL-SHADING-SOLUTION-150",
-    name: "Special Shading Solution",
+    name: "Special Shading Solution Aloe Tattoo",
     slug: "special-shading-solution-150ml",
     category: "cuidados-tatuaje",
     categoryLabel: "Cuidados tatuaje",
@@ -302,9 +319,11 @@ export const products = [
     alt: "Frasco de Special Shading Solution para trabajo de sombreado",
     shortDescription:
       "Solución para sombreado en formato 150 ml, uso profesional en estudio.",
-    description:
-      "Producto auxiliar para técnicas de shading. Formulado para uso profesional; consulta compatibilidad con tu equipo y protocolo de trabajo.",
-    tags: ["aftercare", "shading", "solución", "tatuaje", "aloetattoo"],
+    description:[
+      "Special Shading Solution de Aloe Tattoo es la solución de mezcla ideal para todos los colores y marcas de tinta para tatuaje.",
+      "Libre de conservantes artificiales y especialmente formulado para crear degradados en tintas negras y grises así como en color, el Special Shading Solution puede utilizarse para cualquier técnica o estilo de tatuaje."
+    ],
+    tags: ["aftercare", "shading", "aloetattoo", "tatuaje", "aloetattoo"],
     featured: false,
     offer: false,
     active: true,
@@ -312,7 +331,7 @@ export const products = [
   {
     id: "lofty-bloom-butter-balm-150ml",
     sku: "SAN-LOFTY-BLOOM-BUTTER-BALM-150",
-    name: "Lofty Bloom Butter Balm",
+    name: "Lofty Bloom Butter Balm Aloe Tattoo",
     slug: "lofty-bloom-butter-balm-150ml",
     category: "cuidados-tatuaje",
     categoryLabel: "Cuidados tatuaje",
@@ -323,10 +342,13 @@ export const products = [
     image: "images/productos/lofty1.png",
     alt: "Bálsamo tipo butter Lofty Bloom Butter Balm para cuidado de la piel",
     shortDescription:
-      "Bálsamo butter para hidratar y cuidar la piel en fase de aftercare.",
-    description:
-      "Fórmula tipo bálsamo pensada para aportar confort e hidratación a la piel tatuada durante la recuperación. Uso según indicaciones del fabricante y recomendación profesional.",
-    tags: ["aftercare", "bálsamo", "butter", "hidratar", "piel"],
+      "Bálsamo de Aloe Tattoo para hidratar y cuidar la piel en fase de aftercare.",
+    description:[
+      "Al realizar un tatuaje, es de suma importancia controlar los procesos inflamatorios y oxidativos que se producen en la piel con el fin de acelerar la curación y minimizar las cicatrices en la zona tatuada.",
+      "Para lograr esto LOFTY BLOOM Tattoo Butter Balm de Aloe Tattoo contiene únicamente ingredientes 100% naturales que combinan propiedades anti-inflamatorias y anti-oxidantes. Tocoferoles naturales (vitamina E natural)",
+      "Al utilizar LOFTY BLOOM durante la realización del tatuaje, en vez de la vaselina blanca, conseguirás reducir al máximo el sangrado y la inflamación del mismo."
+    ],
+    tags: ["aftercare", "bálsamo", "aloetattoo", "hidratar", "piel"],
     featured: true,
     offer: false,
     active: true,
@@ -338,7 +360,7 @@ export const products = [
   {
     id: "stencil-eraser-spray",
     sku: "SAN-STENCIL-ERASER-SPRAY-100",
-    name: "Stencil Eraser Spray",
+    name: "Stencil Eraser Spray  Aloe Tattoo",
     slug: "stencil-eraser-spray",
     category: "cuidados-tatuaje",
     categoryLabel: "Cuidados tatuaje",
@@ -349,9 +371,11 @@ export const products = [
     image: "images/productos/stencil-eraser.png",
     alt: "Spray borrador de stencil en envase para estudio",
     shortDescription:
-      "Spray para corregir o retirar stencil. Elige formato 100 ml o 250 ml.",
-    description:
-      "Spray de preparación para ajustar o eliminar transferencias de stencil cuando el trazo necesita corrección. Selecciona capacidad al pedir por WhatsApp.",
+      "Spray para corregir o retirar stencil de Aloe Tattoo",
+    description:[
+      "Tatto stencil eraser de Aloe Tattoo es un producto creado para borrar la plantilla de dibujo sobre la piel de forma cómoda y segura, incluso hasta una hora después del secado de la plantilla. ¡Ya se terminaron los problemas a la hora de borrar el transfer: eraser de Aloe Tattoo no deja la piel irritada una vez que ha eliminado el dibujo!",
+      "INSTRUCCIONES DE USO: Para obtener los mejores resultados utilice un disco desmaquillador de algodón o una compresa de gasa estéril. Frote la piel con movimientos circulares y en sentidos opuestos hasta que desaparezca el dibujo. Después limpie la piel con agua destilada, sin jabón."
+    ],
     tags: ["stencil", "spray", "corrección", "preparación", "transfer"],
     featured: false,
     offer: false,

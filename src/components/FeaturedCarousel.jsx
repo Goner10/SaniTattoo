@@ -39,6 +39,8 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
   const dragRef = useRef(null);
   const resumeTimerRef = useRef(null);
   const nudgeLockRef = useRef(false);
+  /** Evita que mouseenter sintético (iOS) deje el autoplay pausado tras un toque. */
+  const suppressHoverPauseRef = useRef(false);
 
   const [loopCopies, setLoopCopies] = useState(MIN_LOOP_COPIES);
   const [cardWidthPx, setCardWidthPx] = useState(null);
@@ -407,12 +409,48 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
 
   useEffect(() => () => clearResumeTimer(), [clearResumeTimer]);
 
+  useEffect(() => {
+    if (reduceMotion) return undefined;
+    const resumeIfIdle = () => {
+      if (document.visibilityState !== "visible" || dragRef.current?.active) return;
+      clearResumeTimer();
+      pauseRef.current = false;
+    };
+    document.addEventListener("visibilitychange", resumeIfIdle);
+    window.addEventListener("pageshow", resumeIfIdle);
+    return () => {
+      document.removeEventListener("visibilitychange", resumeIfIdle);
+      window.removeEventListener("pageshow", resumeIfIdle);
+    };
+  }, [reduceMotion, clearResumeTimer]);
+
+  useEffect(() => {
+    if (reduceMotion) return undefined;
+    pauseRef.current = false;
+    const id = window.setTimeout(() => {
+      if (!dragRef.current?.active) pauseRef.current = false;
+    }, 80);
+    return () => window.clearTimeout(id);
+  }, [reduceMotion, productIdsKey]);
+
+  const finishTouchInteraction = useCallback(() => {
+    normalizeScroll();
+    scheduleResume();
+    window.setTimeout(() => {
+      suppressHoverPauseRef.current = false;
+    }, 450);
+  }, [normalizeScroll, scheduleResume]);
+
+  const onTouchStart = useCallback(() => {
+    suppressHoverPauseRef.current = true;
+    pause();
+  }, [pause]);
+
   const cardSlotStyle = cardWidthPx ? { width: cardWidthPx } : undefined;
 
   const onPointerDown = (e) => {
     if (e.pointerType === "mouse" && e.button !== 0) return;
     if (e.pointerType === "touch") {
-      pause();
       return;
     }
     const target = e.target;
@@ -460,17 +498,15 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
     scheduleResume();
   };
 
+  const onPointerUp = (e) => {
+    endPointerDrag(e);
+    if (e.pointerType === "touch") {
+      finishTouchInteraction();
+    }
+  };
+
   const onScroll = () => {
     if (!useTransformRef.current) normalizeScroll();
-  };
-
-  const onTouchStart = () => {
-    pause();
-  };
-
-  const onTouchEnd = () => {
-    normalizeScroll();
-    scheduleResume();
   };
 
   const onWheel = (e) => {
@@ -532,14 +568,19 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
         className="featured-scroller cursor-grab select-none overflow-x-auto overscroll-x-contain px-4 active:cursor-grabbing sm:px-6"
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
-        onPointerUp={endPointerDrag}
-        onPointerCancel={endPointerDrag}
+        onPointerUp={onPointerUp}
+        onPointerCancel={onPointerUp}
         onScroll={onScroll}
         onTouchStart={onTouchStart}
-        onTouchEnd={onTouchEnd}
+        onTouchEnd={finishTouchInteraction}
+        onTouchCancel={finishTouchInteraction}
         onWheel={onWheel}
-        onMouseEnter={pause}
+        onMouseEnter={() => {
+          if (suppressHoverPauseRef.current) return;
+          pause();
+        }}
         onMouseLeave={() => {
+          if (suppressHoverPauseRef.current) return;
           if (!dragRef.current?.active) scheduleResume();
         }}
       >

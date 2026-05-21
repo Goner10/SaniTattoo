@@ -10,7 +10,7 @@ const AUTOPLAY_MS = 5500;
 const SLIDES = [
   {
     id: "sanitattoo",
-    image: "images/placeholders/hero3.jpeg",
+    image: "images/placeholders/fondo4.png",
     imageAlt:
       "Cabecera Sanitattoo: higiene y consumibles para estudio de tatuaje",
     imageClass:
@@ -33,7 +33,7 @@ const SLIDES = [
     eyebrow: "ALOE TATTOO",
     title: "Aftercare y preparación profesional",
     description:
-      "Productos especializados para limpieza, preparación y cuidado del tatuaje en estudio.",
+      "",
     ctaTo: "/catalogo?brand=aloetattoo",
     ctaLabel: "Ver productos Aloe Tattoo",
     dotLabel: "Ir al slide Aloe Tattoo",
@@ -47,7 +47,7 @@ const SLIDES = [
     eyebrow: "BIOTATUM PROFESSIONAL",
     title: "Cuidado profesional para piel tatuada",
     description:
-      "Línea profesional orientada al cuidado, recuperación y mantenimiento del tatuaje.",
+      "",
     ctaTo: "/catalogo?brand=biotatum",
     ctaLabel: "Ver productos BioTaTum",
     dotLabel: "Ir al slide BioTaTum",
@@ -63,7 +63,7 @@ const slidePanelHeightClass =
 const imageFillClass = "absolute inset-0 h-full w-full";
 
 const contentShellClass =
-  "relative z-10 mx-auto flex h-full min-h-[inherit] max-w-6xl min-w-0 items-center px-4 py-14 pb-28 sm:px-6 sm:py-14 sm:pb-14 lg:py-8 lg:pb-8 xl:py-8 xl:pb-8 2xl:py-16 2xl:pb-16";
+  "relative z-10 mx-auto flex h-full min-h-[inherit] max-w-6xl min-w-0 items-center px-4 py-14 pb-28 sm:px-6 sm:py-14 sm:pb-14 lg:py-8 lg:pb-8 xl:py-8 xl:pb-8 2xl:mx-0 2xl:mr-auto 2xl:max-w-[1500px] 2xl:ml-[max(2rem,calc((100vw-1500px)/2+2rem))] 2xl:px-8 2xl:py-16 2xl:pb-16";
 
 function slideContentCardClass(variant) {
   return [
