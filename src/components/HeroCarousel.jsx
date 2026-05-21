@@ -10,7 +10,7 @@ const AUTOPLAY_MS = 5500;
 const SLIDES = [
   {
     id: "sanitattoo",
-    image: "images/placeholders/fondo4.png",
+    image: "images/placeholders/hero-definitivo.png",
     imageAlt:
       "Cabecera Sanitattoo: higiene y consumibles para estudio de tatuaje",
     imageClass:
@@ -23,6 +23,7 @@ const SLIDES = [
     ctaTo: "/catalogo",
     ctaLabel: "Ver catálogo",
     dotLabel: "Ir al slide principal SANITATTOO",
+    fullContentOnDesktop: true,
   },
   {
     id: "aloetattoo",
@@ -37,10 +38,12 @@ const SLIDES = [
     ctaTo: "/catalogo?brand=aloetattoo",
     ctaLabel: "Ver productos Aloe Tattoo",
     dotLabel: "Ir al slide Aloe Tattoo",
+    imageOnlyOnDesktop: true,
+    imageLinkAriaLabel: "Ver productos Aloe Tattoo",
   },
   {
     id: "biotatum",
-    image: "images/brands/biotatum-banner.png",
+    image: "images/brands/hero-bio.png",
     imageAlt: "Banner BioTaTum Professional: cuidado para piel tatuada",
     imageClass: "object-cover object-center 2xl:object-[center_35%]",
     variant: "brand",
@@ -51,6 +54,8 @@ const SLIDES = [
     ctaTo: "/catalogo?brand=biotatum",
     ctaLabel: "Ver productos BioTaTum",
     dotLabel: "Ir al slide BioTaTum",
+    imageOnlyOnDesktop: true,
+    imageLinkAriaLabel: "Ver productos BioTaTum",
   },
 ];
 
@@ -76,6 +81,7 @@ function slideContentCardClass(variant) {
 
 function HeroSlidePanel({ slide, eagerImage }) {
   const isBrand = slide.variant === "brand";
+  const imageOnlyOnDesktop = Boolean(slide.imageOnlyOnDesktop);
 
   return (
     <div className={slidePanelHeightClass}>
@@ -89,7 +95,18 @@ function HeroSlidePanel({ slide, eagerImage }) {
         decoding="async"
         draggable={false}
       />
-      <div className={contentShellClass}>
+      {imageOnlyOnDesktop ? (
+        <Link
+          to={slide.ctaTo}
+          className="absolute inset-0 z-[1] hidden md:block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
+          aria-label={slide.imageLinkAriaLabel ?? slide.ctaLabel}
+        />
+      ) : null}
+      <div
+        className={[contentShellClass, imageOnlyOnDesktop ? "md:hidden" : ""]
+          .filter(Boolean)
+          .join(" ")}
+      >
         <div className={slideContentCardClass(slide.variant)}>
           <span
             className={[
@@ -111,14 +128,16 @@ function HeroSlidePanel({ slide, eagerImage }) {
             ].join(" ")}
             aria-hidden
           />
-          <p
-            className={[
-              "mt-4 max-w-md text-sm font-normal leading-relaxed sm:mt-5 sm:text-base",
-              isBrand ? "text-white/90" : "text-brand-muted",
-            ].join(" ")}
-          >
-            {slide.description}
-          </p>
+          {slide.description ? (
+            <p
+              className={[
+                "mt-4 max-w-md text-sm font-normal leading-relaxed sm:mt-5 sm:text-base",
+                isBrand ? "text-white/90" : "text-brand-muted",
+              ].join(" ")}
+            >
+              {slide.description}
+            </p>
+          ) : null}
           <div className="mt-8 max-sm:mb-1 sm:mt-10">
             <Link to={slide.ctaTo} className={catalogCtaPrimary}>
               {slide.ctaLabel}

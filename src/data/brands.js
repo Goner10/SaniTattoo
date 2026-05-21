@@ -25,6 +25,13 @@ export const brands = [
     description: "Consumibles profesionales para estudios de tatuaje.",
   },
   {
+    id: "effigerm",
+    name: "Effigerm",
+    logo: "images/brands/effigerm-destacado.png",
+    banner: "images/brands/effigerm-destacado.png",
+    description: "Limpieza y descontaminación para prevención de infecciones.",
+  },
+  {
     id: "sanitattoo",
     name: "SANITATTOO",
     logo: "images/logos/logo_nuevo.png",

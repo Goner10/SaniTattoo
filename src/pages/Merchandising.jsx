@@ -46,7 +46,7 @@ export default function Merchandising() {
           </p>
         </header>
 
-        <div className="mt-8 min-w-0 sm:mt-10 lg:grid lg:grid-cols-[minmax(280px,0.9fr)_minmax(0,1fr)] lg:items-start lg:gap-6 xl:grid-cols-[minmax(320px,380px)_minmax(0,1fr)] xl:gap-8 2xl:grid-cols-[420px_minmax(0,1fr)] 2xl:gap-10">
+        <div className="mt-8 min-w-0 sm:mt-10 lg:grid lg:grid-cols-[minmax(220px,0.75fr)_minmax(0,1.25fr)] lg:items-start lg:gap-6 xl:grid-cols-[minmax(320px,380px)_minmax(0,1fr)] xl:gap-8 2xl:grid-cols-[420px_minmax(0,1fr)] 2xl:gap-10">
           {/* Móvil: banner ancho + texto debajo en caja blanca */}
           <section className="min-w-0 lg:hidden" aria-labelledby="merch-banner-heading">
             <div className="overflow-hidden rounded-2xl bg-brand-black shadow-[0_10px_40px_rgba(5,5,5,0.08)] ring-1 ring-brand-black/10">

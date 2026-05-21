@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { scrollToTop } from "./ScrollToTop.jsx";
 import WhatsAppButton from "./WhatsAppButton.jsx";
 import { publicAssetUrl } from "../utils/publicAsset.js";
+import { Truck } from "lucide-react";
 
 const SCROLL_TOP_THRESHOLD_PX = 10;
 
@@ -54,16 +55,15 @@ export default function Header() {
         <p
   className={[
     headerContainerClass,
-    "py-1 text-center font-header text-[clamp(0.625rem,2.6vw,0.8125rem)] font-bold leading-snug tracking-[0.06em] text-white sm:py-1.5 sm:text-xs",
+    "flex items-center justify-center gap-1 py-1 text-center font-header text-[clamp(0.625rem,2.6vw,0.8125rem)] font-bold leading-snug tracking-[0.06em] text-white sm:py-1.5 sm:text-xs",
   ].join(" ")}
 >
-  Envío gratuito a partir de 100€
-  <span
-    className="ml-1 inline-block align-[-0.12em] text-base sm:text-lg"
+  <span>Envío gratuito a partir de 100€</span>
+  <Truck
+    className="h-4 w-4 sm:h-5 sm:w-5"
+    strokeWidth={2.2}
     aria-hidden="true"
-  >
-    🚚
-  </span>
+  />
 </p>
       </div>
       <div

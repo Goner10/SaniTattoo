@@ -651,7 +651,7 @@ export const products = [
     ],
     gallery: [
       "images/productos/vendas.png",
-      "images/productos/venda-negra.png",
+      "images/productos/venda-grip.png",
     ],
   },
   {
@@ -816,7 +816,7 @@ export const products = [
     slug: "desinfectante-piel-liquido-150ml",
     category: "esterilizacion",
     categoryLabel: "Esterilización",
-    brand: "generico",
+    brand: "effigerm",
     price: 9.5,
     currency: "EUR",
     unit: "150ml",
@@ -840,15 +840,15 @@ export const products = [
   {
     id: "desinfectante-piel-hydrogel-150ml",
     sku: "SAN-DESINFECTANTE-PIEL-HYDROGEL-150ML",
-    name: "Desinfectante de piel Hydrogel",
+    name: "Desinfectante de piel Hydrogel Effigerm",
     slug: "desinfectante-piel-hydrogel-150ml",
     category: "esterilizacion",
     categoryLabel: "Esterilización",
-    brand: "generico",
+    brand: "effigerm",
     price: 10,
     currency: "EUR",
     unit: "150ml",
-    image: "images/productos/effigerm-hydrogel.png",
+    image: "images/productos/hydrogel.png",
     alt: "Frasco de desinfectante de piel tipo hydrogel 150 ml",
     shortDescription:
       "Desinfectante de piel en gel acuoso (hydrogel), 150 ml, cómodo de extender.",
@@ -926,7 +926,7 @@ export const products = [
     shortDescription:
       "Botella bóxer de 500 ml, formato habitual para líquidos de trabajo en estudio.",
     description:
-      "Botella con rosca y boquilla tipo bóxer para dispensar líquidos de forma controlada. Uso profesional en tatuaje; consulta compatibilidad de contenido.",
+      "Botella con rosca y boquilla tipo bóxer para dispensar líquidos de forma controlada. Uso profesional en tatuaje. Consulta compatibilidad de contenido.",
     tags: ["material sanitario", "botella", "bóxer", "pulverizar", "estudio"],
     featured: false,
     offer: false,
