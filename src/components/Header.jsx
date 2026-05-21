@@ -52,13 +52,19 @@ export default function Header() {
         aria-hidden={!showPromoBar}
       >
         <p
-          className={[
-            headerContainerClass,
-            "py-1 text-center font-header text-[clamp(0.625rem,2.6vw,0.8125rem)] font-bold leading-snug tracking-[0.06em] text-white sm:py-1.5 sm:text-xs",
-          ].join(" ")}
-        >
-          Envío gratuito a partir de 100€ 🚚
-        </p>
+  className={[
+    headerContainerClass,
+    "py-1 text-center font-header text-[clamp(0.625rem,2.6vw,0.8125rem)] font-bold leading-snug tracking-[0.06em] text-white sm:py-1.5 sm:text-xs",
+  ].join(" ")}
+>
+  Envío gratuito a partir de 100€
+  <span
+    className="ml-1 inline-block align-[-0.12em] text-base sm:text-lg"
+    aria-hidden="true"
+  >
+    🚚
+  </span>
+</p>
       </div>
       <div
         className={[

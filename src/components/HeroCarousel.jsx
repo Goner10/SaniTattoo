@@ -10,12 +10,12 @@ const AUTOPLAY_MS = 5500;
 const SLIDES = [
   {
     id: "sanitattoo",
-    image: "images/placeholders/hero-sanitattoo-desktop.png",
+    image: "images/placeholders/hero3.jpeg",
     imageAlt:
       "Cabecera Sanitattoo: higiene y consumibles para estudio de tatuaje",
     imageClass:
       "object-cover object-right xl:object-[right_45%] 2xl:object-[right_42%]",
-    variant: "light",
+    variant: "brand",
     eyebrow: "Sanitattoo",
     title: "Material profesional para estudios de tatuaje",
     description:
@@ -65,12 +65,6 @@ const imageFillClass = "absolute inset-0 h-full w-full";
 const contentShellClass =
   "relative z-10 mx-auto flex h-full min-h-[inherit] max-w-6xl min-w-0 items-center px-4 py-14 pb-28 sm:px-6 sm:py-14 sm:pb-14 lg:py-8 lg:pb-8 xl:py-8 xl:pb-8 2xl:py-16 2xl:pb-16";
 
-function slideOverlayClass(variant) {
-  return variant === "brand"
-    ? "pointer-events-none absolute inset-0 z-[1] bg-gradient-to-r from-brand-black/88 from-0% via-brand-black/55 via-45% to-brand-black/25 to-100% max-md:via-brand-black/70 lg:from-brand-black/80 lg:via-brand-black/45 lg:to-brand-black/15"
-    : "pointer-events-none absolute inset-0 z-[1] bg-gradient-to-r from-brand-white/95 from-0% via-brand-white/72 via-42% to-white/10 to-88% max-md:via-brand-white/78 lg:from-brand-white/55 lg:via-brand-white/28 lg:to-transparent";
-}
-
 function slideContentCardClass(variant) {
   return [
     "max-w-xl rounded-2xl border p-5 shadow-sm backdrop-blur-[6px] sm:max-w-lg sm:p-0 md:max-w-xl",
@@ -95,7 +89,6 @@ function HeroSlidePanel({ slide, eagerImage }) {
         decoding="async"
         draggable={false}
       />
-      <div className={slideOverlayClass(slide.variant)} aria-hidden />
       <div className={contentShellClass}>
         <div className={slideContentCardClass(slide.variant)}>
           <span
@@ -108,18 +101,13 @@ function HeroSlidePanel({ slide, eagerImage }) {
           >
             {slide.eyebrow}
           </span>
-          <h2
-            className={[
-              "font-heading mt-4 text-3xl font-extrabold leading-[1.08] tracking-tight sm:mt-5 sm:text-4xl lg:text-[2.75rem] lg:leading-[1.06]",
-              isBrand ? "text-brand-white" : "text-brand-black",
-            ].join(" ")}
-          >
+          <h2 className="font-heading mt-4 text-3xl font-extrabold leading-[1.08] tracking-tight text-brand-white sm:mt-5 sm:text-4xl lg:text-[2.75rem] lg:leading-[1.06]">
             {slide.title}
           </h2>
           <span
             className={[
               "mt-4 block h-1 w-14 rounded-full sm:mt-5",
-              isBrand ? "bg-brand-white" : "bg-brand-red",
+              isBrand ? "bg-brand-red" : "bg-brand-red",
             ].join(" ")}
             aria-hidden
           />

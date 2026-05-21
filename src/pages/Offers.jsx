@@ -13,7 +13,7 @@ export default function Offers() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-brand-bg via-brand-bg to-brand-white">
-      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-14">
+      <div className="mx-auto max-w-6xl min-w-0 px-4 py-12 sm:px-6 sm:py-14 2xl:max-w-[1500px] 2xl:px-8">
         <header className="max-w-3xl">
           <p className="font-heading text-xs font-bold uppercase tracking-[0.22em] text-brand-red">
             Promociones
