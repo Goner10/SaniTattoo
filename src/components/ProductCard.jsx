@@ -37,12 +37,12 @@ export default function ProductCard({
         ) : null}
         <div className="flex h-full min-h-0 w-full items-center justify-center p-3 sm:p-4 md:p-5">
           <img
-            src={publicAssetUrl(product.image)}
+            src={publicAssetUrl(product.imageSquare ?? product.image)}
             alt={product.alt}
             loading="lazy"
             draggable={isCarousel ? false : undefined}
             onDragStart={isCarousel ? (e) => e.preventDefault() : undefined}
-            className={`max-h-full w-full max-w-full object-contain ${isCarousel ? "select-none" : ""}`}
+            className={`max-h-full w-full max-w-full object-contain object-center ${isCarousel ? "select-none" : ""}`}
           />
         </div>
       </div>

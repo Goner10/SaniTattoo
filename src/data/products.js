@@ -13,6 +13,7 @@
  *   currency: string
  *   unit: string
  *   image: string
+ *   imageSquare?: string
  *   alt: string
  *   shortDescription: string
  *   description: string | string[]

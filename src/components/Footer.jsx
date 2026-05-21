@@ -34,7 +34,7 @@ export default function Footer() {
               <img
                 src={publicAssetUrl("images/logos/logo-nuevo-negro.PNG")}
                 alt="SANITATTOO"
-                className="h-11 w-auto opacity-95 sm:h-32"
+                className="h-20 w-auto opacity-95 sm:h-32"
                 width={180}
                 height={48}
               />

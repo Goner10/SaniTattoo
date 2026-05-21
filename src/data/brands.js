@@ -1,4 +1,13 @@
-/** @typedef {{ id: string, name: string, logo: string | null, banner: string | null, description: string }} Brand */
+/**
+ * @typedef {{ mobile?: string, tablet?: string, desktop?: string }} BrandBannerSources
+ * @typedef {{
+ *   id: string
+ *   name: string
+ *   logo: string | null
+ *   banner: string | null
+ *   banners?: BrandBannerSources | null
+ *   description: string
+ * }} Brand */
 
 /** @type {Brand[]} */
 export const brands = [

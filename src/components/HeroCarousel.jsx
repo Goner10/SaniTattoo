@@ -3,17 +3,56 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { catalogCtaPrimary } from "../utils/catalogCta.js";
-import { publicAssetUrl } from "../utils/publicAsset.js";
+import {
+  publicAssetUrl,
+  resolveResponsiveSources,
+  responsiveImageVisibility,
+} from "../utils/publicAsset.js";
 
 const AUTOPLAY_MS = 5500;
 
+const imageFillClass = "absolute inset-0 h-full w-full";
+
+/**
+ * @typedef {{
+ *   id: string
+ *   image: string
+ *   images?: import("../utils/publicAsset.js").ResponsiveImageSources
+ *   imageAlt: string
+ *   imageClass?: string
+ *   imageClassMobile?: string
+ *   imageClassTablet?: string
+ *   imageClassDesktop?: string
+ *   variant: "brand" | "light"
+ *   eyebrow: string
+ *   title: string
+ *   description: string
+ *   ctaTo: string
+ *   ctaLabel: string
+ *   dotLabel: string
+ *   fullContentOnDesktop?: boolean
+ *   imageOnlyOnDesktop?: boolean
+ *   imageLinkAriaLabel?: string
+ * }} HeroSlide
+ */
+
+/** @type {HeroSlide[]} */
 const SLIDES = [
   {
     id: "sanitattoo",
     image: "images/placeholders/hero-definitivo.png",
+    images: {
+      mobile: "images/placeholders/hero-definitivo.png",
+      tablet: "images/placeholders/hero-definitivo.png",
+      desktop: "images/placeholders/hero-definitivo.png",
+    },
     imageAlt:
       "Cabecera Sanitattoo: higiene y consumibles para estudio de tatuaje",
     imageClass:
+      "object-cover object-right xl:object-[right_45%] 2xl:object-[right_42%]",
+    imageClassMobile: "object-cover object-center sm:object-right",
+    imageClassTablet: "object-cover object-right",
+    imageClassDesktop:
       "object-cover object-right xl:object-[right_45%] 2xl:object-[right_42%]",
     variant: "brand",
     eyebrow: "Sanitattoo",
@@ -28,13 +67,20 @@ const SLIDES = [
   {
     id: "aloetattoo",
     image: "images/brands/aloe_tattoo.JPG",
+    images: {
+      mobile: "images/brands/aloe_tattoo.JPG",
+      tablet: "images/brands/aloe_tattoo.JPG",
+      desktop: "images/brands/aloe_tattoo.JPG",
+    },
     imageAlt: "Banner Aloe Tattoo: aftercare y preparación profesional",
     imageClass: "object-cover object-center",
+    imageClassMobile: "object-cover object-[center_40%]",
+    imageClassTablet: "object-cover object-center",
+    imageClassDesktop: "object-cover object-[center_32%]",
     variant: "brand",
     eyebrow: "ALOE TATTOO",
     title: "Aftercare y preparación profesional",
-    description:
-      "",
+    description: "",
     ctaTo: "/catalogo?brand=aloetattoo",
     ctaLabel: "Ver productos Aloe Tattoo",
     dotLabel: "Ir al slide Aloe Tattoo",
@@ -44,13 +90,20 @@ const SLIDES = [
   {
     id: "biotatum",
     image: "images/brands/hero-bio.png",
+    images: {
+      mobile: "images/brands/hero-bio.png",
+      tablet: "images/brands/hero-bio.png",
+      desktop: "images/brands/hero-bio.png",
+    },
     imageAlt: "Banner BioTaTum Professional: cuidado para piel tatuada",
     imageClass: "object-cover object-center 2xl:object-[center_35%]",
+    imageClassMobile: "object-cover object-[center_42%]",
+    imageClassTablet: "object-cover object-center",
+    imageClassDesktop: "object-cover object-center 2xl:object-[center_35%]",
     variant: "brand",
     eyebrow: "BIOTATUM PROFESSIONAL",
     title: "Cuidado profesional para piel tatuada",
-    description:
-      "",
+    description: "",
     ctaTo: "/catalogo?brand=biotatum",
     ctaLabel: "Ver productos BioTaTum",
     dotLabel: "Ir al slide BioTaTum",
@@ -65,8 +118,6 @@ const sectionHeightClass =
 const slidePanelHeightClass =
   "relative h-full min-h-[500px] w-full shrink-0 basis-full sm:min-h-[460px] lg:min-h-[420px] lg:max-h-[min(560px,calc(100vh-120px))] xl:min-h-[440px] xl:max-h-[min(580px,calc(100vh-112px))] 2xl:max-h-none 2xl:min-h-[700px]";
 
-const imageFillClass = "absolute inset-0 h-full w-full";
-
 const contentShellClass =
   "relative z-10 mx-auto flex h-full min-h-[inherit] max-w-6xl min-w-0 items-center px-4 py-14 pb-28 sm:px-6 sm:py-14 sm:pb-14 lg:py-8 lg:pb-8 xl:py-8 xl:pb-8 2xl:mx-0 2xl:mr-auto 2xl:max-w-[1500px] 2xl:ml-[max(2rem,calc((100vw-1500px)/2+2rem))] 2xl:px-8 2xl:py-16 2xl:pb-16";
 
@@ -79,22 +130,74 @@ function slideContentCardClass(variant) {
   ].join(" ");
 }
 
+/**
+ * @param {{ slide: HeroSlide, eagerImage?: boolean }} props
+ */
+function HeroSlideImage({ slide, eagerImage }) {
+  const sources = resolveResponsiveSources(slide.images, slide.image);
+  const useResponsive = Boolean(slide.images);
+  const sharedImgProps = {
+    alt: slide.imageAlt,
+    width: 1920,
+    height: 1080,
+    loading: eagerImage ? "eager" : "lazy",
+    decoding: "async",
+    draggable: false,
+  };
+
+  if (!useResponsive) {
+    return (
+      <img
+        {...sharedImgProps}
+        src={publicAssetUrl(slide.image)}
+        className={[imageFillClass, slide.imageClass ?? ""].join(" ")}
+      />
+    );
+  }
+
+  return (
+    <>
+      <img
+        {...sharedImgProps}
+        src={publicAssetUrl(sources.mobile)}
+        className={[
+          imageFillClass,
+          slide.imageClassMobile ?? slide.imageClass ?? "",
+          responsiveImageVisibility.mobile,
+        ].join(" ")}
+      />
+      <img
+        {...sharedImgProps}
+        src={publicAssetUrl(sources.tablet)}
+        className={[
+          imageFillClass,
+          slide.imageClassTablet ?? slide.imageClass ?? "",
+          responsiveImageVisibility.tablet,
+        ].join(" ")}
+      />
+      <img
+        {...sharedImgProps}
+        src={publicAssetUrl(sources.desktop)}
+        className={[
+          imageFillClass,
+          slide.imageClassDesktop ?? slide.imageClass ?? "",
+          responsiveImageVisibility.desktop,
+        ].join(" ")}
+      />
+    </>
+  );
+}
+
+/**
+ * @param {{ slide: HeroSlide, eagerImage?: boolean }} props
+ */
 function HeroSlidePanel({ slide, eagerImage }) {
   const isBrand = slide.variant === "brand";
   const imageOnlyOnDesktop = Boolean(slide.imageOnlyOnDesktop);
 
   return (
     <div className={slidePanelHeightClass}>
-      <img
-        src={publicAssetUrl(slide.image)}
-        alt={slide.imageAlt}
-        className={[imageFillClass, slide.imageClass].join(" ")}
-        width={1920}
-        height={1080}
-        loading={eagerImage ? "eager" : "lazy"}
-        decoding="async"
-        draggable={false}
-      />
+      <HeroSlideImage slide={slide} eagerImage={eagerImage} />
       {imageOnlyOnDesktop ? (
         <Link
           to={slide.ctaTo}

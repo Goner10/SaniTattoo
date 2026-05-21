@@ -2,9 +2,86 @@ import { useState } from "react";
 import ProductGrid from "../components/ProductGrid.jsx";
 import ProductModal from "../components/ProductModal.jsx";
 import { getMerchandisingProducts } from "../data/products.js";
-import { publicAssetUrl } from "../utils/publicAsset.js";
+import {
+  publicAssetUrl,
+  resolveResponsiveSources,
+  responsiveImageVisibility,
+} from "../utils/publicAsset.js";
 
-const MERCH_BANNER_IMAGE = "images/merchandising/camisetas-perchas.jpeg";
+/** @type {{
+ *   alt: string
+ *   image: string
+ *   images?: import("../utils/publicAsset.js").ResponsiveImageSources
+ *   objectClass?: { mobile?: string, tablet?: string, desktop?: string }
+ * }} */
+const MERCH_BANNER = {
+  alt: "Camisetas oficiales SANITATTOO en perchas: modelos negro y blanco",
+  image: "images/merchandising/camisetas-perchas.jpeg",
+  images: {
+    mobile: "images/merchandising/camisetas-perchas.jpeg",
+    tablet: "images/merchandising/camisetas-perchas.jpeg",
+    desktop: "images/merchandising/camisetas-perchas.jpeg",
+  },
+  objectClass: {
+    mobile: "object-[center_42%] sm:object-[center_45%]",
+    tablet: "object-[center_44%]",
+    desktop: "object-[center_38%]",
+  },
+};
+
+const merchImageFill = "absolute inset-0 h-full w-full object-cover";
+
+/**
+ * @param {{ layout: "stacked" | "sidebar", loading?: "eager" | "lazy" }} props
+ */
+function MerchBannerImage({ layout, loading = "lazy" }) {
+  const sources = resolveResponsiveSources(MERCH_BANNER.images, MERCH_BANNER.image);
+  const objectMobile =
+    MERCH_BANNER.objectClass?.mobile ?? "object-center";
+  const objectTablet =
+    MERCH_BANNER.objectClass?.tablet ?? objectMobile;
+  const objectDesktop =
+    MERCH_BANNER.objectClass?.desktop ?? objectTablet;
+
+  const shared = {
+    alt: MERCH_BANNER.alt,
+    loading,
+    decoding: "async",
+  };
+
+  if (layout === "sidebar") {
+    return (
+      <img
+        {...shared}
+        src={publicAssetUrl(sources.desktop)}
+        className={[merchImageFill, objectDesktop].join(" ")}
+      />
+    );
+  }
+
+  return (
+    <>
+      <img
+        {...shared}
+        src={publicAssetUrl(sources.mobile)}
+        className={[
+          merchImageFill,
+          objectMobile,
+          responsiveImageVisibility.mobile,
+        ].join(" ")}
+      />
+      <img
+        {...shared}
+        src={publicAssetUrl(sources.tablet)}
+        className={[
+          merchImageFill,
+          objectTablet,
+          responsiveImageVisibility.tablet,
+        ].join(" ")}
+      />
+    </>
+  );
+}
 
 function MerchPhotoOverlay() {
   return (
@@ -47,17 +124,10 @@ export default function Merchandising() {
         </header>
 
         <div className="mt-8 min-w-0 sm:mt-10 lg:grid lg:grid-cols-[minmax(220px,0.75fr)_minmax(0,1.25fr)] lg:items-start lg:gap-6 xl:grid-cols-[minmax(320px,380px)_minmax(0,1fr)] xl:gap-8 2xl:grid-cols-[420px_minmax(0,1fr)] 2xl:gap-10">
-          {/* Móvil: banner ancho + texto debajo en caja blanca */}
           <section className="min-w-0 lg:hidden" aria-labelledby="merch-banner-heading">
             <div className="overflow-hidden rounded-2xl bg-brand-black shadow-[0_10px_40px_rgba(5,5,5,0.08)] ring-1 ring-brand-black/10">
               <div className="relative h-[260px] sm:h-[320px] md:h-[400px]">
-                <img
-                  src={publicAssetUrl(MERCH_BANNER_IMAGE)}
-                  alt="Camisetas oficiales SANITATTOO en perchas: modelos negro y blanco"
-                  className="absolute inset-0 h-full w-full object-cover object-[center_42%] sm:object-[center_45%]"
-                  loading="eager"
-                  decoding="async"
-                />
+                <MerchBannerImage layout="stacked" loading="eager" />
                 <div
                   className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-black/55 via-brand-black/15 to-brand-black/10 md:bg-gradient-to-r md:from-brand-black/65 md:via-brand-black/20 md:to-transparent"
                   aria-hidden
@@ -91,16 +161,9 @@ export default function Merchandising() {
             </div>
           </section>
 
-          {/* lg+: imagen vertical izquierda */}
           <aside className="hidden min-w-0 lg:block lg:sticky lg:top-24">
             <div className="relative h-[520px] overflow-hidden rounded-2xl bg-brand-black shadow-[0_12px_40px_rgba(5,5,5,0.1)] ring-1 ring-brand-black/10 xl:h-[600px] 2xl:h-[680px]">
-              <img
-                src={publicAssetUrl(MERCH_BANNER_IMAGE)}
-                alt="Camisetas oficiales SANITATTOO en perchas: modelos negro y blanco"
-                className="absolute inset-0 h-full w-full object-cover object-[center_38%]"
-                loading="lazy"
-                decoding="async"
-              />
+              <MerchBannerImage layout="sidebar" />
               <div
                 className="pointer-events-none absolute inset-0 bg-gradient-to-b from-brand-black/70 via-brand-black/25 to-brand-black/10"
                 aria-hidden
