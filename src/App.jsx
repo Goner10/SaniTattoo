@@ -27,6 +27,7 @@ function Layout() {
 export default function App() {
   return (
     <BrowserRouter basename="/SaniTattoo">
+      <ScrollToTop />
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<Home />} />

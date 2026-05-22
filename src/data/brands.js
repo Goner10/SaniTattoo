@@ -37,7 +37,7 @@ export const brands = [
     id: "effigerm",
     name: "Effigerm",
     logo: "images/brands/effigerm-destacado.png",
-    banner: "images/brands/effigerm-destacado.png",
+    banner: "images/brands/effigerm.png",
     description: "Limpieza y descontaminación para prevención de infecciones.",
   },
   {
