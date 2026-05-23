@@ -40,8 +40,7 @@ export default function Footer() {
               />
             </Link>
             <p className="font-heading mt-5 max-w-sm text-sm leading-relaxed text-white/75 sm:text-[0.9375rem]">
-              Material sanitario y consumibles para estudios de tatuaje. Calidad
-              profesional y pedidos ágiles.
+            Material sanitario, consumibles premium y aftercare profesional <br />para tattoo & piercing.
             </p>
           </div>
 

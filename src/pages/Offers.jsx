@@ -19,15 +19,14 @@ export default function Offers() {
             Promociones
           </p>
           <h1 className="font-heading mt-3 text-3xl font-bold tracking-tight text-brand-black sm:text-4xl lg:text-[2.5rem] lg:leading-tight">
-            Ofertas
+            Ofertas exclusivas
           </h1>
           <span
             className="mt-4 block h-1 w-14 rounded-full bg-brand-red"
             aria-hidden
           />
           <p className="mt-4 text-sm font-normal leading-relaxed text-brand-muted sm:text-base">
-            Promociones y productos en oferta. Si no hay líneas activas, podemos
-            avisarte por WhatsApp.
+            Accede a promociones especiales, packs y descuentos seleccionados para estudios y artistas.
           </p>
         </header>
 
@@ -37,11 +36,10 @@ export default function Offers() {
           ) : (
             <div className="rounded-2xl border border-brand-border bg-brand-white px-6 py-14 text-center shadow-[0_8px_32px_rgba(5,5,5,0.05)] sm:px-10 sm:py-16">
               <p className="font-heading text-xl font-bold text-brand-black sm:text-2xl">
-                Ahora mismo no hay ofertas publicadas
+                Actualmente no hay promociones activas
               </p>
               <p className="mx-auto mt-4 max-w-md text-sm font-normal leading-relaxed text-brand-muted sm:text-base">
-                Escríbenos y te informamos de promociones vigentes o pedidos
-                agrupados para tu estudio.
+                Contacta con nosotros para rrecibir información sobre próximas ofertas y condiciones especiales para estudios.
               </p>
               <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:flex-wrap">
                 <WhatsAppButton href={generalWhatsAppUrl("Me interesan ofertas.")}>

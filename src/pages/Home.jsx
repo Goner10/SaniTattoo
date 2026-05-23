@@ -53,10 +53,10 @@ export default function Home() {
       >
         <div className="mx-auto max-w-6xl min-w-0 px-4 py-12 sm:px-6 sm:py-16">
           <SectionHeader
-            eyebrow="Más buscados"
+            eyebrow="Favoritos del estudio"
             accent
             title="Productos destacados"
-            subtitle="Referencias habituales en estudios de tatuaje por su utilidad, rendimiento y presencia en el día a día de cada sesión."
+            subtitle="Selección de productos diseñados para acompañar cada sesión con precisión, comodidad y confianza."
             ctaLabel="Ver catálogo completo"
             ctaTo="/catalogo"
             ctaTone="accent"

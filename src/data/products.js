@@ -1015,7 +1015,7 @@ export const products = [
   {
     id: "camiseta-sanitattoo-blanca",
     sku: "SAN-MERCH-CAMISETA-BLANCA",
-    name: "Camiseta blanca SANITATTOO",
+    name: "Camiseta blanca SANITATTOOSUPPLY",
     slug: "camiseta-sanitattoo-blanca",
     category: "cuidados-tatuaje",
     categoryLabel: "Cuidados tatuaje",
@@ -1025,9 +1025,15 @@ export const products = [
     unit: "1 unidad",
     image: "images/merchandising/cami-blanca.png",
     alt: "Camiseta de merchandising SANITATTOO",
-    shortDescription: "Camiseta oficial de marca. Consulta tallas y stock por WhatsApp.",
-    description:
-      "Textil de merchandising SANITATTOO. Disponibilidad y tallas sujetas a stock; te informamos al momento por WhatsApp.",
+    shortDescription: "Camiseta oficial SanitattooSupply. Consulta tallas y stock por WhatsApp.",
+    description:[
+      "Camiseta oficial SanitattooSupply confeccionada en algodón premium para máxima comodidad y durabilidad.",
+      "Diseño minimalista con identidad propia, perfecta para dentro y fuera del estudio.",
+      "- 100% Algodón.",
+      "- Corte oversize",
+      "- Disponible en varias tallas.",
+      "- Edición exclusiva."
+    ],
     tags: ["merchandising", "camiseta", "textil"],
     featured: false,
     offer: false,
@@ -1047,7 +1053,7 @@ export const products = [
   {
     id: "camiseta-sanitattoo-negra",
     sku: "SAN-MERCH-CAMISETA-NEGRA",
-    name: "Camiseta negra SANITATTOO",
+    name: "Camiseta negra SANITATTOOSUPPLY",
     slug: "camiseta-sanitattoo-negra",
     category: "cuidados-tatuaje",
     categoryLabel: "Cuidados tatuaje",
@@ -1057,9 +1063,15 @@ export const products = [
     unit: "1 unidad",
     image: "images/merchandising/cami-negra-.png",
     alt: "Camiseta negra de merchandising SANITATTOO",
-    shortDescription: "Camiseta oficial de marca. Consulta tallas y stock por WhatsApp.",
-    description:
-      "Textil de merchandising SANITATTOO. Disponibilidad y tallas sujetas a stock; te informamos al momento por WhatsApp.",
+    shortDescription: "Camiseta oficial SanitattooSupply. Consulta tallas y stock por WhatsApp.",
+    description:[
+      "Camiseta oficial SanitattooSupply confeccionada en algodón premium para máxima comodidad y durabilidad.",
+      "Diseño minimalista con identidad propia, perfecta para dentro y fuera del estudio.",
+      "- 100% Algodón.",
+      "- Corte oversize",
+      "- Disponible en varias tallas.",
+      "- Edición exclusiva."
+    ],
     tags: ["merchandising", "camiseta", "textil"],
     featured: false,
     offer: false,
@@ -1079,7 +1091,7 @@ export const products = [
   {
     id: "camiseta-sanitattoo-nueva-blanca",
     sku: "SAN-MERCH-CAMISETA-NUEVA-BLANCA",
-    name: "Camiseta logo nuevo SANITATTOO",
+    name: "Camiseta SANITATTOOSUPPLY 2026",
     slug: "camiseta-sanitattoo-nueva-blanca",
     category: "merchandising",
     categoryLabel: "merchandising",
@@ -1089,9 +1101,15 @@ export const products = [
     unit: "1 unidad",
     image: "images/merchandising/cami-nueva.png",
     alt: "Camiseta negra de merchandising SANITATTOO",
-    shortDescription: "Camiseta oficial de marca. Consulta tallas y stock por WhatsApp.",
-    description:
-      "Textil de merchandising SANITATTOO. Disponibilidad y tallas sujetas a stock; te informamos al momento por WhatsApp.",
+    shortDescription: "Camiseta oficial SanitattooSupply nueva edición 2026.",
+    description:[
+      "Nueva edición SanitattooSupply con diseño renovado y esencia exclusiva.",
+      "Una pieza creada para representar la marca con estilo y personalidad.",
+      "- 100% Algodón.",
+      "- Corte oversize",
+      "- Disponible en varias tallas.",
+      "- Edición exclusiva."
+    ],
     tags: ["merchandising", "camiseta", "textil"],
     featured: false,
     offer: false,
@@ -1112,7 +1130,7 @@ export const products = [
   {
     id: "camiseta-sanitattoo-nueva-negra",
     sku: "SAN-MERCH-CAMISETA-NUEVA-NEGRA",
-    name: "Camiseta logo nuevo SANITATTOO",
+    name: "Camiseta SANITATTOOSUPPLY 2026",
     slug: "camiseta-sanitattoo-nueva-negra",
     category: "merchandising",
     categoryLabel: "merchandising",
@@ -1122,9 +1140,15 @@ export const products = [
     unit: "1 unidad",
     image: "images/merchandising/cami-nueva-negra.png",
     alt: "Camiseta negra de merchandising SANITATTOO",
-    shortDescription: "Camiseta oficial de marca. Consulta tallas y stock por WhatsApp.",
-    description:
-      "Textil de merchandising SANITATTOO. Disponibilidad y tallas sujetas a stock; te informamos al momento por WhatsApp.",
+    shortDescription: "Camiseta oficial SanitattooSupply nueva edición 2026.",
+    description:[
+      "Nueva edición SanitattooSupply con diseño renovado y esencia exclusiva.",
+      "Una pieza creada para representar la marca con estilo y personalidad.",
+      "- 100% Algodón.",
+      "- Corte oversize",
+      "- Disponible en varias tallas.",
+      "- Edición exclusiva."
+    ],
     tags: ["merchandising", "camiseta", "textil"],
     featured: false,
     offer: false,

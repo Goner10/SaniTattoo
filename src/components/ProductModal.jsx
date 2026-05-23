@@ -94,11 +94,7 @@ export default function ProductModal({ product, onClose }) {
                   >
                     {product.name}
                   </h2>
-                  {product.badge ? (
-                    <span className="shrink-0 rounded-full bg-brand-red px-2.5 py-1 font-sans text-[0.625rem] font-bold uppercase tracking-[0.06em] text-brand-white shadow-[0_2px_8px_rgba(5,5,5,0.12)] sm:px-3 sm:py-1 sm:text-xs">
-                      {product.badge}
-                    </span>
-                  ) : null}
+                  
                 </div>
               </div>
               <button

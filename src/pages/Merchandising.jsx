@@ -111,15 +111,14 @@ export default function Merchandising() {
             Marca & textil
           </p>
           <h1 className="font-heading mt-3 text-3xl font-bold tracking-tight text-brand-black sm:text-4xl lg:text-[2.5rem] lg:leading-tight">
-            Merchandising
+            Más que un supply
           </h1>
           <span
             className="mt-4 block h-1 w-14 rounded-full bg-brand-red"
             aria-hidden
           />
           <p className="mt-4 text-sm font-normal leading-relaxed text-brand-muted sm:text-base">
-            Textil y productos de marca SANITATTOO. Disponibilidad y tallas las
-            confirmamos por mensaje.
+            Colección oficial SanitattoSupply con diseños exclusivos y calidad premium.
           </p>
         </header>
 

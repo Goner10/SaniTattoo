@@ -58,7 +58,7 @@ export default function Header() {
     "flex items-center justify-center gap-1 py-1 text-center font-header text-[clamp(0.625rem,2.6vw,0.8125rem)] font-bold leading-snug tracking-[0.06em] text-white sm:py-1.5 sm:text-xs",
   ].join(" ")}
 >
-  <span>Envío gratuito a partir de 100€</span>
+  <span>Todo para tu estudio. Envío gratis desde 90€</span>
   <Truck
     className="h-4 w-4 sm:h-5 sm:w-5"
     strokeWidth={2.2}

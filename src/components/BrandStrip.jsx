@@ -65,8 +65,7 @@ export default function BrandStrip() {
             aria-hidden
           />
           <p className="mt-4 text-sm font-normal leading-relaxed text-brand-muted sm:text-base">
-            Seleccionamos productos de las marcas más especializadas para que cada estudio pueda
-            trabajar con material fiable en el día a día.
+            Seleccionamos marcas reconocidas para ofrecer material fiable, profesional y preparado para el trabajo diario del estudio.
           </p>
         </div>
 

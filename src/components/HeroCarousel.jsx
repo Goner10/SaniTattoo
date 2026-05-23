@@ -56,9 +56,9 @@ const SLIDES = [
       "object-cover object-right xl:object-[right_45%] 2xl:object-[right_42%]",
     variant: "brand",
     eyebrow: "Sanitattoo",
-    title: "Material profesional para estudios",
+    title: "EQUIPA TU ESTUDIO AL SIGUIENTE NIVEL",
     description:
-      "Material sanitario, consumibles y aftercare seleccionados para mantener tu flujo de trabajo limpio, cómodo y preparado para cada sesión.",
+      "Material sanitario, consumibles premium y aftercare profesional para tattoo & piercing.",
     ctaTo: "/catalogo",
     ctaLabel: "Ver catálogo",
     dotLabel: "Ir al slide principal SANITATTOO",
@@ -68,14 +68,14 @@ const SLIDES = [
     id: "biotatum",
     image: "images/brands/hero-bio.png",
     images: {
-      mobile: "images/brands/hero-bio.png",
-      tablet: "images/brands/hero-bio.png",
+      mobile: "images/brands/bio-tatum-movil.webp",
+      tablet: "images/brands/bio-tatum-tablet.webp",
       desktop: "images/brands/hero-bio.png",
     },
     imageAlt: "Banner BioTaTum Professional: cuidado para piel tatuada",
     imageClass: "object-cover object-center 2xl:object-[center_35%]",
-    imageClassMobile: "object-cover object-[center_42%]",
-    imageClassTablet: "object-cover object-center",
+    imageClassMobile: "object-contain object-center bg-brand-black",
+    imageClassTablet: "object-contain object-center bg-brand-black",
     imageClassDesktop: "object-cover object-center 2xl:object-[center_35%]",
     variant: "brand",
     eyebrow: "BIOTATUM PROFESSIONAL",
@@ -122,7 +122,13 @@ const slidePanelHeightClass =
 const contentShellClass =
   "relative z-10 mx-auto flex h-full min-h-[inherit] max-w-6xl min-w-0 items-center px-4 py-14 pb-28 sm:px-6 sm:py-14 sm:pb-14 lg:py-8 lg:pb-8 xl:py-8 xl:pb-8 2xl:mx-0 2xl:mr-auto 2xl:max-w-[1500px] 2xl:ml-[max(2rem,calc((100vw-1500px)/2+2rem))] 2xl:px-8 2xl:py-16 2xl:pb-16";
 
-function slideContentCardClass(variant) {
+function slideContentCardClass(variant, slideId) {
+  if (slideId === "biotatum") {
+    return [
+      "max-w-[90%] rounded-2xl border p-4 shadow-sm backdrop-blur-[5px] sm:max-w-lg sm:p-0 md:max-w-xl",
+      "border-white/15 bg-brand-black/40 sm:border-transparent sm:bg-transparent sm:shadow-none sm:backdrop-blur-none",
+    ].join(" ");
+  }
   return [
     "max-w-xl rounded-2xl border p-5 shadow-sm backdrop-blur-[6px] sm:max-w-lg sm:p-0 md:max-w-xl",
     variant === "brand"
@@ -132,24 +138,60 @@ function slideContentCardClass(variant) {
 }
 
 /**
- * @param {{ slide: HeroSlide, eagerImage?: boolean }} props
+ * Clases de encaje por breakpoint sin mezclar object-cover y object-contain.
+ * @param {HeroSlide} slide
+ * @param {"mobile" | "tablet" | "desktop"} variant
  */
-function HeroSlideImage({ slide, eagerImage }) {
-  const sources = resolveResponsiveSources(slide.images, slide.image);
-  const useResponsive = Boolean(slide.images);
-  const sharedImgProps = {
+function heroSlideImageClassName(slide, variant) {
+  const visibility = responsiveImageVisibility[variant];
+  let fit;
+
+  if (variant === "mobile") {
+    fit =
+      slide.imageClassMobile ??
+      (slide.id === "biotatum"
+        ? "object-contain object-center bg-brand-black"
+        : (slide.imageClass ?? "object-cover object-center"));
+  } else if (variant === "tablet") {
+    fit =
+      slide.imageClassTablet ??
+      (slide.id === "biotatum"
+        ? "object-contain object-center bg-brand-black"
+        : (slide.imageClass ?? "object-cover object-center"));
+  } else {
+    fit = slide.imageClassDesktop ?? slide.imageClass ?? "object-cover object-center";
+  }
+
+  return [imageFillClass, fit, visibility].join(" ");
+}
+
+/** Evita ratio 16:9 forzado en assets verticales (p. ej. BioTaTum móvil). */
+function heroSlideImgProps(slide, variant, eagerImage) {
+  const base = {
     alt: slide.imageAlt,
-    width: 1920,
-    height: 1080,
     loading: eagerImage ? "eager" : "lazy",
     decoding: "async",
     draggable: false,
   };
 
+  if (slide.id === "biotatum" && variant !== "desktop") {
+    return base;
+  }
+
+  return { ...base, width: 1920, height: 1080 };
+}
+
+/**
+ * @param {{ slide: HeroSlide, eagerImage?: boolean }} props
+ */
+function HeroSlideImage({ slide, eagerImage }) {
+  const sources = resolveResponsiveSources(slide.images, slide.image);
+  const useResponsive = Boolean(slide.images);
+
   if (!useResponsive) {
     return (
       <img
-        {...sharedImgProps}
+        {...heroSlideImgProps(slide, "desktop", eagerImage)}
         src={publicAssetUrl(slide.image)}
         className={[imageFillClass, slide.imageClass ?? ""].join(" ")}
       />
@@ -159,31 +201,19 @@ function HeroSlideImage({ slide, eagerImage }) {
   return (
     <>
       <img
-        {...sharedImgProps}
+        {...heroSlideImgProps(slide, "mobile", eagerImage)}
         src={publicAssetUrl(sources.mobile)}
-        className={[
-          imageFillClass,
-          slide.imageClassMobile ?? slide.imageClass ?? "",
-          responsiveImageVisibility.mobile,
-        ].join(" ")}
+        className={heroSlideImageClassName(slide, "mobile")}
       />
       <img
-        {...sharedImgProps}
+        {...heroSlideImgProps(slide, "tablet", eagerImage)}
         src={publicAssetUrl(sources.tablet)}
-        className={[
-          imageFillClass,
-          slide.imageClassTablet ?? slide.imageClass ?? "",
-          responsiveImageVisibility.tablet,
-        ].join(" ")}
+        className={heroSlideImageClassName(slide, "tablet")}
       />
       <img
-        {...sharedImgProps}
+        {...heroSlideImgProps(slide, "desktop", eagerImage)}
         src={publicAssetUrl(sources.desktop)}
-        className={[
-          imageFillClass,
-          slide.imageClassDesktop ?? slide.imageClass ?? "",
-          responsiveImageVisibility.desktop,
-        ].join(" ")}
+        className={heroSlideImageClassName(slide, "desktop")}
       />
     </>
   );
@@ -195,9 +225,17 @@ function HeroSlideImage({ slide, eagerImage }) {
 function HeroSlidePanel({ slide, eagerImage }) {
   const isBrand = slide.variant === "brand";
   const imageOnlyOnDesktop = Boolean(slide.imageOnlyOnDesktop);
+  const isBiotatum = slide.id === "biotatum";
 
   return (
-    <div className={slidePanelHeightClass}>
+    <div
+      className={[
+        slidePanelHeightClass,
+        isBiotatum ? "max-lg:bg-brand-black" : "",
+      ]
+        .filter(Boolean)
+        .join(" ")}
+    >
       <HeroSlideImage slide={slide} eagerImage={eagerImage} />
       {imageOnlyOnDesktop ? (
         <Link
@@ -207,11 +245,15 @@ function HeroSlidePanel({ slide, eagerImage }) {
         />
       ) : null}
       <div
-        className={[contentShellClass, imageOnlyOnDesktop ? "md:hidden" : ""]
+        className={[
+          contentShellClass,
+          imageOnlyOnDesktop ? "md:hidden" : "",
+          isBiotatum ? "max-md:py-10 max-md:pb-24" : "",
+        ]
           .filter(Boolean)
           .join(" ")}
       >
-        <div className={slideContentCardClass(slide.variant)}>
+        <div className={slideContentCardClass(slide.variant, slide.id)}>
           <span
             className={[
               "font-heading inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] shadow-sm sm:text-xs sm:tracking-[0.18em]",
@@ -222,7 +264,15 @@ function HeroSlidePanel({ slide, eagerImage }) {
           >
             {slide.eyebrow}
           </span>
-          <h2 className="font-heading mt-4 text-3xl font-extrabold leading-[1.08] tracking-tight text-brand-white sm:mt-5 sm:text-4xl lg:text-[2.75rem] lg:leading-[1.06]">
+          <h2
+            className={[
+              "font-heading font-extrabold leading-[1.08] tracking-tight text-brand-white",
+              isBiotatum
+                ? "mt-3 max-md:text-2xl sm:mt-5 sm:text-4xl"
+                : "mt-4 text-3xl sm:mt-5 sm:text-4xl",
+              "lg:text-[2.75rem] lg:leading-[1.06]",
+            ].join(" ")}
+          >
             {slide.title}
           </h2>
           <span
@@ -242,7 +292,11 @@ function HeroSlidePanel({ slide, eagerImage }) {
               {slide.description}
             </p>
           ) : null}
-          <div className="mt-8 max-sm:mb-1 sm:mt-10">
+          <div
+            className={
+              isBiotatum ? "mt-6 max-sm:mb-1 sm:mt-10" : "mt-8 max-sm:mb-1 sm:mt-10"
+            }
+          >
             <Link to={slide.ctaTo} className={catalogCtaPrimary}>
               {slide.ctaLabel}
             </Link>

@@ -4,11 +4,18 @@ import { buildWhatsAppUrl, WHATSAPP_PHONE } from "../utils/whatsapp.js";
 
 const INSTAGRAM_URL = "https://www.instagram.com/sanitattoosupply/";
 const PHONE_DISPLAY = "+34 686 332 011";
-const EMAIL = "hola@sanitattoo.com";
+const EMAIL = "Sanitattoo22@gmail.com";
 const ADDRESS = "Calle Islas Canarias 1, Paterna, Valencia 46988";
 
-const cardClass =
-  "rounded-2xl border border-brand-border bg-brand-white p-6 shadow-[0_8px_32px_rgba(5,5,5,0.05)] sm:p-8";
+const MAPS_EMBED_URL =
+  "https://www.google.com/maps?q=Calle%20Islas%20Canarias%201%2C%20Paterna%2C%20Valencia%2046988&output=embed";
+
+const cardBase =
+  "rounded-2xl border border-brand-border bg-brand-white shadow-[0_8px_32px_rgba(5,5,5,0.05)]";
+
+const cardClass = `${cardBase} p-6 sm:p-8`;
+
+const cardClassCompact = `${cardBase} p-5 sm:p-6`;
 
 export default function Contact() {
   return (
@@ -19,27 +26,26 @@ export default function Contact() {
             Estudio
           </p>
           <h1 className="font-heading mt-3 text-3xl font-bold tracking-tight text-brand-black sm:text-4xl lg:text-[2.5rem] lg:leading-tight">
-            Contacto
+            ¿Hablamos?
           </h1>
           <span
             className="mt-4 block h-1 w-14 rounded-full bg-brand-red"
             aria-hidden
           />
           <p className="mt-4 text-sm font-normal leading-relaxed text-brand-muted sm:text-base">
-            Canal preferido: WhatsApp para pedidos y consultas rápidas. También
-            puedes usar Instagram, teléfono o correo.
+          WhatsApp para pedidos rápidos. El resto de canales, para lo que necesites.
           </p>
         </header>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-2 lg:gap-8">
-          <div className={cardClass}>
+        <div className="mt-12 grid gap-6 lg:grid-cols-2 lg:items-start lg:gap-8">
+          <div className={`${cardClassCompact} self-start`}>
             <p className="font-heading text-xs font-bold uppercase tracking-[0.18em] text-brand-red">
               WhatsApp
             </p>
-            <p className="mt-3 font-heading text-lg font-bold text-brand-black">
+            <p className="mt-2 font-heading text-lg font-bold text-brand-black">
               {WHATSAPP_PHONE}
             </p>
-            <div className="mt-8">
+            <div className="mt-5">
               <WhatsAppButton href={buildWhatsAppUrl()} variant="whatsapp">
                 Abrir WhatsApp
               </WhatsAppButton>
@@ -97,21 +103,59 @@ export default function Contact() {
                 </a>
               </div>
             </li>
-            <li className="flex gap-4">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-brand-border bg-brand-bg">
-                <MapPin className="size-5 text-brand-red" aria-hidden />
-              </div>
-              <div>
-                <p className="font-heading text-sm font-semibold text-brand-black">
-                  Dirección
-                </p>
-                <p className="mt-1 text-sm leading-relaxed text-brand-muted">
-                  {ADDRESS}
-                </p>
-              </div>
-            </li>
+           
           </ul>
         </div>
+
+        <section
+          className={`mt-12 ${cardClass}`}
+          aria-labelledby="contact-about-heading"
+        >
+          <div className="grid min-w-0 gap-8 lg:grid-cols-2 lg:items-stretch lg:gap-10">
+            <div className="min-w-0">
+              <h2
+                id="contact-about-heading"
+                className="font-heading text-xl font-bold tracking-tight text-brand-black sm:text-2xl"
+              >
+                Quiénes somos
+              </h2>
+              <span
+                className="mt-3 block h-1 w-12 rounded-full bg-brand-red"
+                aria-hidden
+              />
+              <p className="mt-5 text-sm font-normal leading-relaxed text-brand-muted sm:text-base">
+                SanitattooSupply es un distribuidor especializado en material
+                profesional para tattoo y piercing con base en Valencia.
+              </p>
+              <p className="mt-4 text-sm font-normal leading-relaxed text-brand-muted sm:text-base">
+                Trabajamos con marcas reconocidas del sector, ofreciendo calidad,
+                confianza y una imagen inspirada en la cultura tattoo.
+              </p>
+              <p className="mt-6 flex items-start gap-2 text-sm text-brand-muted">
+                <MapPin
+                  className="mt-0.5 size-4 shrink-0 text-brand-red"
+                  aria-hidden
+                />
+                <span>{ADDRESS}</span>
+              </p>
+            </div>
+
+            <div className="flex min-w-0 flex-col lg:min-h-[18rem]">
+              <p className="font-heading mb-3 text-xs font-bold uppercase tracking-[0.18em] text-brand-red lg:sr-only">
+                Ubicación
+              </p>
+              <div className="overflow-hidden rounded-xl border border-brand-border shadow-[0_4px_20px_rgba(5,5,5,0.04)] lg:flex-1">
+                <iframe
+                  title="Ubicación de SanitattooSupply en Paterna, Valencia"
+                  src={MAPS_EMBED_URL}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="h-56 min-h-56 w-full border-0 sm:h-64 lg:h-full lg:min-h-72"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   );
