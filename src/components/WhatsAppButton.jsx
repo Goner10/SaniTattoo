@@ -1,4 +1,31 @@
-import { MessageCircle } from "lucide-react";
+import { publicAssetUrl } from "../utils/publicAsset.js";
+
+const WHATSAPP_ICON_SRC = publicAssetUrl("icons/whatsapp.svg");
+
+const iconBaseClass = "h-5 w-5 shrink-0";
+
+/** Icono monocromo blanco cuando el SVG no admite currentColor (fills fijos). */
+const iconLightClass = `${iconBaseClass} brightness-0 invert`;
+
+/**
+ * @param {"solid" | "outline" | "whatsapp"} variant
+ * @param {string} [className]
+ */
+function getWhatsAppIconClass(variant, className = "") {
+  if (variant === "whatsapp") {
+    return iconBaseClass;
+  }
+
+  if (variant === "solid") {
+    return iconLightClass;
+  }
+
+  if (variant === "outline" && /\btext-white\b/.test(className)) {
+    return iconLightClass;
+  }
+
+  return iconBaseClass;
+}
 
 /**
  * @param {{
@@ -24,6 +51,8 @@ export default function WhatsAppButton({
         ? "border border-brand-border bg-brand-white text-brand-black hover:border-brand-red hover:text-brand-red focus-visible:outline-brand-red"
         : "bg-brand-red text-brand-white hover:bg-brand-red-dark focus-visible:outline-brand-red";
 
+  const iconClass = getWhatsAppIconClass(variant, className);
+
   return (
     <a
       href={href}
@@ -31,7 +60,12 @@ export default function WhatsAppButton({
       rel="noopener noreferrer"
       className={`${base} ${styles} ${className}`}
     >
-      <MessageCircle className="size-4 shrink-0" aria-hidden />
+      <img
+        src={WHATSAPP_ICON_SRC}
+        alt=""
+        aria-hidden="true"
+        className={iconClass}
+      />
       {children}
     </a>
   );
