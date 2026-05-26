@@ -1,3 +1,5 @@
+import { PHONE_TEL_HREF, WHATSAPP_PHONE_DISPLAY } from "../utils/whatsapp.js";
+
 const BROWSER_COOKIE_LINKS = [
   {
     label: "Google Chrome",
@@ -123,7 +125,7 @@ export default function CookiesPolicy() {
             <address className="not-italic space-y-2 text-brand-muted">
               <p>
                 <strong className="text-brand-black">Titular:</strong>{" "}
-                <span className="text-brand-black/80">[NOMBRE LEGAL DEL TITULAR]</span>
+                <span className="text-brand-black/80">Exclusivas Pascual y Furió SA</span>
               </p>
               <p>
                 <strong className="text-brand-black">Email:</strong>{" "}
@@ -133,8 +135,8 @@ export default function CookiesPolicy() {
               </p>
               <p>
                 <strong className="text-brand-black">Teléfono:</strong>{" "}
-                <a href="tel:+34686332011" className={legalLinkClass}>
-                  +34 686 332 011
+                <a href={PHONE_TEL_HREF} className={legalLinkClass}>
+                  {WHATSAPP_PHONE_DISPLAY}
                 </a>
               </p>
               <p>

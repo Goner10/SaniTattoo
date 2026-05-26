@@ -1,9 +1,12 @@
 import { AtSign, Mail, MapPin, Phone } from "lucide-react";
 import WhatsAppButton from "../components/WhatsAppButton.jsx";
-import { buildWhatsAppUrl, WHATSAPP_PHONE } from "../utils/whatsapp.js";
+import {
+  buildWhatsAppUrl,
+  PHONE_TEL_HREF,
+  WHATSAPP_PHONE,
+} from "../utils/whatsapp.js";
 
 const INSTAGRAM_URL = "https://www.instagram.com/sanitattoosupply/";
-const PHONE_DISPLAY = "+34 686 332 011";
 const EMAIL = "Sanitattoo22@gmail.com";
 const ADDRESS = "Calle Islas Canarias 1, Paterna, Valencia 46988";
 
@@ -80,10 +83,10 @@ export default function Contact() {
                   Teléfono
                 </p>
                 <a
-                  href="tel:+34686332011"
+                  href={PHONE_TEL_HREF}
                   className="mt-1 inline-block text-sm font-medium text-brand-black hover:text-brand-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
                 >
-                  {PHONE_DISPLAY}
+                  {WHATSAPP_PHONE}
                 </a>
               </div>
             </li>

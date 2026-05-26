@@ -1,3 +1,5 @@
+import { PHONE_TEL_HREF, WHATSAPP_PHONE_DISPLAY } from "../utils/whatsapp.js";
+
 const legalLinkClass =
   "font-medium text-brand-red underline-offset-2 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red";
 
@@ -52,8 +54,8 @@ export default function TermsAndConditions() {
               </p>
               <p>
                 <strong className="text-brand-black">Teléfono:</strong>{" "}
-                <a href="tel:+34686332011" className={legalLinkClass}>
-                  +34 686 332 011
+                <a href={PHONE_TEL_HREF} className={legalLinkClass}>
+                  {WHATSAPP_PHONE_DISPLAY}
                 </a>
               </p>
             </address>
@@ -301,8 +303,8 @@ export default function TermsAndConditions() {
               </p>
               <p>
                 <strong className="text-brand-black">Teléfono:</strong>{" "}
-                <a href="tel:+34686332011" className={legalLinkClass}>
-                  +34 686 332 011
+                <a href={PHONE_TEL_HREF} className={legalLinkClass}>
+                  {WHATSAPP_PHONE_DISPLAY}
                 </a>
               </p>
               <p>

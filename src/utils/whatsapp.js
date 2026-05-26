@@ -1,5 +1,8 @@
-export const WHATSAPP_PHONE_DISPLAY = "+34 686 332 011";
-export const WHATSAPP_PHONE_DIGITS = "34686332011";
+export const WHATSAPP_PHONE_DISPLAY = "+34 629 613 493";
+export const WHATSAPP_PHONE_DIGITS = "34629613493";
+
+/** Enlace tel: para llamadas desde la web. */
+export const PHONE_TEL_HREF = "tel:+34629613493";
 
 /** Mismo valor que WHATSAPP_PHONE_DISPLAY (imports existentes que muestran el número en UI). */
 export const WHATSAPP_PHONE = WHATSAPP_PHONE_DISPLAY;

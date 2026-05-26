@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { scrollToTop } from "./ScrollToTop.jsx";
 import WhatsAppButton from "./WhatsAppButton.jsx";
+import { buildWhatsAppUrl } from "../utils/whatsapp.js";
 import { publicAssetUrl } from "../utils/publicAsset.js";
 import { Truck } from "lucide-react";
 
@@ -116,7 +117,7 @@ export default function Header() {
             Contacto
           </NavLink>
           <WhatsAppButton
-            href="https://wa.me/34686332011"
+            href={buildWhatsAppUrl()}
             variant="whatsapp"
             className={`ml-2 ${headerWhatsAppClass}`}
           >
@@ -126,7 +127,7 @@ export default function Header() {
 
         <div className="flex items-center gap-2 md:hidden">
           <WhatsAppButton
-            href="https://wa.me/34686332011"
+            href={buildWhatsAppUrl()}
             variant="whatsapp"
             className={`!px-3 ${headerWhatsAppClass}`}
           >
