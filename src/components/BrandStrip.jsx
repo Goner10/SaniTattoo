@@ -13,6 +13,10 @@ const BRAND_LOGO_SIZE_CLASS = {
     "max-h-12 max-w-[15rem] sm:max-h-[5.75rem] sm:max-w-[18rem] md:max-h-[6.25rem] md:max-w-[22rem]",
   ghost:
     "max-h-12 max-w-[12rem] sm:max-h-[4.75rem] sm:max-w-[14.5rem] md:max-h-[5.25rem] md:max-w-[16rem]",
+  tsunami:
+    "max-h-14 max-w-[11rem] sm:max-h-[4.5rem] sm:max-w-[12.75rem] md:max-h-[5rem] md:max-w-[15.5rem]",
+    hornet:
+    "max-h-11 max-w-[9.25rem] sm:max-h-14 sm:max-w-[11rem] md:max-h-16 md:max-w-[12.5rem]",
 };
 
 /** Logos destacado home — rutas en public/images/brands (sin tocar brands.js). */
@@ -37,10 +41,29 @@ const BRAND_LOGOS = [
     alt: "Ghost Tattoo",
     src: "images/brands/ghost-destacado.png",
   },
+  {
+    id: "tsunami",
+    alt: "Tsunami",
+    src: "images/brands/tsunami.png",
+  },
+  {
+    id: "hornet",
+    alt: "Hornet",
+    src: "images/brands/hornet-brand.PNG",
+  },
 ];
 
 function brandLogoClass(id) {
   return [LOGO_BASE_CLASS, BRAND_LOGO_SIZE_CLASS[id] ?? ""].join(" ");
+}
+
+function brandItemClass(id) {
+  return [
+    "flex min-w-[42%] shrink-0 items-center justify-center sm:min-w-0 md:min-w-0",
+    id === "tsunami" ? "mr-2 sm:mr-3" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 }
 
 export default function BrandStrip() {
@@ -76,7 +99,7 @@ export default function BrandStrip() {
           {BRAND_LOGOS.map((brand) => (
             <li
               key={brand.id}
-              className="flex min-w-[42%] shrink-0 items-center justify-center sm:min-w-0 md:min-w-0"
+              className={brandItemClass(brand.id)}
             >
               <img
                 src={publicAssetUrl(brand.src)}

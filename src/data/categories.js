@@ -19,6 +19,12 @@ export const categories = [
     description:
       "Aftercare, preparación y productos especializados para la piel tatuada.",
   },
+  {
+    id: "agujas",
+    name: "Agujas",
+    description:
+      "Agujas y accesorios para tatuaje.",
+  },
 ];
 
 export function getCategoryById(id) {

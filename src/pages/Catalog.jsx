@@ -22,6 +22,52 @@ const filterBtnActive =
 const filterBtnIdle =
   "border-brand-border bg-brand-white text-brand-black hover:border-brand-red/35 hover:bg-brand-bg";
 
+const lineChipBase =
+  "shrink-0 rounded-lg border px-3 py-2.5 text-sm font-medium transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red";
+
+const TSUNAMI_BRAND_ID = "tsunami";
+
+const VALID_NEEDLE_LINE_IDS = new Set(["rl", "rs", "m", "cm"]);
+
+/**
+ * @param {{
+ *   lineId: string
+ *   onLineChange: (lineId: string) => void
+ *   needleLines: { id: string; label: string }[]
+ * }} props
+ */
+function CatalogTsunamiLineFilter({ lineId, onLineChange, needleLines }) {
+  const options = [{ id: "all", label: "Todas" }, ...needleLines];
+
+  return (
+    <div className="mb-6">
+      <p className="mb-2 text-xs font-bold uppercase tracking-wide text-brand-muted">
+        Línea
+      </p>
+      <div
+        className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 [scrollbar-width:thin]"
+        role="group"
+        aria-label="Filtrar por línea Tsunami"
+      >
+        {options.map((line) => (
+          <button
+            key={line.id}
+            type="button"
+            onClick={() => onLineChange(line.id)}
+            className={[
+              lineChipBase,
+              lineId === line.id ? filterBtnActive : filterBtnIdle,
+            ].join(" ")}
+            aria-pressed={lineId === line.id}
+          >
+            {line.label}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function CatalogBrandBanner({ brandId }) {
   const brand = getBrandById(brandId);
   if (!brand || brandId === "all") return null;
@@ -29,7 +75,7 @@ function CatalogBrandBanner({ brandId }) {
   if (brand.banner) {
     return (
       <div className="mb-8 overflow-hidden rounded-2xl border border-brand-border bg-brand-white shadow-[0_6px_28px_rgba(5,5,5,0.06)]">
-        <div className="relative aspect-[21/7] min-h-[172px] w-full sm:aspect-[21/6] sm:min-h-[160px] 2xl:aspect-auto 2xl:h-[400px] 2xl:max-h-[400px]">
+        <div className="relative aspect-[21/7] min-h-[172px] w-full sm:aspect-[21/6] sm:min-h-[160px] md:aspect-[21/6] md:min-h-[220px] lg:aspect-[21/5] lg:min-h-[296px] xl:aspect-[21/4.5] xl:min-h-[332px] 2xl:aspect-auto 2xl:h-[500px] 2xl:max-h-[500px]">
           <img
             src={publicAssetUrl(brand.banner)}
             alt=""
@@ -73,14 +119,16 @@ const CATALOG_BRAND_QUERY_IDS = new Set([
   "aloetattoo",
   "biotatum",
   "ghost-tattoo",
+  "tsunami",
   "generico",
 ]);
 
 export default function Catalog() {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState("");
   const [categoryId, setCategoryId] = useState("all");
   const [brandId, setBrandId] = useState("all");
+  const [lineId, setLineId] = useState("all");
   const [selected, setSelected] = useState(null);
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
@@ -96,22 +144,73 @@ export default function Catalog() {
     );
   }, [catalogProducts]);
 
+  const tsunamiNeedleLines = useMemo(
+    () => getBrandById(TSUNAMI_BRAND_ID)?.needleLines ?? [],
+    [],
+  );
+
+  const syncCatalogSearchParams = (nextBrand, nextLine) => {
+    const params = new URLSearchParams(searchParams);
+    if (nextBrand !== "all") params.set("brand", nextBrand);
+    else params.delete("brand");
+    if (
+      nextBrand === TSUNAMI_BRAND_ID &&
+      nextLine !== "all" &&
+      VALID_NEEDLE_LINE_IDS.has(nextLine)
+    ) {
+      params.set("line", nextLine);
+    } else {
+      params.delete("line");
+    }
+    setSearchParams(params, { replace: true });
+  };
+
+  const applyBrand = (nextBrand) => {
+    setBrandId(nextBrand);
+    const nextLine = nextBrand === TSUNAMI_BRAND_ID ? lineId : "all";
+    if (nextBrand !== TSUNAMI_BRAND_ID) setLineId("all");
+    syncCatalogSearchParams(nextBrand, nextLine);
+  };
+
+  const applyLine = (nextLine) => {
+    setLineId(nextLine);
+    syncCatalogSearchParams(brandId, nextLine);
+  };
+
   useEffect(() => {
     const brandParam = searchParams.get("brand");
-    if (brandParam && CATALOG_BRAND_QUERY_IDS.has(brandParam)) {
-      setBrandId(brandParam);
+    const resolvedBrand =
+      brandParam && CATALOG_BRAND_QUERY_IDS.has(brandParam) ? brandParam : "all";
+    setBrandId(resolvedBrand);
+
+    const lineParam = searchParams.get("line");
+    if (
+      resolvedBrand === TSUNAMI_BRAND_ID &&
+      lineParam &&
+      VALID_NEEDLE_LINE_IDS.has(lineParam)
+    ) {
+      setLineId(lineParam);
+    } else {
+      setLineId("all");
     }
   }, [searchParams]);
 
   useEffect(() => {
     setVisibleCount(PAGE_SIZE);
-  }, [query, categoryId, brandId]);
+  }, [query, categoryId, brandId, lineId]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return catalogProducts.filter((p) => {
       if (categoryId !== "all" && p.category !== categoryId) return false;
       if (brandId !== "all" && p.brand !== brandId) return false;
+      if (
+        brandId === TSUNAMI_BRAND_ID &&
+        lineId !== "all" &&
+        p.needleLine !== lineId
+      ) {
+        return false;
+      }
       if (!q) return true;
       const haystack = [
         p.name,
@@ -124,18 +223,22 @@ export default function Catalog() {
         .toLowerCase();
       return haystack.includes(q);
     });
-  }, [catalogProducts, query, categoryId, brandId]);
+  }, [catalogProducts, query, categoryId, brandId, lineId]);
 
   const hasFilters =
-    categoryId !== "all" || brandId !== "all" || query.trim() !== "";
+    categoryId !== "all" ||
+    brandId !== "all" ||
+    query.trim() !== "" ||
+    (brandId === TSUNAMI_BRAND_ID && lineId !== "all");
 
   const activeFilterCount = useMemo(() => {
     let count = 0;
     if (categoryId !== "all") count += 1;
     if (brandId !== "all") count += 1;
+    if (brandId === TSUNAMI_BRAND_ID && lineId !== "all") count += 1;
     if (query.trim() !== "") count += 1;
     return count;
-  }, [categoryId, brandId, query]);
+  }, [categoryId, brandId, lineId, query]);
 
   const count = filtered.length;
   const shown = Math.min(visibleCount, count);
@@ -152,6 +255,8 @@ export default function Catalog() {
     setQuery("");
     setCategoryId("all");
     setBrandId("all");
+    setLineId("all");
+    setSearchParams({}, { replace: true });
   };
 
   const sidebarFilters = (
@@ -207,7 +312,7 @@ export default function Catalog() {
         <div className="space-y-1.5" role="group" aria-label="Filtrar por marca">
           <button
             type="button"
-            onClick={() => setBrandId("all")}
+            onClick={() => applyBrand("all")}
             className={[
               filterBtnBase,
               brandId === "all" ? filterBtnActive : filterBtnIdle,
@@ -319,6 +424,14 @@ export default function Catalog() {
 
             {brandId !== "all" ? (
               <CatalogBrandBanner brandId={brandId} />
+            ) : null}
+
+            {brandId === TSUNAMI_BRAND_ID && tsunamiNeedleLines.length > 0 ? (
+              <CatalogTsunamiLineFilter
+                lineId={lineId}
+                onLineChange={applyLine}
+                needleLines={tsunamiNeedleLines}
+              />
             ) : null}
 
             <ProductGrid
