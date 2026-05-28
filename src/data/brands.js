@@ -64,7 +64,7 @@ export const brands = [
   {
     id: "shapu",
     name: "Shapu",
-    logo: "images/brands/",
+    logo: "images/brands/shapu-logo.png",
     banner: "images/brands/shapu.png",
     description: "Agujas de la marca Shapu.",
     needleLines: [
@@ -73,6 +73,13 @@ export const brands = [
       { id: "m", label: "Magnum M" },
       { id: "rm", label: "Magnum Curva RM" },
     ],
+  },
+  {
+    id: "real-stencil-printer",
+    name: "Real Stencil Printer",
+    logo: "images/brands/real-stencil-logo.png",
+    banner: "images/brands/real-stencil-banner.jpg",
+    description: "Impresión de stencils para tatuajes.",
   },
   {
     id: "effigerm",

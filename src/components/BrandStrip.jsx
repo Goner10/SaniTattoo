@@ -17,6 +17,10 @@ const BRAND_LOGO_SIZE_CLASS = {
     "max-h-14 max-w-[11rem] sm:max-h-[4.5rem] sm:max-w-[12.75rem] md:max-h-[5rem] md:max-w-[15.5rem]",
     hornet:
     "max-h-11 max-w-[9.25rem] sm:max-h-14 sm:max-w-[11rem] md:max-h-16 md:max-w-[12.5rem]",
+    shapu:
+    "max-h-11 max-w-[9.25rem] sm:max-h-14 sm:max-w-[11rem] md:max-h-16 md:max-w-[12.5rem]",
+    "real-stencil-printer":
+    "max-h-9 max-w-[7.25rem] sm:max-h-12 sm:max-w-[9rem] md:max-h-14 md:max-w-[10.5rem]",
 };
 
 /** Logos destacado home — rutas en public/images/brands (sin tocar brands.js). */
@@ -50,6 +54,16 @@ const BRAND_LOGOS = [
     id: "hornet",
     alt: "Hornet",
     src: "images/brands/hornet-brand.PNG",
+  },
+  {
+    id: "shapu",
+    alt: "Shapu",
+    src: "images/brands/shapu-logo.png",
+  },
+  {
+    id: "real-stencil-printer",
+    alt: "Real Stencil Printer",
+    src: "images/brands/real-stencil-logo-.png",
   },
 ];
 

@@ -1,5 +1,5 @@
 import { ChevronDown, SlidersHorizontal } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import ProductGrid from "../components/ProductGrid.jsx";
 import ProductModal from "../components/ProductModal.jsx";
@@ -25,18 +25,20 @@ const filterBtnIdle =
 const lineChipBase =
   "shrink-0 rounded-lg border px-3 py-2.5 text-sm font-medium transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red";
 
-const TSUNAMI_BRAND_ID = "tsunami";
-
-const VALID_NEEDLE_LINE_IDS = new Set(["rl", "rs", "m", "cm"]);
-
 /**
  * @param {{
+ *   brandName: string
  *   lineId: string
  *   onLineChange: (lineId: string) => void
  *   needleLines: { id: string; label: string }[]
  * }} props
  */
-function CatalogTsunamiLineFilter({ lineId, onLineChange, needleLines }) {
+function CatalogNeedleLineFilter({
+  brandName,
+  lineId,
+  onLineChange,
+  needleLines,
+}) {
   const options = [{ id: "all", label: "Todas" }, ...needleLines];
 
   return (
@@ -47,7 +49,11 @@ function CatalogTsunamiLineFilter({ lineId, onLineChange, needleLines }) {
       <div
         className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 [scrollbar-width:thin]"
         role="group"
-        aria-label="Filtrar por línea Tsunami"
+        aria-label={
+          brandName
+            ? `Filtrar por línea ${brandName}`
+            : "Filtrar por línea de aguja"
+        }
       >
         {options.map((line) => (
           <button
@@ -115,14 +121,6 @@ function CatalogBrandBanner({ brandId }) {
   );
 }
 
-const CATALOG_BRAND_QUERY_IDS = new Set([
-  "aloetattoo",
-  "biotatum",
-  "ghost-tattoo",
-  "tsunami",
-  "generico",
-]);
-
 export default function Catalog() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState("");
@@ -132,6 +130,16 @@ export default function Catalog() {
   const [selected, setSelected] = useState(null);
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const resultsTopRef = useRef(null);
+
+  const scrollToResults = () => {
+    requestAnimationFrame(() => {
+      resultsTopRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+  };
 
   const catalogProducts = useMemo(() => getCatalogProducts(), []);
 
@@ -144,19 +152,29 @@ export default function Catalog() {
     );
   }, [catalogProducts]);
 
-  const tsunamiNeedleLines = useMemo(
-    () => getBrandById(TSUNAMI_BRAND_ID)?.needleLines ?? [],
-    [],
+  const catalogBrandIds = useMemo(
+    () => new Set(brandsInCatalog.map((b) => b.id)),
+    [brandsInCatalog],
   );
 
-  const syncCatalogSearchParams = (nextBrand, nextLine) => {
+  const selectedBrand = useMemo(
+    () => (brandId === "all" ? null : getBrandById(brandId)),
+    [brandId],
+  );
+
+  const selectedBrandNeedleLines = selectedBrand?.needleLines ?? [];
+  const hasNeedleLines = selectedBrandNeedleLines.length > 0;
+
+  const syncCatalogSearchParams = (nextBrand, nextLine, needleLines = []) => {
     const params = new URLSearchParams(searchParams);
     if (nextBrand !== "all") params.set("brand", nextBrand);
     else params.delete("brand");
+
+    const validLineIds = new Set(needleLines.map((line) => line.id));
     if (
-      nextBrand === TSUNAMI_BRAND_ID &&
+      nextBrand !== "all" &&
       nextLine !== "all" &&
-      VALID_NEEDLE_LINE_IDS.has(nextLine)
+      validLineIds.has(nextLine)
     ) {
       params.set("line", nextLine);
     } else {
@@ -166,34 +184,48 @@ export default function Catalog() {
   };
 
   const applyBrand = (nextBrand) => {
+    const brand = nextBrand === "all" ? null : getBrandById(nextBrand);
+    const validLineIds = new Set((brand?.needleLines ?? []).map((line) => line.id));
+    const nextLine =
+      nextBrand !== "all" && lineId !== "all" && validLineIds.has(lineId)
+        ? lineId
+        : "all";
+
     setBrandId(nextBrand);
-    const nextLine = nextBrand === TSUNAMI_BRAND_ID ? lineId : "all";
-    if (nextBrand !== TSUNAMI_BRAND_ID) setLineId("all");
-    syncCatalogSearchParams(nextBrand, nextLine);
+    setLineId(nextLine);
+    syncCatalogSearchParams(nextBrand, nextLine, brand?.needleLines ?? []);
+    setMobileFiltersOpen(false);
+    scrollToResults();
+  };
+
+  const applyCategory = (nextCategory) => {
+    setCategoryId(nextCategory);
+    setMobileFiltersOpen(false);
+    scrollToResults();
   };
 
   const applyLine = (nextLine) => {
     setLineId(nextLine);
-    syncCatalogSearchParams(brandId, nextLine);
+    syncCatalogSearchParams(brandId, nextLine, selectedBrandNeedleLines);
+    scrollToResults();
   };
 
   useEffect(() => {
     const brandParam = searchParams.get("brand");
     const resolvedBrand =
-      brandParam && CATALOG_BRAND_QUERY_IDS.has(brandParam) ? brandParam : "all";
+      brandParam && catalogBrandIds.has(brandParam) ? brandParam : "all";
     setBrandId(resolvedBrand);
 
+    const brand = resolvedBrand === "all" ? null : getBrandById(resolvedBrand);
+    const validLineIds = new Set((brand?.needleLines ?? []).map((line) => line.id));
     const lineParam = searchParams.get("line");
-    if (
-      resolvedBrand === TSUNAMI_BRAND_ID &&
-      lineParam &&
-      VALID_NEEDLE_LINE_IDS.has(lineParam)
-    ) {
+
+    if (lineParam && validLineIds.has(lineParam)) {
       setLineId(lineParam);
     } else {
       setLineId("all");
     }
-  }, [searchParams]);
+  }, [searchParams, catalogBrandIds]);
 
   useEffect(() => {
     setVisibleCount(PAGE_SIZE);
@@ -205,7 +237,7 @@ export default function Catalog() {
       if (categoryId !== "all" && p.category !== categoryId) return false;
       if (brandId !== "all" && p.brand !== brandId) return false;
       if (
-        brandId === TSUNAMI_BRAND_ID &&
+        hasNeedleLines &&
         lineId !== "all" &&
         p.needleLine !== lineId
       ) {
@@ -223,22 +255,22 @@ export default function Catalog() {
         .toLowerCase();
       return haystack.includes(q);
     });
-  }, [catalogProducts, query, categoryId, brandId, lineId]);
+  }, [catalogProducts, query, categoryId, brandId, lineId, hasNeedleLines]);
 
   const hasFilters =
     categoryId !== "all" ||
     brandId !== "all" ||
     query.trim() !== "" ||
-    (brandId === TSUNAMI_BRAND_ID && lineId !== "all");
+    (hasNeedleLines && lineId !== "all");
 
   const activeFilterCount = useMemo(() => {
     let count = 0;
     if (categoryId !== "all") count += 1;
     if (brandId !== "all") count += 1;
-    if (brandId === TSUNAMI_BRAND_ID && lineId !== "all") count += 1;
+    if (hasNeedleLines && lineId !== "all") count += 1;
     if (query.trim() !== "") count += 1;
     return count;
-  }, [categoryId, brandId, lineId, query]);
+  }, [categoryId, brandId, hasNeedleLines, lineId, query]);
 
   const count = filtered.length;
   const shown = Math.min(visibleCount, count);
@@ -257,6 +289,8 @@ export default function Catalog() {
     setBrandId("all");
     setLineId("all");
     setSearchParams({}, { replace: true });
+    setMobileFiltersOpen(false);
+    scrollToResults();
   };
 
   const sidebarFilters = (
@@ -281,7 +315,7 @@ export default function Catalog() {
         <div className="space-y-1.5" role="group" aria-label="Filtrar por categoría">
           <button
             type="button"
-            onClick={() => setCategoryId("all")}
+            onClick={() => applyCategory("all")}
             className={[
               filterBtnBase,
               categoryId === "all" ? filterBtnActive : filterBtnIdle,
@@ -293,7 +327,7 @@ export default function Catalog() {
             <button
               key={c.id}
               type="button"
-              onClick={() => setCategoryId(c.id)}
+              onClick={() => applyCategory(c.id)}
               className={[
                 filterBtnBase,
                 categoryId === c.id ? filterBtnActive : filterBtnIdle,
@@ -324,7 +358,7 @@ export default function Catalog() {
             <button
               key={b.id}
               type="button"
-              onClick={() => setBrandId(b.id)}
+              onClick={() => applyBrand(b.id)}
               className={[
                 filterBtnBase,
                 brandId === b.id ? filterBtnActive : filterBtnIdle,
@@ -414,23 +448,26 @@ export default function Catalog() {
           </div>
 
           <div className="min-w-0 flex-1">
-            <p
-              className="mb-6 text-sm font-semibold text-brand-black"
-              role="status"
-              aria-live="polite"
-            >
-              {rangeLabel}
-            </p>
+            <div ref={resultsTopRef} className="scroll-mt-28">
+              <p
+                className="mb-6 text-sm font-semibold text-brand-black"
+                role="status"
+                aria-live="polite"
+              >
+                {rangeLabel}
+              </p>
+            </div>
 
             {brandId !== "all" ? (
               <CatalogBrandBanner brandId={brandId} />
             ) : null}
 
-            {brandId === TSUNAMI_BRAND_ID && tsunamiNeedleLines.length > 0 ? (
-              <CatalogTsunamiLineFilter
+            {hasNeedleLines ? (
+              <CatalogNeedleLineFilter
+                brandName={selectedBrand?.name ?? ""}
                 lineId={lineId}
                 onLineChange={applyLine}
-                needleLines={tsunamiNeedleLines}
+                needleLines={selectedBrandNeedleLines}
               />
             ) : null}
 
