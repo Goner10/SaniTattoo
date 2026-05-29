@@ -3,6 +3,6 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  base: "/SaniTattoo/",
+  base: process.env.VERCEL ? "/" : "/SaniTattoo/",
   plugins: [react(), tailwindcss()],
 });
