@@ -24,9 +24,11 @@ function Layout() {
   );
 }
 
+const routerBasename = import.meta.env.BASE_URL.replace(/\/$/, "") || "/";
+
 export default function App() {
   return (
-    <BrowserRouter basename="/SaniTattoo">
+    <BrowserRouter basename={routerBasename}>
       <ScrollToTop />
       <Routes>
         <Route element={<Layout />}>
