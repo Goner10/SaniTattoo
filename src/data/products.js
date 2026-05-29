@@ -431,7 +431,7 @@ export const products = [
       "Además, cuenta con un suave aroma a miel, el cuál gustará a cualquier persona."
     ],
     tags: ["stencil", "hornet", "estudio"],
-    featured: false,
+    featured: true,
     offer: false,
     active: true,
    
@@ -982,7 +982,7 @@ export const products = [
       "Está libre de aceites minerales y derivados del petróleo.",
     ],
     tags: ["proton", "cbd", "tattoo butter", "manteca", "made by nature", "aftercare"],
-    featured: false,
+    featured: true,
     offer: false,
     active: true,
   },

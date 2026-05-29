@@ -2,19 +2,73 @@ import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import { useEffect, useState } from "react";
 import WhatsAppButton from "./WhatsAppButton.jsx";
-import { formatPrice } from "../utils/formatPrice.js";
+import {
+  formatPrice,
+  getDisplayPrice,
+  getPriceWithVat,
+} from "../utils/formatPrice.js";
 import { publicAssetUrl } from "../utils/publicAsset.js";
 import { productWhatsAppUrl } from "../utils/whatsapp.js";
+
+/**
+ * @param {{
+ *   basePrice: number | null
+ *   currency: string
+ *   showFrom: boolean
+ *   unit?: string
+ * }} props
+ */
+function ModalPriceBlock({ basePrice, currency, showFrom, unit }) {
+  if (basePrice == null) {
+    return (
+      <div className="rounded-xl border border-brand-border bg-brand-bg/40 px-4 py-3.5">
+        <p className="text-sm font-medium text-brand-black">
+          {formatPrice(null, currency)}
+        </p>
+      </div>
+    );
+  }
+
+  const priceWithVat = getPriceWithVat(basePrice);
+
+  return (
+    <div className="rounded-xl border border-brand-border bg-brand-bg/40 px-4 py-3.5">
+      <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+        {showFrom ? (
+          <span className="text-sm font-medium text-brand-muted">Desde</span>
+        ) : null}
+        <span className="font-heading text-2xl font-bold leading-none text-brand-red sm:text-[1.65rem]">
+          {formatPrice(priceWithVat, currency)}
+        </span>
+        <span className="text-sm font-medium text-brand-muted">IVA incluido</span>
+      </div>
+      <div className="mt-2 flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+        {showFrom ? (
+          <span className="text-xs font-medium text-brand-muted">Desde</span>
+        ) : null}
+        <span className="text-sm font-medium text-brand-black">
+          {formatPrice(basePrice, currency)}
+        </span>
+        <span className="text-xs text-brand-muted">sin IVA</span>
+        {unit ? (
+          <span className="text-xs text-brand-muted">/ {unit}</span>
+        ) : null}
+      </div>
+    </div>
+  );
+}
 
 export default function ProductModal({ product, onClose }) {
   const [selectedImage, setSelectedImage] = useState("");
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [selectedVariantLabel, setSelectedVariantLabel] = useState(null);
 
   useEffect(() => {
     if (!product) return;
     const urls = product.gallery;
     queueMicrotask(() => {
       setLightboxOpen(false);
+      setSelectedVariantLabel(null);
       if (Array.isArray(urls) && urls.length > 1) {
         setSelectedImage(urls[0]);
       } else {
@@ -56,6 +110,18 @@ export default function ProductModal({ product, onClose }) {
   const mainImageAlt = useGallery
     ? `${product?.alt} — vista seleccionada`
     : product?.alt;
+
+  const hasVariants = Boolean(product?.variants?.length);
+  const selectedVariant = hasVariants
+    ? product.variants.find((v) => v.label === selectedVariantLabel)
+    : null;
+  const modalBasePrice =
+    selectedVariant != null
+      ? selectedVariant.price
+      : hasVariants
+        ? getDisplayPrice(product)
+        : product?.price ?? null;
+  const showFromPrice = hasVariants && selectedVariant == null && modalBasePrice != null;
 
   return (
     <AnimatePresence>
@@ -170,44 +236,66 @@ export default function ProductModal({ product, onClose }) {
                 ) : null}
               </div>
               <div className="space-y-4 p-4 sm:p-6">
-               {Array.isArray(product.description) ? (
-                <div className="space-y-3 text-sm font-normal leading-relaxed text-brand-black">
-                 {product.description.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
-                ))}
-               </div>
-            ) : (
-               <p className="whitespace-pre-line text-sm font-normal leading-relaxed text-brand-black">
-                 {product.description}
-              </p>
-              )}
-                {product.variants?.length ? (
+                {Array.isArray(product.description) ? (
+                  <div className="space-y-3 text-sm font-normal leading-relaxed text-brand-black">
+                    {product.description.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="whitespace-pre-line text-sm font-normal leading-relaxed text-brand-black">
+                    {product.description}
+                  </p>
+                )}
+
+                <ModalPriceBlock
+                  basePrice={modalBasePrice}
+                  currency={product.currency}
+                  showFrom={showFromPrice}
+                  unit={hasVariants ? undefined : product.unit}
+                />
+
+                {hasVariants ? (
                   <div>
                     <p className="text-xs font-bold uppercase tracking-wide text-brand-muted">
                       Formatos
                     </p>
-                    <ul className="mt-2 space-y-2">
-                      {product.variants.map((v) => (
-                        <li
-                          key={v.label}
-                          className="flex items-center justify-between rounded-md border border-brand-border px-3 py-2 text-sm"
-                        >
-                          <span>{v.label}</span>
-                          <span className="font-medium">
-                            {formatPrice(v.price, product.currency)}
-                          </span>
-                        </li>
-                      ))}
+                    <p className="mt-1 text-xs text-brand-muted">
+                      Los formatos se muestran en base sin IVA.
+                    </p>
+                    <ul className="mt-2 space-y-2" role="list">
+                      {product.variants.map((v) => {
+                        const isSelected = selectedVariantLabel === v.label;
+                        return (
+                          <li key={v.label}>
+                            <button
+                              type="button"
+                              onClick={() =>
+                                setSelectedVariantLabel((prev) =>
+                                  prev === v.label ? null : v.label,
+                                )
+                              }
+                              aria-pressed={isSelected}
+                              className={[
+                                "flex w-full items-center justify-between gap-3 rounded-md border px-3 py-2.5 text-left text-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red",
+                                isSelected
+                                  ? "border-brand-red bg-brand-red/5 ring-1 ring-brand-red/25"
+                                  : "border-brand-border bg-brand-white hover:border-brand-red/35 hover:bg-brand-bg",
+                              ].join(" ")}
+                            >
+                              <span className="font-medium text-brand-black">
+                                {v.label}
+                              </span>
+                              <span className="shrink-0 font-medium text-brand-black">
+                                {formatPrice(v.price, product.currency)}
+                              </span>
+                            </button>
+                          </li>
+                        );
+                      })}
                     </ul>
                   </div>
-                ) : (
-                  <p className="text-sm font-medium text-brand-black">
-                    {formatPrice(product.price, product.currency)}
-                    <span className="ml-1 font-normal text-brand-muted">
-                      / {product.unit}
-                    </span>
-                  </p>
-                )}
+                ) : null}
                 {product.tags?.length ? (
                   <div className="flex flex-wrap gap-2">
                     {product.tags.map((tag) => (

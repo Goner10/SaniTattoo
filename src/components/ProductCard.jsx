@@ -54,14 +54,23 @@ export default function ProductCard({
         <p className="line-clamp-2 text-sm font-normal text-brand-muted">
           {product.shortDescription}
         </p>
-        <p className="mt-auto text-sm font-medium text-brand-black">
-          {hasVariants && displayPrice !== null ? (
-            <>Desde {formatPrice(displayPrice, product.currency)}</>
-          ) : (
-            formatPrice(displayPrice, product.currency)
-          )}
-          <span className="ml-1 font-normal text-brand-muted">/ {product.unit}</span>
-        </p>
+        <div className="mt-auto space-y-0.5">
+          <p className="text-sm font-medium text-brand-black">
+            {displayPrice === null ? (
+              formatPrice(null, product.currency)
+            ) : hasVariants ? (
+              <>Desde {formatPrice(displayPrice, product.currency)}</>
+            ) : (
+              formatPrice(displayPrice, product.currency)
+            )}
+            {displayPrice !== null ? (
+              <span className="font-normal text-brand-muted"> / {product.unit}</span>
+            ) : null}
+          </p>
+          {displayPrice !== null ? (
+            <p className="text-xs font-normal text-brand-muted">sin IVA</p>
+          ) : null}
+        </div>
       </div>
     </>
   );

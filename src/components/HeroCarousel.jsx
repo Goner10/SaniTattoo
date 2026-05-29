@@ -65,6 +65,30 @@ const SLIDES = [
     fullContentOnDesktop: true,
   },
   {
+    id:"shapu",
+    image: "images/placeholders/shapu-hero.jpg",
+    images: {
+      mobile: "images/placeholders/shapu-hero.jpg",
+      tablet: "images/placeholders/shapu-hero.jpg",
+      desktop: "images/placeholders/shapu-hero.jpg",
+    },
+    imageAlt: "Banner Shapu: cuidado para piel tatuada",
+    imageClass: "object-cover object-center",
+    imageClassMobile: "object-cover object-center",
+    imageClassTablet: "object-cover object-center",
+    imageClassDesktop: "object-cover object-center",
+    variant: "brand",
+    eyebrow: "SHAPU",
+    title: "Cuidado para piel tatuada",
+    description: "",
+    ctaTo: "/catalogo?brand=shapu",
+    ctaLabel: "Ver productos Shapu",
+    dotLabel: "Ir al slide Shapu",
+    imageOnlyOnDesktop: true,
+    imageLinkAriaLabel: "Ver productos Shapu",
+    fullContentOnDesktop: true,
+  },
+  {
     id: "biotatum",
     image: "images/brands/hero-bio.png",
     images: {
@@ -369,18 +393,18 @@ export default function HeroCarousel() {
           <button
             type="button"
             onClick={goPrev}
-            className="absolute left-3 top-1/2 z-20 hidden -translate-y-1/2 rounded-full border border-brand-border/80 bg-brand-white/90 p-2.5 text-brand-black shadow-md transition-colors hover:border-brand-red/40 hover:bg-brand-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red sm:left-4 sm:flex"
+            className="absolute left-2 top-1/2 z-20 flex -translate-y-1/2 rounded-full border border-white/20 bg-black/35 p-2 text-white opacity-70 shadow-sm backdrop-blur-sm transition-colors hover:bg-black/50 hover:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red sm:left-4 sm:border-brand-border/80 sm:bg-brand-white/90 sm:p-2.5 sm:text-brand-black sm:opacity-100 sm:shadow-md sm:hover:border-brand-red/40 sm:hover:bg-brand-white"
             aria-label="Slide anterior"
           >
-            <ChevronLeft className="size-5" aria-hidden />
+            <ChevronLeft className="size-4 sm:size-5" aria-hidden />
           </button>
           <button
             type="button"
             onClick={() => goTo((index + 1) % count)}
-            className="absolute right-3 top-1/2 z-20 hidden -translate-y-1/2 rounded-full border border-brand-border/80 bg-brand-white/90 p-2.5 text-brand-black shadow-md transition-colors hover:border-brand-red/40 hover:bg-brand-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red sm:right-4 sm:flex"
+            className="absolute right-2 top-1/2 z-20 flex -translate-y-1/2 rounded-full border border-white/20 bg-black/35 p-2 text-white opacity-70 shadow-sm backdrop-blur-sm transition-colors hover:bg-black/50 hover:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red sm:right-4 sm:border-brand-border/80 sm:bg-brand-white/90 sm:p-2.5 sm:text-brand-black sm:opacity-100 sm:shadow-md sm:hover:border-brand-red/40 sm:hover:bg-brand-white"
             aria-label="Slide siguiente"
           >
-            <ChevronRight className="size-5" aria-hidden />
+            <ChevronRight className="size-4 sm:size-5" aria-hidden />
           </button>
 
           <div

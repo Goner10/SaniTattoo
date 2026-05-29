@@ -39,11 +39,11 @@ export default function Offers() {
                 Actualmente no hay promociones activas
               </p>
               <p className="mx-auto mt-4 max-w-md text-sm font-normal leading-relaxed text-brand-muted sm:text-base">
-                Contacta con nosotros para rrecibir información sobre próximas ofertas y condiciones especiales para estudios.
+                Contacta con nosotros para recibir información sobre próximas ofertas y condiciones especiales para estudios.
               </p>
               <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:flex-wrap">
                 <WhatsAppButton href={generalWhatsAppUrl("Me interesan ofertas.")}>
-                  Consultar por WhatsApp
+                  Consulta por WhatsApp
                 </WhatsAppButton>
                 <Link to="/catalogo" className={catalogCtaPrimary}>
                   Ver catálogo

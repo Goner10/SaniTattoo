@@ -18,7 +18,7 @@ const BRAND_LOGO_SIZE_CLASS = {
     "max-h-14 max-w-[8.5rem] sm:max-h-11 sm:max-w-[10.5rem] md:max-h-20 md:max-w-[11rem] lg:max-h-[3.85rem] lg:max-w-[13.5rem] xl:max-h-[5.1rem] xl:max-w-[14rem]",
 
   tsunami:
-    "max-h-18 max-w-[8.5rem] sm:max-h-[3.25rem] sm:max-w-[10rem] md:max-h-[6.25rem] md:max-w-[10.5rem] lg:max-h-[4.1rem] lg:max-w-[13rem] xl:max-h-[7.5rem] xl:max-w-[13.75rem]",
+    "max-h-18 max-w-[8.5rem] sm:max-h-[3.25rem] sm:max-w-[10rem] md:max-h-[7.25rem] md:max-w-[10.5rem] lg:max-h-[4.1rem] lg:max-w-[13rem] xl:max-h-[7.5rem] xl:max-w-[13.75rem]",
 
   hornet:
     "max-h-12 max-w-[8rem] sm:max-h-12 sm:max-w-[9rem] md:max-h-13 md:max-w-[11.25rem] lg:max-h-11 lg:max-w-[8.75rem] xl:max-h-[4rem] xl:max-w-[10.75rem]",
