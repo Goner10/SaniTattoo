@@ -1,26 +1,33 @@
 import { publicAssetUrl } from "../utils/publicAsset.js";
 
 const LOGO_BASE_CLASS =
-  "h-auto w-auto object-contain opacity-80 transition-opacity duration-200 hover:opacity-100";
+  "h-auto w-auto max-w-full object-contain opacity-80 transition-opacity duration-200 hover:opacity-100";
 
 /** Presencia visual por marca (object-contain; sin deformar). */
 const BRAND_LOGO_SIZE_CLASS = {
   "aloe-tattoo":
-    "max-h-11 max-w-[9.25rem] sm:max-h-14 sm:max-w-[11rem] md:max-h-16 md:max-w-[12.5rem]",
+    "max-h-10 max-w-[8.5rem] sm:max-h-12 sm:max-w-[10rem] md:max-h-[3.25rem] md:max-w-[10.5rem] lg:max-h-14 lg:max-w-[10rem]",
+
   effigerm:
-    "max-h-[4.25rem] max-w-[11rem] sm:max-h-[5.25rem] sm:max-w-[12.5rem] md:max-h-[6rem] md:max-w-[13.5rem]",
+    "max-h-18 max-w-[9rem] sm:max-h-12 sm:max-w-[10.5rem] md:max-h-[5.25rem] md:max-w-[11rem] lg:max-h-[4.25rem] lg:max-w-[13.5rem] xl:max-h-[6.5rem] xl:max-w-[14rem]",
+
   biotatum:
-    "max-h-12 max-w-[15rem] sm:max-h-[5.75rem] sm:max-w-[18rem] md:max-h-[6.25rem] md:max-w-[22rem]",
+    "max-h-14 max-w-[10rem] sm:max-h-11 sm:max-w-[13rem] md:max-h-20 md:max-w-[13rem] lg:max-h-[3.85rem] lg:max-w-[15.5rem] xl:max-h-[5.5rem] xl:max-w-[16.25rem]",
+
   ghost:
-    "max-h-12 max-w-[12rem] sm:max-h-[4.75rem] sm:max-w-[14.5rem] md:max-h-[5.25rem] md:max-w-[16rem]",
+    "max-h-14 max-w-[8.5rem] sm:max-h-11 sm:max-w-[10.5rem] md:max-h-20 md:max-w-[11rem] lg:max-h-[3.85rem] lg:max-w-[13.5rem] xl:max-h-[5.1rem] xl:max-w-[14rem]",
+
   tsunami:
-    "max-h-14 max-w-[11rem] sm:max-h-[4.5rem] sm:max-w-[12.75rem] md:max-h-[5rem] md:max-w-[15.5rem]",
-    hornet:
-    "max-h-11 max-w-[9.25rem] sm:max-h-14 sm:max-w-[11rem] md:max-h-16 md:max-w-[12.5rem]",
-    shapu:
-    "max-h-11 max-w-[9.25rem] sm:max-h-14 sm:max-w-[11rem] md:max-h-16 md:max-w-[12.5rem]",
-    "real-stencil-printer":
-    "max-h-9 max-w-[7.25rem] sm:max-h-12 sm:max-w-[9rem] md:max-h-14 md:max-w-[10.5rem]",
+    "max-h-18 max-w-[8.5rem] sm:max-h-[3.25rem] sm:max-w-[10rem] md:max-h-[6.25rem] md:max-w-[10.5rem] lg:max-h-[4.1rem] lg:max-w-[13rem] xl:max-h-[7.5rem] xl:max-w-[13.75rem]",
+
+  hornet:
+    "max-h-12 max-w-[8rem] sm:max-h-12 sm:max-w-[9rem] md:max-h-13 md:max-w-[11.25rem] lg:max-h-11 lg:max-w-[8.75rem] xl:max-h-[4rem] xl:max-w-[10.75rem]",
+
+  shapu:
+    "max-h-18 max-w-[8rem] sm:max-h-12 sm:max-w-[9.5rem] md:max-h-[6.5rem] md:max-w-[10rem] lg:max-h-[4.15rem] lg:max-w-[14rem] xl:max-h-[6rem] xl:max-w-[18.5rem]",
+
+  "real-stencil-printer":
+    "max-h-10 max-w-[8.5rem] sm:max-h-12 sm:max-w-[10rem] md:max-h-12 md:max-w-[9.75rem] lg:max-h-11 lg:max-w-[9rem]",
 };
 
 /** Logos destacado home — rutas en public/images/brands (sin tocar brands.js). */
@@ -71,15 +78,6 @@ function brandLogoClass(id) {
   return [LOGO_BASE_CLASS, BRAND_LOGO_SIZE_CLASS[id] ?? ""].join(" ");
 }
 
-function brandItemClass(id) {
-  return [
-    "flex min-w-[42%] shrink-0 items-center justify-center sm:min-w-0 md:min-w-0",
-    id === "tsunami" ? "mr-2 sm:mr-3" : "",
-  ]
-    .filter(Boolean)
-    .join(" ");
-}
-
 export default function BrandStrip() {
   return (
     <section
@@ -107,13 +105,13 @@ export default function BrandStrip() {
         </div>
 
         <ul
-          className="mt-10 flex min-w-0 flex-wrap items-center justify-center gap-x-6 gap-y-4 sm:gap-x-5 sm:gap-y-5 md:mt-12 md:justify-start lg:gap-x-5"
+          className="mt-10 grid max-w-5xl grid-cols-2 items-center gap-x-8 gap-y-7 sm:gap-x-10 sm:gap-y-8 md:mt-12 md:grid-cols-4 md:gap-x-10 md:gap-y-10 lg:max-w-6xl lg:gap-x-12"
           aria-label="Marcas asociadas"
         >
           {BRAND_LOGOS.map((brand) => (
             <li
               key={brand.id}
-              className={brandItemClass(brand.id)}
+              className="flex h-16 items-center justify-center sm:h-20 md:h-24 lg:h-26 xl:h-30"
             >
               <img
                 src={publicAssetUrl(brand.src)}
