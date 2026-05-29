@@ -181,7 +181,7 @@ export default function Home() {
             <SectionHeader
               eyebrow="Marca"
               accent
-              title="Merchandising"
+              title="Camisetas"
               subtitle="Viste la marca dentro y fuera del estudio sin perder identidad.."
             />
             </div>
@@ -193,7 +193,7 @@ export default function Home() {
             </div>
             <div className="relative z-10 mt-8 flex justify-center sm:mt-10 lg:absolute lg:bottom-6 lg:right-6 lg:mt-0 lg:justify-end xl:bottom-8 xl:right-8">
               <Link to="/merchandising" className={catalogCtaPrimary}>
-                Ir a merchandising
+                Ir a camisetas
               </Link>
             </div>
           </div>

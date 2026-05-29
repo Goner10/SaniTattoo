@@ -264,14 +264,14 @@ function HeroSlidePanel({ slide, eagerImage }) {
       {imageOnlyOnDesktop ? (
         <Link
           to={slide.ctaTo}
-          className="absolute inset-0 z-[1] hidden md:block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
+          className="absolute inset-0 z-[1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
           aria-label={slide.imageLinkAriaLabel ?? slide.ctaLabel}
         />
       ) : null}
       <div
         className={[
           contentShellClass,
-          imageOnlyOnDesktop ? "md:hidden" : "",
+          imageOnlyOnDesktop ? "hidden" : "",
           isBiotatum ? "max-md:py-10 max-md:pb-24" : "",
         ]
           .filter(Boolean)
