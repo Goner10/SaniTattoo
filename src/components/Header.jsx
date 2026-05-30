@@ -10,17 +10,18 @@ import { Truck } from "lucide-react";
 const SCROLL_TOP_THRESHOLD_PX = 10;
 
 const headerContainerClass =
-  "mx-auto w-full max-w-6xl px-4 sm:px-6 2xl:max-w-[1500px] 2xl:px-8";
+  "mx-auto w-full max-w-6xl px-4 min-[700px]:px-4 sm:px-6 2xl:max-w-[1500px] 2xl:px-8";
 
-  const navLinkClass = ({ isActive }) =>
-    [
-      "header-font rounded-md px-3 py-2 text-[15px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red",
-      isActive
-        ? "bg-brand-black text-brand-white"
-        : "text-brand-black hover:bg-brand-bg",
-    ].join(" ");
-  
-  const headerWhatsAppClass = "header-font text-[15px]";
+const navLinkClass = ({ isActive }) =>
+  [
+    "header-font rounded-md px-3 py-2 text-[15px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red max-[900px]:px-2 max-[900px]:py-1.5 max-[900px]:text-[0.8125rem]",
+    isActive
+      ? "bg-brand-black text-brand-white"
+      : "text-brand-black hover:bg-brand-bg",
+  ].join(" ");
+
+const headerWhatsAppClass =
+  "header-font text-[15px] max-[900px]:!px-3 max-[900px]:!py-2 max-[900px]:text-[0.8125rem]";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -76,7 +77,7 @@ export default function Header() {
       >
         <NavLink
           to="/"
-          className="flex min-w-0 shrink items-center gap-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
+          className="flex min-w-0 shrink-0 items-center gap-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
           onClick={handleNavClick}
         >
           <img
@@ -85,8 +86,8 @@ export default function Header() {
             className={[
               "w-auto object-contain transition-[height,max-height] duration-300 ease-in-out",
               isAtTop
-                ? "h-12 max-h-14 sm:h-14 sm:max-h-16 md:h-16 md:max-h-[4.5rem]"
-                : "h-10 max-h-12 sm:h-12 md:h-14",
+                ? "h-12 max-h-14 sm:h-14 sm:max-h-16 min-[700px]:h-14 min-[700px]:max-h-[4rem] md:h-16 md:max-h-[4.5rem]"
+                : "h-10 max-h-12 sm:h-12 min-[700px]:h-12 md:h-14",
             ].join(" ")}
             width={200}
             height={56}
@@ -94,7 +95,7 @@ export default function Header() {
         </NavLink>
 
         <nav
-          className="hidden items-center gap-1 md:flex"
+          className="hidden min-w-0 items-center gap-1 min-[700px]:flex max-[900px]:gap-0.5"
           aria-label="Principal"
         >
           <NavLink to="/" end className={navLinkClass} onClick={scrollToTop}>
@@ -119,13 +120,13 @@ export default function Header() {
           <WhatsAppButton
             href={buildWhatsAppUrl()}
             variant="whatsapp"
-            className={`ml-2 ${headerWhatsAppClass}`}
+            className={`ml-1 shrink-0 max-[900px]:ml-1.5 ${headerWhatsAppClass}`}
           >
             WhatsApp
           </WhatsAppButton>
         </nav>
 
-        <div className="flex items-center gap-2 md:hidden">
+        <div className="flex items-center gap-2 min-[700px]:hidden">
           <WhatsAppButton
             href={buildWhatsAppUrl()}
             variant="whatsapp"
@@ -154,7 +155,7 @@ export default function Header() {
         <div
           id="mobile-menu"
           className={[
-            "border-t border-brand-border bg-brand-white py-3 md:hidden",
+            "border-t border-brand-border bg-brand-white py-3 min-[700px]:hidden",
             headerContainerClass,
           ].join(" ")}
         >

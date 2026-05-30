@@ -28,7 +28,7 @@ export function resolveResponsiveSources(sources, fallback) {
 
 /** Clases Tailwind para mostrar una sola variante por breakpoint (< md | md–lg | lg+). */
 export const responsiveImageVisibility = {
-  mobile: "md:hidden",
+  mobile: "block md:hidden",
   tablet: "hidden md:block lg:hidden",
   desktop: "hidden lg:block",
 };

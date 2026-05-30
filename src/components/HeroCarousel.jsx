@@ -6,7 +6,6 @@ import { catalogCtaPrimary } from "../utils/catalogCta.js";
 import {
   publicAssetUrl,
   resolveResponsiveSources,
-  responsiveImageVisibility,
 } from "../utils/publicAsset.js";
 
 const AUTOPLAY_MS = 5500;
@@ -74,9 +73,8 @@ const SLIDES = [
     },
     imageAlt: "Banner Shapu: cuidado para piel tatuada",
     imageClass: "object-cover object-center",
-    imageClassMobile: "object-cover object-center",
-    imageClassTablet: "object-cover object-center",
-    imageClassDesktop: "object-cover object-center",
+    pictureClass:
+      "absolute inset-0 h-full w-full object-cover object-center bg-[#e30613]",
     variant: "brand",
     eyebrow: "SHAPU",
     title: "Cuidado para piel tatuada",
@@ -88,30 +86,29 @@ const SLIDES = [
     imageLinkAriaLabel: "Ver productos Shapu",
     fullContentOnDesktop: true,
   },
- {
-  id:"tsunami",
-  image: "images/brands/tsunami-banner.jpeg",
-  images: {
-    mobile: "images/brands/tsunami-hero-movil.jpeg",
-    tablet: "images/brands/tsunami-hero-tablet.jpeg",
-    desktop: "images/brands/tsunami-hero-tablet.jpeg",
+  {
+    id: "tsunami",
+    image: "images/brands/tsunami-banner.jpeg",
+    images: {
+      mobile: "images/brands/tsunami-hero-movil.jpeg",
+      tablet: "images/brands/tsunami-hero-tablet.jpeg",
+      desktop: "images/brands/tsunami-hero-tablet.jpeg",
+    },
+    imageAlt: "Banner Tsunami: agujas de la marca Tsunami",
+    imageClass: "object-cover object-center",
+    pictureClass:
+      "absolute inset-0 h-full w-full object-contain object-center scale-[1.88] bg-[#050b09] md:object-cover md:scale-100 lg:object-cover",
+    variant: "brand",
+    eyebrow: "TSUNAMI",
+    title: "Agujas de la marca Tsunami",
+    description: "",
+    ctaTo: "/catalogo?brand=tsunami",
+    ctaLabel: "Ver productos Tsunami",
+    dotLabel: "Ir al slide Tsunami",
+    imageOnlyOnDesktop: true,
+    imageLinkAriaLabel: "Ver productos Tsunami",
+    fullContentOnDesktop: true,
   },
-  imageAlt: "Banner Tsunami: agujas de la marca Tsunami",
-  imageClass: "object-fill",
-  imageClassMobile: "object-cover object-center",
-  imageClassTablet: "object-cover object-center",
-  imageClassDesktop: "object-cover object-center",
-  variant: "brand",
-  eyebrow: "TSUNAMI",
-  title: "Agujas de la marca Tsunami",
-  description: "",
-  ctaTo: "/catalogo?brand=tsunami",
-  ctaLabel: "Ver productos Tsunami",
-  dotLabel: "Ir al slide Tsunami",
-  imageOnlyOnDesktop: true,
-  imageLinkAriaLabel: "Ver productos Tsunami",
-  fullContentOnDesktop: true,
- },
   {
     id: "aloetattoo",
     image: "images/brands/aloe_tattoo.JPG",
@@ -142,7 +139,7 @@ const sectionHeightClass =
   "relative isolate min-h-[500px] w-full overflow-hidden border-b border-brand-border bg-brand-white sm:min-h-[460px] lg:min-h-[420px] lg:max-h-[min(560px,calc(100vh-120px))] xl:min-h-[440px] xl:max-h-[min(580px,calc(100vh-112px))] 2xl:max-h-none 2xl:min-h-[700px]";
 
 const slidePanelHeightClass =
-  "relative h-full min-h-[500px] w-full shrink-0 basis-full sm:min-h-[460px] lg:min-h-[420px] lg:max-h-[min(560px,calc(100vh-120px))] xl:min-h-[440px] xl:max-h-[min(580px,calc(100vh-112px))] 2xl:max-h-none 2xl:min-h-[700px]";
+  "relative h-full min-h-[500px] w-full max-w-full shrink-0 basis-full overflow-hidden sm:min-h-[460px] lg:min-h-[420px] lg:max-h-[min(560px,calc(100vh-120px))] xl:min-h-[440px] xl:max-h-[min(580px,calc(100vh-112px))] 2xl:max-h-none 2xl:min-h-[700px]";
 
 const contentShellClass =
   "relative z-10 mx-auto flex h-full min-h-[inherit] max-w-6xl min-w-0 items-center px-4 py-14 pb-28 sm:px-6 sm:py-14 sm:pb-14 lg:py-8 lg:pb-8 xl:py-8 xl:pb-8 2xl:mx-0 2xl:mr-auto 2xl:max-w-[1500px] 2xl:ml-[max(2rem,calc((100vw-1500px)/2+2rem))] 2xl:px-8 2xl:py-16 2xl:pb-16";
@@ -163,31 +160,14 @@ function slideContentCardClass(variant, slideId) {
 }
 
 /**
- * Clases de encaje por breakpoint sin mezclar object-cover y object-contain.
  * @param {HeroSlide} slide
- * @param {"mobile" | "tablet" | "desktop"} variant
+ * @returns {string}
  */
-function heroSlideImageClassName(slide, variant) {
-  const visibility = responsiveImageVisibility[variant];
-  let fit;
-
-  if (variant === "mobile") {
-    fit =
-      slide.imageClassMobile ??
-      (slide.id === "biotatum"
-        ? "object-contain object-center bg-brand-black"
-        : (slide.imageClass ?? "object-cover object-center"));
-  } else if (variant === "tablet") {
-    fit =
-      slide.imageClassTablet ??
-      (slide.id === "biotatum"
-        ? "object-contain object-center bg-brand-black"
-        : (slide.imageClass ?? "object-cover object-center"));
-  } else {
-    fit = slide.imageClassDesktop ?? slide.imageClass ?? "object-cover object-center";
-  }
-
-  return [imageFillClass, fit, visibility].join(" ");
+function heroPictureImgClass(slide) {
+  return (
+    slide.pictureClass ??
+    [imageFillClass, slide.imageClass ?? "object-cover object-center"].join(" ")
+  );
 }
 
 /** Evita ratio 16:9 forzado en assets verticales (p. ej. BioTaTum móvil). */
@@ -212,35 +192,34 @@ function heroSlideImgProps(slide, variant, eagerImage) {
 function HeroSlideImage({ slide, eagerImage }) {
   const sources = resolveResponsiveSources(slide.images, slide.image);
   const useResponsive = Boolean(slide.images);
+  const imgClass = heroPictureImgClass(slide);
 
   if (!useResponsive) {
     return (
       <img
         {...heroSlideImgProps(slide, "desktop", eagerImage)}
         src={publicAssetUrl(slide.image)}
-        className={[imageFillClass, slide.imageClass ?? ""].join(" ")}
+        className={imgClass}
       />
     );
   }
 
   return (
-    <>
+    <picture className="absolute inset-0 block h-full w-full">
+      <source
+        media="(min-width: 1024px)"
+        srcSet={publicAssetUrl(sources.desktop)}
+      />
+      <source
+        media="(min-width: 768px)"
+        srcSet={publicAssetUrl(sources.tablet)}
+      />
       <img
         {...heroSlideImgProps(slide, "mobile", eagerImage)}
         src={publicAssetUrl(sources.mobile)}
-        className={heroSlideImageClassName(slide, "mobile")}
+        className={imgClass}
       />
-      <img
-        {...heroSlideImgProps(slide, "tablet", eagerImage)}
-        src={publicAssetUrl(sources.tablet)}
-        className={heroSlideImageClassName(slide, "tablet")}
-      />
-      <img
-        {...heroSlideImgProps(slide, "desktop", eagerImage)}
-        src={publicAssetUrl(sources.desktop)}
-        className={heroSlideImageClassName(slide, "desktop")}
-      />
-    </>
+    </picture>
   );
 }
 

@@ -104,13 +104,13 @@ export default function Home() {
             </p>
           </div>
 
-          <ol className="grid gap-4 sm:grid-cols-3 sm:gap-5 lg:gap-6">
+          <ol className="grid grid-cols-1 gap-4 min-[700px]:grid-cols-2 min-[700px]:gap-5 lg:grid-cols-3 lg:gap-6">
             {orderSteps.map((item) => {
               const Icon = item.Icon;
               return (
                 <li
                   key={item.step}
-                  className="group relative overflow-hidden rounded-2xl border border-white/20 bg-white/[0.08] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.22)] backdrop-blur-md transition-[transform,box-shadow,border-color,background-color] duration-300 ease-out will-change-transform hover:-translate-y-1 hover:border-white/35 hover:bg-white/[0.14] hover:shadow-[0_22px_56px_rgba(0,0,0,0.28)] sm:p-7"
+                  className="group relative min-w-0 overflow-hidden rounded-2xl border border-white/20 bg-white/[0.08] p-5 shadow-[0_18px_50px_rgba(0,0,0,0.22)] backdrop-blur-md transition-[transform,box-shadow,border-color,background-color] duration-300 ease-out will-change-transform hover:-translate-y-1 hover:border-white/35 hover:bg-white/[0.14] hover:shadow-[0_22px_56px_rgba(0,0,0,0.28)] min-[700px]:p-5 min-[700px]:max-lg:last:col-span-2 lg:p-7 lg:last:col-span-1"
                 >
                   <div
                     className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-white/10 transition-opacity duration-300 group-hover:opacity-80"
@@ -124,7 +124,7 @@ export default function Home() {
                       <span className="font-heading text-4xl leading-none text-white/25 transition-colors duration-300 group-hover:text-white/35 sm:text-5xl">
                         {item.step}
                       </span>
-                      <h3 className="font-heading mt-2 text-base font-semibold tracking-tight text-white sm:text-lg">
+                      <h3 className="font-heading mt-2 text-base font-semibold tracking-tight text-white min-[700px]:text-base lg:text-lg">
                         {item.title}
                       </h3>
                       <p className="mt-2 text-sm leading-relaxed text-white/80">
