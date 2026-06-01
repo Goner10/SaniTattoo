@@ -68,7 +68,9 @@ export default function ProductCard({
             ) : null}
           </p>
           {displayPrice !== null ? (
-            <p className="text-xs font-normal text-brand-muted">sin IVA</p>
+            <p className="text-xs font-normal text-brand-muted">
+              {product.priceIncludesVat ? "IVA incluido" : "sin IVA"}
+            </p>
           ) : null}
         </div>
       </div>

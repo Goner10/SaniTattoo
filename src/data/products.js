@@ -25,6 +25,7 @@
  *   merchandisingFeatured?: boolean
  *   badge?: string
  *   gallery?: string[]
+ *   priceIncludesVat?: boolean
  * }} Product
  */
 
@@ -3957,6 +3958,7 @@ export const products = [
     featured: false,
     offer: false,
     active: true,
+    priceIncludesVat: true,
     merchandisingFeatured: true,
     gallery: [
       "images/merchandising/cami-blanca.png",
@@ -3995,6 +3997,7 @@ export const products = [
     featured: false,
     offer: false,
     active: true,
+    priceIncludesVat: true,
     merchandisingFeatured: true,
     gallery: [
       "images/merchandising/cami-negra-.png",
@@ -4033,6 +4036,7 @@ export const products = [
     featured: false,
     offer: false,
     active: true,
+    priceIncludesVat: true,
     merchandisingFeatured: false,
     badge: "Próximamente",
     gallery: [
@@ -4072,6 +4076,7 @@ export const products = [
     featured: false,
     offer: false,
     active: true,
+    priceIncludesVat: true,
     merchandisingFeatured: true,
     badge: "Próximamente",
     gallery: [

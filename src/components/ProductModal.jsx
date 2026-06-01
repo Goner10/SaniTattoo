@@ -16,9 +16,16 @@ import { productWhatsAppUrl } from "../utils/whatsapp.js";
  *   currency: string
  *   showFrom: boolean
  *   unit?: string
+ *   priceIncludesVat?: boolean
  * }} props
  */
-function ModalPriceBlock({ basePrice, currency, showFrom, unit }) {
+function ModalPriceBlock({
+  basePrice,
+  currency,
+  showFrom,
+  unit,
+  priceIncludesVat = false,
+}) {
   if (basePrice == null) {
     return (
       <div className="rounded-xl border border-brand-border bg-brand-bg/40 px-4 py-3.5">
@@ -29,7 +36,26 @@ function ModalPriceBlock({ basePrice, currency, showFrom, unit }) {
     );
   }
 
-  const priceWithVat = getPriceWithVat(basePrice);
+  const priceWithVat = getPriceWithVat(basePrice, { priceIncludesVat });
+
+  if (priceIncludesVat) {
+    return (
+      <div className="rounded-xl border border-brand-border bg-brand-bg/40 px-4 py-3.5">
+        <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+          {showFrom ? (
+            <span className="text-sm font-medium text-brand-muted">Desde</span>
+          ) : null}
+          <span className="font-heading text-2xl font-bold leading-none text-brand-red sm:text-[1.65rem]">
+            {formatPrice(priceWithVat, currency)}
+          </span>
+          <span className="text-sm font-medium text-brand-muted">IVA incluido</span>
+          {unit ? (
+            <span className="text-sm text-brand-muted">/ {unit}</span>
+          ) : null}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="rounded-xl border border-brand-border bg-brand-bg/40 px-4 py-3.5">
@@ -253,6 +279,7 @@ export default function ProductModal({ product, onClose }) {
                   currency={product.currency}
                   showFrom={showFromPrice}
                   unit={hasVariants ? undefined : product.unit}
+                  priceIncludesVat={product.priceIncludesVat}
                 />
 
                 {hasVariants ? (
@@ -261,7 +288,9 @@ export default function ProductModal({ product, onClose }) {
                       Formatos
                     </p>
                     <p className="mt-1 text-xs text-brand-muted">
-                      Los formatos se muestran en base sin IVA.
+                      {product.priceIncludesVat
+                        ? "Los precios por talla incluyen IVA."
+                        : "Los formatos se muestran en base sin IVA."}
                     </p>
                     <ul className="mt-2 space-y-2" role="list">
                       {product.variants.map((v) => {

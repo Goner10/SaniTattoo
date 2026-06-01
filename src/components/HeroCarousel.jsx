@@ -39,11 +39,11 @@ const imageFillClass = "absolute inset-0 h-full w-full";
 const SLIDES = [
   {
     id: "sanitattoo",
-    image: "images/placeholders/hero-definitivo.png",
+    image: "images/placeholders/hero-nuevo.png",
     images: {
-      mobile: "images/placeholders/hero-definitivo.png",
-      tablet: "images/placeholders/hero-definitivo.png",
-      desktop: "images/placeholders/hero-definitivo.png",
+      mobile: "images/placeholders/hero-nuevo.png",
+      tablet: "images/placeholders/hero-nuevo.png",
+      desktop: "images/placeholders/hero-nuevo.png",
     },
     imageAlt:
       "Cabecera Sanitattoo: higiene y consumibles para estudio de tatuaje",

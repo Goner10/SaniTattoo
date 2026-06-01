@@ -3,10 +3,12 @@ export const VAT_RATE = 0.21;
 
 /**
  * @param {number | null | undefined} price Precio base sin IVA
+ * @param {{ priceIncludesVat?: boolean }} [options]
  * @returns {number | null}
  */
-export function getPriceWithVat(price) {
+export function getPriceWithVat(price, options = {}) {
   if (price == null) return null;
+  if (options.priceIncludesVat) return price;
   return Math.round(price * (1 + VAT_RATE) * 100) / 100;
 }
 
