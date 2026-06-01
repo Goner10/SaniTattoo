@@ -531,10 +531,9 @@ export const products = [
     shortDescription:
       "Stencil primer profesional de máxima fijación para sesiones largas y trabajos de alta precisión.",
     description: [
-      "La versión más potente, precisa y exclusiva de la línea profesional de Protón.",
+      "La versión más potente, precisa y exclusiva de nuestra línea profesional.",
       "Diseñado para artistas que exigen el máximo control, ofrece una fijación extrema y una estabilidad superior en todo tipo de pieles y sesiones largas.",
-      "BLACK LABEL representa el nivel más alto de fijación y control. Ideal para trabajos de alta complejidad, líneas críticas y sesiones prolongadas.",
-      
+      "BLACK LABEL representa el nivel más alto de fijación y control del mercado. Ideal para trabajos de alta complejidad, líneas críticas y sesiones prolongadas, garantiza una transferencia limpia, nítida y estable.",
     ],
     tags: ["proton", "stencil", "primer", "black label", "tatuaje"],
     featured: false,
@@ -557,10 +556,9 @@ export const products = [
     shortDescription:
       "Stencil primer Pro Line con alta duración y transferencia limpia para trabajos exigentes.",
     description: [
-      "Producto Pro Line diseñado para superar a sus predecesores con una duración de hasta 20 horas o más.",
-      "Permite incluso dejar el tatuaje marcado para continuar la sesión al día siguiente.",
-      "Su textura similar a una cera se extiende fácilmente sobre la piel y permite una adherencia excepcional de la plantilla.",
-      "Ayuda a evitar bolsas y expansión del stencil, garantizando una transferencia nítida, limpia y detallada.",
+      "Este nuevo producto va aún más allá, superando a sus predecesores con una duración de hasta 20 horas o más, permitiendo incluso dejar el tatuaje marcado para continuar la sesión al día siguiente.",
+      "Con una textura similar a una cera, al aplicarlo sobre la piel se extiende fácilmente y permite una adherencia excepcional de la plantilla sin formar bolsas ni expandirse, gracias a su formulación magistral.",
+      "Este producto garantiza una transferencia perfectamente nítida, limpia y detallada en cada tatuaje.",
     ],
     tags: ["proton", "stencil", "primer", "evolution", "pro line"],
     featured: false,
@@ -583,9 +581,7 @@ export const products = [
     shortDescription:
       "Stencil líquido profesional para una transferencia rápida, limpia y precisa.",
     description: [
-      "Protón Origins Professional Stencil Primer es un stencil líquido diseñado para extenderse rápidamente sobre la piel.",
-      "Facilita que el calco se adhiera de forma excepcional, evitando bolsas y ayudando a controlar la expansión de la plantilla.",
-      "Su formulación está pensada para lograr una transferencia precisa durante el proceso de tatuaje.",
+      "protón Origins Professional Stencil Primer es un stencil líquido, que al colocarlo sobre la piel y expandirlo ves como rápidamente se extiende y el calco se pega sobre ella de una manera excepcional, no creando bolsas y evitando la expansión de la plantilla por su formulación magistral.",
     ],
     tags: ["proton", "stencil", "primer", "origins", "tatuaje"],
     featured: false,
@@ -608,10 +604,8 @@ export const products = [
     shortDescription:
       "Limpiador y removedor de stencil con aroma a menta para preparar y corregir la piel.",
     description: [
-      "Aliado imprescindible para preparar la piel y corregir errores de calco durante el proceso de tatuaje.",
-      "Su fórmula avanzada elimina incluso los stencils más resistentes sin agredir la piel.",
-      "Deja la piel lista para recibir un nuevo calco.",
-      "Versión azul con olor a menta.",
+      "Tu nuevo aliado imprescindible para preparar la piel y corregir cualquier error de calco durante el proceso de tatuaje.",
+      "Esta fórmula avanzada ha sido desarrollada en nuestros laboratorios para ofrecer un rendimiento excepcional: elimina incluso los stencil más resistentes sin agredir la piel, dejándola perfectamente lista para recibir el nuevo calco, con olor a Menta.",
     ],
     tags: ["proton", "stencil remover", "skin cleanser", "menta", "azul"],
     featured: false,
@@ -634,10 +628,8 @@ export const products = [
     shortDescription:
       "Limpiador y removedor de stencil con aroma a golosina para preparar y corregir la piel.",
     description: [
-      "Aliado imprescindible para preparar la piel y corregir errores de calco durante el proceso de tatuaje.",
-      "Su fórmula avanzada elimina incluso los stencils más resistentes sin agredir la piel.",
-      "Deja la piel lista para recibir un nuevo calco.",
-      "Versión rosa con olor a golosina.",
+      "Tu nuevo aliado imprescindible para preparar la piel y corregir cualquier error de calco durante el proceso de tatuaje.",
+      "Esta fórmula avanzada ha sido desarrollada en nuestros laboratorios para ofrecer un rendimiento excepcional: elimina incluso los stencil más resistentes sin agredir la piel, dejándola perfectamente lista para recibir el nuevo calco, con olor a Golosina.",
     ],
     tags: ["proton", "stencil remover", "skin cleanser", "golosina", "rosa"],
     featured: false,
@@ -660,11 +652,12 @@ export const products = [
     shortDescription:
       "Solución cosmética astringente profesional para calmar la piel y acompañar el proceso de tatuaje.",
     description: [
-      "Protón Cristal Blue Shading Solution es una solución cosmética astringente de uso profesional.",
-      "Está desarrollada para acompañar el proceso artístico del tatuaje y calmar la piel durante trabajos exigentes.",
-      "Su textura fluida facilita una aplicación suave y uniforme, ayudando a mantener la piel en óptimas condiciones durante el procedimiento.",
-      "Reduce visiblemente el enrojecimiento, ayuda a controlar el sangrado y aporta una sensación refrescante.",
-      "Realza la intensidad de los pigmentos aplicados, dejando la piel luminosa, limpia y preparada para trabajar con precisión.",
+      "Protón Cristal Blue Shading Solution es una solución cosmética astringente de uso profesional, desarrollada específicamente para acompañar el proceso artístico del tatuaje.",
+      "Su fórmula exclusiva, basada en conocimientos magistrales tradicionales colombianos y fabricada íntegramente en España bajo estrictos controles sanitarios, está diseñada para calmar la piel durante los trabajos más exigentes.",
+      "Gracias a su textura fluida y perfectamente compatible con los productos habituales en el proceso de tatuado, facilita una aplicación suave y uniforme, ayudando a mantener la piel en óptimas condiciones durante todo el procedimiento.",
+      "Su fórmula avanzada reduce visiblemente el enrojecimiento, ayuda a controlar el sangrado y aporta una agradable sensación refrescante.",
+      "Además, realza la intensidad de los pigmentos ya aplicados, dejando una piel luminosa, limpia y preparada para trabajar con máxima precisión.",
+      "Es un aliado ideal para los artistas que buscan fluidez, control y un acabado vibrante.",
     ],
     tags: ["proton", "shading solution", "cristal blue", "azul", "tatuaje"],
     featured: false,
@@ -687,11 +680,12 @@ export const products = [
     shortDescription:
       "Solución cosmética astringente profesional para calmar la piel durante trabajos exigentes.",
     description: [
-      "Protón Cristal Pink Shading Solution es una solución cosmética astringente de uso profesional.",
-      "Está desarrollada para acompañar el proceso artístico del tatuaje y calmar la piel durante trabajos exigentes.",
-      "Su textura fluida facilita una aplicación suave y uniforme, ayudando a mantener la piel en óptimas condiciones durante el procedimiento.",
-      "Reduce visiblemente el enrojecimiento, ayuda a controlar el sangrado y aporta una sensación refrescante.",
-      "Realza la intensidad de los pigmentos aplicados, dejando la piel luminosa, limpia y preparada para trabajar con precisión.",
+      "Protón Cristal Pink Shading Solution es una solución cosmética astringente de uso profesional, desarrollada específicamente para acompañar el proceso artístico del tatuaje.",
+      "Su fórmula exclusiva, basada en conocimientos magistrales tradicionales colombianos y fabricada íntegramente en España bajo estrictos controles sanitarios, está diseñada para calmar la piel durante los trabajos más exigentes.",
+      "Gracias a su textura fluida y perfectamente compatible con los productos habituales en el proceso de tatuado, facilita una aplicación suave y uniforme, ayudando a mantener la piel en óptimas condiciones durante todo el procedimiento.",
+      "Su fórmula avanzada reduce visiblemente el enrojecimiento, ayuda a controlar el sangrado y aporta una agradable sensación refrescante.",
+      "Además, realza la intensidad de los pigmentos ya aplicados, dejando una piel luminosa, limpia y preparada para trabajar con máxima precisión.",
+      "Es un aliado ideal para los artistas que buscan fluidez, control y un acabado vibrante.",
     ],
     tags: ["proton", "shading solution", "cristal pink", "rosa", "tatuaje"],
     featured: false,
@@ -714,10 +708,9 @@ export const products = [
     shortDescription:
       "Espuma limpiadora con pantenol, alantoína y aloe vera, con aroma a golosina.",
     description: [
-      "Pink Foamer Protón es un espumizador formulado con ingredientes bioactivos de alta calidad.",
-      "Enriquecido con pantenol, alantoína y aloe vera, limpia profundamente y ayuda a cuidar la piel durante el proceso de tatuaje.",
-      "Proporciona una sensación de alivio inmediato y comodidad para el cliente.",
-      "Su aroma a golosina añade un toque agradable y reconfortante a la experiencia.",
+      "Pink Foamer Protón es el espumizador revolucionario que incorpora el Soap más avanzado del mercado, formulado con ingredientes bioactivos de la más alta calidad.",
+      "Enriquecido con pantenol, alantoína y aloe vera, este espumizador no solo limpia profundamente, sino que también cuida y repara la piel del cliente, proporcionando un alivio inmediato durante el proceso de tatuaje.",
+      "Su delicado aroma a golosina añade un toque agradable y reconfortante a la experiencia de tus clientes.",
     ],
     tags: [
       "proton",
@@ -748,10 +741,9 @@ export const products = [
     shortDescription:
       "Espuma limpiadora con pantenol, alantoína y aloe vera, con aroma a menta.",
     description: [
-      "Blue Foamer Protón es un espumizador formulado con ingredientes bioactivos de alta calidad.",
-      "Enriquecido con pantenol, alantoína y aloe vera, limpia profundamente y ayuda a cuidar la piel durante el proceso de tatuaje.",
-      "Proporciona una sensación de alivio inmediato y comodidad para el cliente.",
-      "Su aroma a menta aporta un toque refrescante y reconfortante a la sesión.",
+      "Blue Foamer Protón es el espumizador revolucionario que incorpora el Soap más avanzado del mercado, formulado con ingredientes bioactivos de la más alta calidad.",
+      "Enriquecido con pantenol, alantoína y aloe vera, este espumizador no solo limpia profundamente, sino que también cuida y repara la piel del cliente, proporcionando un alivio inmediato durante el proceso de tatuaje.",
+      "Su delicado aroma a menta añade un toque agradable, refrescante y reconfortante a la experiencia de tus clientes.",
     ],
     tags: [
       "proton",
@@ -783,10 +775,9 @@ export const products = [
     shortDescription:
       "Espuma limpiadora con pantenol, alantoína y aloe vera, con aroma a melón.",
     description: [
-      "Green Foamer Protón es un espumizador formulado con ingredientes bioactivos de alta calidad.",
-      "Enriquecido con pantenol, alantoína y aloe vera, limpia profundamente y ayuda a cuidar la piel durante el proceso de tatuaje.",
-      "Proporciona una sensación de alivio inmediato y comodidad para el cliente.",
-      "Su aroma a melón aporta un toque agradable y reconfortante a la experiencia.",
+      "Green Foamer Protón es el espumizador revolucionario que incorpora el Soap más avanzado del mercado, formulado con ingredientes bioactivos de la más alta calidad.",
+      "Enriquecido con pantenol, alantoína y aloe vera, este espumizador no solo limpia profundamente, sino que también cuida y repara la piel del cliente, proporcionando un alivio inmediato durante el proceso de tatuaje.",
+      "Su delicado aroma a melón añade un toque agradable y reconfortante a la experiencia de tus clientes.",
     ],
     tags: [
       "proton",
@@ -819,9 +810,8 @@ export const products = [
       "Jabón concentrado con pantenol, alantoína y aloe vera, con fragancia dulce de fresa.",
     description: [
       "Limpia, protege y calma la piel con una fórmula avanzada que combina ciencia y naturaleza.",
-      "Diseñado para ofrecer máxima eficacia durante el proceso de tatuaje.",
-      "Este jabón concentrado ayuda a garantizar una experiencia cómoda y profesional.",
-      "Su fragancia dulce de fresa aporta un toque fresco y agradable durante la sesión.",
+      "Diseñado para ofrecer la máxima eficacia durante el proceso de tatuaje, este jabón concentrado rosa es todo lo que necesitas para garantizar una experiencia cómoda y profesional.",
+      "Su fragancia dulce de fresa aporta un toque fresco y delicioso, haciendo que cada sesión sea más placentera tanto para el cliente como para el artista.",
     ],
     tags: [
       "proton",
@@ -854,9 +844,8 @@ export const products = [
       "Jabón concentrado con pantenol, alantoína y aloe vera, con aroma a menta.",
     description: [
       "Limpia, protege y calma la piel con una fórmula avanzada que combina ciencia y naturaleza.",
-      "Diseñado para ofrecer máxima eficacia durante el proceso de tatuaje.",
-      "Este jabón concentrado ayuda a garantizar una experiencia cómoda y profesional.",
-      "Su ligero aroma a menta aporta frescor al cliente y al artista durante la sesión.",
+      "Diseñado para ofrecer la máxima eficacia durante el proceso de tatuaje, este jabón concentrado rosa es todo lo que necesitas para garantizar una experiencia cómoda y profesional.",
+      "Su ligero aroma a menta aporta frescor tanto al cliente como al artista, creando una experiencia agradable en cada sesión.",
     ],
     tags: [
       "proton",
@@ -889,9 +878,8 @@ export const products = [
       "Jabón concentrado con pantenol, alantoína y aloe vera, con fragancia de melón.",
     description: [
       "Limpia, protege y calma la piel con una fórmula avanzada que combina ciencia y naturaleza.",
-      "Diseñado para ofrecer máxima eficacia durante el proceso de tatuaje.",
-      "Este jabón concentrado ayuda a garantizar una experiencia cómoda y profesional.",
-      "Su fragancia de melón fresco aporta un toque dulce y refrescante durante la sesión.",
+      "Diseñado para ofrecer la máxima eficacia durante el proceso de tatuaje, este jabón concentrado rosa es todo lo que necesitas para garantizar una experiencia cómoda y profesional.",
+      "Su fragancia de melón fresco aporta un toque dulce y refrescante que hará más placentera cada sesión tanto para el cliente como para el artista.",
     ],
     tags: [
       "proton",
@@ -923,10 +911,10 @@ export const products = [
     shortDescription:
       "Manteca para usar durante el tatuaje, con extractos naturales y textura controlada.",
     description: [
-      "Manteca diseñada para usar mientras se tatúa gracias a su contenido en extractos naturales.",
-      "Tiene una textura suave y aceitosa, formulada para no derretirse cuando se coloca sobre el guante.",
-      "Contiene mantecas de karité y mango, extractos de ortiga, liquen de Islandia, caléndula, aceite de sésamo y otros aceites esenciales.",
-      "Ayuda a cuidar y regenerar la piel desde el inicio del proceso.",
+      "Es la mejor manteca que puedes usar mientras tatuas por su contenido en Extractos Naturales.",
+      "Protón Tattoo Cream tiene una textura suave y aceitosa, pero sin derretirse cuando la colocamos encima del guante para ir agregando a la piel poco a poco.",
+      "Contiene mantecas de Karite y Mango, además de extractos de Ortiga, Liquen de Islandia, Calendula, Aceite de Sésamo y otros aceites esenciales, para ir regenerando la piel desde el minuto 0.",
+      "Su aroma exclusivo no te dejará indiferente.",
     ],
     tags: ["proton", "tattoo cream", "butter", "manteca", "made by nature", "aftercare"],
     featured: false,
@@ -949,10 +937,11 @@ export const products = [
     shortDescription:
       "Manteca original de Protón para el proceso de tatuaje, con textura suave y aroma característico.",
     description: [
-      "La manteca original de Protón, diseñada para el proceso de tatuaje.",
-      "Combina aceites esenciales y vitamina E para mantener la piel más elástica, cómoda y cuidada durante el trabajo.",
-      "Su aroma característico a coco aporta una experiencia distintiva durante la sesión.",
-      "Su textura suave y aceitosa permite deslizar sin esfuerzo, pero está formulada para no derretirse sobre el guante.",
+      "Es la manteca ORIGINAL de Protón, la que lo empezó todo.",
+      "Diseñada para el proceso de tatuaje (y para que la piel lo agradezca desde el primer minuto), combina una selección premium de aceites esenciales y Vitamina E para mantener la piel más elástica, más cómoda y mejor cuidada mientras trabajas.",
+      "Su olor característico a coco… y algo más está importado directamente desde Colombia, y convierte cada pasada en una experiencia.",
+      "Su textura es suave y aceitosa, perfecta para deslizar sin esfuerzo… pero con un detalle clave, no se derrite sobre el guante.",
+      "Así puedes aplicarla poco a poco, con control, sin desperdicio y sin “charcos” innecesarios.",
     ],
     tags: ["proton", "origins", "process butter", "manteca", "coco", "tatuaje"],
     featured: false,
@@ -975,11 +964,15 @@ export const products = [
     shortDescription:
       "Tattoo butter con CBD, extractos naturales y textura controlada para el proceso de tatuado.",
     description: [
-      "CBD Protón Tattoo Butter está diseñada para ofrecer una experiencia profesional durante el proceso de tatuado.",
-      "Cada bote contiene 800 mg de CBD aislado con una pureza del 99,9%.",
-      "Su fórmula utiliza ingredientes obtenidos directamente de la naturaleza, con mantecas de karité y mango, extractos de caléndula, aceite de sésamo y otros aceites esenciales.",
-      "Tiene una textura suave y aceitosa, formulada para no derretirse sobre el guante y permitir una aplicación controlada.",
-      "Está libre de aceites minerales y derivados del petróleo.",
+      "Descubre una de las formulaciones más prodigiosas y únicas de los laboratorios de Protón Europa: CBD Protón Tattoo Butter.",
+      "Esta crema se ha diseñado meticulosamente para ofrecer la mejor experiencia durante el proceso de tatuado, gracias a su contenido de extractos naturales y su pureza excepcional.",
+      "Beneficios del Producto:",
+      "• Alta Concentración de CBD: Cada bote de CBD Protón Tattoo Butter contiene 800 mg de CBD aislado con una pureza del 99.9%, proveniente de Colombia. Esta alta concentración asegura un efecto verdaderamente satisfactorio y relajante durante el tatuaje. Y su posterior cicatrización.",
+      "• Ingredientes Naturales: Nuestra fórmula exclusiva se ha desarrollado utilizando únicamente materiales obtenidos directamente de la naturaleza, garantizando la más alta calidad y seguridad.",
+      "• Textura Ideal: La crema tiene una textura suave y aceitosa, pero está formulada para no derretirse cuando se coloca sobre el guante, permitiendo una aplicación controlada y gradual sobre la piel.",
+      "• Cuidado Integral de la Piel: Enriquecida con mantecas de karité y mango, así como extractos de caléndula y aceite de sésamo, esta crema regenera la piel desde el primer momento. Además, contiene otros aceites esenciales que potencian su efecto regenerador.",
+      "• Aroma Exclusivo: El aroma distintivo de CBD Proton Tattoo Butter es una característica que no te dejará indiferente, añadiendo una dimensión sensorial agradable a la experiencia del tatuaje.",
+      "• Libre de Petroquímicos: Nuestra CBD Tattoo Butter está totalmente libres de aceites minerales ni derivados del petroleo. Solo ingredientes naturales.",
     ],
     tags: ["proton", "cbd", "tattoo butter", "manteca", "made by nature", "aftercare"],
     featured: true,
@@ -1002,11 +995,18 @@ export const products = [
     shortDescription:
       "Tattoo butter disponible en varios colores, aromas y extractos específicos.",
     description: [
-      "Protón Colours Obsession es una manteca creada con 7 colores diferentes.",
-      "Cada manteca incorpora aceites esenciales y extractos relacionados con su olor y color.",
-      "Tiene un tacto suave para trabajar durante horas sin irritar la piel del cliente.",
-      "Su textura suave y aceitosa está formulada para no derretirse sobre el guante y permitir una aplicación controlada.",
-      "Ayuda a regenerar la piel desde el inicio del proceso, aportando aromas y extractos únicos.",
+      "Creada con 7 Colores diferentes.",
+      "Pero no solo son colores... Cada Mantenca tiene unos aceites esenciales y extractos relacionados con su Olor y Color.",
+      "Una manteca Excepcional con un tacto sublime para poder tatuar horas y horas sin irritar la piel de los clientes.",
+      "Protón Colours Obsession tiene una textura suave y aceitosa, pero sin derretirse cuando la colocamos encima del guante para ir agregando a la piel poco a poco.",
+      "Regenerando la piel desde el minuto 0 aportando unos aromas y extractos únicos.",
+      "• Naranja: Aroma de Naranja, Extracto de Naranja y Aceite esencial de naranja Amarga.",
+      "• Violeta: Aroma de Mora y Extracto de Violeta de Genciana.",
+      "• Verde: Aroma de Melon, Extracto de Pepino.",
+      "• Negro: Aroma de Vainilla y Tabaco y extracto de Uva.",
+      "• Amarillo: Aroma de Limon, Aceite esencial de Limon y extracto de Corteza de Limon.",
+      "• Rosa: Aroma de Chicle, y extracto de Granada.",
+      "• Azul: Aroma de Menta, extracto de Te Azul Oolong y aceite esencial de menta piperina.",
     ],
     variants: [
       {
@@ -1065,10 +1065,8 @@ export const products = [
     shortDescription:
       "Gel transparente de acabado para aplicar al finalizar el tatuaje y mejorar el resultado visual.",
     description: [
-      "Photo Finish Protón es un finish premium en formato gel transparente de consistencia media.",
-      "Está diseñado para aplicarse al finalizar el tatuaje y conseguir un acabado visual limpio e impecable.",
-      "Su combinación de aloe vera, glicerina y pantenol actúa de forma inmediata sobre la piel.",
-      "Ayuda a reducir la rojez, disminuir el sangrado visible, realzar el contraste y la saturación, dejando el tatuaje listo para fotos nítidas y espectaculares.",
+      "Photo Finish Protón es el finish premium, un gel transparente de consistencia media diseñado para aplicarse justo al finalizar el tatuaje y conseguir un acabado visual impecable.",
+      "Su combinación de Aloe Vera, Glicerina y Pantenolactúa de forma inmediata sobre la piel: reduce la rojez, disminuye el sangrado visible, realza el contraste y la saturación y deja el tatuaje listo para fotos nítidas, limpias y espectaculares.",
     ],
     tags: ["proton", "photo finish", "finish", "gel", "tatuaje", "aftercare"],
     featured: false,
@@ -1091,10 +1089,9 @@ export const products = [
     shortDescription:
       "Polvo solidificante profesional para convertir líquidos en sólido estable en segundos.",
     description: [
-      "Protón Liquid Solidifier es un polvo solidificante de grado profesional para estudios de tatuaje y piercing.",
-      "Está diseñado para trabajar bajo altos estándares de higiene, control y responsabilidad ambiental.",
-      "Su fórmula granular de acción rápida convierte cualquier líquido en un sólido estable en cuestión de segundos.",
-      "Permite una eliminación limpia, segura y controlada de restos de tinta, agua de limpieza de agujas y líquidos utilizados durante el procedimiento.",
+      "Protón Liquid Solidifier es un polvo solidificante de grado profesional, diseñado para estudios de tatuaje y piercing que trabajan bajo los más altos estándares de higiene, control y responsabilidad ambiental.",
+      "Su fórmula granular de acción rápida, convierte cualquier líquido en un sólido estable en cuestión de segundos, permitiendo una eliminación limpia, segura y completamente controlada.",
+      "Ideal para: restos de tinta, agua de limpieza de agujas y líquidos utilizados durante el procedimiento.",
     ],
     tags: ["proton", "liquid solidifier", "solidificante", "higiene", "estudio"],
     featured: false,
