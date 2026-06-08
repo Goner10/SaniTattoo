@@ -28,6 +28,8 @@ const BRAND_LOGO_SIZE_CLASS = {
 
   "real-stencil-printer":
     "max-h-10 max-w-[8.5rem] sm:max-h-12 sm:max-w-[10rem] md:max-h-12 md:max-w-[9.75rem] lg:max-h-11 lg:max-w-[9rem]",
+    proton:
+    "max-h-13 max-w-[8.5rem] sm:max-h-12 sm:max-w-[10rem] md:max-h-14 md:max-w-[9.75rem] lg:max-h-18 lg:max-w-[9rem]",
 };
 
 /** Logos destacado home — rutas en public/images/brands (sin tocar brands.js). */
@@ -71,6 +73,11 @@ const BRAND_LOGOS = [
     id: "real-stencil-printer",
     alt: "Real Stencil Printer",
     src: "images/brands/real-stencil-logo-.png",
+  },
+  {
+    id:"proton",
+    alt: "Proton",
+    src: "images/brands/proton-logo.PNG",
   },
 ];
 
