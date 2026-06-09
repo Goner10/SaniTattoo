@@ -104,7 +104,7 @@ const SLIDES = [
     description: "",
     ctaTo: "/catalogo?brand=hornet",
     ctaLabel: "Ver productos Hornet",
-    dotLabel: "Ir al slide Tsunami",
+    dotLabel: "Ir al slide Hornet",
     imageOnlyOnDesktop: true,
     imageLinkAriaLabel: "Ver productos Tsunami",
     fullContentOnDesktop: true,

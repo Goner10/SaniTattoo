@@ -89,6 +89,13 @@ export const brands = [
     description: "Limpieza y descontaminación para prevención de infecciones.",
   },
   {
+    id:"yummy",
+    name: "Yummy",
+    logo: "images/brands/yummy-stencil-logo.png",
+    banner: "images/brands/yummy-stencil-banner.jpeg",
+    description: "Stencil para tatuajes de la marca Yummy.",
+  },
+  {
     id: "sanitattoo",
     name: "SANITATTOO",
     logo: "images/logos/logo_nuevo.png",
