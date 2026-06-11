@@ -75,6 +75,18 @@ export const brands = [
     ],
   },
   {
+    id:"black-mambo",
+    name: "Black Mambo",
+    logo: "images/brands/black-mambo-logo.png",
+    banner: "images/brands/black-mambo-banner.png",
+    description: "Agujas premium de la marca Black Mambo.",
+    needleLines: [
+      { id: "rlt", label: "RLT" },
+      { id: "rs", label: "RS" },
+      { id: "cm", label: "Magnum Curva CM" },
+    ],
+  },
+  {
     id: "real-stencil-printer",
     name: "Real Stencil Printer",
     logo: "images/brands/real-stencil-logo.png",

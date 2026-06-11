@@ -32,6 +32,8 @@ const BRAND_LOGO_SIZE_CLASS = {
     "max-h-13 max-w-[8.5rem] sm:max-h-12 sm:max-w-[10rem] md:max-h-14 md:max-w-[9.75rem] lg:max-h-18 lg:max-w-[9rem]",
   yummy:
     "max-h-10 max-w-[8.5rem] sm:max-h-12 sm:max-w-[10rem] md:max-h-12 md:max-w-[9.75rem] lg:max-h-11 lg:max-w-[9rem]",
+  "black-mambo":
+    "max-h-23 max-w-[8rem] sm:max-h-15 sm:max-w-[9.5rem] md:max-h-[9.5rem] md:max-w-[10rem] lg:max-h-[7.15rem] lg:max-w-[14rem] xl:max-h-[9rem] xl:max-w-[18.5rem]",
 };
 
 /** Logos destacado home — rutas en public/images/brands (sin tocar brands.js). */
@@ -86,6 +88,11 @@ const BRAND_LOGOS = [
     alt: "Yummy",
     src: "images/brands/yummy-stencil-logo.png",
   },
+  {
+    id:"black-mambo",
+    alt: "Black Mambo",
+    src: "images/brands/black-mambo-logo.png",
+  }
 ];
 
 function brandLogoClass(id) {

@@ -74,7 +74,7 @@ const SLIDES = [
     imageAlt: "Banner Shapu: cuidado para piel tatuada",
     imageClass: "object-cover object-center",
     pictureClass:
-      "absolute inset-0 h-full w-full object-cover object-[48%_center] scale-[0.95] bg-[#e30613] md:object-center md:scale-100",
+      "absolute inset-0 h-full w-full bg-[#e30613] object-cover object-[center_46%] max-md:scale-100 md:object-center md:scale-100",
     variant: "brand",
     eyebrow: "SHAPU",
     title: "Cuidado para piel tatuada",
@@ -88,25 +88,25 @@ const SLIDES = [
   },
   {
     id: "hornet",
-    image: "images/brands/hornet-hero.jpg",
+    image: "images/brands/black-mambo-banner.png",
     images: {
-      mobile: "images/brands/hornet-hero.jpg",
-      tablet: "images/brands/hornet-hero.jpg",
-      desktop: "images/brands/hornet-hero.jpg",
+      mobile: "images/brands/black-mambo-banner.png",
+      tablet: "images/brands/black-mambo-banner.png",
+      desktop: "images/brands/black-mambo-banner.png",
     },
-    imageAlt: "Banner Tsunami: agujas de la marca Tsunami",
+    imageAlt: "Banner Black Mambo: agujas de la marca Black Mambo",
     imageClass: "object-cover object-center",
     pictureClass:
-      "absolute inset-0 h-full w-full object-contain object-center scale-[1.88] bg-[#050b09] md:object-cover md:scale-100 lg:object-cover",
+      "absolute inset-0 h-full w-full object-contain object-center scale-[1.52] bg-[#050b09] md:object-cover md:scale-100 lg:object-cover",
     variant: "brand",
-    eyebrow: "HORNET",
-    title: "Agujas de la marca Tsunami",
+    eyebrow: "BLACK MAMBO",
+    title: "Agujas de la marca Black Mambo",
     description: "",
-    ctaTo: "/catalogo?brand=hornet",
-    ctaLabel: "Ver productos Hornet",
-    dotLabel: "Ir al slide Hornet",
+    ctaTo: "/catalogo?brand=black-mambo",
+    ctaLabel: "Ver productos Black Mambo",
+    dotLabel: "Ir al slide Black Mambo",
     imageOnlyOnDesktop: true,
-    imageLinkAriaLabel: "Ver productos Tsunami",
+    imageLinkAriaLabel: "Ver productos Black Mambo",
     fullContentOnDesktop: true,
   },
   {
@@ -230,12 +230,14 @@ function HeroSlidePanel({ slide, eagerImage }) {
   const isBrand = slide.variant === "brand";
   const imageOnlyOnDesktop = Boolean(slide.imageOnlyOnDesktop);
   const isBiotatum = slide.id === "biotatum";
+  const isShapu = slide.id === "shapu";
 
   return (
     <div
       className={[
         slidePanelHeightClass,
         isBiotatum ? "max-lg:bg-brand-black" : "",
+        isShapu ? "max-md:bg-[#e30613]" : "",
       ]
         .filter(Boolean)
         .join(" ")}
