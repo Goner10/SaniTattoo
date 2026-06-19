@@ -1315,6 +1315,10 @@ export const products = [
       "Perfecto para guiarte a la hora de realizar distintos tipos de tatuajes, gracias a sus 30 metros de longitud y la cuchilla de corte precisa puedes elegir el tamaño de hilo que requieres para tu sesión.",
     "Para un marcado más duradero del producto dejar secar el trazo un rato tras su uso."
     ],
+    gallery: [
+      "images/productos/real-mapping-string.png",
+      "images/productos/hilo.jpeg",
+    ],
     tags: ["material sanitario", "stencil", "impresión"],
     featured: false,
     offer: false,

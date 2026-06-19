@@ -118,7 +118,7 @@ export const brands = [
     id: "generico",
     name: "Material profesional",
     logo: null,
-    banner: "images/placeholders/hero-nuevo.png",
+    banner: "images/placeholders/banner-marca.jpeg",
     description:
       "Material seleccionado para el trabajo diario en estudios de tatuaje.",
   },

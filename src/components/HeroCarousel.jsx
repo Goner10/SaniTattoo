@@ -49,7 +49,7 @@ const SLIDES = [
       "Cabecera Sanitattoo: higiene y consumibles para estudio de tatuaje",
     imageClass:
       "object-cover object-right xl:object-[right_45%] 2xl:object-[right_42%]",
-    imageClassMobile: "object-cover object-center sm:object-right",
+    imageClassMobile: "object-cover object-center sm:object-[center_16%]",
     imageClassTablet: "object-cover object-right",
     imageClassDesktop:
       "object-cover object-right xl:object-[right_45%] 2xl:object-[right_42%]",
