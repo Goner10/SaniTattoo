@@ -92,6 +92,11 @@ const BRAND_LOGOS = [
     id:"black-mambo",
     alt: "Black Mambo",
     src: "images/brands/black-mambo-logo.png",
+  },
+  {
+    id:"sunnink",
+    alt: "Sunnink",
+    src: "images/brands/sunnink-logo.png",
   }
 ];
 
