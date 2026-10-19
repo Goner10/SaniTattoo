@@ -26,9 +26,11 @@ The website should use these routes:
 
 - `/` for the homepage
 - `/catalogo` for the complete product catalog
-- `/ofertas` for offers and promoted products
+- `/pro-team` for artists sponsored by Sanitattoo
 - `/merchandising` for merchandising products
 - `/contacto` for contact information
+
+`/ofertas` only redirects to `/pro-team`. Do not keep an offers interface.
 
 ## Homepage structure
 
@@ -49,7 +51,7 @@ The header must include:
 
 - Sanitattoo logo
 - Catálogo
-- Ofertas
+- Pro Team
 - Merchandising
 - Contacto
 - WhatsApp button
@@ -110,15 +112,15 @@ The `/catalogo` page should include:
 
 The catalog page is where the full catalog should be shown.
 
-## Offers page
+## Pro Team page
 
-The `/ofertas` page should show products where:
+The `/pro-team` page presents the artists sponsored by Sanitattoo.
 
-```js
-offer: true
-```
+Artist data lives in `src/data/artists.js`. Profiles must be rendered from that data, so a new artist is added by extending the list.
 
-If there are no offers, show a clean empty state with a WhatsApp CTA.
+`/ofertas` redirects to `/pro-team`.
+
+Keep the product field `offer` in the catalog data. Do not delete products or that field because the offers page was removed.
 
 ## Merchandising page
 
@@ -293,11 +295,12 @@ src/
 │   └── SectionHeader.jsx
 ├── data/
 │   ├── products.js
-│   └── categories.js
+│   ├── categories.js
+│   └── artists.js
 ├── pages/
 │   ├── Home.jsx
 │   ├── Catalog.jsx
-│   ├── Offers.jsx
+│   ├── ProTeam.jsx
 │   ├── Merchandising.jsx
 │   └── Contact.jsx
 ├── utils/

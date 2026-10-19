@@ -255,21 +255,21 @@ for merchandising products that should appear in the homepage merchandising prev
 
 The homepage must not render the full catalog.
 
-## Offers logic
+## Offers field
 
-Use:
+Keep `offer` on every product:
 
 ```js
 offer: true
 ```
 
-for products that should appear on the `/ofertas` page.
-
-If a product is not on offer, use:
+or:
 
 ```js
 offer: false
 ```
+
+The public offers page was replaced by `/pro-team`. `/ofertas` only redirects there. Do not delete the field, or any product, because that page was removed.
 
 ## Active products
 

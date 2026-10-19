@@ -3,7 +3,7 @@ import WhatsAppButton from "./WhatsAppButton.jsx";
 import { publicAssetUrl } from "../utils/publicAsset.js";
 import { generalWhatsAppUrl } from "../utils/whatsapp.js";
 
-const PORTFOLIO_URL = "https://goner10.github.io/Portfolio-personal/";
+const PORTFOLIO_URL = "https://goner10.github.io/Portfolio-2026/";
 const INSTAGRAM_URL = "https://www.instagram.com/sanitattoosupply/";
 
 const footerLinkClass =
@@ -83,8 +83,8 @@ export default function Footer() {
             <Link to="/catalogo" className={footerLinkClass}>
               Catálogo
             </Link>
-            <Link to="/ofertas" className={footerLinkClass}>
-              Ofertas
+            <Link to="/pro-team" className={footerLinkClass}>
+              Pro Team
             </Link>
             <Link to="/merchandising" className={footerLinkClass}>
               Camisetas

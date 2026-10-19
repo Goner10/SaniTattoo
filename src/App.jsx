@@ -1,4 +1,4 @@
-import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer.jsx";
 import Header from "./components/Header.jsx";
 import ScrollToTop from "./components/ScrollToTop.jsx";
@@ -8,7 +8,7 @@ import CookiesPolicy from "./pages/CookiesPolicy.jsx";
 import Home from "./pages/Home.jsx";
 import LegalNotice from "./pages/LegalNotice.jsx";
 import Merchandising from "./pages/Merchandising.jsx";
-import Offers from "./pages/Offers.jsx";
+import ProTeam from "./pages/ProTeam.jsx";
 import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
 import TermsAndConditions from "./pages/TermsAndConditions.jsx";
 
@@ -34,7 +34,8 @@ export default function App() {
         <Route element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="catalogo" element={<Catalog />} />
-          <Route path="ofertas" element={<Offers />} />
+          <Route path="pro-team" element={<ProTeam />} />
+          <Route path="ofertas" element={<Navigate to="/pro-team" replace />} />
           <Route path="merchandising" element={<Merchandising />} />
           <Route path="contacto" element={<Contact />} />
           <Route path="aviso-legal" element={<LegalNotice />} />

@@ -61,9 +61,11 @@ The project must include these routes:
 
 - `/`
 - `/catalogo`
-- `/ofertas`
+- `/pro-team`
 - `/merchandising`
 - `/contacto`
+
+`/ofertas` redirects to `/pro-team`.
 
 Use React Router DOM for page routing.
 
@@ -84,7 +86,7 @@ The complete catalog must live on `/catalogo`.
 
 The complete merchandising list must live on `/merchandising`.
 
-Offers must live on `/ofertas`.
+Sponsored artists must live on `/pro-team`.
 
 ## Header requirements
 
@@ -92,14 +94,14 @@ The header must include:
 
 - SANITATTOO logo
 - Catálogo
-- Ofertas
+- Pro Team
 - Merchandising
 - Contacto
 - WhatsApp button
 
 Desktop layout:
 
-Logo | Catálogo | Ofertas | Merchandising | Contacto | WhatsApp button
+Logo | Catálogo | Pro Team | Merchandising | Contacto | WhatsApp button
 
 Mobile layout:
 
@@ -166,17 +168,13 @@ The `/catalogo` page must include:
 
 The catalog page is the only place where the full active product catalog should be shown.
 
-## Offers page
+## Pro Team page
 
-The `/ofertas` page should show products where:
+The `/pro-team` page presents artists sponsored by Sanitattoo.
 
-offer: true
+Render profiles from `src/data/artists.js`. Adding an artist must not require a new page or name-specific layout.
 
-If there are no offers, show a clean empty state with:
-
-- Clear message
-- WhatsApp CTA
-- Link back to catalog
+`/ofertas` redirects to `/pro-team`. Do not restore the offers interface. Keep the product `offer` field in catalog data.
 
 ## Merchandising preview
 
@@ -239,7 +237,7 @@ Recommended page components:
 
 - Home.jsx
 - Catalog.jsx
-- Offers.jsx
+- ProTeam.jsx
 - Merchandising.jsx
 - Contact.jsx
 
@@ -554,7 +552,6 @@ Empty states should be clean and useful.
 
 Examples:
 
-- No offers available
 - No products found by search
 - No merchandising products yet
 
@@ -607,5 +604,5 @@ The website should help users:
 1. Understand what SANITATTOO offers.
 2. Explore selected products from the homepage.
 3. Visit the complete catalog when needed.
-4. Discover offers and merchandising.
+4. Meet the sponsored artists and discover merchandising.
 5. Contact quickly through WhatsApp.

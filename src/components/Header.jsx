@@ -104,8 +104,8 @@ export default function Header() {
           <NavLink to="/catalogo" className={navLinkClass} onClick={scrollToTop}>
             Catálogo
           </NavLink>
-          <NavLink to="/ofertas" className={navLinkClass} onClick={scrollToTop}>
-            Ofertas
+          <NavLink to="/pro-team" className={navLinkClass} onClick={scrollToTop}>
+            Pro Team
           </NavLink>
           <NavLink
             to="/merchandising"
@@ -176,11 +176,11 @@ export default function Header() {
               Catálogo
             </NavLink>
             <NavLink
-              to="/ofertas"
+              to="/pro-team"
               className={navLinkClass}
               onClick={handleNavClick}
             >
-              Ofertas
+              Pro Team
             </NavLink>
             <NavLink
               to="/merchandising"
