@@ -104,14 +104,14 @@ export const brands = [
     id:"yummy",
     name: "Yummy",
     logo: "images/brands/yummy-stencil-logo.png",
-    banner: "images/brands/yummy-stencil-banner.jpeg",
+    banner: "images/brands/yummy1.jpeg",
     description: "Stencil para tatuajes de la marca Yummy.",
   },
   {
     id: "sunnink",
     name: "Sunnink",
     logo: null,
-    banner: "images/brands/sunnink-banner.jpeg",
+    banner: "images/brands/sunnink1.jpeg",
     description:
       "Línea profesional de stencil, tinta hectográfica y cuidado de la piel para estudios de tatuaje.",
   },
@@ -126,7 +126,7 @@ export const brands = [
     id: "generico",
     name: "Material profesional",
     logo: null,
-    banner: "images/placeholders/banner-marca.jpeg",
+    banner: "",
     description:
       "Material seleccionado para el trabajo diario en estudios de tatuaje.",
   },
