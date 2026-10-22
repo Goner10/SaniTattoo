@@ -73,12 +73,6 @@ export default function ProTeam() {
         <div className={pageContainer}>
           <div className="relative z-10 flex flex-col gap-6 py-12 sm:py-14 lg:flex-row lg:items-end lg:justify-between lg:py-16">
             <div className="relative min-w-0">
-              <p
-                aria-hidden
-                className="pointer-events-none absolute -left-1 top-6 font-heading text-[4.75rem] leading-none text-transparent select-none [-webkit-text-stroke:1px_rgb(255_255_255_/_0.22)] sm:top-4 sm:text-[7.5rem] lg:text-[9rem]"
-              >
-                Team
-              </p>
               <div className="relative">
                 <p className="flex items-center gap-3 text-[0.7rem] font-semibold uppercase tracking-[0.28em] text-white/70">
                   <span className="h-px w-8 bg-brand-red" aria-hidden />
@@ -90,8 +84,8 @@ export default function ProTeam() {
               </div>
             </div>
             <p className="max-w-sm text-sm leading-relaxed text-white/80 sm:text-base lg:max-w-md lg:pb-2">
-              Artistas patrocinados por Sanitattoo. Cada perfil reúne retrato,
-              especialidades, estudio y una selección de trabajos.
+              Conoce a los artistas que confían en Sanitattoo Supply. Explora sus especialidades,
+              descubre sus estudios y déjate inspirar por sus trabajos.
             </p>
           </div>
         </div>

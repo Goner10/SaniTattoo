@@ -25,6 +25,16 @@ export const categories = [
     description:
       "Agujas y accesorios para tatuaje.",
   },
+  {
+    id:"tintas-homologadas",
+    name:"Tintas homologadas en España",
+    description:"Tintas homologadas en España para tatuaje.",
+  },
+  {
+    id:"tintas-artisticas",
+    name:"Tintas artísticas, pigmento y dibujo",
+    description:"Tintas artísticas, pigmento y dibujo para tatuaje.",
+  },
 ];
 
 export function getCategoryById(id) {

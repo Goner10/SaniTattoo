@@ -6,7 +6,6 @@ import ProductModal from "../components/ProductModal.jsx";
 import { brands, getBrandById } from "../data/brands.js";
 import { categories } from "../data/categories.js";
 import { getCatalogProducts } from "../data/products.js";
-import { publicAssetUrl } from "../utils/publicAsset.js";
 
 const PAGE_SIZE = 12;
 
@@ -78,57 +77,11 @@ function CatalogBrandBanner({ brandId }) {
   const brand = getBrandById(brandId);
   if (!brand || brandId === "all") return null;
 
-  const isSunnink = brandId === "sunnink";
-
-  if (brand.banner) {
-    return (
-      <div className="mb-8 overflow-hidden rounded-2xl border border-brand-border bg-brand-white shadow-[0_6px_28px_rgba(5,5,5,0.06)]">
-        <div
-          className={[
-            "relative aspect-[21/7] min-h-[172px] w-full sm:aspect-[21/6] sm:min-h-[160px] md:aspect-[21/6] md:min-h-[220px] min-[700px]:max-[900px]:aspect-[21/7] min-[700px]:max-[900px]:!h-[290px] min-[700px]:max-[900px]:!min-h-[300px] lg:aspect-[21/5] lg:min-h-[296px] xl:aspect-[21/5] xl:min-h-[315px] 2xl:aspect-auto 2xl:h-[450px] 2xl:max-h-[500px]",
-            isSunnink ? "bg-black" : "",
-          ].join(" ")}
-        >
-          <img
-            src={publicAssetUrl(brand.banner)}
-            alt=""
-            className={[
-              "h-full w-full object-cover object-center",
-              isSunnink
-                ? "scale-[0.60] sm:scale-[0.7] lg:scale-[0.72]"
-                : "2xl:object-[center_35%]",
-            ].join(" ")}
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="mb-8 rounded-2xl border border-brand-border bg-brand-white p-5 shadow-[0_6px_28px_rgba(5,5,5,0.06)] sm:p-6">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
-        {brand.logo ? (
-          <div className="flex h-16 w-32 shrink-0 items-center justify-center rounded-xl border border-brand-border bg-[#f3f3f3] p-3 sm:h-20 sm:w-36">
-            <img
-              src={publicAssetUrl(brand.logo)}
-              alt=""
-              className="max-h-full max-w-full object-contain"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-        ) : null}
-        <div className="min-w-0">
-          <p className="font-heading text-lg font-bold text-brand-black sm:text-xl">
-            {brand.name}
-          </p>
-          <p className="mt-1 text-sm leading-relaxed text-brand-muted">
-            {brand.description}
-          </p>
-        </div>
-      </div>
+      <p className="font-heading text-lg font-bold text-brand-black sm:text-xl">
+        {brand.name}
+      </p>
     </div>
   );
 }

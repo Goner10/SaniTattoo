@@ -34,6 +34,14 @@ const BRAND_LOGO_SIZE_CLASS = {
     "max-h-10 max-w-[8.5rem] sm:max-h-12 sm:max-w-[10rem] md:max-h-12 md:max-w-[9.75rem] lg:max-h-11 lg:max-w-[9rem]",
   "black-mambo":
     "max-h-23 max-w-[8rem] sm:max-h-15 sm:max-w-[9.5rem] md:max-h-[9.5rem] md:max-w-[10rem] lg:max-h-[7.15rem] lg:max-w-[14rem] xl:max-h-[9rem] xl:max-w-[18.5rem]",
+  eclipse:
+    "max-h-23 max-w-[8rem] sm:max-h-15 sm:max-w-[9.5rem] md:max-h-[9.5rem] md:max-w-[10rem] lg:max-h-[7.15rem] lg:max-w-[14rem] xl:max-h-[9rem] xl:max-w-[18.5rem]",
+  "vice-colors":
+    "max-h-21 max-w-[7rem] sm:max-h-15 sm:max-w-[8.5rem] md:max-h-[8.5rem] md:max-w-[9rem] lg:max-h-[7.15rem] lg:max-w-[14rem] xl:max-h-[9rem] xl:max-w-[18.5rem]",
+  hype:
+    "max-h-23 max-w-[8rem] sm:max-h-15 sm:max-w-[9.5rem] md:max-h-[9.5rem] md:max-w-[10rem] lg:max-h-[7.15rem] lg:max-w-[14rem] xl:max-h-[9rem] xl:max-w-[18.5rem]",
+  spirit:
+   "max-h-11 max-w-[2rem] sm:max-h-15 sm:max-w-[5.5rem] md:max-h-[5.5rem] md:max-w-[6rem] lg:max-h-[4.15rem] lg:max-w-[10rem] xl:max-h-[6rem] xl:max-w-[14.5rem]",
 };
 
 /** Logos destacado home — rutas en public/images/brands (sin tocar brands.js). */
@@ -97,7 +105,28 @@ const BRAND_LOGOS = [
     id:"sunnink",
     alt: "Sunnink",
     src: "images/brands/sunnink-logo.png",
+  },
+  {
+    id:"eclipse",
+    alt: "Eclipse Tattoo Ink",
+    src: "images/brands/logo-eclipse.png",
+  },
+  {
+    id:"vice-colors",
+    alt: "Vice Colors",
+    src: "images/brands/logo-vice.png",
+  },
+  {
+    id:"hype",
+    alt: "Hype",
+    src: "images/brands/logo-hype.png",
+  },
+  {
+    id:"spirit",
+    alt: "Spirit",
+    src: "images/brands/logo-spirit.png",
   }
+  
 ];
 
 function brandLogoClass(id) {
