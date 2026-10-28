@@ -76,7 +76,7 @@ export default function ProTeam() {
               <div className="relative">
                 <p className="flex items-center gap-3 text-[0.7rem] font-semibold uppercase tracking-[0.28em] text-white/70">
                   <span className="h-px w-8 bg-brand-red" aria-hidden />
-                  Sanitattoo
+                  SanitattooSupply
                 </p>
                 <h1 className="font-heading mt-4 text-5xl leading-[0.9] text-white sm:text-7xl lg:text-8xl">
                   Pro Team
@@ -84,7 +84,7 @@ export default function ProTeam() {
               </div>
             </div>
             <p className="max-w-sm text-sm leading-relaxed text-white/80 sm:text-base lg:max-w-md lg:pb-2">
-              Conoce a los artistas que confían en Sanitattoo Supply. Explora sus especialidades,
+              Conoce a los artistas que confían en SanitattooSupply. Explora sus especialidades,
               descubre sus estudios y déjate inspirar por sus trabajos.
             </p>
           </div>

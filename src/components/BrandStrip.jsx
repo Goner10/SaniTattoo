@@ -42,6 +42,8 @@ const BRAND_LOGO_SIZE_CLASS = {
     "max-h-23 max-w-[8rem] sm:max-h-15 sm:max-w-[9.5rem] md:max-h-[9.5rem] md:max-w-[10rem] lg:max-h-[7.15rem] lg:max-w-[14rem] xl:max-h-[9rem] xl:max-w-[18.5rem]",
   spirit:
    "max-h-11 max-w-[2rem] sm:max-h-15 sm:max-w-[5.5rem] md:max-h-[5.5rem] md:max-w-[6rem] lg:max-h-[4.15rem] lg:max-w-[10rem] xl:max-h-[6rem] xl:max-w-[14.5rem]",
+   "blue-ice":
+    "max-h-19 max-w-[5rem] sm:max-h-13 sm:max-w-[6.5rem] md:max-h-[6.5rem] md:max-w-[7rem] lg:max-h-[5.15rem] lg:max-w-[12rem] xl:max-h-[7rem] xl:max-w-[15.5rem]",
 };
 
 /** Logos destacado home — rutas en public/images/brands (sin tocar brands.js). */
@@ -125,6 +127,11 @@ const BRAND_LOGOS = [
     id:"spirit",
     alt: "Spirit",
     src: "images/brands/logo-spirit.png",
+  },
+  {
+    id:"blue-ice",
+    alt: "Blue Ice",
+    src: "images/brands/logo-blue-ice2.png",
   }
   
 ];

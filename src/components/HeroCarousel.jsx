@@ -84,7 +84,7 @@ const SLIDES = [
     fullContentOnDesktop: true,
   },
   {
-    id: "hype",
+    id: "hype-ink",
     image: "images/placeholders/hero-hype.png",
     images: {
       mobile: "images/placeholders/hero-movil-hype.jpeg",
@@ -99,37 +99,13 @@ const SLIDES = [
     eyebrow: "HYPE",
     title: "Agujas de la marca Hype",
     description: "",
-    ctaTo: "/catalogo?brand=hype",
+    ctaTo: "/catalogo?brand=hype-ink",
     ctaLabel: "Ver productos Hype",
     dotLabel: "Ir al slide Hype",
     imageOnlyOnDesktop: true,
     imageLinkAriaLabel: "Ver productos Hype",
     fullContentOnDesktop: true,
-  },
-  {
-    id: "aloetattoo",
-    image: "images/brands/aloe_tattoo.JPG",
-    images: {
-      mobile: "images/brands/aloe_tattoo.JPG",
-      tablet: "images/brands/aloe_tattoo.JPG",
-      desktop: "images/brands/aloe_tattoo.JPG",
-    },
-    imageAlt: "Banner Aloe Tattoo: aftercare y preparación profesional",
-    imageClass: "object-cover object-center",
-    imageClassMobile: "object-cover object-[center_40%]",
-    imageClassTablet: "object-cover object-center",
-    imageClassDesktop: "object-cover object-[center_32%]",
-    variant: "brand",
-    eyebrow: "ALOE TATTOO",
-    title: "Aftercare y preparación profesional",
-    description: "",
-    ctaTo: "/catalogo?brand=aloetattoo",
-    ctaLabel: "Ver productos Aloe Tattoo",
-    dotLabel: "Ir al slide Aloe Tattoo",
-    imageOnlyOnDesktop: true,
-    imageLinkAriaLabel: "Ver productos Aloe Tattoo",
-  },
- 
+  }
 ];
 
 const sectionHeightClass =
