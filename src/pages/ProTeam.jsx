@@ -18,7 +18,7 @@ function pageDescription(list) {
     const specialties = artist.specialties.join(" y ").toLowerCase();
     return `${artist.name} (${specialties}, ${artist.studio})`;
   });
-  return `Artistas patrocinados por Sanitattoo: ${formatter.format(profiles)}.`;
+  return `Artistas patrocinados por SanitattooSupply: ${formatter.format(profiles)}.`;
 }
 
 function revealProps(reduceMotion) {

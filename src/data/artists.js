@@ -35,7 +35,7 @@ export const artists = [
     specialties: ["Realismo", "Microrrealismo"],
     studio: "Crime Gallery",
     description:
-      "Artista patrocinado por Sanitattoo. Trabaja el realismo y el microrrealismo en Crime Gallery.",
+      "Artista patrocinado por SanitattooSupply. Trabaja el realismo y el microrrealismo en Crime Gallery.",
     portrait: "images/pro-team/sergio.png",
     portraitAlt:
       "Retrato de Sergio, artista patrocinado por Sanitattoo, con los brazos cruzados.",
@@ -71,7 +71,7 @@ export const artists = [
     specialties: ["Realismo", "Surrealismo"],
     studio: "Nomad Tattoo Gallery",
     description:
-      "Artista patrocinado por Sanitattoo. Trabaja el realismo y el surrealismo en Nomad Tattoo Gallery.",
+      "Artista patrocinado por SanitattooSupply. Trabaja el realismo y el surrealismo en Nomad Tattoo Gallery.",
     portrait: "images/pro-team/jesus.png",
     portraitAlt:
       "Retrato de Jesús Arellano, artista patrocinado por Sanitattoo, con los brazos cruzados.",

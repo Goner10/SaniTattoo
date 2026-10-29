@@ -38,6 +38,29 @@ const imageFillClass = "absolute inset-0 h-full w-full";
 /** @type {HeroSlide[]} */
 const SLIDES = [
   {
+    id:"hero-halloween",
+    image: "images/placeholders/banner-halloween-laptop.jpeg",
+    images: {
+      mobile: "images/placeholders/banner-halloween.jpeg",
+      tablet: "images/placeholders/banner-halloween-laptop.jpeg",
+      desktop: "images/placeholders/banner-halloween-laptop.jpeg",
+    },
+    imageAlt: "Banner Halloween: agujas de la marca Halloween",
+    imageClass: "object-cover object-center md:object-top",
+    pictureClass:
+      "absolute inset-0 z-[1] h-full w-full bg-black object-cover object-center md:object-top lg:bottom-auto lg:right-auto lg:top-0 lg:left-1/2 lg:h-[116%] lg:w-auto lg:max-w-none lg:-translate-x-1/2",
+    variant: "brand",
+    eyebrow: "HALLOWEEN",
+    title: "Agujas de la marca Halloween",
+    description: "",
+    ctaTo: "/catalogo?brand=halloween",
+    ctaLabel: "Ver productos Halloween",
+    dotLabel: "Ir al slide Halloween",
+    imageOnlyOnDesktop: true,
+    imageLinkAriaLabel: "Ver productos Halloween",
+    fullContentOnDesktop: true,
+  },
+  {
     id: "black-mambo-banner",
     image: "images/placeholders/banner-black-mambo.png",
     images: {
@@ -87,7 +110,7 @@ const SLIDES = [
     id: "hype-ink",
     image: "images/placeholders/hero-hype.png",
     images: {
-      mobile: "images/placeholders/hero-movil-hype.jpeg",
+      mobile: "images/placeholders/hype-banner.jpeg",
       tablet: "images/placeholders/hero-hype.png",
       desktop: "images/placeholders/hero-hype.png",
     },
@@ -177,7 +200,7 @@ function HeroSlideImage({ slide, eagerImage }) {
     );
   }
 
-  return (
+  const picture = (
     <picture className="absolute inset-0 block h-full w-full">
       <source
         media="(min-width: 1024px)"
@@ -194,6 +217,26 @@ function HeroSlideImage({ slide, eagerImage }) {
       />
     </picture>
   );
+
+  if (slide.id !== "hero-halloween") return picture;
+
+  return (
+    <>
+      <picture className="pointer-events-none absolute inset-0 hidden lg:block">
+        <source
+          media="(min-width: 1024px)"
+          srcSet={publicAssetUrl(sources.desktop)}
+        />
+        <img
+          alt=""
+          aria-hidden
+          src={publicAssetUrl(sources.mobile)}
+          className="h-full w-full scale-105 object-cover object-center blur-md"
+        />
+      </picture>
+      {picture}
+    </>
+  );
 }
 
 /**
@@ -204,6 +247,7 @@ function HeroSlidePanel({ slide, eagerImage }) {
   const imageOnlyOnDesktop = Boolean(slide.imageOnlyOnDesktop);
   const isBiotatum = slide.id === "biotatum";
   const isShapu = slide.id === "shapu";
+  const isHalloween = slide.id === "hero-halloween";
 
   return (
     <div
@@ -211,6 +255,7 @@ function HeroSlidePanel({ slide, eagerImage }) {
         slidePanelHeightClass,
         isBiotatum ? "max-lg:bg-brand-black" : "",
         isShapu ? "max-md:bg-[#e30613]" : "",
+        isHalloween ? "bg-black" : "",
       ]
         .filter(Boolean)
         .join(" ")}
