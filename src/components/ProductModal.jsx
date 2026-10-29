@@ -1,90 +1,15 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import { useEffect, useState } from "react";
+import PriceTag from "./PriceTag.jsx";
 import WhatsAppButton from "./WhatsAppButton.jsx";
-import {
-  formatPrice,
-  getDisplayPrice,
-  getPriceWithVat,
-} from "../utils/formatPrice.js";
+import { useCampaignState } from "../context/campaignState.js";
+import { getProductPriceQuote, resolveCampaign } from "../utils/campaignPricing.js";
 import { publicAssetUrl } from "../utils/publicAsset.js";
 import { productWhatsAppUrl } from "../utils/whatsapp.js";
 
-/**
- * @param {{
- *   basePrice: number | null
- *   currency: string
- *   showFrom: boolean
- *   unit?: string
- *   priceIncludesVat?: boolean
- * }} props
- */
-function ModalPriceBlock({
-  basePrice,
-  currency,
-  showFrom,
-  unit,
-  priceIncludesVat = false,
-}) {
-  if (basePrice == null) {
-    return (
-      <div className="rounded-xl border border-brand-border bg-brand-bg/40 px-4 py-3.5">
-        <p className="text-sm font-medium text-brand-black">
-          {formatPrice(null, currency)}
-        </p>
-      </div>
-    );
-  }
-
-  const priceWithVat = getPriceWithVat(basePrice, { priceIncludesVat });
-
-  if (priceIncludesVat) {
-    return (
-      <div className="rounded-xl border border-brand-border bg-brand-bg/40 px-4 py-3.5">
-        <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
-          {showFrom ? (
-            <span className="text-sm font-medium text-brand-muted">Desde</span>
-          ) : null}
-          <span className="font-heading text-2xl font-bold leading-none text-brand-red sm:text-[1.65rem]">
-            {formatPrice(priceWithVat, currency)}
-          </span>
-          <span className="text-sm font-medium text-brand-muted">IVA incluido</span>
-          {unit ? (
-            <span className="text-sm text-brand-muted">/ {unit}</span>
-          ) : null}
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="rounded-xl border border-brand-border bg-brand-bg/40 px-4 py-3.5">
-      <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
-        {showFrom ? (
-          <span className="text-sm font-medium text-brand-muted">Desde</span>
-        ) : null}
-        <span className="font-heading text-2xl font-bold leading-none text-brand-red sm:text-[1.65rem]">
-          {formatPrice(priceWithVat, currency)}
-        </span>
-        <span className="text-sm font-medium text-brand-muted">IVA incluido</span>
-      </div>
-      <div className="mt-2 flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
-        {showFrom ? (
-          <span className="text-xs font-medium text-brand-muted">Desde</span>
-        ) : null}
-        <span className="text-sm font-medium text-brand-black">
-          {formatPrice(basePrice, currency)}
-        </span>
-        <span className="text-xs text-brand-muted">sin IVA</span>
-        {unit ? (
-          <span className="text-xs text-brand-muted">/ {unit}</span>
-        ) : null}
-      </div>
-    </div>
-  );
-}
-
 export default function ProductModal({ product, onClose }) {
+  const { activeCampaigns } = useCampaignState();
   const [selectedImage, setSelectedImage] = useState("");
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [selectedVariantLabel, setSelectedVariantLabel] = useState(null);
@@ -141,13 +66,10 @@ export default function ProductModal({ product, onClose }) {
   const selectedVariant = hasVariants
     ? product.variants.find((v) => v.label === selectedVariantLabel)
     : null;
-  const modalBasePrice =
-    selectedVariant != null
-      ? selectedVariant.price
-      : hasVariants
-        ? getDisplayPrice(product)
-        : product?.price ?? null;
-  const showFromPrice = hasVariants && selectedVariant == null && modalBasePrice != null;
+  const campaign = product ? resolveCampaign(product, activeCampaigns) : null;
+  const quote = product
+    ? getProductPriceQuote(product, campaign, { variant: selectedVariant })
+    : null;
 
   return (
     <AnimatePresence>
@@ -274,12 +196,10 @@ export default function ProductModal({ product, onClose }) {
                   </p>
                 )}
 
-                <ModalPriceBlock
-                  basePrice={modalBasePrice}
-                  currency={product.currency}
-                  showFrom={showFromPrice}
-                  unit={hasVariants ? undefined : product.unit}
-                  priceIncludesVat={product.priceIncludesVat}
+                <PriceTag
+                  quote={quote}
+                  layout="modal"
+                  showUnit={!hasVariants}
                 />
 
                 {hasVariants ? (
@@ -312,12 +232,15 @@ export default function ProductModal({ product, onClose }) {
                                   : "border-brand-border bg-brand-white hover:border-brand-red/35 hover:bg-brand-bg",
                               ].join(" ")}
                             >
-                              <span className="font-medium text-brand-black">
+                              <span className="min-w-0 break-words font-medium text-brand-black">
                                 {v.label}
                               </span>
-                              <span className="shrink-0 font-medium text-brand-black">
-                                {formatPrice(v.price, product.currency)}
-                              </span>
+                              <PriceTag
+                                quote={getProductPriceQuote(product, campaign, {
+                                  variant: v,
+                                })}
+                                layout="variant"
+                              />
                             </button>
                           </li>
                         );
@@ -341,7 +264,9 @@ export default function ProductModal({ product, onClose }) {
             </div>
             <div className="border-t border-brand-border p-4 sm:p-6">
               <WhatsAppButton
-                href={productWhatsAppUrl(product.name)}
+                href={productWhatsAppUrl(product.name, {
+                  variantLabel: selectedVariant?.label,
+                })}
                 className="w-full"
               >
                 Consultar por WhatsApp

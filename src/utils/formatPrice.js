@@ -29,15 +29,19 @@ export function formatPrice(price, currency = "EUR") {
 }
 
 /**
- * Precio mostrable para tarjetas: si hay variantes, devuelve el mínimo.
- * @param {{ price: number | null, variants?: { price: number }[] }} product
+ * Precio base mostrable. Con variantes válidas, el mínimo es solo el de
+ * esas variantes (el “Desde”). Si no hay, usa el precio del producto.
+ * @param {{ price?: number | null, variants?: { price?: number }[] }} product
  * @returns {number | null}
  */
 export function getDisplayPrice(product) {
-  const variantPrices = product.variants?.map((v) => v.price) ?? [];
-  const candidates = [product.price, ...variantPrices].filter(
-    (n) => typeof n === "number" && !Number.isNaN(n),
-  );
-  if (candidates.length === 0) return null;
-  return Math.min(...candidates);
+  const variantPrices = (product?.variants ?? [])
+    .map((variant) => variant.price)
+    .filter((price) => typeof price === "number" && !Number.isNaN(price));
+
+  if (variantPrices.length > 0) return Math.min(...variantPrices);
+  if (typeof product?.price === "number" && !Number.isNaN(product.price)) {
+    return product.price;
+  }
+  return null;
 }

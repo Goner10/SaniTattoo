@@ -1,11 +1,15 @@
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { scrollToTop } from "./ScrollToTop.jsx";
 import WhatsAppButton from "./WhatsAppButton.jsx";
+import { useCampaignState } from "../context/campaignState.js";
 import { buildWhatsAppUrl } from "../utils/whatsapp.js";
 import { publicAssetUrl } from "../utils/publicAsset.js";
 import { Truck } from "lucide-react";
+
+const SHIPPING_BAR_TEXT = "Todo para tu estudio. Envío gratis desde 90€";
+const SHIPPING_CONDITION_TEXT = "Envío gratis desde 90€";
 
 const SCROLL_TOP_THRESHOLD_PX = 10;
 
@@ -24,6 +28,7 @@ const headerWhatsAppClass =
   "header-font text-[15px] max-[900px]:!px-3 max-[900px]:!py-2 max-[900px]:text-[0.8125rem]";
 
 export default function Header() {
+  const { announcement } = useCampaignState();
   const [open, setOpen] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
 
@@ -49,24 +54,57 @@ export default function Header() {
         className={[
           "overflow-hidden bg-[#C1121F] transition-[max-height,opacity] duration-300 ease-in-out motion-reduce:transition-none",
           showPromoBar
-            ? "max-h-[2.125rem] border-b border-white/10 opacity-100 sm:max-h-9"
+            ? announcement
+              ? "max-h-36 border-b border-white/10 opacity-100 sm:max-h-24"
+              : "max-h-[2.125rem] border-b border-white/10 opacity-100 sm:max-h-9"
             : "pointer-events-none max-h-0 border-b border-transparent opacity-0",
         ].join(" ")}
+        role="region"
+        aria-label={announcement ? announcement.name : "Envío"}
         aria-hidden={!showPromoBar}
+        inert={showPromoBar ? undefined : true}
       >
-        <p
-  className={[
-    headerContainerClass,
-    "flex items-center justify-center gap-1 py-1 text-center font-header text-[clamp(0.625rem,2.6vw,0.8125rem)] font-bold leading-snug tracking-[0.06em] text-white sm:py-1.5 sm:text-xs",
-  ].join(" ")}
->
-  <span>Todo para tu estudio. Envío gratis desde 90€</span>
-  <Truck
-    className="h-4 w-4 sm:h-5 sm:w-5"
-    strokeWidth={2.2}
-    aria-hidden="true"
-  />
-</p>
+        {announcement ? (
+          <div
+            className={[
+              headerContainerClass,
+              "flex flex-col items-center gap-1 py-2 text-center text-[0.8125rem] font-semibold leading-snug text-white sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-3 sm:gap-y-1 sm:py-1.5 sm:text-sm",
+            ].join(" ")}
+          >
+            <p className="max-w-full font-header text-[0.8125rem] font-bold tracking-[0.04em] sm:text-sm">
+              {announcement.copy.barHeadline}
+            </p>
+            <p className="flex max-w-full flex-wrap items-center justify-center gap-x-2 gap-y-0.5 font-sans text-[0.8125rem] font-medium sm:text-sm">
+              <span>{announcement.copy.barDeadline}</span>
+              <Link
+                to={announcement.copy.barCtaTo}
+                onClick={scrollToTop}
+                className="underline decoration-white/80 underline-offset-2 hover:decoration-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              >
+                {announcement.copy.barCtaLabel}
+              </Link>
+              <span aria-hidden="true">·</span>
+              <span className="inline-flex items-center gap-1">
+                <span>{SHIPPING_CONDITION_TEXT}</span>
+                <Truck className="h-4 w-4 shrink-0" strokeWidth={2.2} aria-hidden="true" />
+              </span>
+            </p>
+          </div>
+        ) : (
+          <p
+            className={[
+              headerContainerClass,
+              "flex items-center justify-center gap-1 py-1 text-center font-header text-[clamp(0.625rem,2.6vw,0.8125rem)] font-bold leading-snug tracking-[0.06em] text-white sm:py-1.5 sm:text-xs",
+            ].join(" ")}
+          >
+            <span>{SHIPPING_BAR_TEXT}</span>
+            <Truck
+              className="h-4 w-4 sm:h-5 sm:w-5"
+              strokeWidth={2.2}
+              aria-hidden="true"
+            />
+          </p>
+        )}
       </div>
       <div
         className={[

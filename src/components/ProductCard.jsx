@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import WhatsAppButton from "./WhatsAppButton.jsx";
-import { formatPrice, getDisplayPrice } from "../utils/formatPrice.js";
+import PriceTag from "./PriceTag.jsx";
+import { useCampaignState } from "../context/campaignState.js";
+import { getProductPriceQuote, resolveCampaign } from "../utils/campaignPricing.js";
 import { productWhatsAppUrl } from "../utils/whatsapp.js";
 import { catalogCtaPrimary } from "../utils/catalogCta.js";
 import { publicAssetUrl } from "../utils/publicAsset.js";
@@ -21,8 +23,11 @@ export default function ProductCard({
   openOnCardClick = true,
   showWhatsAppButton = true,
 }) {
-  const displayPrice = getDisplayPrice(product);
-  const hasVariants = Boolean(product.variants?.length);
+  const { activeCampaigns } = useCampaignState();
+  const quote = getProductPriceQuote(
+    product,
+    resolveCampaign(product, activeCampaigns),
+  );
   const isCarousel = cardMotion === "carousel";
 
   const body = (
@@ -46,32 +51,18 @@ export default function ProductCard({
           />
         </div>
       </div>
-      <div className="flex flex-1 flex-col gap-2 p-4">
+      <div className="flex min-w-0 flex-1 flex-col gap-2 p-4">
         <p className="text-xs font-medium uppercase tracking-wide text-brand-muted">
           {product.categoryLabel}
         </p>
-        <h3 className="text-base font-semibold text-brand-black">{product.name}</h3>
+        <h3 className="line-clamp-2 break-words text-base font-semibold text-brand-black">
+          {product.name}
+        </h3>
         <p className="line-clamp-2 text-sm font-normal text-brand-muted">
           {product.shortDescription}
         </p>
-        <div className="mt-auto space-y-0.5">
-          <p className="text-sm font-medium text-brand-black">
-            {displayPrice === null ? (
-              formatPrice(null, product.currency)
-            ) : hasVariants ? (
-              <>Desde {formatPrice(displayPrice, product.currency)}</>
-            ) : (
-              formatPrice(displayPrice, product.currency)
-            )}
-            {displayPrice !== null ? (
-              <span className="font-normal text-brand-muted"> / {product.unit}</span>
-            ) : null}
-          </p>
-          {displayPrice !== null ? (
-            <p className="text-xs font-normal text-brand-muted">
-              {product.priceIncludesVat ? "IVA incluido" : "sin IVA"}
-            </p>
-          ) : null}
+        <div className="mt-auto min-w-0">
+          <PriceTag quote={quote} layout="card" />
         </div>
       </div>
     </>

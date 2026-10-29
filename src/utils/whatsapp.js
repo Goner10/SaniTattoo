@@ -19,10 +19,13 @@ export function buildWhatsAppUrl(message = "") {
 
 /**
  * @param {string} productName
+ * @param {{ variantLabel?: string }} [options]
  * @returns {string}
  */
-export function productWhatsAppUrl(productName) {
-  const text = `Hola, estoy interesado en este producto de Sanitattoo: ${productName}`;
+export function productWhatsAppUrl(productName, options = {}) {
+  const variant = options.variantLabel?.trim();
+  const subject = variant ? `${productName} (${variant})` : productName;
+  const text = `Hola, estoy interesado en este producto de Sanitattoo: ${subject}`;
   return buildWhatsAppUrl(text);
 }
 

@@ -6,9 +6,12 @@ import HeroCarousel from "../components/HeroCarousel.jsx";
 import FeaturedCarousel from "../components/FeaturedCarousel.jsx";
 import ProductGrid from "../components/ProductGrid.jsx";
 import ProductModal from "../components/ProductModal.jsx";
+import ProTeamPreview from "../components/ProTeamPreview.jsx";
 import SectionHeader from "../components/SectionHeader.jsx";
 import WhatsAppButton from "../components/WhatsAppButton.jsx";
+import { useCampaignState } from "../context/campaignState.js";
 import { getActiveProducts } from "../data/products.js";
+import { resolveSharedCampaign } from "../utils/campaignPricing.js";
 import { generalWhatsAppUrl } from "../utils/whatsapp.js";
 import { catalogCtaPrimary } from "../utils/catalogCta.js";
 import { publicAssetUrl } from "../utils/publicAsset.js";
@@ -36,8 +39,10 @@ const orderSteps = [
 
 export default function Home() {
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const { activeCampaigns } = useCampaignState();
   const active = getActiveProducts();
   const featured = active.filter((p) => p.featured);
+  const featuredCampaign = resolveSharedCampaign(featured, activeCampaigns);
   const merchandisingPreview = active
     .filter((p) => p.brand === "sanitattoo")
     .sort((a, b) => Number(b.merchandisingFeatured) - Number(a.merchandisingFeatured))
@@ -53,12 +58,15 @@ export default function Home() {
       >
         <div className="mx-auto max-w-6xl min-w-0 px-4 py-12 sm:px-6 sm:py-16">
           <SectionHeader
-            eyebrow="Favoritos del estudio"
+            eyebrow={featuredCampaign?.copy.featuredEyebrow ?? "Favoritos del estudio"}
             accent
-            title="Productos destacados"
-            subtitle="Selección de productos diseñados para acompañar cada sesión con precisión, comodidad y confianza."
-            ctaLabel="Ver catálogo completo"
-            ctaTo="/catalogo"
+            title={featuredCampaign?.copy.featuredTitle ?? "Productos destacados"}
+            subtitle={
+              featuredCampaign?.copy.featuredSubtitle ??
+              "Selección de productos diseñados para acompañar cada sesión con precisión, comodidad y confianza."
+            }
+            ctaLabel={featuredCampaign?.copy.featuredCtaLabel ?? "Ver catálogo completo"}
+            ctaTo={featuredCampaign?.copy.featuredCtaTo ?? "/catalogo"}
             ctaTone="accent"
           />
           <div className="rounded-2xl border border-brand-border/80 bg-gradient-to-b from-brand-bg/60 to-brand-white p-2 shadow-[0_10px_40px_rgba(5,5,5,0.05)] sm:p-3">
@@ -70,6 +78,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <ProTeamPreview />
 
       <BrandStrip />
 

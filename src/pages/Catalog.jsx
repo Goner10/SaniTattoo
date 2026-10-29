@@ -1,8 +1,10 @@
 import { ChevronDown, SlidersHorizontal } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import CampaignNotice from "../components/CampaignNotice.jsx";
 import ProductGrid from "../components/ProductGrid.jsx";
 import ProductModal from "../components/ProductModal.jsx";
+import { useCampaignState } from "../context/campaignState.js";
 import { brands, getBrandById } from "../data/brands.js";
 import { categories } from "../data/categories.js";
 import { getCatalogProducts } from "../data/products.js";
@@ -87,6 +89,7 @@ function CatalogBrandBanner({ brandId }) {
 }
 
 export default function Catalog() {
+  const { announcement } = useCampaignState();
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState("");
   const [categoryId, setCategoryId] = useState("all");
@@ -366,6 +369,8 @@ export default function Catalog() {
             detalle. Cada producto incluye acceso directo a WhatsApp.
           </p>
         </header>
+
+        <CampaignNotice campaign={announcement} />
 
         <div className="mt-8 lg:hidden">
           <button

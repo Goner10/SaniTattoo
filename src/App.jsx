@@ -2,6 +2,7 @@ import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom
 import Footer from "./components/Footer.jsx";
 import Header from "./components/Header.jsx";
 import ScrollToTop from "./components/ScrollToTop.jsx";
+import { CampaignProvider } from "./context/CampaignContext.jsx";
 import Catalog from "./pages/Catalog.jsx";
 import Contact from "./pages/Contact.jsx";
 import CookiesPolicy from "./pages/CookiesPolicy.jsx";
@@ -29,21 +30,23 @@ const routerBasename = import.meta.env.BASE_URL.replace(/\/$/, "") || "/";
 export default function App() {
   return (
     <BrowserRouter basename={routerBasename}>
-      <ScrollToTop />
-      <Routes>
-        <Route element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="catalogo" element={<Catalog />} />
-          <Route path="pro-team" element={<ProTeam />} />
-          <Route path="ofertas" element={<Navigate to="/pro-team" replace />} />
-          <Route path="merchandising" element={<Merchandising />} />
-          <Route path="contacto" element={<Contact />} />
-          <Route path="aviso-legal" element={<LegalNotice />} />
-          <Route path="politica-privacidad" element={<PrivacyPolicy />} />
-          <Route path="politica-cookies" element={<CookiesPolicy />} />
-          <Route path="terminos-condiciones" element={<TermsAndConditions />} />
-        </Route>
-      </Routes>
+      <CampaignProvider>
+        <ScrollToTop />
+        <Routes>
+          <Route element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="catalogo" element={<Catalog />} />
+            <Route path="pro-team" element={<ProTeam />} />
+            <Route path="ofertas" element={<Navigate to="/pro-team" replace />} />
+            <Route path="merchandising" element={<Merchandising />} />
+            <Route path="contacto" element={<Contact />} />
+            <Route path="aviso-legal" element={<LegalNotice />} />
+            <Route path="politica-privacidad" element={<PrivacyPolicy />} />
+            <Route path="politica-cookies" element={<CookiesPolicy />} />
+            <Route path="terminos-condiciones" element={<TermsAndConditions />} />
+          </Route>
+        </Routes>
+      </CampaignProvider>
     </BrowserRouter>
   );
 }
