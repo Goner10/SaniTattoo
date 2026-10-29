@@ -29,6 +29,20 @@ export function formatPrice(price, currency = "EUR") {
 }
 
 /**
+ * Formatea céntimos enteros sin pasar por `cents / 100` en coma flotante.
+ * @param {number | null | undefined} cents
+ * @param {string} [currency]
+ */
+export function formatCents(cents, currency = "EUR") {
+  if (cents == null) return formatPrice(null, currency);
+  const abs = Math.abs(cents);
+  const amount =
+    (cents < 0 ? -1 : 1) *
+    Number(`${Math.trunc(abs / 100)}.${String(abs % 100).padStart(2, "0")}`);
+  return formatPrice(amount, currency);
+}
+
+/**
  * Precio base mostrable. Con variantes válidas, el mínimo es solo el de
  * esas variantes (el “Desde”). Si no hay, usa el precio del producto.
  * @param {{ price?: number | null, variants?: { price?: number }[] }} product

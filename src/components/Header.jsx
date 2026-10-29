@@ -1,12 +1,12 @@
-import { Menu, X } from "lucide-react";
+import { Menu, ShoppingBag, Truck, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { scrollToTop } from "./ScrollToTop.jsx";
 import WhatsAppButton from "./WhatsAppButton.jsx";
 import { useCampaignState } from "../context/campaignState.js";
+import { useOrder } from "../context/orderState.js";
 import { buildWhatsAppUrl } from "../utils/whatsapp.js";
 import { publicAssetUrl } from "../utils/publicAsset.js";
-import { Truck } from "lucide-react";
 
 const SHIPPING_BAR_TEXT = "Todo para tu estudio. Envío gratis desde 90€";
 const SHIPPING_CONDITION_TEXT = "Envío gratis desde 90€";
@@ -25,7 +25,38 @@ const navLinkClass = ({ isActive }) =>
   ].join(" ");
 
 const headerWhatsAppClass =
-  "header-font text-[15px] max-[900px]:!px-3 max-[900px]:!py-2 max-[900px]:text-[0.8125rem]";
+  "header-font max-[899px]:!min-h-11 max-[899px]:!min-w-11 max-[899px]:!px-2.5 min-[900px]:text-[15px]";
+
+function OrderBagButton() {
+  const { totalUnits, isOpen, openPanel } = useOrder();
+  const label =
+    totalUnits > 0
+      ? `Mi pedido, ${totalUnits} ${totalUnits === 1 ? "unidad" : "unidades"}`
+      : "Mi pedido";
+
+  return (
+    <button
+      id="mi-pedido-button"
+      type="button"
+      className="relative inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border border-brand-border text-brand-black hover:bg-brand-bg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
+      aria-label={label}
+      aria-haspopup="dialog"
+      aria-expanded={isOpen}
+      aria-controls="mi-pedido-panel"
+      onClick={openPanel}
+    >
+      <ShoppingBag className="size-5" aria-hidden />
+      {totalUnits > 0 ? (
+        <span
+          aria-hidden
+          className="absolute -right-1 -top-1 inline-flex min-h-5 min-w-5 items-center justify-center rounded-full bg-brand-red px-1 text-[0.6875rem] font-bold leading-none text-brand-white"
+        >
+          {totalUnits > 99 ? "99+" : totalUnits}
+        </span>
+      ) : null}
+    </button>
+  );
+}
 
 export default function Header() {
   const { announcement } = useCampaignState();
@@ -132,49 +163,43 @@ export default function Header() {
           />
         </NavLink>
 
-        <nav
-          className="hidden min-w-0 items-center gap-1 min-[700px]:flex max-[900px]:gap-0.5"
-          aria-label="Principal"
-        >
-          <NavLink to="/" end className={navLinkClass} onClick={scrollToTop}>
-            Inicio
-          </NavLink>
-          <NavLink to="/catalogo" className={navLinkClass} onClick={scrollToTop}>
-            Catálogo
-          </NavLink>
-          <NavLink to="/pro-team" className={navLinkClass} onClick={scrollToTop}>
-            Pro Team
-          </NavLink>
-          <NavLink
-            to="/merchandising"
-            className={navLinkClass}
-            onClick={scrollToTop}
+        <div className="flex min-w-0 items-center gap-1.5 sm:gap-2">
+          <nav
+            className="hidden min-w-0 items-center gap-1 min-[700px]:flex max-[900px]:gap-0.5"
+            aria-label="Principal"
           >
-            Camisetas
-          </NavLink>
-          <NavLink to="/contacto" className={navLinkClass} onClick={scrollToTop}>
-            Contacto
-          </NavLink>
+            <NavLink to="/" end className={navLinkClass} onClick={scrollToTop}>
+              Inicio
+            </NavLink>
+            <NavLink to="/catalogo" className={navLinkClass} onClick={scrollToTop}>
+              Catálogo
+            </NavLink>
+            <NavLink to="/pro-team" className={navLinkClass} onClick={scrollToTop}>
+              Pro Team
+            </NavLink>
+            <NavLink
+              to="/merchandising"
+              className={navLinkClass}
+              onClick={scrollToTop}
+            >
+              Camisetas
+            </NavLink>
+            <NavLink to="/contacto" className={navLinkClass} onClick={scrollToTop}>
+              Contacto
+            </NavLink>
+          </nav>
+          <OrderBagButton />
           <WhatsAppButton
             href={buildWhatsAppUrl()}
             variant="whatsapp"
-            className={`ml-1 shrink-0 max-[900px]:ml-1.5 ${headerWhatsAppClass}`}
+            className={`shrink-0 ${headerWhatsAppClass}`}
           >
-            WhatsApp
-          </WhatsAppButton>
-        </nav>
-
-        <div className="flex items-center gap-2 min-[700px]:hidden">
-          <WhatsAppButton
-            href={buildWhatsAppUrl()}
-            variant="whatsapp"
-            className={`!px-3 ${headerWhatsAppClass}`}
-          >
-            WhatsApp
+            <span className="sr-only min-[900px]:hidden">WhatsApp</span>
+            <span className="hidden min-[900px]:inline">WhatsApp</span>
           </WhatsAppButton>
           <button
             type="button"
-            className="inline-flex items-center justify-center rounded-md border border-brand-border p-2 text-brand-black hover:bg-brand-bg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border border-brand-border text-brand-black hover:bg-brand-bg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red min-[700px]:hidden"
             aria-expanded={open}
             aria-controls="mobile-menu"
             onClick={() => setOpen((v) => !v)}

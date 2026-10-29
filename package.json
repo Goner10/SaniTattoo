@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
+    "test": "node --test src/utils/orderList.test.js src/utils/orderStorage.test.js src/utils/orderPricing.test.js src/utils/orderMessage.test.js",
     "preview": "vite preview"
   },
   "dependencies": {

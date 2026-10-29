@@ -1,18 +1,28 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { ShoppingBag, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import PriceTag from "./PriceTag.jsx";
-import WhatsAppButton from "./WhatsAppButton.jsx";
+import QuantityControl from "./QuantityControl.jsx";
 import { useCampaignState } from "../context/campaignState.js";
+import { useOrder } from "../context/orderState.js";
 import { getProductPriceQuote, resolveCampaign } from "../utils/campaignPricing.js";
+import { lockBodyScroll } from "../utils/bodyScrollLock.js";
+import { MAX_LINE_QUANTITY } from "../utils/orderList.js";
 import { publicAssetUrl } from "../utils/publicAsset.js";
-import { productWhatsAppUrl } from "../utils/whatsapp.js";
+import { getVariantChoiceCopy, listVariantIdentities } from "../utils/variantIdentity.js";
 
 export default function ProductModal({ product, onClose }) {
   const { activeCampaigns } = useCampaignState();
+  const { addProduct, openPanel } = useOrder();
+  const quantityRef = useRef(null);
+  const switchedRef = useRef(false);
   const [selectedImage, setSelectedImage] = useState("");
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [selectedVariantLabel, setSelectedVariantLabel] = useState(null);
+  const [quantity, setQuantity] = useState(1);
+  const [variantError, setVariantError] = useState("");
+  const [addedNotice, setAddedNotice] = useState(null);
+  const [openingOrder, setOpeningOrder] = useState(false);
 
   useEffect(() => {
     if (!product) return;
@@ -20,6 +30,11 @@ export default function ProductModal({ product, onClose }) {
     queueMicrotask(() => {
       setLightboxOpen(false);
       setSelectedVariantLabel(null);
+      setQuantity(1);
+      setVariantError("");
+      setAddedNotice(null);
+      setOpeningOrder(false);
+      switchedRef.current = false;
       if (Array.isArray(urls) && urls.length > 1) {
         setSelectedImage(urls[0]);
       } else {
@@ -29,18 +44,21 @@ export default function ProductModal({ product, onClose }) {
   }, [product]);
 
   useEffect(() => {
-    if (!product) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = prev;
-    };
+    if (!product) return undefined;
+    return lockBodyScroll();
   }, [product]);
 
   useEffect(() => {
-    if (!product) return;
-    const onKey = (e) => {
-      if (e.key !== "Escape") return;
+    if (!openingOrder || switchedRef.current) return;
+    switchedRef.current = true;
+    onClose();
+    openPanel();
+  }, [openingOrder, onClose, openPanel]);
+
+  useEffect(() => {
+    if (!product) return undefined;
+    const onKey = (event) => {
+      if (event.key !== "Escape") return;
       if (lightboxOpen) {
         setLightboxOpen(false);
       } else {
@@ -63,13 +81,38 @@ export default function ProductModal({ product, onClose }) {
     : product?.alt;
 
   const hasVariants = Boolean(product?.variants?.length);
-  const selectedVariant = hasVariants
-    ? product.variants.find((v) => v.label === selectedVariantLabel)
-    : null;
+  const identities = hasVariants ? listVariantIdentities(product) : [];
+  const selectedVariant = identities.find((variant) => variant.label === selectedVariantLabel) ?? null;
+  const choice = getVariantChoiceCopy(product?.variants);
   const campaign = product ? resolveCampaign(product, activeCampaigns) : null;
   const quote = product
     ? getProductPriceQuote(product, campaign, { variant: selectedVariant })
     : null;
+
+  function addToOrder() {
+    quantityRef.current?.holdBlur();
+    const nextQuantity = quantityRef.current?.commit();
+    if (nextQuantity == null) return;
+    if (hasVariants && !selectedVariant) {
+      setVariantError(choice.prompt);
+      return;
+    }
+    const result = addProduct(product, {
+      variantId: selectedVariant?.id ?? null,
+      quantity: nextQuantity,
+      feedback: "inline",
+    });
+    if (!result.ok) {
+      if (result.reason === "variant") setVariantError(choice.prompt);
+      if (result.reason === "lines") {
+        setVariantError("La lista ha llegado al máximo de líneas.");
+      }
+      return;
+    }
+    setVariantError("");
+    setAddedNotice({ capped: Boolean(result.capped) });
+    setQuantity(1);
+  }
 
   return (
     <AnimatePresence>
@@ -90,14 +133,14 @@ export default function ProductModal({ product, onClose }) {
             onClick={onClose}
           />
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: openingOrder ? 0 : 16 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 16 }}
-            transition={{ duration: 0.2 }}
-            className="relative z-10 flex max-h-[90vh] w-full max-w-lg flex-col overflow-hidden rounded-t-xl border border-brand-border bg-brand-white shadow-lg sm:rounded-xl"
+            exit={{ opacity: 0, y: openingOrder ? 0 : 16 }}
+            transition={{ duration: openingOrder ? 0 : 0.2 }}
+            className="relative z-10 flex max-h-[calc(100dvh-0.75rem)] min-h-0 w-full max-w-lg flex-col overflow-hidden rounded-t-xl border border-brand-border bg-brand-white shadow-lg sm:max-h-[calc(100dvh-2rem)] sm:rounded-xl"
           >
-            <div className="flex items-start justify-between gap-3 border-b border-brand-border p-4">
-              <div className="min-w-0">
+            <div className="flex shrink-0 items-start justify-between gap-3 border-b border-brand-border p-4 [@media(max-height:760px)]:py-3">
+              <div className="min-w-0 flex-1">
                 <p className="text-xs font-medium uppercase tracking-wide text-brand-muted">
                   {product.categoryLabel}
                 </p>
@@ -114,7 +157,7 @@ export default function ProductModal({ product, onClose }) {
               <button
                 type="button"
                 onClick={onClose}
-                className="rounded-md border border-transparent p-2 text-brand-black hover:bg-brand-bg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
+                className="shrink-0 rounded-md border border-transparent p-2 text-brand-black hover:bg-brand-bg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
                 aria-label="Cerrar"
               >
                 <X className="size-5" aria-hidden />
@@ -122,11 +165,11 @@ export default function ProductModal({ product, onClose }) {
             </div>
             <div className="min-h-0 flex-1 overflow-y-auto">
               <div className="relative w-full shrink-0 overflow-hidden bg-[#f1f1f1] ring-1 ring-inset ring-black/[0.04]">
-                <div className="aspect-[4/3] w-full lg:aspect-auto lg:h-[320px] lg:max-h-[320px] xl:h-[340px] xl:max-h-[340px] 2xl:h-[420px] 2xl:max-h-[420px]">
+                <div className="aspect-[4/3] w-full shrink-0 max-h-[min(40dvh,26.25rem)] [@media(max-height:720px)]:max-h-[min(30dvh,13rem)] xl:[@media(max-height:800px)]:!aspect-auto xl:[@media(max-height:800px)]:!h-[min(24rem,calc(100dvh-15.5rem))] xl:[@media(max-height:800px)]:!max-h-none xl:[@media(max-height:800px)]:!min-h-[min(24rem,calc(100dvh-15.5rem))]">
                   <button
                     type="button"
                     onClick={() => setLightboxOpen(true)}
-                    className="group relative flex h-full min-h-0 w-full cursor-zoom-in items-center justify-center p-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red sm:p-6 lg:p-5 xl:p-6 2xl:p-8"
+                    className="group relative flex h-full min-h-0 w-full cursor-zoom-in items-center justify-center p-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red sm:p-6 lg:p-5 xl:p-6 2xl:p-8 [@media(max-height:760px)]:p-3"
                     aria-label="Ampliar imagen del producto"
                   >
                     {product.badge ? (
@@ -137,7 +180,7 @@ export default function ProductModal({ product, onClose }) {
                     <img
                       src={publicAssetUrl(mainSrc)}
                       alt={mainImageAlt}
-                      className="max-h-full w-full max-w-full object-contain"
+                      className="h-full max-h-full w-full object-contain"
                       draggable={false}
                     />
                     <span
@@ -213,31 +256,32 @@ export default function ProductModal({ product, onClose }) {
                         : "Los formatos se muestran en base sin IVA."}
                     </p>
                     <ul className="mt-2 space-y-2" role="list">
-                      {product.variants.map((v) => {
-                        const isSelected = selectedVariantLabel === v.label;
+                      {identities.map((variant) => {
+                        const isSelected = selectedVariantLabel === variant.label;
                         return (
-                          <li key={v.label}>
+                          <li key={variant.id}>
                             <button
                               type="button"
-                              onClick={() =>
+                              onClick={() => {
+                                setVariantError("");
                                 setSelectedVariantLabel((prev) =>
-                                  prev === v.label ? null : v.label,
-                                )
-                              }
+                                  prev === variant.label ? null : variant.label,
+                                );
+                              }}
                               aria-pressed={isSelected}
                               className={[
-                                "flex w-full items-center justify-between gap-3 rounded-md border px-3 py-2.5 text-left text-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red",
+                                "flex min-h-11 w-full items-center justify-between gap-3 rounded-md border px-3 py-2.5 text-left text-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red",
                                 isSelected
                                   ? "border-brand-red bg-brand-red/5 ring-1 ring-brand-red/25"
                                   : "border-brand-border bg-brand-white hover:border-brand-red/35 hover:bg-brand-bg",
                               ].join(" ")}
                             >
                               <span className="min-w-0 break-words font-medium text-brand-black">
-                                {v.label}
+                                {variant.label}
                               </span>
                               <PriceTag
                                 quote={getProductPriceQuote(product, campaign, {
-                                  variant: v,
+                                  variant,
                                 })}
                                 layout="variant"
                               />
@@ -262,15 +306,54 @@ export default function ProductModal({ product, onClose }) {
                 ) : null}
               </div>
             </div>
-            <div className="border-t border-brand-border p-4 sm:p-6">
-              <WhatsAppButton
-                href={productWhatsAppUrl(product.name, {
-                  variantLabel: selectedVariant?.label,
-                })}
-                className="w-full"
-              >
-                Consultar por WhatsApp
-              </WhatsAppButton>
+            <div className="shrink-0 border-t border-brand-border px-4 py-3 sm:px-6">
+              <div aria-live="polite">
+                {addedNotice ? (
+                  <p className="mb-2 flex flex-wrap items-center justify-between gap-2 rounded-md border border-brand-border bg-brand-bg px-3 py-2 text-sm text-brand-black">
+                    <span>
+                      {addedNotice.capped
+                        ? `Añadido al pedido. La cantidad máxima por línea es ${MAX_LINE_QUANTITY}.`
+                        : "Añadido al pedido"}
+                    </span>
+                    <button
+                      type="button"
+                      className="inline-flex min-h-11 items-center font-semibold text-brand-red underline decoration-brand-red/70 underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red"
+                      onClick={() => setOpeningOrder(true)}
+                    >
+                      Ver pedido
+                    </button>
+                  </p>
+                ) : null}
+              </div>
+              {variantError ? (
+                <p role="alert" className="mb-2 text-sm text-brand-red">
+                  {variantError}
+                </p>
+              ) : null}
+              <div className="flex flex-col gap-3 xl:flex-row xl:items-start xl:gap-4">
+                <QuantityControl
+                  ref={quantityRef}
+                  value={quantity}
+                  showLegend
+                  compact
+                  className="shrink-0"
+                  label={
+                    selectedVariant
+                      ? `Cantidad de ${product.name}, ${selectedVariant.label}`
+                      : `Cantidad de ${product.name}`
+                  }
+                  onCommit={setQuantity}
+                />
+                <button
+                  type="button"
+                  className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-md border-2 border-brand-red bg-brand-red px-4 py-2.5 text-sm font-bold text-brand-white transition-colors duration-200 hover:bg-brand-white hover:text-brand-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red motion-reduce:transition-none xl:mt-5 xl:min-w-0 xl:flex-1"
+                  onPointerDown={() => quantityRef.current?.holdBlur()}
+                  onClick={addToOrder}
+                >
+                  <ShoppingBag className="size-4" aria-hidden />
+                  Añadir al pedido
+                </button>
+              </div>
             </div>
           </motion.div>
           <AnimatePresence>

@@ -1,4 +1,9 @@
-/** @typedef {{ label: string, price: number, sku?: string }} ProductVariant */
+/**
+ * `id` es opcional. Si falta, la identidad estable de la variante es el slug
+ * de `label` (único dentro del producto). No se usa el índice del array:
+ * varios formatos comparten SKU.
+ * @typedef {{ id?: string, label: string, price: number, sku?: string }} ProductVariant
+ */
 
 /**
  * @typedef {{

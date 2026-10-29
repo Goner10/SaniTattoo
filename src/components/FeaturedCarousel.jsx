@@ -15,6 +15,8 @@ const MAX_LOOP_COPIES = 24;
 const AUTOPLAY_DELTA = 0.58;
 const GAP_PX = 16;
 const FALLBACK_CARD_W = 296;
+/** A partir de este desplazamiento el gesto es arrastre y no debe abrir la ficha. */
+const DRAG_CLICK_THRESHOLD_PX = 8;
 
 const CARD_SLOT_CLASS =
   "shrink-0 w-[min(88vw,20rem)] sm:w-[17.5rem] lg:w-[18.5rem]";
@@ -37,6 +39,7 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
   const useTransformRef = useRef(false);
   const pauseRef = useRef(false);
   const dragRef = useRef(null);
+  const suppressClickRef = useRef(false);
   const resumeTimerRef = useRef(null);
   const nudgeLockRef = useRef(false);
   /** Evita que mouseenter sintético (iOS) deje el autoplay pausado tras un toque. */
@@ -448,59 +451,101 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
 
   const cardSlotStyle = cardWidthPx ? { width: cardWidthPx } : undefined;
 
-  const onPointerDown = (e) => {
-    if (e.pointerType === "mouse" && e.button !== 0) return;
-    if (e.pointerType === "touch") {
-      return;
-    }
-    const target = e.target;
-    if (target instanceof Element && target.closest("a, button")) return;
+  const onDragStart = (event) => {
+    event.preventDefault();
+  };
 
+  const onPointerDown = (event) => {
+    if (event.pointerType === "mouse" && event.button !== 0) return;
     const el = scrollerRef.current;
     if (!el) return;
 
-    pause();
-    if (useTransformRef.current) {
-      clearTransform();
-      el.scrollLeft = virtualXRef.current;
-      virtualXRef.current = 0;
-    }
-    el.setPointerCapture(e.pointerId);
     dragRef.current = {
-      active: true,
-      pointerId: e.pointerId,
-      originX: e.clientX,
+      tracking: true,
+      active: false,
+      pointerId: event.pointerId,
+      pointerType: event.pointerType,
+      originX: event.clientX,
+      originY: event.clientY,
       originScroll: el.scrollLeft,
     };
   };
 
-  const onPointerMove = (e) => {
-    const d = dragRef.current;
+  const onPointerMove = (event) => {
+    const drag = dragRef.current;
     const el = scrollerRef.current;
-    if (!d?.active || e.pointerId !== d.pointerId || !el) return;
+    if (!drag?.tracking || event.pointerId !== drag.pointerId || !el) return;
 
-    el.scrollLeft = d.originScroll - (e.clientX - d.originX);
+    const dx = event.clientX - drag.originX;
+    const dy = event.clientY - drag.originY;
+    if (!drag.active) {
+      if (Math.hypot(dx, dy) < DRAG_CLICK_THRESHOLD_PX) return;
+      drag.active = true;
+      suppressClickRef.current = true;
+      if (drag.pointerType === "touch") return;
+
+      pause();
+      if (useTransformRef.current) {
+        clearTransform();
+        el.scrollLeft = virtualXRef.current;
+        virtualXRef.current = 0;
+        drag.originScroll = el.scrollLeft;
+      }
+      try {
+        el.setPointerCapture(event.pointerId);
+      } catch {
+        /* el puntero ya no admite captura */
+      }
+    }
+
+    if (drag.pointerType === "touch") return;
+    el.scrollLeft = drag.originScroll - (event.clientX - drag.originX);
     normalizeScroll();
   };
 
-  const endPointerDrag = (e) => {
-    const d = dragRef.current;
+  const endPointerDrag = (event) => {
+    const drag = dragRef.current;
     const el = scrollerRef.current;
-    if (!d?.active || e.pointerId !== d.pointerId) return;
-    d.active = false;
+    if (!drag?.tracking || event.pointerId !== drag.pointerId) return;
+    const dragged = drag.active;
+    const pointerType = drag.pointerType;
     dragRef.current = null;
     try {
-      el?.releasePointerCapture(e.pointerId);
+      if (el?.hasPointerCapture?.(event.pointerId)) {
+        el.releasePointerCapture(event.pointerId);
+      }
     } catch {
       /* ya liberado */
     }
-    normalizeScroll();
-    scheduleResume();
+    if (dragged && pointerType !== "touch") {
+      normalizeScroll();
+      scheduleResume();
+    }
+    if (!dragged) {
+      suppressClickRef.current = false;
+      return;
+    }
+    window.setTimeout(() => {
+      suppressClickRef.current = false;
+    }, 0);
   };
 
-  const onPointerUp = (e) => {
-    endPointerDrag(e);
-    if (e.pointerType === "touch") {
+  const onPointerLeave = (event) => {
+    const drag = dragRef.current;
+    if (!drag?.tracking || drag.active || event.pointerId !== drag.pointerId) return;
+    dragRef.current = null;
+  };
+
+  const onClickCapture = (event) => {
+    if (!suppressClickRef.current) return;
+    suppressClickRef.current = false;
+    event.preventDefault();
+    event.stopPropagation();
+  };
+
+  const onPointerUp = (event) => {
+    endPointerDrag(event);
+    if (event.pointerType === "touch") {
       finishTouchInteraction();
     }
   };
@@ -526,11 +571,19 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
   if (reduceMotion) {
     return (
       <div
-        className="featured-marquee-scroll featured-scroller -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain px-4 pb-2 sm:-mx-6 sm:px-6"
+        className="featured-marquee-scroll featured-scroller -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain px-4 pb-2 select-none sm:-mx-6 sm:px-6"
         role="region"
         aria-roledescription="carrusel"
         aria-label="Productos destacados"
         tabIndex={0}
+        ref={scrollerRef}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerCancel={onPointerUp}
+        onPointerLeave={onPointerLeave}
+        onClickCapture={onClickCapture}
+        onDragStart={onDragStart}
       >
         {products.map((product) => (
           <div key={product.id} className={CARD_SLOT_CLASS}>
@@ -538,8 +591,6 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
               product={product}
               cardMotion="carousel"
               onOpenDetail={onOpenDetail}
-              openOnCardClick={false}
-              showWhatsAppButton={false}
             />
           </div>
         ))}
@@ -570,6 +621,9 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
         onPointerCancel={onPointerUp}
+        onPointerLeave={onPointerLeave}
+        onClickCapture={onClickCapture}
+        onDragStart={onDragStart}
         onScroll={onScroll}
         onTouchStart={onTouchStart}
         onTouchEnd={finishTouchInteraction}
@@ -601,8 +655,6 @@ export default function FeaturedCarousel({ products, onOpenDetail }) {
                 product={product}
                 cardMotion="carousel"
                 onOpenDetail={onOpenDetail}
-                openOnCardClick={false}
-                showWhatsAppButton={false}
               />
             </div>
           ))}

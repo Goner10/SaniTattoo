@@ -1,8 +1,10 @@
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer.jsx";
 import Header from "./components/Header.jsx";
+import OrderPanel, { OrderAddedToast } from "./components/OrderPanel.jsx";
 import ScrollToTop from "./components/ScrollToTop.jsx";
 import { CampaignProvider } from "./context/CampaignContext.jsx";
+import { OrderProvider } from "./context/OrderContext.jsx";
 import Catalog from "./pages/Catalog.jsx";
 import Contact from "./pages/Contact.jsx";
 import CookiesPolicy from "./pages/CookiesPolicy.jsx";
@@ -21,6 +23,8 @@ function Layout() {
         <Outlet />
       </main>
       <Footer />
+      <OrderPanel />
+      <OrderAddedToast />
     </div>
   );
 }
@@ -31,8 +35,9 @@ export default function App() {
   return (
     <BrowserRouter basename={routerBasename}>
       <CampaignProvider>
-        <ScrollToTop />
-        <Routes>
+        <OrderProvider>
+          <ScrollToTop />
+          <Routes>
           <Route element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="catalogo" element={<Catalog />} />
@@ -45,7 +50,8 @@ export default function App() {
             <Route path="politica-cookies" element={<CookiesPolicy />} />
             <Route path="terminos-condiciones" element={<TermsAndConditions />} />
           </Route>
-        </Routes>
+          </Routes>
+        </OrderProvider>
       </CampaignProvider>
     </BrowserRouter>
   );

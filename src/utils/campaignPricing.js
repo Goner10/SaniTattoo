@@ -1,4 +1,4 @@
-import { getDisplayPrice, getPriceWithVat } from "./formatPrice.js";
+import { getDisplayPrice, getPriceWithVat, VAT_RATE } from "./formatPrice.js";
 
 /** Tope de setTimeout en navegadores (2^31 − 1). */
 export const MAX_TIMEOUT_MS = 2_147_483_647;
@@ -156,10 +156,11 @@ export function resolveSharedCampaign(products, activeCampaigns) {
 
 /**
  * Céntimos estables a partir de un importe ya redondeado a 2 decimales.
+ * Evita `precio * 100` en coma flotante.
  * @param {number} price
  * @returns {number}
  */
-function toCents(price) {
+export function toCents(price) {
   const normalized = price.toFixed(2);
   const negative = normalized.startsWith("-");
   const [whole, frac] = normalized.replace("-", "").split(".");
@@ -177,6 +178,28 @@ export function applyPercentDiscount(price, percent) {
   const cents = toCents(price);
   const discountedCents = Math.round((cents * (100 - percent)) / 100);
   return discountedCents / 100;
+}
+
+/**
+ * Importe neto a 2 decimales.
+ * Si el precio almacenado ya incluye IVA, se extrae con `vatRate` o, si no
+ * hay uno en el producto, con el mismo `VAT_RATE` de `getPriceWithVat`.
+ * El descuento no se aplica aquí: llega ya resuelto en el importe.
+ * @param {number} price
+ * @param {{ priceIncludesVat?: boolean, vatRate?: number }} [options]
+ * @returns {number}
+ */
+export function getNetPrice(price, options = {}) {
+  const cents = toCents(price);
+  if (!options.priceIncludesVat) return cents / 100;
+
+  const rate =
+    typeof options.vatRate === "number" && options.vatRate >= 0 && options.vatRate < 1
+      ? options.vatRate
+      : VAT_RATE;
+  const divisor = Math.round((1 + rate) * 100);
+  const netCents = Math.round((cents * 100) / divisor);
+  return netCents / 100;
 }
 
 /**

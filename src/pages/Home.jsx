@@ -1,4 +1,4 @@
-import { BadgeCheck, MessageCircle, Search } from "lucide-react";
+import { ShoppingBag, BadgeCheck, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import BrandStrip from "../components/BrandStrip.jsx";
@@ -6,10 +6,10 @@ import HeroCarousel from "../components/HeroCarousel.jsx";
 import FeaturedCarousel from "../components/FeaturedCarousel.jsx";
 import ProductGrid from "../components/ProductGrid.jsx";
 import ProductModal from "../components/ProductModal.jsx";
-import ProTeamPreview from "../components/ProTeamPreview.jsx";
 import SectionHeader from "../components/SectionHeader.jsx";
 import WhatsAppButton from "../components/WhatsAppButton.jsx";
 import { useCampaignState } from "../context/campaignState.js";
+import { useOrder } from "../context/orderState.js";
 import { getActiveProducts } from "../data/products.js";
 import { resolveSharedCampaign } from "../utils/campaignPricing.js";
 import { generalWhatsAppUrl } from "../utils/whatsapp.js";
@@ -19,20 +19,20 @@ import { publicAssetUrl } from "../utils/publicAsset.js";
 const orderSteps = [
   {
     step: "01",
-    title: "Explora el catálogo",
-    body: "Filtra por categoría o busca por nombre. Abre la ficha para ver descripción y formatos.",
-    Icon: Search,
+    title: "Elige tus productos",
+    body: "Selecciona formatos, tallas y cantidades y añádelos a tu pedido.",
+    Icon: ShoppingBag,
   },
   {
     step: "02",
-    title: "Escríbenos",
-    body: "Usa el botón de WhatsApp en la ficha o en la cabecera. Indica producto y cantidades.",
+    title: "Revisa y solicita",
+    body: "Abre Mi pedido, ajusta tu selección y continúa por WhatsApp con el resumen preparado.",
     Icon: MessageCircle,
   },
   {
     step: "03",
-    title: "Confirmación",
-    body: "Te respondemos con disponibilidad, opciones de envío o recogida y forma de pago.",
+    title: "Te lo confirmamos",
+    body: "Te confirmamos disponibilidad, importe final, envío o recogida y forma de pago.",
     Icon: BadgeCheck,
   },
 ];
@@ -40,6 +40,7 @@ const orderSteps = [
 export default function Home() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const { activeCampaigns } = useCampaignState();
+  const { openPanel } = useOrder();
   const active = getActiveProducts();
   const featured = active.filter((p) => p.featured);
   const featuredCampaign = resolveSharedCampaign(featured, activeCampaigns);
@@ -79,8 +80,6 @@ export default function Home() {
         </div>
       </section>
 
-      <ProTeamPreview />
-
       <BrandStrip />
 
       <section
@@ -109,8 +108,8 @@ export default function Home() {
               aria-hidden
             />
             <p className="mt-4 text-sm leading-relaxed text-white/85 sm:text-base">
-              Sin complicaciones: revisas el catálogo y cerramos detalle por
-              WhatsApp.
+              Puedes reunir varios productos en una sola solicitud y enviárnosla
+              por WhatsApp para confirmarla.
             </p>
           </div>
 
@@ -155,6 +154,14 @@ export default function Home() {
             <Link to="/catalogo" className={catalogCtaPrimary}>
               Ir al catálogo
             </Link>
+            <button
+              type="button"
+              onClick={openPanel}
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border-2 border-white/70 bg-transparent px-5 py-3 text-sm font-bold text-white transition-colors duration-200 hover:border-white hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white motion-reduce:transition-none"
+            >
+              <ShoppingBag className="size-4" aria-hidden />
+              Ver mi pedido
+            </button>
             <WhatsAppButton
               href={generalWhatsAppUrl()}
               variant="outline"
