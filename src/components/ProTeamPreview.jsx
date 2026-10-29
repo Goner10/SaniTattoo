@@ -24,7 +24,7 @@ export default function ProTeamPreview() {
             Pro Team
           </h2>
           <p className="mt-4 max-w-md text-sm leading-relaxed text-white/80 sm:text-base">
-            Conoce a los artistas que forman parte de Sanitattoo.
+            Conoce a los artistas que forman parte dee equipo SanitattooSupply.
           </p>
           <Link to="/pro-team" className={previewCtaClass}>
             Conoce al ProTeam
