@@ -37,29 +37,7 @@ const imageFillClass = "absolute inset-0 h-full w-full";
 
 /** @type {HeroSlide[]} */
 const SLIDES = [
-  {
-    id:"hero-halloween",
-    image: "images/placeholders/banner-halloween-laptop.jpeg",
-    images: {
-      mobile: "images/placeholders/banner-halloween.jpeg",
-      tablet: "images/placeholders/banner-halloween-laptop.jpeg",
-      desktop: "images/placeholders/banner-halloween-laptop.jpeg",
-    },
-    imageAlt: "Banner Halloween: agujas de la marca Halloween",
-    imageClass: "object-cover object-center md:object-top",
-    pictureClass:
-      "absolute inset-0 z-[1] h-full w-full bg-black object-cover object-center md:object-top lg:bottom-auto lg:right-auto lg:top-0 lg:left-1/2 lg:h-[116%] lg:w-auto lg:max-w-none lg:-translate-x-1/2",
-    variant: "brand",
-    eyebrow: "HALLOWEEN",
-    title: "Agujas de la marca Halloween",
-    description: "",
-    ctaTo: "/catalogo?brand=halloween",
-    ctaLabel: "Ver productos Halloween",
-    dotLabel: "Ir al slide Halloween",
-    imageOnlyOnDesktop: true,
-    imageLinkAriaLabel: "Ver productos Halloween",
-    fullContentOnDesktop: true,
-  },
+ 
   {
     id: "black-mambo-banner",
     image: "images/placeholders/banner-black-mambo.png",
