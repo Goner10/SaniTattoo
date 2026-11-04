@@ -102,8 +102,8 @@ export const artists = [
     id: "paula-rodriguez",
     proTeamId: "#003",
     name: "Paula Rodríguez",
-    instagram: "@paulatattoing",
-    instagramUrl: "https://www.instagram.com/paulatattoing/",
+    instagram: "@paulatattooing",
+    instagramUrl: "https://www.instagram.com/paulatattooing/",
     specialties: ["Fineline", "Ornamental", "Microrrealismo"],
     studio: "Paulatattoing Orna Studio",
     description:
