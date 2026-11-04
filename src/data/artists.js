@@ -98,4 +98,40 @@ export const artists = [
       },
     ],
   },
+  {
+    id: "paula-rodriguez",
+    proTeamId: "#003",
+    name: "Paula Rodríguez",
+    instagram: "@paulatattoing",
+    instagramUrl: "https://www.instagram.com/paulatattoing/",
+    specialties: ["Fineline", "Ornamental", "Microrrealismo"],
+    studio: "Paulatattoing Orna Studio",
+    description:
+      "Artista patrocinada por SanitattooSupply. Cuenta con 13 años de experiencia profesional y está especializada en fineline, ornamental y microrrealismo en Paulatattoing Orna Studio.",
+    portrait: "images/pro-team/paula.png",
+    portraitAlt:
+      "Retrato de Paula Rodríguez, artista patrocinada por Sanitattoo, sentada con los brazos cruzados.",
+    portraitWidth: 1056,
+    portraitHeight: 1489,
+    works: [
+      {
+        src: "images/pro-team/tattoo1-paula.jpg",
+        alt: "Tatuaje en el brazo: composición floral en línea fina con un girasol, hojas y flores.",
+        width: 1169,
+        height: 1553,
+      },
+      {
+        src: "images/pro-team/tattoo2-paula.jpg",
+        alt: "Tatuaje en el brazo: composición marina con un pez globo, un caballito de mar y otros elementos marinos.",
+        width: 1168,
+        height: 1558,
+      },
+      {
+        src: "images/pro-team/tattoo3-paula.jpg",
+        alt: "Tatuaje en la parte superior de la espalda: águila con las alas extendidas y motivos geométricos.",
+        width: 1169,
+        height: 1560,
+      },
+    ],
+  },
 ];

@@ -15,7 +15,7 @@ function pageDescription(list) {
   });
   if (!list.length) return "Artistas patrocinados por Sanitattoo.";
   const profiles = list.map((artist) => {
-    const specialties = artist.specialties.join(" y ").toLowerCase();
+    const specialties = formatter.format(artist.specialties).toLowerCase();
     return `${artist.name} (${specialties}, ${artist.studio})`;
   });
   return `Artistas patrocinados por SanitattooSupply: ${formatter.format(profiles)}.`;

@@ -108,14 +108,6 @@ export const brands = [
     description: "Stencil para tatuajes de la marca Yummy.",
   },
   {
-    id: "sunnink",
-    name: "Sunnink",
-    logo: null,
-    banner: "images/brands/sunnink1.jpeg",
-    description:
-      "Línea profesional de stencil, tinta hectográfica y cuidado de la piel para estudios de tatuaje.",
-  },
-  {
 id:"eclipse",
 name:"Eclipse Tattoo Ink",
 logo:"images/brands/logo-eclipse.png",

@@ -104,11 +104,6 @@ const BRAND_LOGOS = [
     src: "images/brands/black-mambo-logo.png",
   },
   {
-    id:"sunnink",
-    alt: "Sunnink",
-    src: "images/brands/sunnink-logo.png",
-  },
-  {
     id:"eclipse",
     alt: "Eclipse Tattoo Ink",
     src: "images/brands/logo-eclipse.png",
