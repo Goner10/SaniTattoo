@@ -2186,7 +2186,7 @@ export const products = [
     active: true,
   },
   {
-    id: "capsulas-con-base-10u",
+    id: "capsulas-con-base-100u",
     sku: "SAN-CAPSULAS-BASE-10MM-10U",
     name: "Cápsulas con base",
     slug: "capsulas-con-base-100u",
@@ -2195,13 +2195,13 @@ export const products = [
     brand: "generico",
     price: 3.5,
     currency: "EUR",
-    unit: "10 unidades",
+    unit: "100 unidades",
     image: "images/productos/capsulas-1.png",
-    alt: "Cápsulas con base para pigmentos en formato caja de 10 unidades",
+    alt: "Cápsulas con base para pigmentos en formato caja de 100 unidades",
     shortDescription:
-      "Cápsulas con base en caja de 10 unidades. Varios diámetros según medida.",
+      "Cápsulas con base en caja de 100 unidades. Varios diámetros según medida.",
     description:
-      "Cápsulas desechables con base estable para trabajar cómodamente en sesión. Cajas de 10 unidades",
+      "Cápsulas desechables con base estable para trabajar cómodamente en sesión. Cajas de 100 unidades",
     tags: ["consumibles", "cápsulas", "tinta", "pigmento", "estudio"],
     featured: false,
     offer: false,
